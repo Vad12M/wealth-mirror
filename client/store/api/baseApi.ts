@@ -1,5 +1,4 @@
 import useAuthHandler from "@/service/useAuthHandler";
-import { FetchBaseQueryArgs } from "@reduxjs/toolkit/dist/query/fetchBaseQuery";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const jsonType = "application/json";
@@ -7,7 +6,7 @@ const jsonType = "application/json";
 export const baseApi = createApi({
   reducerPath: "gql",
   baseQuery: async (
-    args: FetchBaseQueryArgs & {
+    args: any & {
       url: string;
       externalToken?: string;
       extraBaseURL?: string;

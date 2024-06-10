@@ -50,7 +50,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const [showOptions, setShowOptions] = useState(false);
   const [optionsPosition, setOptionsPosition] = useState({ x: 0, y: 0 });
 
-  const handleCanvasClick = useCallback((e) => {
+  const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
     const pos = stage.getPointerPosition();
     setOptionsPosition({ x: pos.x, y: pos.y });

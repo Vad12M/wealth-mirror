@@ -42,6 +42,7 @@ export default function PaintMenu({
       <ButtonGroup size="sm" isAttached variant="solid">
         {PAINT_OPTIONS.map(({ id, label, icon }) => (
           <IconButton
+            key={id}
             aria-label={label}
             icon={icon}
             onClick={() => setDrawAction(id)}
