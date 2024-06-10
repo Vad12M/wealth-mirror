@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  position: relative;
+  background: black;
+  @apply text-white;
+}
+
+
+input:-webkit-autofill {
+  transition-delay: 9999s;
+  transition-property: background-color;
+}
+
+.animation-slide-fade {
+  animation: slideFade 0.7s;
+}
+
+@keyframes slideFade {
+  from {
+    transform: translateY(-22px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.m-container {
+  width: 1240px;
+  margin: 0 auto;
+}

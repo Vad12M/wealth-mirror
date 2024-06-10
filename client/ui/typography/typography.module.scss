@@ -1,0 +1,29 @@
+
+.h1 {
+  @apply text-[60px] leading-[84px];
+  font-weight: 700;
+}
+
+.button {
+  @apply text-[16px] leading-[24px];
+  font-weight: 500;
+}
+
+.body {
+  @apply text-[18px] leading-[24px];
+  font-weight: 400;
+}
+
+.bodySB {
+  @apply text-[18px] leading-[24px];
+  font-weight: 500;
+}
+
+.sub1 {
+  @apply text-[20px] leading-[28px];
+  font-weight: 700;
+}
+
+.primaryElement {
+  @apply text-primary;
+}
