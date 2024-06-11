@@ -5,7 +5,6 @@ import useRegisterValidator from "@/service/validator/useRegisterValidator";
 import { IRegister } from "@/interfaces/IAuth";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
-import PasswordInputComponent from "@/ui/input/PasswordInput.component";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { Button } from "@/ui/button/Button";
 
@@ -91,7 +90,7 @@ export default function Register() {
           onUpdate={(e) => setForm({ ...form, address: e.target.value })}
           className={'mb-2 w-[360px]'}
         />
-        <PasswordInputComponent
+        <Input
           value={form.password}
           placeholder={'Password'}
           onUpdate={(e) => {
@@ -100,8 +99,9 @@ export default function Register() {
           }}
           className={'mb-2 w-[360px]'}
           invalid={validator.isFieldInvalid('password')}
+          type={'password'}
         />
-        <PasswordInputComponent
+        <Input
           value={form.confirmPassword}
           placeholder={'Confirm Password'}
           onUpdate={(e) => {
@@ -110,6 +110,7 @@ export default function Register() {
           }}
           className={'mb-2 w-[360px]'}
           invalid={validator.isFieldInvalid('confirmPassword')}
+          type={'password'}
         />
 
         <Button typeButton={'primary'} onClick={handleRegister} className={'w-[360px] mt-6'}>

@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import cors from 'cors';
-import userRoutes from './routes/authRoutes.js';
 import { loginValidator, registerValidator } from "./validations/auth.js";
 import { handleValidationErrors } from "./utils/handleValidationErrors.js";
 import { getMe, login, register } from "./controllers/UserController.js";

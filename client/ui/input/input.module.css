@@ -3,10 +3,11 @@
   @apply disabled:cursor-auto text-white;
   border: 0.835px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.12);
+  color: white !important;
 }
 
 .inputContainer input::placeholder {
-  @apply text-neutralGray opacity-100 text-[12px] leading-6 capitalize;
+  @apply text-placeholder opacity-100 text-[12px] leading-6 capitalize;
 }
 
 .inputContainer.required {

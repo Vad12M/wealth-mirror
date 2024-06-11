@@ -1,6 +1,7 @@
 .button {
-	@apply rounded-[48px] flex items-center space-x-2;
+	@apply flex items-center space-x-2;
 }
+
 
 .primaryBtn {
   @apply bg-primary text-white text-[18px] px-[38px] py-[26px];

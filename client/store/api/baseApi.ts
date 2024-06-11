@@ -25,10 +25,6 @@ export const baseApi = createApi({
           headers.set("Content-Type", jsonType);
         }
         headers.set("Accept", jsonType);
-        const KEY = process.env.NEXT_PUBLIC_KEY as string;
-        if (KEY) {
-          headers.set('authorization', KEY);
-        }
 
         return headers;
       },

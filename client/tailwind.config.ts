@@ -14,7 +14,7 @@ const config: Config = {
         black: '#112520',
         gray: '#4B5754',
         grayLight: '#BEBEBE',
-
+        placeholder: '#797979',
 
 
         mediumColor: "#969696",

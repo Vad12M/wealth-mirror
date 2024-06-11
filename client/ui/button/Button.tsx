@@ -1,19 +1,25 @@
 import { InputHTMLAttributes } from 'react'
 import styles from './Button.module.scss'
+import cx from "classnames";
 
 interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
   typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent'
   prefixBtn?: () => any;
+  rounded?: number;
 }
 
 export function Button({
   children,
   typeButton = 'primary',
   prefixBtn,
+  rounded,
   ...props
 }: IButton) {
-  let typeClassname = '';
 
+  const buttonStyles = cx(`${styles.button}`, {
+  })
+
+  let typeClassname = '';
   switch (typeButton) {
     case 'primary':
       typeClassname = styles.primaryBtn;
@@ -29,7 +35,11 @@ export function Button({
   }
 
   return (
-    <button onClick={props.onClick} className={`${typeClassname} ${styles.button}`}>
+    <button
+      onClick={props.onClick}
+      className={`${typeClassname} ${buttonStyles} ${props.className}`}
+      style={{ borderRadius: rounded ? `${rounded}px` : '48px'}}
+    >
       {prefixBtn?.()}
         <div>
           {children}

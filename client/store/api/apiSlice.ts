@@ -23,11 +23,18 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    getMe: builder.query<any, void>({
+      query: () => ({
+        url: '/auth/me',
+      }),
+    }),
+
   })
 })
 
 export const {
   useLoginMutation,
   useRegisterMutation,
+  useGetMeQuery,
 
 } = apiSlice;
