@@ -9,5 +9,8 @@ const router = express.Router();
 router.post("/login", loginValidator, handleValidationErrors, login);
 router.post("/register", registerValidator, handleValidationErrors, register);
 router.get('/me', checkAuth, getMe)
+router.get('test', (req, res) => {
+  res.send('Hello')
+})
 
 export default router;
