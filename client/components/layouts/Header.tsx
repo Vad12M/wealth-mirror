@@ -57,10 +57,7 @@ export default function Header() {
           <Link href={'/auth/login'} className="cursor-pointer">
             <Typography text={'Login'} type={'button'}/>
           </Link>
-          <Button
-            typeButton={'primary-dark'}
-            onClick={() => router.push('/auth/register')}
-          >
+          <Button typeButton={'primary-dark'} onClick={() => router.push('/auth/register')}>
             {'Start Free Trial'}
           </Button>
         </div>

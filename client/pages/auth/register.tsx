@@ -7,6 +7,7 @@ import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
 import PasswordInputComponent from "@/ui/input/PasswordInput.component";
 import AuthLayout from "@/components/layouts/AuthLayout";
+import { Button } from "@/ui/button/Button";
 
 export default function Register() {
   const [register] = useRegisterMutation();
@@ -41,9 +42,10 @@ export default function Register() {
 
   return (
     <AuthLayout>
-      <div className="w-full flex flex-col items-center justify-center">
-        <Typography text={'Register'} className={'text-2xl font-bold mb-4'} color={'text-black'}/>
+      <div className="w-full flex flex-col items-center justify-center mt-[20%]">
+        <Typography text={'Register'} className={'text-2xl font-bold mb-4'}/>
         <Input
+          label={'Name'}
           value={form.firstName}
           placeholder={'First Name'}
           onUpdate={(e) => {
@@ -109,7 +111,10 @@ export default function Register() {
           className={'mb-2 w-[360px]'}
           invalid={validator.isFieldInvalid('confirmPassword')}
         />
-        {/*<ValidationHint validationHint={error}/>*/}
+
+        <Button typeButton={'primary'} onClick={handleRegister} className={'w-[360px] mt-6'}>
+          {'Register'}
+        </Button>
       </div>
     </AuthLayout>
   )

@@ -1,5 +1,6 @@
 import styles from "./input.module.css";
 import cx from 'classnames';
+import Typography from "@/ui/typography/Typography";
 
 export interface InputProps {
   placeholder?: string;
@@ -11,6 +12,7 @@ export interface InputProps {
   required?: boolean;
   invalid?: boolean;
   type?: string;
+  label?: string;
 }
 
 export default function Input({
@@ -23,6 +25,7 @@ export default function Input({
   invalid,
   type,
   suffixComponent,
+  label,
 }: InputProps) {
 
   const renderSuffix = Boolean(suffixComponent) && (
@@ -37,20 +40,23 @@ export default function Input({
   })
 
 
-  return <div className={`flex flex-col space-y-1 ${className} ${disabled && 'opacity-60'}`}>
-    <div className={'relative'}>
-      <div className="relative">
-        <input
-          value={value}
-          onChange={onUpdate}
-          placeholder={placeholder}
-          disabled={disabled}
-          onClick={(e) => e.preventDefault()}
-          className={inputStyles}
-          type={type || 'text'}
-        />
-        {renderSuffix}
-      </div>
+  return <div className={`flex flex-col ${className} ${disabled && 'opacity-60'}`}>
+    {label && <Typography
+      text={label}
+      type={'body'}
+      className={'mb-2'}
+    />}
+    <div className="relative">
+      <input
+        value={value}
+        onChange={onUpdate}
+        placeholder={placeholder}
+        disabled={disabled}
+        onClick={(e) => e.preventDefault()}
+        className={inputStyles}
+        type={type || 'text'}
+      />
+      {renderSuffix}
     </div>
   </div>
 }

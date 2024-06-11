@@ -7,9 +7,12 @@ import userRoutes from './routes/authRoutes.js';
 dotenv.config();
 
 mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => console.log('Connected to the database'))
-    .catch((err) => console.log('Error connecting to the database', err));
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connected to the database'))
+  .catch((err) => console.log('Error connecting to the database', err));
 
 
 const app = express();
@@ -18,9 +21,9 @@ app.use(express.json());
 
 app.use('/api/auth', userRoutes);
 app.get('/', (req, res) => {
-    res.send('Start');
+  res.send('Start');
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+  console.log(`Server is running on port ${process.env.PORT}`);
 });

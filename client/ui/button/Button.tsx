@@ -10,6 +10,7 @@ export function Button({
   children,
   typeButton = 'primary',
   prefixBtn,
+  ...props
 }: IButton) {
   let typeClassname = '';
 
@@ -28,11 +29,11 @@ export function Button({
   }
 
   return (
-    <button className={`${typeClassname} ${styles.button}`}>
+    <button onClick={props.onClick} className={`${typeClassname} ${styles.button}`}>
       {prefixBtn?.()}
-      <div>
-        {children}
-      </div>
+        <div>
+          {children}
+        </div>
     </button>
   )
 }

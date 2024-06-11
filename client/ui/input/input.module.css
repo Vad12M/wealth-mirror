@@ -1,6 +1,8 @@
 .inputContainer {
-  @apply w-full border border-neutralGray px-4 py-2 outline-0 active:border-b-neutralGray focus:border-neutralGray;
-  @apply disabled:cursor-auto text-black;
+  @apply w-full px-4 py-2 outline-0;
+  @apply disabled:cursor-auto text-white;
+  border: 0.835px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .inputContainer input::placeholder {
