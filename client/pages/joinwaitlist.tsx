@@ -5,7 +5,7 @@ import OurServicesBlock from "@/components/home/OurServicesBlock";
 import FAQBlock from "@/components/mainHome/blocks/FAQBlock";
 
 
-export default function Home() {
+export default function Joinwaitlist() {
   return (
     <main className="w-full">
       <JoinWaitlistBlock/>
