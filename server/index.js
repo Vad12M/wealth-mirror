@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 app.post("/auth/login", loginValidator, handleValidationErrors, login);
 app.post("/auth/register", registerValidator, handleValidationErrors, register);
-app.get('/auth/me', checkAuth, getMe)
+app.get('/auth/me', getMe)
 
 app.get('/auth/hello', (req, res) => {
   res.send('Hello')
