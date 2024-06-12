@@ -1,5 +1,6 @@
 import BlockLayout from "@/components/layouts/BlockLayout";
 import Typography from "@/ui/typography/Typography";
+import Image from "next/image";
 
 
 export default function SpotlightBlock() {
@@ -36,7 +37,7 @@ export default function SpotlightBlock() {
       <div className="flex items-start space-x-8 m-container">
         {data.map((item, index) => (
           <div key={index} className="flex flex-col space-y-4">
-            <img
+            <Image
               src={item.image}
               alt="spotlight"
               className="h-[172px] object-cover rounded-[16px] mb-4"

@@ -1,6 +1,7 @@
 import BlockLayout from "@/components/layouts/BlockLayout";
 import Typography from "@/ui/typography/Typography";
 import SpotlightBlock from "@/components/SpotlightBlock";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -11,12 +12,12 @@ export default function About() {
         description={'Lorem ipsum dolor sit amet consectetur. Ante ornare sed iaculis turpis aenean. Neque viverra adipiscing'}
       >
         <div className="flex items-center space-x-8">
-          <img
+          <Image
             src="/aboutUs/about-us-1.png"
             alt="about"
             className="h-[480px] object-cover rounded-[42px]"
           />
-          <img
+          <Image
             src="/aboutUs/about-us-2.png"
             alt="about"
             className="h-[480px] object-cover rounded-[42px]"
