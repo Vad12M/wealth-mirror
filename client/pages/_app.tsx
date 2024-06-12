@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: any) {
       <div id={"app-root"} className={"flex flex-col min-h-screen"}>
         <Provider store={store}>
           <Header/>
-          <div className={"flex justify-center grow"}>
+          <div className={"flex justify-center"}>
             {(Component.getLayout || ((page: any) => page))(<Component {...pageProps} />)}
           </div>
           <Footer/>

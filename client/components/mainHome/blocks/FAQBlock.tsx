@@ -1,6 +1,6 @@
 import BlockLayout from "@/components/layouts/BlockLayout";
 import AnimateHeight from "react-animate-height";
-import BaseCollapse from "@/components/home/BaseCollapse";
+import BaseCollapse from "@/components/mainHome/BaseCollapse";
 
 export default function FAQBlock() {
   const faqs = [

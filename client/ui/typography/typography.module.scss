@@ -27,3 +27,23 @@
 .primaryElement {
   @apply text-primary;
 }
+
+
+.healine6 {
+  @apply text-[18px] leading-[32px];
+  font-weight: 600;
+}
+
+.healine5 {
+  @apply text-[24px] leading-[40px];
+  font-family: 'Inter';
+  font-weight: 600;
+}
+
+.healine4 {
+  @apply text-[28px] leading-[40px];
+  font-family: 'Inter';
+  font-weight: 700;
+}
+
+

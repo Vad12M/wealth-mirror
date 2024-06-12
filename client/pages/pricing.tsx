@@ -1,4 +1,4 @@
-import PriceBlock from "@/components/home/blocks/PriceBlock";
+import PriceBlock from "@/components/mainHome/blocks/PriceBlock";
 import SpotlightBlock from "@/components/SpotlightBlock";
 
 export default function Pricing() {

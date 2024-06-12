@@ -12,8 +12,15 @@ const config: Config = {
         primary: '#00B386',
         white: '#FFF',
         black: '#112520',
+        naturalBlack: '#000',
         gray: '#4B5754',
         grayLight: '#BEBEBE',
+
+        darkGray1: '#343839',
+        darkGray2: '#232627',
+        darkGray3: '#141718',
+
+        lightGray4: '#6C7275',
         placeholder: '#797979',
 
 

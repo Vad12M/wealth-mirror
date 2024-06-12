@@ -1,0 +1,28 @@
+.overlayStyles {
+  @apply fixed flex justify-center top-0 bottom-0 right-0 left-0 h-full;
+  background: rgba(30, 30, 30, 0.3);
+  z-index: 1000;
+}
+
+.modalContainer {
+  @apply bg-naturalBlack relative !important;
+}
+
+.modalContent {
+  @apply outline-0 overflow-x-hidden bg-naturalBlack relative;
+  @apply flex flex-col m-0;
+  max-width: 1400px;
+}
+
+.closeButton {
+  @apply absolute top-8 right-6 md:-right-14 md:-top-1.5 !important;
+  z-index: 1000;
+}
+
+.modalContentScreen {
+  @apply md:flex h-screen bg-naturalBlack w-screen !important;
+}
+
+.closeButtonScreen {
+  @apply absolute top-3 rtl:left-3 ltr:right-3 md:top-6 rtl:md:left-6 ltr:md:right-6 rtl:xl:left-20 ltr:xl:right-20 z-50;
+}

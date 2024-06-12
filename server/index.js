@@ -2,9 +2,9 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import cors from 'cors';
-import { loginValidator, registerValidator } from "./validations/auth.js";
+import { addWaitUserValidator, loginValidator, registerValidator } from "./validations/auth.js";
 import { handleValidationErrors } from "./utils/handleValidationErrors.js";
-import { getMe, login, register } from "./controllers/UserController.js";
+import { addWaitUser, getMe, login, register } from "./controllers/UserController.js";
 import { checkAuth } from "./utils/checkAuth.js";
 
 dotenv.config();
@@ -28,7 +28,8 @@ app.get('/', (req, res) => {
 
 app.post("/auth/login", loginValidator, handleValidationErrors, login);
 app.post("/auth/register", registerValidator, handleValidationErrors, register);
-app.get('/auth/me', checkAuth, getMe)
+app.get('/auth/me', checkAuth, getMe);
+app.post('/auth/addWaitUser', addWaitUserValidator, handleValidationErrors, addWaitUser);
 
 app.get('/auth/hello', (req, res) => {
   res.send('Hello')

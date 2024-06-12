@@ -1,7 +1,7 @@
 import styles from './typography.module.scss';
 
 interface ITypography {
-  type?: 'h1' | 'body' | 'bodySB' | 'sub1' | 'button';
+  type?: 'h1' | 'body' | 'bodySB' | 'sub1' | 'button' | 'healine6' | 'healine5' | 'healine4' | 'base1';
   text: string;
   className?: string;
   color?: string;
@@ -44,6 +44,14 @@ export default function Typography({
       return <p className={`${styles.bodySB} ${className} ${color}`}>{highlightedText}</p>;
     case 'button':
       return <p className={`${styles.button} ${className} ${color}`}>{highlightedText}</p>;
+    case 'healine6':
+      return <p className={`${styles.healine6} ${className} ${color}`}>{highlightedText}</p>;
+    case 'healine5':
+      return <p className={`${styles.healine5} ${className} ${color}`}>{highlightedText}</p>;
+    case 'healine4':
+      return <p className={`${styles.healine4} ${className} ${color}`}>{highlightedText}</p>;
+    case 'base1':
+      return <p className={`${styles.base1} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

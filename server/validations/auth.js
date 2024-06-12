@@ -30,3 +30,11 @@ export const loginValidator = [
     max: 32
   }).withMessage('Password must be between 3 and 32 characters'),
 ];
+
+
+export const addWaitUserValidator = [
+  body('email', 'Email is required').isEmail().withMessage('Invalid email format'),
+  body('name', 'Name is required').isString().isLength({
+    min: 2,
+  }).withMessage('Name must be at least 2 characters'),
+];

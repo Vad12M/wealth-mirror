@@ -1,0 +1,30 @@
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
+/* opacity */
+.ReactModal__Overlay.animate-opacity {
+  @apply opacity-0 transition-opacity ease-in duration-150;
+}
+
+.ReactModal__Overlay--after-open.animate-opacity {
+  @apply opacity-100;
+}
+
+.ReactModal__Overlay--before-close.animate-opacity {
+  @apply opacity-0;
+}
+
+/* slideUp */
+.ReactModal__Overlay.animate-slideUp .ReactModal__Content {
+  @apply transition-all duration-150 ease-in translate-y-full bg-transparent;
+  @apply w-full sm:w-auto h-full sm:h-auto;
+}
+
+.ReactModal__Overlay--after-open.animate-slideUp .ReactModal__Content {
+  @apply translate-y-0;
+}
+
+.ReactModal__Overlay--before-close.animate-slideUp .ReactModal__Content {
+  @apply translate-y-full opacity-0;
+}

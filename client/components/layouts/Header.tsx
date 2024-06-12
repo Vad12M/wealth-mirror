@@ -36,7 +36,7 @@ export default function Header() {
   }
 
   return (
-    <header className="m-container absolute z-50 top-0 left-[50%] transform translate-x-[-50%] p-10">
+    <header className="m-container absolute z-50 top-0 left-[50%] transform translate-x-[-50%] py-10">
       <div className="flex items-center justify-between">
         <Link href={"/"} className="flex items-center space-x-3">
           <MainLogo/>
@@ -53,7 +53,7 @@ export default function Header() {
           ))}
         </ul>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 pr-3">
           <Link href={'/auth/login'} className="cursor-pointer">
             <Typography text={'Login'} type={'button'}/>
           </Link>
