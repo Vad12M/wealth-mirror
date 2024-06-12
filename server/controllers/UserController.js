@@ -61,15 +61,7 @@ export const login = async (req, res) => {
 
 export const getMe = async (req, res) => {
   try {
-    console.log('req.headers:', req.headers)
-    const token = req.headers?.apiauthorization?.split(' ')[1];
-    if (!token) {
-      return res.status(401).json({
-        message: 'Unauthorized',
-      });
-    }
-    const decoded = jwt.verify(token, 'secret');
-    const user = await UserModel.findById(decoded.userId);
+    const user = await UserModel.findById(req.userId);
     if (!user) {
       return res.status(404).json({
         message: 'User not found',
