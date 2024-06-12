@@ -6,7 +6,7 @@ import styles from './header.module.scss'
 import Typography from "@/ui/typography/Typography";
 
 export default function Header() {
-  const router = useRouter();
+  const { asPath } = useRouter();
 
   const list = [
     {
@@ -31,7 +31,7 @@ export default function Header() {
     }
   ];
 
-  if (router.pathname.includes('auth')) {
+  if (asPath.includes('auth')) {
     return null;
   }
 
@@ -40,7 +40,7 @@ export default function Header() {
       <div className="flex items-center justify-between">
         <Link href={"/"} className="flex items-center space-x-3">
           <MainLogo/>
-          <Typography text={'Wealth Mirror'} type={'sub1'} color='text-black'/>
+          <Typography text={'Wealth Mirror'} type={'sub1'} color={asPath === '/' ? 'text-black' : 'text-white'}/>
         </Link>
 
         <ul className={`flex items-center space-x-8 py-3 px-4 ${styles.list}`}>
