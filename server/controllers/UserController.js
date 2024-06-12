@@ -62,7 +62,7 @@ export const login = async (req, res) => {
 export const getMe = async (req, res) => {
   try {
     console.log('req.headers:', req.headers)
-    const token = req.headers?.authorization?.split(' ')[1];
+    const token = req.headers?.apiauthorization?.split(' ')[1];
     if (!token) {
       return res.status(401).json({
         message: 'Unauthorized',
