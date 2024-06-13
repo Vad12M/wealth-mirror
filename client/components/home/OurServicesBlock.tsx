@@ -22,9 +22,9 @@ export default function OurServicesBlock() {
     <section className="flex items-center flex-col justify-center pt-[120px] pb-8 relative">
       <div className='bg-no-repeat bg-bottom w-full h-1/3 absolute bottom-0 bg-cover'
            style={{ backgroundImage: 'url(/yCombinator/OurServicesBG.svg)' }}/>
-      <Typography text={'Our Services'} className="mb-6"/>
+      <Typography text={'How It Works?'} className="mb-6"/>
       <Typography
-        text={'Actually, we\'re not so different from other coding platforms. But with AI, do you catch our drift? Exactly, that\'s the point.'}
+        text={'Get rid of Old School ways of managing your Wealth in 2D Matrix. We will help you visualize your Wealth so that you can “Actually” see it growing and take Necessary Actions :)'}
         type={'healine6'}
         color={'text-lightGray4'}
         className="w-[530px] mb-10"

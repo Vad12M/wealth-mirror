@@ -1,4 +1,3 @@
-import { useGetMeQuery } from "@/store/api/apiSlice";
 import JoinWaitlistBlock from "@/components/home/JoinWaitlistBlock";
 import JoinWaitlistGraphicsBlock from "@/components/home/JoinWaitlistGraphicsBlock";
 import OurServicesBlock from "@/components/home/OurServicesBlock";

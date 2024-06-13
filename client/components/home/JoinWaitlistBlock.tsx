@@ -47,11 +47,11 @@ export default function JoinWaitlistBlock() {
         </div>
 
         <Typography
-          text={"Discoveradless possibilities in the world of trading"}
+          text={"See Your Wealth Growing with You ❤️"}
           className={'text-center w-[1000px] mb-2 z-10'}
         />
         <Typography
-          text={"Step into the world of trading excellence and seize every opportunity with our advanced platform, expert guidance, and strategic insights for unrivaled financial success."}
+          text={"Bring all your Assets and Liabilities in a single platform. Wealth Mirror helps you in Centralize, Visualize, Analyze and Take Actions to Grow your Wealth."}
           color='text-gray'
           type={'body'}
           className={'text-center w-[770px] mb-6 z-10'}
