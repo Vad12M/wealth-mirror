@@ -3,8 +3,9 @@ import styles from './Button.module.scss'
 import cx from "classnames";
 
 interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
-  typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent'
+  typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent';
   prefixBtn?: () => any;
+  isGradient?: boolean;
   rounded?: number;
 }
 
@@ -13,6 +14,7 @@ export function Button({
   typeButton = 'primary',
   prefixBtn,
   rounded,
+  isGradient = false,
   ...props
 }: IButton) {
 
@@ -38,7 +40,10 @@ export function Button({
     <button
       onClick={props.onClick}
       className={`${typeClassname} ${buttonStyles} ${props.className}`}
-      style={{ borderRadius: rounded ? `${rounded}px` : '48px'}}
+      style={{
+        borderRadius: rounded ? `${rounded}px` : '48px',
+        background: isGradient ? 'linear-gradient(90deg, #3EDC79 0%, #1E6BEB 100%' : '',
+    }}
     >
       {prefixBtn?.()}
         <div>

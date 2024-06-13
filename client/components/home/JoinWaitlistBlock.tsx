@@ -1,24 +1,13 @@
 import Typography from "@/ui/typography/Typography";
-import { Button } from "@/ui/button/Button";
 import VerticalLinesIcon from "@/ui/icons/home/VerticalLinesIcon";
 import BlurCircleMDIcon from "@/ui/icons/home/BlurCircleMDIcon";
 import BlurCircleSMIcon from "@/ui/icons/home/BlurCircleSMIcon";
-import Dialog from "@/ui/dialog/dialog.component";
-import { useState } from "react";
-import Input from "@/ui/input/input";
-import { IWaitUser } from "@/interfaces/IWaitUser";
-import { useAddWaitUserMutation } from "@/store/api/apiSlice";
 
-export default function JoinWaitlistBlock() {
-  const [addWaitUser, { isLoading }] = useAddWaitUserMutation();
-  const [open, setOpen] = useState(false);
-  const [form, setForm] = useState<IWaitUser>({
-    name: '',
-    email: '',
-    company: '',
-    message: ''
-  });
-
+export default function JoinWaitlistBlock({
+  onClick
+}: {
+  onClick?: () => void;
+}) {
   return (
     <section
       className="relative min-w-[100%] bg-cover"
@@ -56,68 +45,17 @@ export default function JoinWaitlistBlock() {
           type={'body'}
           className={'text-center w-[770px] mb-6 z-10'}
         />
-        <Button
-          className={'z-10'}
-          onClick={() => setOpen(true)}
+        <button
+          onClick={onClick}
+          className="py-2 rounded-[5px] w-[150px] flex justify-center z-10 mt-6"
+          style={{
+            background: 'linear-gradient(90deg, #3EDC79 0%, #1E6BEB 100%)',
+            border: '1px solid rgba(255, 255, 255, 0.40)'
+          }}
         >
-          {'Join Waitlist'}
-        </Button>
+          <Typography text={'Join Waitlist'} type={'healine6'}/>
+        </button>
       </div>
-      <Dialog
-        isOpen={open}
-        onRequestClose={() => setOpen(false)}
-        className="px-20 py-20 flex flex-col items-center "
-      >
-        <Typography
-          text={'Join Weight list'}
-          type={'h1'}
-          className={'mb-[100px]'}
-          primaryElements={['Weight list']}
-        />
-        <div className="flex flex-col space-y-10">
-          <div className="flex items-center space-x-10">
-            <Input
-              label={'Name *'}
-              placeholder={'John David'}
-              className="w-[500px]"
-              value={form.name}
-              onUpdate={(e) => setForm({ ...form, name: e.target.value })}
-            />
-            <Input
-              label={'Your email *'}
-              placeholder={'example@yourmail.com'}
-              className="w-[500px]"
-              value={form.email}
-              onUpdate={(e) => setForm({ ...form, email: e.target.value })}
-            />
-          </div>
-          <div className="flex items-center space-x-10">
-            <Input
-              label={'Company'}
-              placeholder={'yourcompany name here'}
-              className="w-[500px]"
-              value={form.company}
-              onUpdate={(e) => setForm({ ...form, company: e.target.value })}
-            />
-            <Input
-              label={'Message'}
-              placeholder={'How can we Help'}
-              className="w-[500px]"
-              value={form.message}
-              onUpdate={(e) => setForm({ ...form, message: e.target.value })}
-            />
-          </div>
-          <Button
-            className="w-[220px] mx-auto"
-            onClick={() => {
-              addWaitUser(form)
-              setOpen(false)
-            }}
-          >
-            {'Send Message'}
-          </Button>
-        </div>
-      </Dialog>
     </section>
   )
 }

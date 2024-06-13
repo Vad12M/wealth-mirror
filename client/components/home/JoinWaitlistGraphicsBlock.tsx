@@ -23,7 +23,7 @@ export default function JoinWaitlistGraphicsBlock() {
           ))}
         </div>
         <div className="flex w-full justify-center mb-[20px]">
-          <Image src={'/yCombinator/TestEllipse1.svg'} alt="yCombinatorLogo"/>
+          <img src={'/yCombinator/TestEllipse1.svg'} alt="yCombinatorLogo"/>
         </div>
         <div className="flex w-full justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="106" height="20" viewBox="0 0 106 20" fill="none">
@@ -61,7 +61,7 @@ export default function JoinWaitlistGraphicsBlock() {
           <div className="flex flex-col pt-6">
             {Array.from({ length: 4 }).map((_, index) => (
               <div key={index} className="flex items-center space-x-4 pb-3 border-[#313139] border-b-[1px] mb-[5px]">
-                <Image src={`/yCombinator/TestEllipse${index + 1}.svg`} alt="yCombinatorLogo"/>
+                <img src={`/yCombinator/TestEllipse${index + 1}.svg`} alt="yCombinatorLogo"/>
                 <svg xmlns="http://www.w3.org/2000/svg" width="106" height="20" viewBox="0 0 106 20" fill="none">
                   <rect width="74" height="6" rx="3" fill="#313139"/>
                   <rect x="82" width="24" height="6" rx="3" fill="#313139"/>

@@ -2,7 +2,11 @@ import BlockLayout from "@/components/layouts/BlockLayout";
 import AnimateHeight from "react-animate-height";
 import BaseCollapse from "@/components/mainHome/BaseCollapse";
 
-export default function FAQBlock() {
+export default function FAQBlock({
+  primaryElements = ['FAQ’s']
+}: {
+  primaryElements?: string[];
+}) {
   const faqs = [
     {
       title: 'Lorem ipsum dolor sit amet consectetur. Eleifend nec ?',
@@ -27,7 +31,7 @@ export default function FAQBlock() {
   ]
 
   return (
-    <BlockLayout title={'FAQ’s'} primaryElements={['FAQ’s']}>
+    <BlockLayout title={'FAQ’s'} primaryElements={primaryElements}>
       <div className="flex flex-col items-center space-y-6 m-container pt-12">
         {faqs.map((faq, index) => (
           <BaseCollapse key={index} title={faq.title} text={faq.description}/>
