@@ -47,7 +47,7 @@ export default function JoinWaitlistBlock() {
         </div>
 
         <Typography
-          text={"See Your Wealth Growing with You ❤️"}
+          text={"See Your Wealth Growing with You️"}
           className={'text-center w-[1000px] mb-2 z-10'}
         />
         <Typography
