@@ -9,6 +9,9 @@ body {
   @apply text-white;
 }
 
+body * {
+  cursor: none !important;
+}
 
 input:-webkit-autofill {
   transition-delay: 9999s;

@@ -23,6 +23,7 @@ const config: Config = {
         lightGray4: '#6C7275',
         placeholder: '#797979',
 
+        bodyGray: '#9E9E9E',
 
         mediumColor: "#969696",
         neutralGray: '#404040',

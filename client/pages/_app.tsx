@@ -3,6 +3,9 @@ import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import { Provider } from "react-redux";
 import store from "@/store";
+import dynamic from "next/dynamic";
+
+const CustomCursor = dynamic(() => import('@/components/custom-cursor/CustomCursor'), { ssr: false });
 
 export default function App({ Component, pageProps }: any) {
   return (
@@ -12,6 +15,7 @@ export default function App({ Component, pageProps }: any) {
           <Header/>
           <div className={"flex justify-center"}>
             {(Component.getLayout || ((page: any) => page))(<Component {...pageProps} />)}
+            <CustomCursor/>
           </div>
           <Footer/>
         </Provider>
