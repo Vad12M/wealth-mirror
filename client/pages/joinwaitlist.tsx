@@ -12,14 +12,13 @@ import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
 
 export default function Joinwaitlist() {
-  const [addWaitUser, { isLoading }] = useAddWaitUserMutation();
+  const [addWaitUser] = useAddWaitUserMutation();
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState<IWaitUser>({
     name: '',
     email: '',
-    company: '',
-    message: ''
   });
+
   return (
     <main className="w-full">
       <JoinWaitlistBlock onClick={() => setOpen(true)}/>
@@ -55,22 +54,6 @@ export default function Joinwaitlist() {
               className="w-[500px]"
               value={form.email}
               onUpdate={(e) => setForm({ ...form, email: e.target.value })}
-            />
-          </div>
-          <div className="flex items-center space-x-10">
-            <Input
-              label={'Company'}
-              placeholder={'yourcompany name here'}
-              className="w-[500px]"
-              value={form.company}
-              onUpdate={(e) => setForm({ ...form, company: e.target.value })}
-            />
-            <Input
-              label={'Message'}
-              placeholder={'How can we Help'}
-              className="w-[500px]"
-              value={form.message}
-              onUpdate={(e) => setForm({ ...form, message: e.target.value })}
             />
           </div>
           <Button
