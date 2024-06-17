@@ -3,6 +3,7 @@ import styles from './typography.module.scss';
 interface ITypography {
   type?: 'h1'
     | 'body'
+    | 'bodyB1'
     | 'bodySB'
     | 'sub1'
     | 'button'
@@ -49,6 +50,8 @@ export default function Typography({
       return <h2 className={`${styles.sub1} ${className} ${color}`}>{highlightedText}</h2>;
     case 'body':
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
+    case 'bodyB1':
+      return <p className={`${styles.bodyB1} ${className} ${color}`}>{highlightedText}</p>;
     case 'bodySB':
       return <p className={`${styles.bodySB} ${className} ${color}`}>{highlightedText}</p>;
     case 'button':

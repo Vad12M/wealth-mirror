@@ -9,6 +9,12 @@
   font-weight: 500;
 }
 
+.bodyB1 {
+  @apply text-[16px] leading-[24px];
+  font-weight: 400;
+  font-family: 'Open Sans';
+}
+
 .body {
   @apply text-[18px] leading-[24px];
   font-weight: 400;

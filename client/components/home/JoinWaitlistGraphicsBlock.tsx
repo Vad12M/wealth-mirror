@@ -1,8 +1,8 @@
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
-import VerticalLinesIcon from "@/ui/icons/home/VerticalLinesIcon";
-import CircleGraphicIcon from "@/ui/icons/home/CircleGraphicIcon";
-import BlueGraphicIcon from "@/ui/icons/home/BlueGraphicIcon";
+import VerticalLinesIcon from "@/ui/icons/waitlist/VerticalLinesIcon";
+import CircleGraphicIcon from "@/ui/icons/waitlist/CircleGraphicIcon";
+import BlueGraphicIcon from "@/ui/icons/waitlist/BlueGraphicIcon";
 import Image from "next/image";
 
 export default function JoinWaitlistGraphicsBlock() {

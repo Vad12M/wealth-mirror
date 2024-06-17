@@ -1,6 +1,6 @@
 import Typography from "@/ui/typography/Typography";
-import AmbrellaIcon from "@/ui/icons/home/AmbrellaIcon";
-import WalletListIcon from "@/ui/icons/home/WalletListIcon";
+import AmbrellaIcon from "@/ui/icons/waitlist/AmbrellaIcon";
+import WalletListIcon from "@/ui/icons/waitlist/WalletListIcon";
 import PlusIcon from "@/ui/icons/PlusIcon";
 import ArrowBottomIcon from "@/ui/icons/ArrowBottomIcon";
 

@@ -1,6 +1,8 @@
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import BlockLayout from "@/components/layouts/BlockLayout";
+import ColorsIcon from "@/ui/icons/servicesBlock/ColorsIcon";
+import TickIcon from "@/ui/icons/TickIcon";
 
 export default function PriceBlock() {
   const whatIsIncluded = [
@@ -25,42 +27,29 @@ export default function PriceBlock() {
             background: ' #21342F'
           }}
         >
-          <div>
-            <Typography
-              text={'For individuals'}
-              type={'body'}
-              color={'text-grayLight'}
-            />
-            <Typography
-              text={'Basic'}
-              type={'bodySB'}
-              color={'text-primary'}
-            />
-
+          <div className="flex space-x-4 items-start mb-4">
+            <ColorsIcon/>
+            <div className="flex flex-col">
+              <Typography text={'For individuals'} type={'body'} color={'text-grayLight'}/>
+              <Typography text={'Basic'} type={'sub1'} color={'text-primary'}/>
+            </div>
           </div>
           <Typography
             text={'Show social proof notifications to increase leads and sales.'}
             type={'body'}
             color={'text-grayLight'}
+            className={'w-[300px] mb-4'}
           />
-          <div className="flex items-center space-x-2">
-            <Typography
-              text={'₹999'}
-              type={'h1'}
-              color={'text-primary'}
-            />
-            <Typography
-              text={'/year'}
-              type={'body'}
-              color={'text-grayLight mt-5'}
-            />
+          <div className="flex items-center space-x-2 mb-6">
+            <Typography text={'₹999'} type={'h1'} color={'text-primary'}/>
+            <Typography text={'/monthly'} type={'body'} color={'text-grayLight'}/>
           </div>
-          <Button>
+          <Button className="w-[300px]">
             {'Get Started'}
           </Button>
         </div>
         <div
-          className="rounded-r-[30px] py-10 px-8 w-[380px] h-[450px]"
+          className="rounded-r-[30px] py-10 px-8 w-[380px] h-[450px] flex items-start justify-center flex-col space-y-4"
           style={{
             borderTop: '2px solid rgba(255, 255, 255, 0.08)',
             borderRight: ' 2px solid rgba(255, 255, 255, 0.08)',
@@ -68,10 +57,11 @@ export default function PriceBlock() {
             background: 'rgba(255, 255, 255, 0.12)'
           }}
         >
-          <Typography text={'What’s included'} type={'bodySB'}/>
-          <ul className="flex flex-col">
+          <Typography text={'What’s included'} type={'bodySB'} className="mb-2"/>
+          <ul className="flex flex-col space-y-3">
             {whatIsIncluded.map((item, index) => (
               <li key={index} className={'flex items-center space-x-2'}>
+                <TickIcon/>
                 <Typography text={item} type={'body'} color={'text-white'}/>
               </li>
             ))}

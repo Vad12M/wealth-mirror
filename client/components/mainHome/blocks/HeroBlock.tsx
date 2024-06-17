@@ -10,7 +10,7 @@ export default function HeroBlock() {
 
   return (
     <section
-      className="py-40 relative bg-cover w-screen h-screen"
+      className="py-40 relative bg-cover bg-bottom w-full h-[1200px]"
       style={{
         backgroundImage: 'url("/header-banner.svg")',
       }}

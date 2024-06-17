@@ -60,28 +60,6 @@ export const login = async (req, res) => {
 }
 
 
-export const addWaitUser = async (req, res) => {
-  try {
-    const existingUser = await WaitUserModel.findOne({ email: req.body.email });
-    if (existingUser) {
-      return res.status(400).json({
-        message: 'User already exists',
-      });
-    }
-
-    const user = new WaitUserModel(req.body);
-    await user.save();
-    res.status(200).json({
-      message: 'User added to waitlist',
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
-}
-
-
 export const getMe = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);

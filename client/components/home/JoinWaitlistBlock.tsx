@@ -1,7 +1,7 @@
 import Typography from "@/ui/typography/Typography";
-import VerticalLinesIcon from "@/ui/icons/home/VerticalLinesIcon";
-import BlurCircleMDIcon from "@/ui/icons/home/BlurCircleMDIcon";
-import BlurCircleSMIcon from "@/ui/icons/home/BlurCircleSMIcon";
+import VerticalLinesIcon from "@/ui/icons/waitlist/VerticalLinesIcon";
+import BlurCircleMDIcon from "@/ui/icons/waitlist/BlurCircleMDIcon";
+import BlurCircleSMIcon from "@/ui/icons/waitlist/BlurCircleSMIcon";
 
 export default function JoinWaitlistBlock({
   onClick
@@ -9,10 +9,7 @@ export default function JoinWaitlistBlock({
   onClick?: () => void;
 }) {
   return (
-    <section
-      className="relative min-w-[100%] bg-cover"
-      style={{ backgroundImage: 'url(/yCombinator/Subtract.svg)', }}
-    >
+    <section className="relative min-w-[100%] bg-cover" style={{ backgroundImage: 'url(/yCombinator/Subtract.svg)' }}>
       <div className="m-container">
         <div className="absolute">
           <VerticalLinesIcon/>
@@ -34,11 +31,7 @@ export default function JoinWaitlistBlock({
         <div className="absolute right-6 top-[32%]">
           <BlurCircleSMIcon/>
         </div>
-
-        <Typography
-          text={"See Your Wealth Growing with You️"}
-          className={'text-center w-[1000px] mb-2 z-10'}
-        />
+        <Typography text={"See Your Wealth Growing with You️"} className={'text-center w-[1000px] mb-2 z-10'}/>
         <Typography
           text={"Bring all your Assets and Liabilities in a single platform. Wealth Mirror helps you in Centralize, Visualize, Analyze and Take Actions to Grow your Wealth."}
           color='text-gray'

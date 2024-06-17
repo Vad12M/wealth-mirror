@@ -2,10 +2,12 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import cors from 'cors';
-import { addWaitUserValidator, loginValidator, registerValidator } from "./validations/auth.js";
+import { loginValidator, registerValidator } from "./validations/auth.js";
 import { handleValidationErrors } from "./utils/handleValidationErrors.js";
-import { addWaitUser, getMe, login, register } from "./controllers/UserController.js";
+import { getMe, login, register } from "./controllers/UserController.js";
 import { checkAuth } from "./utils/checkAuth.js";
+import { addWaitUser, contact } from "./controllers/NewClientController.js";
+import { addWaitUserValidator, contactValidator } from "./validations/newClient.js";
 
 dotenv.config();
 
@@ -22,18 +24,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Start');
-});
 
+// auth
 app.post("/auth/login", loginValidator, handleValidationErrors, login);
 app.post("/auth/register", registerValidator, handleValidationErrors, register);
 app.get('/auth/me', checkAuth, getMe);
-app.post('/auth/addWaitUser', addWaitUserValidator, handleValidationErrors, addWaitUser);
 
-app.get('/auth/hello', (req, res) => {
-  res.send('Hello')
-})
+// for creator
+app.post('/addWaitUser', addWaitUserValidator, handleValidationErrors, addWaitUser);
+app.post('/contact', contactValidator, checkAuth, contact);
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

@@ -3,6 +3,7 @@ import Typography from "@/ui/typography/Typography";
 import VisualizeIcon from "@/ui/icons/servicesBlock/VisualizeIcon";
 import CentralizeIcon from "@/ui/icons/servicesBlock/CentralizeIcon";
 import AnalyzeIcon from "@/ui/icons/servicesBlock/AnalyzeIcon";
+import styles from './servicesBlock.module.scss'
 
 export default function ServicesBlock() {
   const services = [
@@ -38,11 +39,7 @@ export default function ServicesBlock() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="relative flex flex-col items-center space-y-4 py-10 px-8 w-[280px] h-[360px] rounded-[30px]"
-            style={{
-              border: '2px solid rgba(255, 255, 255, 0.08)',
-              background: 'rgba(255, 255, 255, 0.12)'
-            }}
+            className={`relative flex flex-col items-center space-y-4 py-10 px-8 w-[280px] h-[360px] rounded-[30px] ${styles.serviceCard}`}
           >
             <div className="absolute top-8">
               {service.icon}

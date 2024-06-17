@@ -10,6 +10,7 @@ import Dialog from "@/ui/dialog/dialog.component";
 import Typography from "@/ui/typography/Typography";
 import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
+import useWaitlistValidator from "@/service/validator/useWaitListValidator";
 
 export default function Joinwaitlist() {
   const [addWaitUser] = useAddWaitUserMutation();
@@ -18,6 +19,16 @@ export default function Joinwaitlist() {
     name: '',
     email: '',
   });
+
+  const validator = useWaitlistValidator(form);
+
+  const onSend = () => {
+    validator.validate();
+    if (!validator.isFormInvalid()) {
+      addWaitUser(form);
+      setOpen(false);
+    }
+  }
 
   return (
     <main className="w-full">
@@ -46,23 +57,25 @@ export default function Joinwaitlist() {
               placeholder={'John David'}
               className="w-[500px]"
               value={form.name}
-              onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+              onUpdate={(e) => {
+                validator.clear(['name'])
+                setForm({ ...form, name: e.target.value })
+              }}
+              invalid={validator.isFieldInvalid('name')}
             />
             <Input
               label={'Your email *'}
               placeholder={'example@yourmail.com'}
               className="w-[500px]"
               value={form.email}
-              onUpdate={(e) => setForm({ ...form, email: e.target.value })}
+              onUpdate={(e) => {
+                validator.clear(['email'])
+                setForm({ ...form, email: e.target.value })
+              }}
+              invalid={validator.isFieldInvalid('email')}
             />
           </div>
-          <Button
-            className="w-[220px] mx-auto"
-            onClick={() => {
-              addWaitUser(form)
-              setOpen(false)
-            }}
-          >
+          <Button className="w-[220px] mx-auto" onClick={onSend}>
             {'Send Message'}
           </Button>
         </div>

@@ -1,7 +1,7 @@
 import Typography from "@/ui/typography/Typography";
 import CheckMarkIcon from "@/ui/icons/CheckMarkIcon";
-import BlurCircleSMIcon from "@/ui/icons/home/BlurCircleSMIcon";
-import BlurCircleMDIcon from "@/ui/icons/home/BlurCircleMDIcon";
+import BlurCircleSMIcon from "@/ui/icons/waitlist/BlurCircleSMIcon";
+import BlurCircleMDIcon from "@/ui/icons/waitlist/BlurCircleMDIcon";
 
 export default function PennyWiseBlock({
   onClick

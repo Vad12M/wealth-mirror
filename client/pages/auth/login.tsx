@@ -4,7 +4,7 @@ import Typography from "@/ui/typography/Typography";
 import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
 import useLoginValidator from "@/service/validator/useLoginValidator";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useLoginMutation } from "@/store/api/apiSlice";
 import { ILogin } from "@/interfaces/IAuth";
@@ -15,17 +15,12 @@ import { setUserToken } from "@/service/useAuthHandler";
 export default function LoginPage() {
   const [login] = useLoginMutation();
   const router = useRouter()
-  const [error, setError] = useState<string>('');
   const [form, setForm] = useState<ILogin>({
     email: '',
     password: '',
   });
 
   const validator = useLoginValidator(form);
-
-  useEffect(() => {
-    setError('');
-  }, [form.email, form.password]);
 
   const handleLogin = () => {
     validator.validate()
@@ -36,10 +31,6 @@ export default function LoginPage() {
           loginByToken({ token: res.token })
           router.push('/')
         })
-        .catch((e) => {
-          console.log(e)
-          setError('Something went wrong, please try again later')
-        });
     }
   }
 
@@ -72,7 +63,6 @@ export default function LoginPage() {
           invalid={validator.isFieldInvalid('password')}
           type={'password'}
         />
-        {/*<ValidationHint validationHint={error}/>*/}
         <Button
           typeButton={'primary'}
           className={'w-[360px] mt-6 flex justify-center h-[46px]'}
