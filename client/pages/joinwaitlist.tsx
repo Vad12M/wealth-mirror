@@ -34,7 +34,7 @@ export default function Joinwaitlist() {
         className="px-20 py-20 flex flex-col items-center "
       >
         <Typography
-          text={'Join Weight list'}
+          text={'Join Waitlist'}
           type={'h1'}
           className={'mb-[100px]'}
           primaryElements={['Weight list']}
