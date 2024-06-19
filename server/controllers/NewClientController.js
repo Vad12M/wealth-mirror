@@ -1,5 +1,6 @@
 import WaitUserModel from "../models/WaitUser.js";
 import ContactModel from "../models/Contact.js";
+import e from "express";
 
 export const addWaitUser = async (req, res) => {
   try {
@@ -22,6 +23,16 @@ export const addWaitUser = async (req, res) => {
   }
 }
 
+export const getWaitUsers = async (req, res) => {
+  try {
+    const users = await WaitUserModel.find();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
 
 export const contact = async (req, res) => {
   try {
@@ -36,3 +47,16 @@ export const contact = async (req, res) => {
     });
   }
 }
+
+export const getContacts = async (req, res) => {
+  try {
+    const users = await ContactModel.find();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+

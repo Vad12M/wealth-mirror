@@ -48,6 +48,18 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    getContacts: builder.query<IContactForm, void>({
+      query: () => ({
+        url: '/contacts',
+      }),
+    }),
+
+    getWaitUsers: builder.query<IWaitUser, void>({
+      query: () => ({
+        url: '/waitUsers',
+      }),
+    }),
+
   })
 })
 
