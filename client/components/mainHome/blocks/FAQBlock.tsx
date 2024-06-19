@@ -9,24 +9,24 @@ export default function FAQBlock({
 }) {
   const faqs = [
     {
-      title: 'Lorem ipsum dolor sit amet consectetur. Eleifend nec ?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      title: 'How fast can I setup and start using Wealth Mirror?',
+      description: 'Getting started with Wealth Mirror is simple. We are a SaaS product and hosted in cloud to get you started in no time :)'
     },
     {
-      title: 'Lorem ipsum dolor sit amet consectetur. Eleifend nec ?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      title: 'I\'m ready to take the next step. How can I schedule demo?',
+      description: 'You can try Wealth Mirror for free. For a personalized demo please reach out to wealthmirrorofficial@gmail.com'
     },
     {
-      title: 'Lorem ipsum dolor sit amet consectetur. Eleifend nec ?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      title: 'What is Wealth Mirror’s pricing model?',
+      description: 'Wealth Mirror has a standard Pricing Model of ₹999/year for Indian Users and $99/year for International Users. The pricing is designed to make a lifetime relationship with its users.'
     },
     {
-      title: 'Lorem ipsum dolor sit amet consectetur. Eleifend nec ?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      title: 'Will Wealth Mirror impact my application(s) performance?',
+      description: 'Wealth Mirror has no noticeable impact on your application performance. Wealth Mirror follows a secure software development lifecycle that includes performance testing of Wealth Mirror against several known applications. Software releases are gated with performance test results ensuring stable performance Wealth Mirror scripts.'
     },
     {
-      title: 'Lorem ipsum dolor sit amet consectetur. Eleifend nec ?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      title: ' How Secure is Wealth Mirror?',
+      description: 'At Wealth Mirror, the security of our products is a top priority. Our customer-first approach ensures that we remain committed to safeguarding all customer data and information. Wealth Mirror uses best-in-class technology and processes to ensure the highest degree of data security, and to maintain and support enterprise customer in various industries that have regulatory compliance requirements including (but not limited to) data privacy.'
     },
   ]
 

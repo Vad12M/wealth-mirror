@@ -107,7 +107,7 @@ export default function Footer() {
       <div className="m-container flex justify-between items-center py-[26px]">
         <Typography
           color={'text-bodyGray'}
-          text={`Copyright © ${currentYear} BRIX Templates | All Rights Reserved `}
+          text={`WealthMirror © ${currentYear} | Made with ❤️ for the 🌎 for all the pages`}
           type={'body'}
         />
         <div className="flex items-center space-x-4 transform">

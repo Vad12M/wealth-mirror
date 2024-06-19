@@ -9,31 +9,31 @@ export default function ServicesBlock() {
   const services = [
     {
       title: 'VISUALIZE',
-      description: 'Lorem ipsum dolor sit amet consectetur. Ante ornare sed iaculis turpis aenean',
+      description: 'Bring in all different aspects of your wealth in a single place.',
       icon: <VisualizeIcon/>
     },
     {
       title: 'CENTRALIZE',
-      description: 'Lorem ipsum dolor sit amet consectetur. Ante ornare sed iaculis turpis aenean',
+      description: 'See your Wealth growing in a way like Never Before.',
       icon: <CentralizeIcon/>
     },
     {
       title: 'ANALYZE',
-      description: 'Lorem ipsum dolor sit amet consectetur. Ante ornare sed iaculis turpis aenean',
+      description: ' Get daily/monthly/yearly/lifetime analysis of your portfolio.',
       icon: <AnalyzeIcon/>
     },
     {
       title: 'Take Actions',
-      description: 'Lorem ipsum dolor sit amet consectetur. Ante ornare sed iaculis turpis aenean',
+      description: 'An AI model that can analyze all the data and give valuable ',
       icon: <AnalyzeIcon/>
     },
   ]
 
   return (
     <BlockLayout
-      title={'Services We offer'}
-      primaryElements={['Services']}
-      description={'Lorem ipsum dolor sit amet consectetur. Ante ornare sed iaculis turpis aenean. Neque viverra adipiscing'}
+      title={'How It Works'}
+      primaryElements={['Works']}
+      description={'Change below text to “Wealth Mirror is a one stop solution to see how your wealth is growing and what actions you can do to grow it better'}
     >
       <div className="flex items-center space-x-6">
         {services.map((service, index) => (
@@ -45,16 +45,8 @@ export default function ServicesBlock() {
               {service.icon}
             </div>
             <div className="text-center">
-              <Typography
-                text={service.title}
-                type={'sub1'}
-                className="pt-32"
-              />
-              <Typography
-                text={service.description}
-                type={'body'}
-                color={'text-grayLight'}
-              />
+              <Typography text={service.title} type={'sub1'} className="pt-32"/>
+              <Typography text={service.description} type={'body'} color={'text-grayLight'}/>
             </div>
           </div>
         ))}

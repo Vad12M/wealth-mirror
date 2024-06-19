@@ -32,7 +32,7 @@ export default function BaseCollapse({
           text={text}
           type={'body'}
           color={'text-grayLight'}
-          className="w-3/4 pt-8"
+          className="w-[88%] pt-8"
         />
       </AnimateHeight>
     </div>
