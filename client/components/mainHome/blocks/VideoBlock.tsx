@@ -6,7 +6,7 @@ export default function VideoBlock() {
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
-    const blockTop = document.getElementById('scale-block')?.offsetTop - 300;
+    const blockTop = (document.getElementById('scale-block')?.offsetTop || 0) - 300;
 
     if (!blockTop) return;
     if (scrollY >= blockTop - windowHeight && scrollY <= blockTop) {
