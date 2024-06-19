@@ -48,13 +48,13 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
-    getContacts: builder.query<IContactForm, void>({
+    getContacts: builder.query<IContactForm[], void>({
       query: () => ({
         url: '/contacts',
       }),
     }),
 
-    getWaitUsers: builder.query<IWaitUser, void>({
+    getWaitUsers: builder.query<IWaitUser[], void>({
       query: () => ({
         url: '/waitUsers',
       }),
@@ -68,6 +68,7 @@ export const {
   useRegisterMutation,
   useGetMeQuery,
   useAddWaitUserMutation,
-  useContactMutation
-
+  useContactMutation,
+  useGetContactsQuery,
+  useGetWaitUsersQuery,
 } = apiSlice;

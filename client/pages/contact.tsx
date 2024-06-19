@@ -43,7 +43,7 @@ export default function About() {
         type={'bodyB1'}
       />
 
-      <form className="flex flex-col space-y-10 w-full">
+      <div className="flex flex-col space-y-10 w-full">
         <div className="flex items-center space-x-6">
           <Input
             label={'Full name *'}
@@ -88,13 +88,13 @@ export default function About() {
           label={'Message'}
           value={form.message}
           placeholder={'Hello there,I would like to talk about how to...'}
-          onUpdate={(e) => setForm({ ...form, subject: e.target.value })}
+          onUpdate={(e) => setForm({ ...form, message: e.target.value })}
           className={'w-full mb-[36]'}
         />
         <Button onClick={handleContact}>
           {'Send Message'}
         </Button>
-      </form>
+      </div>
     </section>
   )
 }
