@@ -56,7 +56,7 @@ export const apiSlice = baseApi.injectEndpoints({
 
     getWaitUsers: builder.query<IWaitUser[], void>({
       query: () => ({
-        url: '/waitUsers',
+        url: '/wait-users',
       }),
     }),
 

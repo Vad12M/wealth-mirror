@@ -43,8 +43,8 @@ export default function About() {
         type={'bodyB1'}
       />
 
-      <div className="flex flex-col space-y-10 w-full">
-        <div className="flex items-center space-x-6">
+      <div className="flex flex-col space-y-10 w-full items-center">
+        <div className="flex items-center space-x-6 w-full">
           <Input
             label={'Full name *'}
             value={form.fullName}
@@ -68,18 +68,18 @@ export default function About() {
             invalid={validator.isFieldInvalid('email')}
           />
         </div>
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-6 w-full">
           <Input
             label={'Company'}
             value={form.company}
-            placeholder={'Password'}
+            placeholder={'yourcompany name here'}
             onUpdate={(e) => setForm({ ...form, company: e.target.value })}
             className={'w-full'}
           />
           <Input
             label={'Subject'}
             value={form.subject}
-            placeholder={'Password'}
+            placeholder={'How can we Help'}
             onUpdate={(e) => setForm({ ...form, subject: e.target.value })}
             className={'w-full'}
           />
@@ -91,7 +91,7 @@ export default function About() {
           onUpdate={(e) => setForm({ ...form, message: e.target.value })}
           className={'w-full mb-[36]'}
         />
-        <Button onClick={handleContact}>
+        <Button onClick={handleContact} className="w-60">
           {'Send Message'}
         </Button>
       </div>
