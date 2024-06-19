@@ -6,7 +6,7 @@ export default function VideoBlock() {
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
-    const blockTop = document.getElementById('scale-block')?.offsetTop;
+    const blockTop = document.getElementById('scale-block')?.offsetTop - 300;
 
     if (!blockTop) return;
     if (scrollY >= blockTop - windowHeight && scrollY <= blockTop) {
@@ -31,7 +31,7 @@ export default function VideoBlock() {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div
         id="scale-block"
-        className="bg-green-500 text-white p-20 transition-transform duration-100 ease-out w-1/2 h-[670px]"
+        className="transition-transform duration-200 ease-out w-1/2 h-[520px] mt-10"
         style={{ transform: `scale(${scale})` }}
       >
         <iframe
