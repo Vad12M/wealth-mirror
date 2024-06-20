@@ -4,8 +4,12 @@ import Hero2Icon from "@/ui/icons/heroBlock/Hero2Icon";
 import Hero3Icon from "@/ui/icons/heroBlock/Hero3Icon";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
+import useAuthHandler from "@/service/useAuthHandler";
+import { useRouter } from "next/router";
 
 export default function HeroBlock() {
+  const { hasAuthToken } = useAuthHandler();
+  const router = useRouter();
   return (
     <section
       className="py-40 relative bg-cover bg-bottom w-full h-[1200px]"
@@ -27,19 +31,23 @@ export default function HeroBlock() {
 
         <div className="flex items-center space-x-6 mb-[46px]">
           <div className="flex items-center space-x-2">
-            <Hero1Icon/>
+            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            {/*<Hero1Icon/>*/}
             <Typography text={'Centralize'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <Hero2Icon/>
+            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            {/*<Hero2Icon/>*/}
             <Typography text={'Visualize'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <Hero3Icon/>
+            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            {/*<Hero3Icon/>*/}
             <Typography text={'Analyze'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <Hero3Icon/>
+            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            {/*<Hero3Icon/>*/}
             <Typography text={'Take Actions'} type={'bodySB'} color={'text-black'}/>
           </div>
         </div>
@@ -48,6 +56,11 @@ export default function HeroBlock() {
           prefixBtn={() => <FireIcon/>}
           typeButton={'secondary'}
           onClick={() => {
+            if (hasAuthToken()) {
+              router.push('/canvas');
+            } else {
+              router.push('/auth/register');
+            }
           }}
         >
           {'Try Wealth Mirror'}

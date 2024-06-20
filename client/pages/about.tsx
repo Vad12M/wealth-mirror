@@ -33,7 +33,7 @@ export default function About() {
           />
         </div>
       </div>
-      <SpotlightBlock/>
+      {/*<SpotlightBlock/>*/}
     </section>
   )
 }

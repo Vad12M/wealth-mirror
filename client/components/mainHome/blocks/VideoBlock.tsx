@@ -35,13 +35,12 @@ export default function VideoBlock() {
         style={{ transform: `scale(${scale})` }}
       >
         <iframe
-          title="YouTube Video"
           width="100%"
           height="100%"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
+          src="https://www.youtube.com/embed/zhPayDylYSc?si=69DV1i1QmPtUxULh"
+          title="YouTube video player" frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         ></iframe>
       </div>

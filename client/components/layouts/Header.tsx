@@ -20,8 +20,8 @@ export default function Header() {
       link: '/services'
     },
     {
-      name: 'News',
-      link: '/news'
+      name: 'How it Works',
+      link: '/how-it-works'
     },
     {
       name: 'Pricing',

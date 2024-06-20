@@ -75,13 +75,11 @@ export default function Footer() {
         <div className="m-container flex items-start justify-between">
           <div className="flex flex-col">
             <Link href={"/"} className="flex items-center space-x-3 mb-[30px]">
-              {isJoinWaitlist
-                ? <GradientLogo/>
-                : <PrimaryLogo/>}
+              <GradientLogo/>
               <Typography text={'Wealth Mirror'} type={'sub1'}/>
             </Link>
             <Typography
-              text={'A good design is not only aesthetically pleasing, but also functional. It should be able to solve the problem '}
+              text={'We want Your Wealth to Grow with You ❤️'}
               type={'body'}
               color={'text-bodyGray'}
               className={'w-[300px]'}
@@ -107,7 +105,7 @@ export default function Footer() {
       <div className="m-container flex justify-between items-center py-[26px]">
         <Typography
           color={'text-bodyGray'}
-          text={`WealthMirror © ${currentYear} | Made with ❤️ for the 🌎 for all the pages`}
+          text={`“© WealthMirror ${currentYear} | Made with ❤️ for the 🌎`}
           type={'body'}
         />
         <div className="flex items-center space-x-4 transform">

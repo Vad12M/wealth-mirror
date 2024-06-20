@@ -7,7 +7,7 @@ export default function Pricing() {
     <div className="pt-[120px]">
       <PriceBlock/>
       <PlanBlock/>
-      <SpotlightBlock/>
+      {/*<SpotlightBlock/>*/}
     </div>
   )
 }

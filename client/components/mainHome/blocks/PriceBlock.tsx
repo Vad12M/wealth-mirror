@@ -6,10 +6,10 @@ import TickIcon from "@/ui/icons/TickIcon";
 
 export default function PriceBlock() {
   const whatIsIncluded = [
-    'All analytics features',
-    'Up to 250,000 tracked visits',
-    'Normal support',
-    'Up to 3 team members',
+    'Auto Save Progress',
+    'Bring data from various Apps',
+    'Extended Support',
+    'Free Product Upgrades',
   ]
   return (
     <BlockLayout
@@ -19,7 +19,7 @@ export default function PriceBlock() {
     >
       <div className="flex">
         <div
-          className="rounded-l-[30px] py-10 px-8 w-[450px] h-[450px] pl-[50px] pt-[64px]"
+          className="rounded-l-[30px] py-10 px-8 w-[450px] h-[450px] pl-[50px] pt-[32px]"
           style={{
             borderTop: '2px solid var(--Green-500, #00D094)',
             borderBottom: '2px solid var(--Green-500, #00D094)',
@@ -30,22 +30,26 @@ export default function PriceBlock() {
           <div className="flex space-x-4 items-start mb-4">
             <ColorsIcon/>
             <div className="flex flex-col">
-              <Typography text={'For individuals'} type={'body'} color={'text-grayLight'}/>
-              <Typography text={'Basic'} type={'sub1'} color={'text-primary'}/>
+              <Typography text={'For Everyone'} type={'body'} color={'text-grayLight'}/>
+              <Typography text={'1 Year Membership'} type={'sub1'} color={'text-primary'}/>
             </div>
           </div>
           <Typography
-            text={'Show social proof notifications to increase leads and sales.'}
+            text={'Take charge of your Wealth now and let it Prosper ❤️'}
             type={'body'}
             color={'text-grayLight'}
             className={'w-[300px] mb-4'}
           />
-          <div className="flex items-center space-x-2 mb-6">
+          <div className="flex items-center space-x-2">
             <Typography text={'₹999'} type={'h1'} color={'text-primary'}/>
-            <Typography text={'/monthly'} type={'body'} color={'text-grayLight'}/>
+            <Typography text={'/ year for Indian Users'} type={'body'} color={'text-grayLight'}/>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Typography text={'$99'} type={'h1'} color={'text-primary'}/>
+            <Typography text={'/ year for International Users'} type={'body'} color={'text-grayLight'}/>
           </div>
           <Button className="w-[300px]">
-            {'Get Started'}
+            {'JOIN NOW!'}
           </Button>
         </div>
         <div

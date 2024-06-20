@@ -14,11 +14,11 @@ export default function Home() {
     <main className="w-full">
       <HeroBlock/>
       <VideoBlock/>
-      <PlatformToAnalyzeBlock/>
+      {/*<PlatformToAnalyzeBlock/>*/}
       <ServicesBlock/>
       <PriceBlock/>
       <FAQBlock/>
-      <SpotlightBlock/>
+      {/*<SpotlightBlock/>*/}
     </main>
   );
 }

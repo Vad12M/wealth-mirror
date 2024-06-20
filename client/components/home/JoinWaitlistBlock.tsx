@@ -31,7 +31,7 @@ export default function JoinWaitlistBlock({
         <div className="absolute right-6 top-[32%]">
           <BlurCircleSMIcon/>
         </div>
-        <Typography text={"See Your Wealth Growing with You️ 🤍"} className={'text-center w-[1100px] mb-2 z-10'}/>
+        <Typography text={"See Your Wealth Growing with You️ ❤️"} className={'text-center w-[1100px] mb-2 z-10'}/>
         <Typography
           text={"Bring all your Assets and Liabilities in a single platform. Wealth Mirror helps you in Centralize, Visualize, Analyze and Take Actions to Grow your Wealth."}
           color='text-gray'

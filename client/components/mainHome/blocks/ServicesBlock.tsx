@@ -24,7 +24,7 @@ export default function ServicesBlock() {
     },
     {
       title: 'Take Actions',
-      description: 'An AI model that can analyze all the data and give valuable ',
+      description: 'AI Engine that will give valuable recommendations on your wealth',
       icon: <AnalyzeIcon/>
     },
   ]
@@ -33,7 +33,7 @@ export default function ServicesBlock() {
     <BlockLayout
       title={'How It Works'}
       primaryElements={['Works']}
-      description={'Change below text to “Wealth Mirror is a one stop solution to see how your wealth is growing and what actions you can do to grow it better'}
+      description={'Change below text to “Wealth Mirror is a one stop solution to see how your wealth is growing and what actions you can do to grow it better 🙂'}
     >
       <div className="flex items-center space-x-6">
         {services.map((service, index) => (

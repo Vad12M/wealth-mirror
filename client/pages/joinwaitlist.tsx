@@ -15,6 +15,7 @@ import useWaitlistValidator from "@/service/validator/useWaitListValidator";
 export default function Joinwaitlist() {
   const [addWaitUser] = useAddWaitUserMutation();
   const [open, setOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [form, setForm] = useState<IWaitUser>({
     name: '',
     email: '',
@@ -25,8 +26,11 @@ export default function Joinwaitlist() {
   const onSend = () => {
     validator.validate();
     if (!validator.isFormInvalid()) {
-      addWaitUser(form);
-      setOpen(false);
+      addWaitUser(form)
+        .unwrap()
+        .then(() => {
+          setIsSuccess(true);
+        });
     }
   }
 
@@ -42,43 +46,46 @@ export default function Joinwaitlist() {
       <Dialog
         isOpen={open}
         onRequestClose={() => setOpen(false)}
-        className="px-20 py-20 flex flex-col items-center "
+        className="px-20 py-20"
       >
-        <Typography
-          text={'Join Waitlist'}
-          type={'h1'}
-          className={'mb-[100px]'}
-          primaryElements={['Weight list']}
-        />
-        <div className="flex flex-col space-y-10">
-          <div className="flex items-center space-x-10">
-            <Input
-              label={'Name *'}
-              placeholder={'John David'}
-              className="w-[500px]"
-              value={form.name}
-              onUpdate={(e) => {
-                validator.clear(['name'])
-                setForm({ ...form, name: e.target.value })
-              }}
-              invalid={validator.isFieldInvalid('name')}
+        {!isSuccess ?
+          <div className='flex flex-col items-center'>
+            <Typography
+              text={'Join Waitlist'}
+              type={'h1'}
+              className={'mb-[100px]'}
+              primaryElements={['Weight list']}
             />
-            <Input
-              label={'Your email *'}
-              placeholder={'example@yourmail.com'}
-              className="w-[500px]"
-              value={form.email}
-              onUpdate={(e) => {
-                validator.clear(['email'])
-                setForm({ ...form, email: e.target.value })
-              }}
-              invalid={validator.isFieldInvalid('email')}
-            />
-          </div>
-          <Button className="w-[220px] mx-auto" onClick={onSend}>
-            {'Send Message'}
-          </Button>
-        </div>
+            <div className="flex flex-col space-y-10">
+              <div className="flex items-center space-x-10">
+                <Input
+                  label={'Name *'}
+                  placeholder={'John David'}
+                  className="w-[500px]"
+                  value={form.name}
+                  onUpdate={(e) => {
+                    validator.clear(['name'])
+                    setForm({ ...form, name: e.target.value })
+                  }}
+                  invalid={validator.isFieldInvalid('name')}
+                />
+                <Input
+                  label={'Your email *'}
+                  placeholder={'example@yourmail.com'}
+                  className="w-[500px]"
+                  value={form.email}
+                  onUpdate={(e) => {
+                    validator.clear(['email'])
+                    setForm({ ...form, email: e.target.value })
+                  }}
+                  invalid={validator.isFieldInvalid('email')}
+                />
+              </div>
+              <Button className="w-[220px] mx-auto" onClick={onSend}>
+                {'Count Me In!'}
+              </Button>
+            </div>
+          </div> : <Typography text={'You will be notified when we will launch the Product 🙂'} type={'healine4'}/>}
       </Dialog>
     </main>
   );
