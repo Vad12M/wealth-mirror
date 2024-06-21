@@ -29,24 +29,24 @@ export default function HeroBlock() {
           className={'text-center w-[820px] mb-10'}
         />
 
-        <div className="flex items-center space-x-6 mb-[46px]">
+        <div className="flex items-center space-x-10 mb-[46px]">
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            <img className="w-9 h-9" alt={'icon'} src={'/hero/centralize.png'}/>
             {/*<Hero1Icon/>*/}
             <Typography text={'Centralize'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            <img className="w-9 h-9" alt={'icon'} src={'/hero/vizualize.png'}/>
             {/*<Hero2Icon/>*/}
             <Typography text={'Visualize'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            <img className="w-9 h-9" alt={'icon'} src={'/hero/analyze.png'}/>
             {/*<Hero3Icon/>*/}
             <Typography text={'Analyze'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/centralize.png'}/>
+            <img className="w-9 h-9" alt={'icon'} src={'/hero/actions.png'}/>
             {/*<Hero3Icon/>*/}
             <Typography text={'Take Actions'} type={'bodySB'} color={'text-black'}/>
           </div>
