@@ -17,7 +17,7 @@ export default function HeroBlock() {
     >
       <div className='m-container px-10 flex items-center flex-col pt-[125px]'>
         <Typography
-          text={'Discover endless possibilities in the world of Trading.'}
+          text={'See Your Wealth Growing With You ❤️'}
           type={'h1'}
           color={'text-black'}
           className={'text-center mb-6'}
