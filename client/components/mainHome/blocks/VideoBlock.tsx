@@ -51,20 +51,11 @@ export default function VideoBlock() {
           ref={videoRef}
           width="100%"
           height="100%"
-          muted // Ensure the video is muted for autoplay
+          muted
           controls={false}
         >
           <source src="/hero/video.mp4" type="video/mp4"/>
         </video>
-        {/*<iframe*/}
-        {/*  width="100%"*/}
-        {/*  height="100%"*/}
-        {/*  src="https://www.youtube.com/embed/zhPayDylYSc?si=69DV1i1QmPtUxULh"*/}
-        {/*  title="YouTube video player" frameBorder="0"*/}
-        {/*  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"*/}
-        {/*  referrerPolicy="strict-origin-when-cross-origin" allowFullScreen*/}
-        {/*  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}*/}
-        {/*></iframe>*/}
       </div>
     </div>
   );

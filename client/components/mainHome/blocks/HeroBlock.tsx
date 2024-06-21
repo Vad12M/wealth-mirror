@@ -1,7 +1,4 @@
 import Typography from "@/ui/typography/Typography";
-import Hero1Icon from "@/ui/icons/heroBlock/Hero1Icon";
-import Hero2Icon from "@/ui/icons/heroBlock/Hero2Icon";
-import Hero3Icon from "@/ui/icons/heroBlock/Hero3Icon";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
 import useAuthHandler from "@/service/useAuthHandler";
@@ -32,22 +29,18 @@ export default function HeroBlock() {
         <div className="flex items-center space-x-10 mb-[46px]">
           <div className="flex items-center space-x-2">
             <img className="w-9 h-9" alt={'icon'} src={'/hero/centralize.png'}/>
-            {/*<Hero1Icon/>*/}
             <Typography text={'Centralize'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
             <img className="w-9 h-9" alt={'icon'} src={'/hero/vizualize.png'}/>
-            {/*<Hero2Icon/>*/}
             <Typography text={'Visualize'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
             <img className="w-9 h-9" alt={'icon'} src={'/hero/analyze.png'}/>
-            {/*<Hero3Icon/>*/}
             <Typography text={'Analyze'} type={'bodySB'} color={'text-black'}/>
           </div>
           <div className="flex items-center space-x-2">
             <img className="w-9 h-9" alt={'icon'} src={'/hero/actions.png'}/>
-            {/*<Hero3Icon/>*/}
             <Typography text={'Take Actions'} type={'bodySB'} color={'text-black'}/>
           </div>
         </div>
