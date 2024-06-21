@@ -11,8 +11,8 @@ export default function GradientLogo() {
       <defs>
         <linearGradient id="paint0_linear_219_738" x1="-9.57751e-08" y1="4.62351" x2="40.3204" y2="6.34794"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#3FDD78"/>
-          <stop offset="1" stop-color="#1D65F1"/>
+          <stop stopColor="#3FDD78"/>
+          <stop offset="1" stopColor="#1D65F1"/>
         </linearGradient>
       </defs>
     </svg>

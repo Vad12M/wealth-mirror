@@ -13,7 +13,7 @@ import Link from "next/link";
 import { setUserToken } from "@/service/useAuthHandler";
 
 export default function LoginPage() {
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const router = useRouter()
   const [form, setForm] = useState<ILogin>({
     email: '',
@@ -29,7 +29,7 @@ export default function LoginPage() {
         .then((res) => {
           setUserToken(res.token);
           loginByToken({ token: res.token })
-          router.push('/')
+          router.push('/canvas')
         })
     }
   }
@@ -48,7 +48,7 @@ export default function LoginPage() {
             setForm({ ...form, email: e.target.value })
             validator.clear(['email'])
           }}
-          className={'mb-6 w-[360px]'}
+          className={'mb-6 w-[400px]'}
           invalid={validator.isFieldInvalid('email')}
         />
         <Input
@@ -59,7 +59,7 @@ export default function LoginPage() {
             setForm({ ...form, password: e.target.value })
             validator.clear(['password'])
           }}
-          className={'mb-4 w-[360px]'}
+          className={'mb-4 w-[400px]'}
           invalid={validator.isFieldInvalid('password')}
           type={'password'}
         />
@@ -68,6 +68,8 @@ export default function LoginPage() {
           className={'w-[360px] mt-6 flex justify-center h-[46px]'}
           onClick={handleLogin}
           rounded={6}
+          loading={isLoading}
+          disabled={isLoading}
         >
           {'Sign In'}
         </Button>

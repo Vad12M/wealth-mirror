@@ -5,32 +5,23 @@ import styles from './header.module.scss'
 import Typography from "@/ui/typography/Typography";
 import GradientLogo from "@/ui/icons/logos/GradientLogo";
 import MainLogo from "@/ui/icons/logos/MainLogo";
+import useAuthHandler from "@/service/useAuthHandler";
+import { useGetMeQuery } from "@/store/api/apiSlice";
 
 export default function Header() {
   const { asPath } = useRouter();
   const isJoinWaitlist = asPath.includes('joinwaitlist');
+  const authHandler = useAuthHandler();
+  const isLogged = authHandler.hasAuthToken();
+  const router = useRouter();
+  const { data: user } = useGetMeQuery({}, { skip: !isLogged });
 
   const list = [
-    {
-      name: 'About Us',
-      link: '/about'
-    },
-    {
-      name: 'Services',
-      link: '/services'
-    },
-    {
-      name: 'How it Works',
-      link: '/how-it-works'
-    },
-    {
-      name: 'Pricing',
-      link: '/pricing'
-    },
-    {
-      name: 'Contact',
-      link: '/contact'
-    }
+    { name: 'About Us', link: '/about' },
+    { name: 'Services', link: '/services' },
+    { name: 'How it Works', link: '/how-it-works' },
+    { name: 'Pricing', link: '/pricing' },
+    { name: 'Contact', link: '/contact' }
   ];
 
   if (asPath.includes('auth')) {
@@ -58,10 +49,20 @@ export default function Header() {
         </ul>
 
         <div className="flex items-center space-x-4 pr-3">
-          <Link href={'/auth/login'} className="cursor-pointer">
-            <Typography text={'Login'} type={'button'}/>
-          </Link>
-          <Button typeButton={'primary-dark'} isGradient={isJoinWaitlist}>
+          {!isLogged ? (
+            <Link href={'/auth/login'}>
+              <Typography text={'Login'} type={'button'}/>
+            </Link>
+          ) : (
+            <Link href={'/profile'}>
+              <Typography text={`${user?.firstName || ''} ${user?.lastName || ''}`} type={'button'}/>
+            </Link>
+          )}
+          <Button
+            typeButton={'primary-dark'}
+            isGradient={isJoinWaitlist}
+            onClick={() => router.push('/canvas')}
+          >
             {'Start Free Trial'}
           </Button>
         </div>

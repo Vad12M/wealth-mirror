@@ -11,8 +11,8 @@ export default function WalletListIcon() {
       </g>
       <defs>
         <linearGradient id="paint0_linear_219_933" x1="24" y1="0" x2="24" y2="48" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#CBAD60"/>
-          <stop offset="1" stop-color="#A78F51"/>
+          <stop stopColor="#CBAD60"/>
+          <stop offset="1" stopColor="#A78F51"/>
         </linearGradient>
         <clipPath id="clip0_219_933">
           <rect width="22.3478" height="28" fill="white" transform="translate(13 10)"/>

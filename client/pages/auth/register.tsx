@@ -9,7 +9,7 @@ import AuthLayout from "@/components/layouts/AuthLayout";
 import { Button } from "@/ui/button/Button";
 
 export default function Register() {
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const router = useRouter()
   const [error, setError] = useState<string>('');
   const [form, setForm] = useState<IRegister>({
@@ -31,7 +31,7 @@ export default function Register() {
     validator.validate()
     if (!validator.isFormInvalid()) {
       register(form).unwrap()
-        .then(() => router.push('/login'))
+        .then(() => router.push('/auth/login'))
         .catch((e) => {
           console.log(e)
           setError('Something went wrong, please try again later')
@@ -44,14 +44,13 @@ export default function Register() {
       <div className="w-full flex flex-col items-center justify-center mt-[20%]">
         <Typography text={'Register'} className={'text-2xl font-bold mb-4'}/>
         <Input
-          label={'Name'}
           value={form.firstName}
           placeholder={'First Name'}
           onUpdate={(e) => {
             setForm({ ...form, firstName: e.target.value })
             validator.clear(['firstName'])
           }}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('firstName')}
         />
         <Input
@@ -61,7 +60,7 @@ export default function Register() {
             setForm({ ...form, lastName: e.target.value })
             validator.clear(['lastName'])
           }}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('lastName')}
         />
         <Input
@@ -71,7 +70,7 @@ export default function Register() {
             setForm({ ...form, email: e.target.value })
             validator.clear(['email'])
           }}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('email')}
         />
         <Input
@@ -81,14 +80,14 @@ export default function Register() {
             setForm({ ...form, phone: e.target.value })
             validator.clear(['phone'])
           }}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('phone')}
         />
         <Input
           value={form.address}
           placeholder={'Address'}
           onUpdate={(e) => setForm({ ...form, address: e.target.value })}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
         />
         <Input
           value={form.password}
@@ -97,7 +96,7 @@ export default function Register() {
             setForm({ ...form, password: e.target.value })
             validator.clear(['password'])
           }}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('password')}
           type={'password'}
         />
@@ -108,12 +107,19 @@ export default function Register() {
             setForm({ ...form, confirmPassword: e.target.value })
             validator.clear(['confirmPassword'])
           }}
-          className={'mb-2 w-[360px]'}
+          className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('confirmPassword')}
           type={'password'}
         />
+        {error && <Typography text={error} className={'mb-2'} color={'text-danger'} type={'body'}/>}
 
-        <Button typeButton={'primary'} onClick={handleRegister} className={'w-[360px] mt-6'}>
+        <Button
+          typeButton={'primary'}
+          onClick={handleRegister}
+          className={'w-[360px] mt-6'}
+          loading={isLoading}
+          disabled={isLoading}
+        >
           {'Register'}
         </Button>
       </div>

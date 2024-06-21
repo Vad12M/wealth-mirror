@@ -1,8 +1,6 @@
 import BlockLayout from "@/components/layouts/BlockLayout";
 import Typography from "@/ui/typography/Typography";
 import VisualizeIcon from "@/ui/icons/servicesBlock/VisualizeIcon";
-import CentralizeIcon from "@/ui/icons/servicesBlock/CentralizeIcon";
-import AnalyzeIcon from "@/ui/icons/servicesBlock/AnalyzeIcon";
 import styles from './servicesBlock.module.scss'
 
 export default function ServicesBlock() {
@@ -10,22 +8,22 @@ export default function ServicesBlock() {
     {
       title: 'VISUALIZE',
       description: 'Bring in all different aspects of your wealth in a single place.',
-      icon: <VisualizeIcon/>
+      icon: '/hero/centralize.png'
     },
     {
       title: 'CENTRALIZE',
       description: 'See your Wealth growing in a way like Never Before.',
-      icon: <CentralizeIcon/>
+      icon: '/hero/vizualize.png'
     },
     {
       title: 'ANALYZE',
       description: ' Get daily/monthly/yearly/lifetime analysis of your portfolio.',
-      icon: <AnalyzeIcon/>
+      icon: '/hero/analyze.png'
     },
     {
       title: 'Take Actions',
       description: 'AI Engine that will give valuable recommendations on your wealth',
-      icon: <AnalyzeIcon/>
+      icon: '/hero/actions.png'
     },
   ]
 
@@ -41,11 +39,11 @@ export default function ServicesBlock() {
             key={index}
             className={`relative flex flex-col items-center space-y-4 py-10 px-8 w-[280px] h-[360px] rounded-[30px] ${styles.serviceCard}`}
           >
-            <div className="absolute top-8">
-              {service.icon}
+            <div className="absolute top-8 bg-white p-6 rounded-full">
+              <img className="w-[100px] h-[100px]" alt={'icon'} src={service.icon}/>
             </div>
             <div className="text-center">
-              <Typography text={service.title} type={'sub1'} className="pt-32"/>
+              <Typography text={service.title} type={'sub1'} className="pt-36"/>
               <Typography text={service.description} type={'body'} color={'text-grayLight'}/>
             </div>
           </div>

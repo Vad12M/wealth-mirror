@@ -16,8 +16,8 @@ export default function HeroGradientIcon() {
         </filter>
         <linearGradient id="paint0_linear_219_571" x1="-3" y1="833.292" x2="1472.54" y2="1031.28"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#3FDD78"/>
-          <stop offset="1" stop-color="#1D65F1"/>
+          <stop stopColor="#3FDD78"/>
+          <stop offset="1" stopColor="#1D65F1"/>
         </linearGradient>
       </defs>
     </svg>

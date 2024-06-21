@@ -7,6 +7,7 @@ interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
   prefixBtn?: () => any;
   isGradient?: boolean;
   rounded?: number;
+  loading?: boolean;
 }
 
 export function Button({
@@ -15,11 +16,11 @@ export function Button({
   prefixBtn,
   rounded,
   isGradient = false,
+  loading,
   ...props
 }: IButton) {
 
-  const buttonStyles = cx(`${styles.button}`, {
-  })
+  const buttonStyles = cx(`${styles.button}`, {})
 
   let typeClassname = '';
   switch (typeButton) {
@@ -43,12 +44,12 @@ export function Button({
       style={{
         borderRadius: rounded ? `${rounded}px` : '48px',
         background: isGradient ? 'linear-gradient(90deg, #3EDC79 0%, #1E6BEB 100%' : '',
-    }}
+      }}
     >
       {prefixBtn?.()}
-        <div>
-          {children}
-        </div>
+      <div>
+        {loading ? <div className={styles.loader}/> : children}
+      </div>
     </button>
   )
 }

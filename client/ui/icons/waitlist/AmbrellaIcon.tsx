@@ -10,8 +10,8 @@ export default function AmbrellaIcon() {
       </g>
       <defs>
         <linearGradient id="paint0_linear_219_914" x1="24" y1="0" x2="24" y2="48" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#606ACB"/>
-          <stop offset="1" stop-color="#4F5ABE"/>
+          <stop stopColor="#606ACB"/>
+          <stop offset="1" stopColor="#4F5ABE"/>
         </linearGradient>
         <clipPath id="clip0_219_914">
           <rect width="24.1994" height="28" fill="white" transform="translate(10 10)"/>

@@ -14,8 +14,8 @@ export default function BlurCircleMDIcon() {
         </filter>
         <radialGradient id="paint0_radial_219_590" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
                         gradientTransform="translate(85.7917 20.7916) rotate(87.7365) scale(137.149 1615.67)">
-          <stop stop-color="#494955"/>
-          <stop offset="1" stop-color="#141414"/>
+          <stop stopColor="#494955"/>
+          <stop offset="1" stopColor="#141414"/>
         </radialGradient>
       </defs>
     </svg>

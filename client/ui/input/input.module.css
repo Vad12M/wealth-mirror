@@ -1,28 +1,62 @@
 .inputContainer {
-  @apply w-full p-6 outline-0 rounded-[18px];
-  @apply disabled:cursor-auto text-white;
+  width: 100%;
+  padding: 16px;
+  outline: 0;
+  border-radius: 18px;
   border: 0.835px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.12);
+  color: white !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer input {
+  background: rgba(255, 255, 255, 0.12) !important;
   color: white !important;
 }
 
 .inputContainer input::placeholder {
-  @apply text-placeholder opacity-100 text-[12px] leading-6 capitalize;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
 }
 
+.inputContainer input:-webkit-autofill,
+.inputContainer input:-webkit-autofill:hover,
+.inputContainer input:-webkit-autofill:focus,
+.inputContainer input:-webkit-autofill:active  {
+  -webkit-text-fill-color: white !important;
+  box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.12) inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.12) inset !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+.inputContainer input:-moz-autofill {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.inputContainer input:-ms-autofill {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Інші стилі */
 .inputContainer.required {
-  @apply pl-6;
+  padding-left: 24px;
 }
 
 .inputContainer.invalid {
-  @apply border-danger text-danger;
+  border-color: red;
+  color: red;
 }
 
 .suffix {
-  @apply absolute right-3 top-3;
+  position: absolute;
+  right: 12px;
+  top: 12px;
 }
 
 .suffixInput {
-  @apply pr-12;
+  padding-right: 48px;
 }
-
