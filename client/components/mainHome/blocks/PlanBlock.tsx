@@ -1,7 +1,4 @@
 import Typography from "@/ui/typography/Typography";
-import Hero1Icon from "@/ui/icons/heroBlock/Hero1Icon";
-import Hero2Icon from "@/ui/icons/heroBlock/Hero2Icon";
-import Hero3Icon from "@/ui/icons/heroBlock/Hero3Icon";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
 import PresentIcon from "@/ui/icons/PresentIcon";
