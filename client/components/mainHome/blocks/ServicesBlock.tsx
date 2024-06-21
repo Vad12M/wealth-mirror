@@ -33,7 +33,7 @@ export default function ServicesBlock() {
     <BlockLayout
       title={'How It Works'}
       primaryElements={['Works']}
-      description={'Change below text to “Wealth Mirror is a one stop solution to see how your wealth is growing and what actions you can do to grow it better 🙂'}
+      description={'Wealth Mirror is a one stop solution to see how your wealth is growing and what actions you can do to grow it better 🙂'}
     >
       <div className="flex items-center space-x-6">
         {services.map((service, index) => (
