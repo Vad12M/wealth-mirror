@@ -5,7 +5,6 @@ import { Twitter } from "react-bootstrap-icons";
 import InstagramIcon from "@/ui/icons/socials/InstagramIcon";
 import LinkedinIcon from "@/ui/icons/socials/LinkedinIcon";
 import YoutubeIcon from "@/ui/icons/socials/YoutubeIcon";
-import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 import { useRouter } from "next/router";
 import GradientLogo from "@/ui/icons/logos/GradientLogo";
 
@@ -42,18 +41,21 @@ export default function Footer() {
       column: [
         { title: 'Home', link: '/' },
         { title: 'About Us', link: '/about' },
-        { title: 'Contact Us', link: '/contact' },
-      ]
-    },
-    {
-      column: [
-        { title: 'News', link: '/news' },
         { title: 'Pricing', link: '/pricing' },
+        { title: 'Payment', link: '/payment' }
       ]
     },
     {
       column: [
-        { title: 'Services', link: '/services' }
+        { title: 'Privacy policy', link: '/privacy' },
+        { title: 'Terms and Conditions ', link: '/termsandconditions' },
+        { title: 'Cancellation and Refund', link: '/cancellationandrefund' },
+      ]
+    },
+    {
+      column: [
+        { title: 'Contact Us', link: '/contact' },
+        { title: 'Shipping and Selivery', link: '/shippingandselivery' }
       ]
     }
   ]
@@ -110,8 +112,11 @@ export default function Footer() {
         />
         <div className="flex items-center space-x-4 transform">
           {footerData.map((item, index) => (
-            <Link key={index} href={item.link}
-                  className="w-10 h-10 rounded-[16px] bg-[#18181C] flex items-center justify-center">
+            <Link
+              key={index}
+              href={item.link}
+              className="w-10 h-10 rounded-[16px] bg-[#18181C] flex items-center justify-center"
+            >
               {item.icon}
             </Link>
           ))}
