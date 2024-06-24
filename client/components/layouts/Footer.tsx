@@ -55,7 +55,7 @@ export default function Footer() {
     {
       column: [
         { title: 'Contact Us', link: '/contact' },
-        { title: 'Shipping and Selivery', link: '/shippingandselivery' }
+        { title: 'Shipping and Selivery', link: '/shippinganddelivery' }
       ]
     }
   ]
