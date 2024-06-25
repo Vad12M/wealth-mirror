@@ -5,16 +5,14 @@ import styles from './header.module.scss'
 import Typography from "@/ui/typography/Typography";
 import GradientLogo from "@/ui/icons/logos/GradientLogo";
 import MainLogo from "@/ui/icons/logos/MainLogo";
-import useAuthHandler from "@/service/useAuthHandler";
-import { useGetMeQuery } from "@/store/api/apiSlice";
+import { removeUserToken } from "@/service/useAuthHandler";
+import LogoutIcon from "@/ui/icons/LogoutIcon";
+import useGetUser from "@/hooks/useGetUser";
 
 export default function Header() {
-  const { asPath } = useRouter();
+  const { asPath, push } = useRouter();
   const isJoinWaitlist = asPath.includes('joinwaitlist');
-  const authHandler = useAuthHandler();
-  const isLogged = authHandler.hasAuthToken();
-  const router = useRouter();
-  const { data: user } = useGetMeQuery({}, { skip: !isLogged });
+  const { user, isLoggedIn, isAdmin } = useGetUser();
 
   const list = [
     { name: 'About Us', link: '/about' },
@@ -49,7 +47,7 @@ export default function Header() {
         </ul>
 
         <div className="flex items-center space-x-4 pr-3">
-          {!isLogged ? (
+          {!isLoggedIn ? (
             <Link href={'/auth/login'}>
               <Typography text={'Login'} type={'button'}/>
             </Link>
@@ -58,13 +56,31 @@ export default function Header() {
               <Typography text={`${user?.firstName || ''} ${user?.lastName || ''}`} type={'button'}/>
             </Link>
           )}
-          <Button
+
+          {isAdmin && <Button
             typeButton={'primary-dark'}
             isGradient={isJoinWaitlist}
-            onClick={() => router.push('/canvas')}
+            onClick={() => push('/admin')}
+          >
+            {'Admin Panel'}
+          </Button>}
+
+          {!isLoggedIn ? <Button
+            typeButton={'primary-dark'}
+            isGradient={isJoinWaitlist}
+            onClick={() => push('/canvas')}
           >
             {'Start Free Trial'}
-          </Button>
+          </Button> : (
+            <button
+              onClick={() => {
+                removeUserToken()
+                window.location.reload()
+              }}
+            >
+              <LogoutIcon/>
+            </button>
+          )}
         </div>
       </div>
     </header>

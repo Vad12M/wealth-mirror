@@ -1,11 +1,26 @@
-import { useGetContactsQuery, useGetWaitUsersQuery } from "@/store/api/apiSlice";
+import { useGetContactsQuery, useGetMeQuery, useGetWaitUsersQuery } from "@/store/api/apiSlice";
 import Typography from "@/ui/typography/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import useAuthHandler from "@/service/useAuthHandler";
 
 export default function AdminPage() {
+  const router = useRouter();
+  const authHandler = useAuthHandler();
+  const isLoggedIn = authHandler.hasAuthToken();
   const { data: contacts } = useGetContactsQuery();
   const { data: waitUsers } = useGetWaitUsersQuery();
+  const { data: user, isSuccess } = useGetMeQuery({}, { skip: !isLoggedIn });
+  const isAdmin = user?.role === 'admin';
+
   const [selectedTab, setSelectedTab] = useState<'contacts' | 'waitUsers'>('waitUsers');
+
+  useEffect(() => {
+    if (isSuccess && !isAdmin) {
+      router.push('/');
+    }
+  }, [isAdmin]);
+
   return (
     <section className="py-[180px] flex flex-col items-center">
       <Typography text={'Admin'} className="mb-2"/>

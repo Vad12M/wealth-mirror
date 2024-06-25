@@ -58,3 +58,40 @@
   font-family: 'Inter';
   font-weight: 700;
 }
+
+.link1 {
+  @apply text-[18px];
+  font-weight: 500;
+  font-family: 'Nunito';
+}
+
+.heading1 {
+  @apply text-[50px] leading-[62px];
+  font-family: 'Inter';
+  font-weight: 800;
+}
+
+.heading3 {
+  @apply text-[30px] leading-[37px];
+  font-family: 'Inter';
+  font-weight: 700;
+}
+
+.heading6 {
+  @apply text-[18px] leading-[22px];
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+
+.body2 {
+  @apply text-[22px] leading-[34px];
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+.body2B {
+  @apply text-[22px] leading-[34px];
+  font-family: 'Inter';
+  font-weight: 700;
+}

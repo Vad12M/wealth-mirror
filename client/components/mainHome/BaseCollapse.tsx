@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Typography from "@/ui/typography/Typography";
-import AnimateHeight from "react-animate-height";
 import CircleBottomPrimaryArrowIcon from "@/ui/icons/CircleBottomPrimaryArrowIcon";
 import CircleRightArrowIcon from "@/ui/icons/CircleRightArrowIcon";
+import styles from './baseCollapse.module.scss';
 
 export default function BaseCollapse({
   title,
@@ -12,6 +12,21 @@ export default function BaseCollapse({
   text: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsAnimating(true);
+    } else {
+      setIsAnimating(false);
+    }
+  }, [isOpen]);
+
   return (
     <div
       className="p-[36px] w-full rounded-[14px]"
@@ -21,20 +36,23 @@ export default function BaseCollapse({
       }}
     >
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         className="w-full flex justify-between items-center"
       >
-        <Typography text={title} type={'sub1'} color={'text-primary'}/>
-        {isOpen ? <CircleBottomPrimaryArrowIcon/> : <CircleRightArrowIcon/>}
+        <Typography text={title} type={'sub1'} color={'text-primary'} />
+        {isOpen ? <CircleBottomPrimaryArrowIcon /> : <CircleRightArrowIcon />}
       </button>
-      <AnimateHeight height={isOpen ? 'auto' : 0}>
+      <div
+        ref={contentRef}
+        className={`${styles.collapsibleContent} ${isAnimating ? styles.opening : ''} ${!isOpen && !isAnimating ? styles.closing : ''}`}
+      >
         <Typography
           text={text}
           type={'body'}
           color={'text-grayLight'}
           className="w-[88%] pt-8"
         />
-      </AnimateHeight>
+      </div>
     </div>
-  )
+  );
 }

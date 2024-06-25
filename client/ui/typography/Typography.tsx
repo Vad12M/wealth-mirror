@@ -11,7 +11,12 @@ interface ITypography {
     | 'healine5'
     | 'healine4'
     | 'healine2'
-    | 'base1';
+    | 'link1'
+    | 'heading1'
+    | 'heading3'
+    | 'heading6'
+    | 'body2'
+    | 'body2B';
   text: string;
   className?: string;
   color?: string;
@@ -41,6 +46,7 @@ export default function Typography({
     );
   };
 
+
   const highlightedText = highlightPrimaryElements(text, primaryElements);
 
   switch (type) {
@@ -64,8 +70,18 @@ export default function Typography({
       return <p className={`${styles.healine4} ${className} ${color}`}>{highlightedText}</p>;
     case 'healine2':
       return <p className={`${styles.healine2} ${className} ${color}`}>{highlightedText}</p>;
-    case 'base1':
-      return <p className={`${styles.base1} ${className} ${color}`}>{highlightedText}</p>;
+    case 'link1':
+      return <p className={`${styles.link1} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading1':
+      return <p className={`${styles.heading1} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading3':
+      return <p className={`${styles.heading3} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading6':
+      return <p className={`${styles.heading6} ${className} ${color}`}>{highlightedText}</p>;
+    case 'body2':
+      return <p className={`${styles.body2} ${className} ${color}`}>{highlightedText}</p>;
+    case 'body2B':
+      return <p className={`${styles.body2B} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

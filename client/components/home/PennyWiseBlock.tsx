@@ -52,7 +52,7 @@ export default function PennyWiseBlock({
             {freeForEveryoneList.map((item, index) => (
               <div key={index} className='flex items-center space-x-3'>
                 <CheckMarkIcon/>
-                <Typography text={item} type={'base1'}/>
+                <Typography text={item} type={'body'}/>
               </div>
             ))}
           </div>
@@ -75,7 +75,7 @@ export default function PennyWiseBlock({
             {paidList.map((item, index) => (
               <div key={index} className='flex items-center space-x-3'>
                 <CheckMarkIcon/>
-                <Typography text={item} type={'base1'}/>
+                <Typography text={item} type={'body'}/>
               </div>
             ))}
           </div>

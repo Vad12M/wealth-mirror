@@ -11,7 +11,7 @@ export default function OurServicesBlock() {
       <Typography text={title} type={'healine4'} className="mt-8 mb-4"/>
       <Typography
         text={descr}
-        type={'base1'}
+        type={'body'}
         color={'text-lightGray4'}
         className={"w-[490px]"}
       />
@@ -107,7 +107,7 @@ export default function OurServicesBlock() {
             <div className="bg-darkGray3 border-darkGray1 p-8 rounded-[16px] mb-10 flex items-center justify-between">
               <div className="flex flex-col space-y-1">
                 <Typography text={'Wealth Mirror'} type={'healine5'}/>
-                <Typography text={'Saved 32 seconds ago'} type={'base1'} color={'text-lightGray4'}/>
+                <Typography text={'Saved 32 seconds ago'} type={'body'} color={'text-lightGray4'}/>
               </div>
               <div
                 className="px-8 py-2"
