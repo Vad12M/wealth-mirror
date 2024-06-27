@@ -3,10 +3,12 @@ import Link from "next/link";
 
 export default function PrivacyPagesLayout({
   children,
+  iconsContainer,
   title,
   lastUpdated
 }: {
   children: React.ReactNode,
+  iconsContainer?: React.ReactNode,
   title: string,
   lastUpdated: string
 }) {
@@ -31,8 +33,8 @@ export default function PrivacyPagesLayout({
         <div className="w-1/2">
           {children}
         </div>
-        <div>
-
+        <div className="w-1/2">
+          {iconsContainer}
         </div>
       </div>
     </section>

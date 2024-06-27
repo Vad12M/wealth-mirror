@@ -15,7 +15,6 @@ export default function Register() {
   const [form, setForm] = useState<IRegister>({
     email: '',
     password: '',
-    confirmPassword: '',
     firstName: '',
     lastName: '',
     phone: '',
@@ -83,12 +82,12 @@ export default function Register() {
           className={'mb-2 w-[400px]'}
           invalid={validator.isFieldInvalid('phone')}
         />
-        <Input
-          value={form.address}
-          placeholder={'Address'}
-          onUpdate={(e) => setForm({ ...form, address: e.target.value })}
-          className={'mb-2 w-[400px]'}
-        />
+        {/*<Input*/}
+        {/*  value={form.address}*/}
+        {/*  placeholder={'Address'}*/}
+        {/*  onUpdate={(e) => setForm({ ...form, address: e.target.value })}*/}
+        {/*  className={'mb-2 w-[400px]'}*/}
+        {/*/>*/}
         <Input
           value={form.password}
           placeholder={'Password'}
@@ -100,17 +99,17 @@ export default function Register() {
           invalid={validator.isFieldInvalid('password')}
           type={'password'}
         />
-        <Input
-          value={form.confirmPassword}
-          placeholder={'Confirm Password'}
-          onUpdate={(e) => {
-            setForm({ ...form, confirmPassword: e.target.value })
-            validator.clear(['confirmPassword'])
-          }}
-          className={'mb-2 w-[400px]'}
-          invalid={validator.isFieldInvalid('confirmPassword')}
-          type={'password'}
-        />
+        {/*<Input*/}
+        {/*  value={form.confirmPassword}*/}
+        {/*  placeholder={'Confirm Password'}*/}
+        {/*  onUpdate={(e) => {*/}
+        {/*    setForm({ ...form, confirmPassword: e.target.value })*/}
+        {/*    validator.clear(['confirmPassword'])*/}
+        {/*  }}*/}
+        {/*  className={'mb-2 w-[400px]'}*/}
+        {/*  invalid={validator.isFieldInvalid('confirmPassword')}*/}
+        {/*  type={'password'}*/}
+        {/*/>*/}
         {error && <Typography text={error} className={'mb-2'} color={'text-danger'} type={'body'}/>}
 
         <Button

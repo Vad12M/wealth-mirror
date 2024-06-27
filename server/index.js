@@ -2,9 +2,9 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import cors from 'cors';
-import { loginValidator, registerValidator } from "./validations/auth.js";
+import { loginValidator, registerValidator, updateMeValidator } from "./validations/auth.js";
 import { handleValidationErrors } from "./utils/handleValidationErrors.js";
-import { getMe, login, register } from "./controllers/UserController.js";
+import { getMe, login, register, updateMe } from "./controllers/UserController.js";
 import { checkAuth } from "./utils/checkAuth.js";
 import { addWaitUser, contact, getContacts, getWaitUsers } from "./controllers/NewClientController.js";
 import { addWaitUserValidator, contactValidator } from "./validations/newClient.js";
@@ -29,6 +29,7 @@ app.use(express.json());
 app.post("/auth/login", loginValidator, handleValidationErrors, login);
 app.post("/auth/register", registerValidator, handleValidationErrors, register);
 app.get('/auth/me', checkAuth, getMe);
+app.put('/user/update', checkAuth, updateMeValidator, handleValidationErrors, updateMe);
 
 // for creator
 app.post('/addWaitUser', addWaitUserValidator, handleValidationErrors, addWaitUser);

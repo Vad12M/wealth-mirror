@@ -21,6 +21,7 @@ interface ITypography {
   className?: string;
   color?: string;
   primaryElements?: string[];
+  boldElements?: string[];
 }
 
 export default function Typography({
@@ -28,16 +29,18 @@ export default function Typography({
   type = 'h1',
   color = 'text-white',
   className,
-  primaryElements = []
+  primaryElements = [],
+  boldElements = [],
 }: ITypography) {
 
-  const highlightPrimaryElements = (text: string, primaryElements: string[]) => {
-    if (primaryElements.length === 0) return text;
+  const highlightPrimaryElements = (text: string, primaryElements?: string[], boldElements?: string[]) => {
+    const elements = (primaryElements || [])?.concat(boldElements || []);
+    if (elements.length === 0) return text;
 
-    const regex = new RegExp(`(${primaryElements.join('|')})`, 'gi');
+    const regex = new RegExp(`(${elements.join('|')})`, 'gi');
     return text.split(regex).map((part, index) =>
-      primaryElements.includes(part) ? (
-        <span key={index} className={styles.primaryElement}>
+      elements.includes(part) ? (
+        <span key={index} className={styles.boldElement}>
           {part}
         </span>
       ) : (
@@ -47,7 +50,7 @@ export default function Typography({
   };
 
 
-  const highlightedText = highlightPrimaryElements(text, primaryElements);
+  const highlightedText = highlightPrimaryElements(text, primaryElements, boldElements);
 
   switch (type) {
     case 'h1':

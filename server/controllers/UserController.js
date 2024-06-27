@@ -77,3 +77,25 @@ export const getMe = async (req, res) => {
     });
   }
 }
+
+export const updateMe = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
+    const { passwordHash, ...userData } = user._doc;
+    const updatedUser = await UserModel.findByIdAndUpdate(req.userId, {
+      ...user._doc,
+      ...req.body,
+    }, { new: true });
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.error('Error in updateMe:', err);
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}

@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 export default function VideoBlock() {
   const videoRef = useRef(null);
   const [scale, setScale] = useState(1);
+  const [muted, setMuted] = useState(true);
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
-    const blockTop = (document.getElementById('scale-block')?.offsetTop || 0) - 300;
+    const blockTop = (document.getElementById('scale-block')?.offsetTop || 0) - 320;
 
-    if (!blockTop) return;
+    if (blockTop === undefined) return;
 
     if (scrollY >= blockTop - windowHeight && scrollY <= blockTop) {
       const progress = (scrollY - (blockTop - windowHeight)) / windowHeight;
@@ -41,18 +42,25 @@ export default function VideoBlock() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen mb-[100px]">
       <div
         id="scale-block"
-        className="transition-transform duration-200 ease-out w-1/2 h-[520px] mt-10"
+        className="transition-transform duration-200 ease-out w-1/2 h-[650px] mt-10 relative"
         style={{ transform: `scale(${scale})` }}
       >
+        <button
+          className="absolute right-0 bottom-0 m-4 bg-opacity-50 rounded-full p-1 z-50"
+          onClick={() => setMuted(!muted)}
+        >
+          {muted ? 'Unmute' : 'Mute'}
+        </button>
         <video
           ref={videoRef}
           width="100%"
           height="100%"
-          muted
           controls={false}
+          loop={true}
+          muted={muted}
         >
           <source src="/hero/video.mp4" type="video/mp4"/>
         </video>

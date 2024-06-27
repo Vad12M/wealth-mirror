@@ -27,15 +27,15 @@ export default function CancellationAndRefund() {
         list={[
           {
             subTitle: "Initial Purchase:",
-            text: "Refunds are available for initial subscription purchases within the first 14 days of service, provided that no substantial use of the service has occurred.",
+            text: "Initial Purchase: Refunds are available for initial subscription purchases within the first 14 days of service, provided that no substantial use of the service has occurred.",
           },
           {
             subTitle: "Renewals:",
-            text: "Refunds for subscription renewals are available within 7 days of the renewal date, given that the service has not been used during this period."
+            text: "Renewals: Refunds for subscription renewals are available within 7 days of the renewal date, given that the service has not been used during this period."
           },
           {
             subTitle: "Special Circumstances:",
-            text: "Refund requests outside of the standard policy may be considered on a case-by-case basis for special circumstances."
+            text: "Special Circumstances: Refund requests outside of the standard policy may be considered on a case-by-case basis for special circumstances."
           },
         ]}
       />
@@ -45,11 +45,11 @@ export default function CancellationAndRefund() {
         list={[
           {
             subTitle: "Requesting a Refund:",
-            text: "To request a refund, please contact our customer support team at support@financeease.com with your account details and the reason for the refund request.",
+            text: "Requesting a Refund: To request a refund, please contact our customer support team at support@financeease.com with your account details and the reason for the refund request.",
           },
           {
             subTitle: "Processing Time:",
-            text: "Refunds will be processed within 7-10 business days of receiving the request. The refund will be credited back to the original payment method used during the purchase.",
+            text: "Processing Time: Refunds will be processed within 7-10 business days of receiving the request. The refund will be credited back to the original payment method used during the purchase.",
           }
         ]}
       />
@@ -59,33 +59,41 @@ export default function CancellationAndRefund() {
         list={[
           {
             subTitle: "One-Time Services:",
-            text: "Payments for one-time services or consultations are non-refundable once the service has been delivered.",
+            text: "One-Time Services: Payments for one-time services or consultations are non-refundable once the service has been delivered.",
           },
           {
             subTitle: "Promotional Offers:",
-            text: "Services purchased under promotional offers are non-refundable unless otherwise stated in the terms of the promotion.",
+            text: "Promotional Offers: Services purchased under promotional offers are non-refundable unless otherwise stated in the terms of the promotion.",
           }
         ]}
       />
 
       <Typography text={'Cancellation Policy'} type="heading3" className='mb-10'/>
-      <div className='mb-[57px] flex items-center space-x-1'>
-        <Typography text="Subscription Cancellation:" type="body2B"/>
-        <Typography
-          text="You may cancel your subscription at any time through your account settings or by contacting customer support at support@financeease.com."
-          type="body2"
-        />
-      </div>
+      <Typography
+        boldElements={['Subscription Cancellation:']}
+        text="Subscription Cancellation: You may cancel your subscription at any time through your account settings or by contacting customer support at support@financeease.com."
+        type="body2"
+        className={'mb-[57px]'}
+      />
 
-      <Typography text={' Changes to the Policy'} type="heading3" className='mb-10'/>
+      <Typography text={'Changes to the Policy'} type="heading3" className='mb-10'/>
       <Typography
         text="We may update our Refund and Cancellation Policy from time to time. We will notify you of any changes by posting the new policy on this page. We encourage you to review this policy periodically for any updates."
         type="body2"
         className='mb-[57px]'
       />
 
-
-      <Typography text={'Contact us'} type="heading3" className='mb-10'/>
+      <Typography text={'Contact us'} type="heading3" className='mb-[38px]'/>
+      <Typography
+        text={'If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:'}
+        type="body2" className='mb-2'/>
+      <Typography text={'1. Email: '} type="body2" className='mb-2'/>
+      <Typography text={'support@financeease.com'} type="body2" className='mb-2 ml-6'/>
+      <Typography text={'2. Phone:'} type="body2" className='mb-2'/>
+      <Typography text={'+1-800-123-4567'} type="body2" className='mb-2 ml-6'/>
+      <Typography text={'3. Address:'} type="body2" className='mb-2'/>
+      <Typography text={'FinanceEase, 1234 Financial Ave, Suite 100, New York, NY 10001'} type="body2"
+                  className='mb-2 ml-6'/>
     </PrivacyPagesLayout>
   );
 }
