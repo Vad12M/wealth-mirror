@@ -12,7 +12,14 @@ export default function ProfilePage() {
   const isLoggedIn = authHandler.hasAuthToken();
   const { data: user } = useGetMeQuery({}, { skip: !isLoggedIn });
   const [isEditing, setIsEditing] = useState(false);
-  const [form, setForm] = useState<IUser>();
+  const [form, setForm] = useState<IUser>({
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
 
   useEffect(() => {
     if (user) setForm(user);
@@ -21,6 +28,10 @@ export default function ProfilePage() {
   const handleSave = async () => {
     await updateMe({ ...user });
     setIsEditing(false);
+  }
+
+  if (!user) {
+    return null;
   }
 
   return (
