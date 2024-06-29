@@ -1,54 +1,46 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   Stage,
   Layer,
   Rect as KonvaRect,
   Image as KonvaImage,
-  Circle as KonvaCircle,
   Line as KonvaLine,
-  Arrow as KonvaArrow,
   Transformer,
 } from "react-konva";
 import {
   Box,
 } from "@chakra-ui/react";
-import PaintMenu from "@/components/paint/PaintMenu";
 import usePaint from "../../hooks/usePaint";
+import Dialog from "@/ui/dialog/dialog.component";
+import Typography from "@/ui/typography/Typography";
+import PaintMenu from "@/components/paint/PaintMenu";
 
 interface PaintProps {
 }
 
-
-const SIZE = 500;
+const SIZE = 1200;
+const GRID_SIZE = 67;
 
 export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const {
-    color,
-    setColor,
-    drawAction,
-    setDrawAction,
-    scribbles,
-    rectangles,
-    circles,
-    arrows,
-    image,
+
+    imageObjects,
     isDraggable,
     onStageMouseUp,
     onStageMouseDown,
     onStageMouseMove,
     onBgClick,
-    onShapeClick,
-    fileRef,
-    onImportImageSelect,
-    onImportImageClick,
     onExportClick,
     transformerRef,
     onClear,
-    stageRef
+    addNewImage,
+    stageRef,
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
   const [optionsPosition, setOptionsPosition] = useState({ x: 0, y: 0 });
+  const [settingPopup, setSettingPopup] = useState(false);
+
 
   const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
@@ -61,26 +53,52 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     setShowOptions(false);
   }, []);
 
+  const drawGrid = () => {
+    const lines = [];
+    for (let i = 0; i < SIZE / GRID_SIZE; i++) {
+      lines.push(
+        <KonvaLine
+          key={`v-${i}`}
+          points={[i * GRID_SIZE, 0, i * GRID_SIZE, SIZE]}
+          stroke="#D1D1D1"
+          strokeWidth={1}
+        />
+      );
+      lines.push(
+        <KonvaLine
+          key={`h-${i}`}
+          points={[0, i * GRID_SIZE, SIZE, i * GRID_SIZE]}
+          stroke="#D1D1D1"
+          strokeWidth={1}
+        />
+      );
+    }
+    return lines;
+  };
+
   return (
     <Box m={4} width={`${SIZE}px`}>
-      <PaintMenu
-        setDrawAction={setDrawAction}
-        drawAction={drawAction}
-        color={color}
-        setColor={setColor}
-        onClear={onClear}
-        fileRef={fileRef}
-        onImportImageSelect={onImportImageSelect}
-        onImportImageClick={onImportImageClick}
-        onExportClick={onExportClick}
-      />
-
+     <div className="bg-black p-4 flex  justify-between">
+       <Typography text={'Convas'} type={'heading3'}/>
+       <PaintMenu
+         // setDrawAction={setDrawAction}
+         // drawAction={drawAction}
+         // color={color}
+         // setColor={setColor}
+         onClear={onClear}
+         // fileRef={fileRef}
+         // onImportImageSelect={onImportImageSelect}
+         // onImportImageClick={onImportImageClick}
+         onExportClick={onExportClick}
+       />
+     </div>
       <Box
         width={`${SIZE}px`}
         height={`${SIZE}px`}
         border="1px solid black"
         mt={4}
         overflow="hidden"
+        position="relative"
       >
         <Stage
           height={SIZE}
@@ -92,77 +110,98 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           onClick={handleCanvasClick}
         >
           <Layer>
+            {drawGrid()}
             <KonvaRect
               x={0}
               y={0}
               height={SIZE}
               width={SIZE}
-              fill="white"
+              fill="transparent"
               id="bg"
               onClick={onBgClick}
             />
-            {image && (
+          </Layer>
+          <Layer>
+            {imageObjects.map((image) => (
               <KonvaImage
+                key={image.id}
                 image={image}
                 x={0}
                 y={0}
-                height={SIZE / 2}
-                width={SIZE / 2}
+                height={GRID_SIZE * 2}
+                width={GRID_SIZE * 2}
                 draggable={isDraggable}
-              />
-            )}
-            {arrows.map((arrow) => (
-              <KonvaArrow
-                key={arrow.id}
-                id={arrow.id}
-                points={arrow.points}
-                fill={arrow.color}
-                stroke={arrow.color}
-                strokeWidth={4}
-                onClick={onShapeClick}
-                draggable={isDraggable}
+                onClick={(e) => {
+                  e.cancelBubble = true;
+                  setSettingPopup(true);
+                  console.log('image clicked')
+                }}
               />
             ))}
-            {rectangles.map((rectangle) => (
-              <KonvaRect
-                key={rectangle.id}
-                x={rectangle?.x}
-                y={rectangle?.y}
-                height={rectangle?.height}
-                width={rectangle?.width}
-                stroke={rectangle?.color}
-                id={rectangle?.id}
-                strokeWidth={4}
-                onClick={onShapeClick}
-                draggable={isDraggable}
-              />
-            ))}
-            {circles.map((circle) => (
-              <KonvaCircle
-                key={circle.id}
-                id={circle.id}
-                x={circle?.x}
-                y={circle?.y}
-                radius={circle?.radius}
-                stroke={circle?.color}
-                strokeWidth={4}
-                onClick={onShapeClick}
-                draggable={isDraggable}
-              />
-            ))}
-            {scribbles.map((scribble) => (
-              <KonvaLine
-                key={scribble.id}
-                id={scribble.id}
-                lineCap="round"
-                lineJoin="round"
-                stroke={scribble?.color}
-                strokeWidth={4}
-                points={scribble.points}
-                onClick={onShapeClick}
-                draggable={isDraggable}
-              />
-            ))}
+
+            {/*{image && (*/}
+            {/*  <KonvaImage*/}
+            {/*    key={image.id}*/}
+            {/*    image={image}*/}
+            {/*    x={0}*/}
+            {/*    y={0}*/}
+            {/*    height={SIZE / 2}*/}
+            {/*    width={SIZE / 2}*/}
+            {/*    draggable={isDraggable}*/}
+            {/*  />*/}
+            {/*)}*/}
+            {/*{arrows.map((arrow) => (*/}
+            {/*  <KonvaArrow*/}
+            {/*    key={arrow.id}*/}
+            {/*    id={arrow.id}*/}
+            {/*    points={arrow.points}*/}
+            {/*    fill={arrow.color}*/}
+            {/*    stroke={arrow.color}*/}
+            {/*    strokeWidth={4}*/}
+            {/*    onClick={onShapeClick}*/}
+            {/*    draggable={isDraggable}*/}
+            {/*  />*/}
+            {/*))}*/}
+            {/*{rectangles.map((rectangle) => (*/}
+            {/*  <KonvaRect*/}
+            {/*    key={rectangle.id}*/}
+            {/*    x={rectangle?.x}*/}
+            {/*    y={rectangle?.y}*/}
+            {/*    height={rectangle?.height}*/}
+            {/*    width={rectangle?.width}*/}
+            {/*    stroke={rectangle?.color}*/}
+            {/*    id={rectangle?.id}*/}
+            {/*    strokeWidth={4}*/}
+            {/*    onClick={onShapeClick}*/}
+            {/*    draggable={isDraggable}*/}
+            {/*  />*/}
+            {/*))}*/}
+            {/*{circles.map((circle) => (*/}
+            {/*  <KonvaCircle*/}
+            {/*    key={circle.id}*/}
+            {/*    id={circle.id}*/}
+            {/*    x={circle?.x}*/}
+            {/*    y={circle?.y}*/}
+            {/*    radius={circle?.radius}*/}
+            {/*    stroke={circle?.color}*/}
+            {/*    strokeWidth={4}*/}
+            {/*    onClick={onShapeClick}*/}
+            {/*    draggable={isDraggable}*/}
+            {/*  />*/}
+            {/*))}*/}
+            {/*{scribbles.map((scribble) => (*/}
+            {/*  <KonvaLine*/}
+            {/*    key={scribble.id}*/}
+            {/*    id={scribble.id}*/}
+            {/*    lineCap="round"*/}
+            {/*    lineJoin="round"*/}
+            {/*    stroke={scribble?.color}*/}
+            {/*    strokeWidth={4}*/}
+            {/*    points={scribble.points}*/}
+            {/*    onClick={onShapeClick}*/}
+            {/*    draggable={isDraggable}*/}
+            {/*  />*/}
+            {/*))}*/}
             <Transformer ref={transformerRef}/>
           </Layer>
         </Stage>
@@ -173,10 +212,21 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
             top={optionsPosition.y}
             className={'p-4 shadow-lg bg-white'}
           >
-            <ul className="p-2 flex items-center flex-col space-y-3">
-              <li>Option 1</li>
-              <li>Option 2</li>
-              <li>Option 3</li>
+            <ul className="p-2 flex items-center flex-col space-y-3 text-black">
+              <button onClick={() => {
+                setShowOptions(false)
+                addNewImage('car')
+              }}>
+                {'Car'}
+              </button>
+              <button onClick={() => {
+                setShowOptions(false)
+                addNewImage('house')
+              }}>
+                {'Real estate'}
+              </button>
+              <li>Fortune</li>
+              <li>Card</li>
               <button
                 onClick={() => handleCloseOptions()}
                 className={'bg-red-500 text-white p-2 rounded-md'}
@@ -186,6 +236,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
             </ul>
           </Box>
         )}
+
+        <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-6'}>
+          <Typography text={'Setting Form'}/>
+        </Dialog>
       </Box>
     </Box>
   );
