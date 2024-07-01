@@ -11,7 +11,6 @@ import GradientLogo from "@/ui/icons/logos/GradientLogo";
 export default function Footer() {
   const router = useRouter();
   const currentYear = new Date().getFullYear();
-  const isJoinWaitlist = router.asPath.includes('joinwaitlist');
 
   const footerData = [
     {
@@ -93,7 +92,7 @@ export default function Footer() {
               {columns.map((item, index) => (
                 <div key={index} className="flex flex-col space-y-2">
                   {item.column.map((column, index) => (
-                    <Link key={index} href={column.link}>
+                    <Link key={index} href={column.link} target={'_blank'}>
                       <Typography text={column.title} type={'body'} color={'text-bodyGray'}/>
                     </Link>
                   ))}
@@ -115,6 +114,7 @@ export default function Footer() {
             <Link
               key={index}
               href={item.link}
+              target={'_blank'}
               className="w-10 h-10 rounded-[16px] bg-[#18181C] flex items-center justify-center"
             >
               {item.icon}
