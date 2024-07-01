@@ -40,7 +40,7 @@ export default function Typography({
     const regex = new RegExp(`(${elements.join('|')})`, 'gi');
     return text.split(regex).map((part, index) =>
       elements.includes(part) ? (
-        <span key={index} className={styles.boldElement}>
+        <span key={index} className={!!primaryElements?.length ? styles.primaryElement : styles.boldElement}>
           {part}
         </span>
       ) : (
