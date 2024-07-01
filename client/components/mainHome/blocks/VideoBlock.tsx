@@ -8,7 +8,7 @@ export default function VideoBlock() {
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
-    const blockTop = (document.getElementById('scale-block')?.offsetTop || 0) - 320;
+    const blockTop = (document.getElementById('scale-block')?.offsetTop || 0) - 370;
 
     if (blockTop === undefined) return;
 
@@ -42,14 +42,14 @@ export default function VideoBlock() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen mb-[100px]">
+    <div className="flex flex-col items-center justify-center min-h-screen mt-[130px]">
       <div
         id="scale-block"
         className="transition-transform duration-200 ease-out w-1/2 h-[650px] mt-10 relative"
         style={{ transform: `scale(${scale})` }}
       >
         <button
-          className="absolute right-0 bottom-0 m-4 bg-opacity-50 rounded-full p-1 z-50"
+          className="absolute right-0 bottom-[60%] m-4 bg-opacity-50 rounded-full p-1 z-50"
           onClick={() => setMuted(!muted)}
         >
           {muted ? 'Unmute' : 'Mute'}

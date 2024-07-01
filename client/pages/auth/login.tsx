@@ -65,7 +65,7 @@ export default function LoginPage() {
         />
         <Button
           typeButton={'primary'}
-          className={'w-[360px] mt-6 flex justify-center h-[46px]'}
+          className={'w-[400px] mt-6 flex justify-center h-[46px]'}
           onClick={handleLogin}
           rounded={6}
           loading={isLoading}

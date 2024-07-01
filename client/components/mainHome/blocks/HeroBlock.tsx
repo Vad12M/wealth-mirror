@@ -1,11 +1,11 @@
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
-import useAuthHandler from "@/service/useAuthHandler";
 import { useRouter } from "next/router";
+import useGetUser from "@/hooks/useGetUser";
 
 export default function HeroBlock() {
-  const { hasAuthToken } = useAuthHandler();
+  const { isLoggedIn } = useGetUser();
   const router = useRouter();
   return (
     <section
@@ -48,13 +48,7 @@ export default function HeroBlock() {
         <Button
           prefixBtn={() => <FireIcon/>}
           typeButton={'secondary'}
-          onClick={() => {
-            if (hasAuthToken()) {
-              router.push('/canvas');
-            } else {
-              router.push('/auth/register');
-            }
-          }}
+          onClick={() => router.push(isLoggedIn ? '/canvas' : '/auth/register')}
         >
           {'Try Wealth Mirror'}
         </Button>

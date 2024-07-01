@@ -115,9 +115,10 @@ export default function Register() {
         <Button
           typeButton={'primary'}
           onClick={handleRegister}
-          className={'w-[360px] mt-6'}
+          className={'w-[400px] mt-6 flex justify-center h-[46px]'}
           loading={isLoading}
           disabled={isLoading}
+          rounded={6}
         >
           {'Register'}
         </Button>
