@@ -40,6 +40,13 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    changePassword: builder.mutation<void, any>({
+      query: (params) => ({
+        url: '/user/update-password',
+        method: 'POST',
+        body: JSON.stringify(params)
+      }),
+    }),
 
     addWaitUser: builder.mutation<void, IWaitUser>({
       query: (params) => ({
@@ -80,5 +87,6 @@ export const {
   useContactMutation,
   useGetContactsQuery,
   useGetWaitUsersQuery,
-  useUpdateMeMutation
+  useUpdateMeMutation,
+  useChangePasswordMutation,
 } = apiSlice;

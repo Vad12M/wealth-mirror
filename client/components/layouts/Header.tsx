@@ -68,7 +68,7 @@ export default function Header() {
           {!isLoggedIn ? <Button
             typeButton={'primary-dark'}
             isGradient={isJoinWaitlist}
-            onClick={() => push(isLoggedIn ? '/canvas' : '/auth/register')}
+            onClick={() => push(isLoggedIn ? '/canvas' : '/auth/login')}
           >
             {'Start Free Trial'}
           </Button> : (

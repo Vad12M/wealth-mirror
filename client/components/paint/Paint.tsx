@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Stage,
   Layer,
@@ -79,7 +79,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   return (
     <Box m={4} width={`${SIZE}px`}>
      <div className="bg-black p-4 flex  justify-between">
-       <Typography text={'Convas'} type={'heading3'}/>
+       <Typography text={'Canvas'} type={'heading3'}/>
        <PaintMenu
          // setDrawAction={setDrawAction}
          // drawAction={drawAction}
@@ -231,12 +231,11 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 onClick={() => handleCloseOptions()}
                 className={'bg-red-500 text-white p-2 rounded-md'}
               >
-                Close
+                {'Close'}
               </button>
             </ul>
           </Box>
         )}
-
         <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-6'}>
           <Typography text={'Setting Form'}/>
         </Dialog>

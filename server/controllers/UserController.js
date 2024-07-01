@@ -1,5 +1,4 @@
 import UserModel from "../models/User.js";
-import WaitUserModel from "../models/WaitUser.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -45,6 +44,13 @@ export const login = async (req, res) => {
       return res.status(400).json({
         message: 'Invalid credentials',
       });
+    }
+
+    if (user.status === 'active') {
+      const nowTimestamp = new Date().getTime();
+      if (user.expiredPayment < nowTimestamp) {
+        await UserModel.findByIdAndUpdate(user._id, { status: 'inactive' });
+      }
     }
 
     const token = jwt.sign({
@@ -94,6 +100,34 @@ export const updateMe = async (req, res) => {
     res.status(200).json(updatedUser);
   } catch (err) {
     console.error('Error in updateMe:', err);
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+export const updatePassword = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
+    const validPassword = await bcrypt.compare(req.body.oldPassword, user.passwordHash);
+    if (!validPassword) {
+      return res.status(400).json({
+        message: 'Invalid password',
+      });
+    }
+    const salt = await bcrypt.genSaltSync(10);
+    const passwordHash = await bcrypt.hash(req.body.newPassword, salt);
+    const updatedUser = await UserModel.findByIdAndUpdate(req.userId, {
+      passwordHash,
+    }, { new: true });
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.error('Error in updatePassword:', err);
     res.status(500).json({
       message: err.message,
     });

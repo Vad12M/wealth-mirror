@@ -1,11 +1,20 @@
-import useAuthHandler from "@/service/useAuthHandler";
 import { Button } from "@/ui/button/Button";
 import { useRouter } from "next/router";
 import { Paint } from "@/components/paint/Paint";
+import useGetUser from "@/hooks/useGetUser";
+import { useEffect } from "react";
 
 export default function CanvasPage() {
-  const { hasAuthToken } = useAuthHandler();
+  const { isLoggedIn } = useGetUser();
   const router = useRouter();
+
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/auth/login')
+    }
+  }, [isLoggedIn])
+
   return (
     <section className="py-[140px] flex flex-col items-center space-y-6">
       <div className="m-container flex items-center justify-center  relative">
@@ -18,8 +27,7 @@ export default function CanvasPage() {
         </div>
       </div>
 
-
-      {!hasAuthToken() && <Button onClick={() => router.push('/auth/register')}>
+      {!isLoggedIn && <Button onClick={() => router.push('/auth/register')}>
         {'Register'}
       </Button>}
     </section>

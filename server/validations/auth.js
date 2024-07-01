@@ -35,3 +35,14 @@ export const updateMeValidator = [
   body('phone', 'Phone number is required').isMobilePhone().withMessage('Invalid phone number format'),
 ];
 
+
+export const updatePasswordValidator = [
+  body('oldPassword', 'Old password is required').isLength({
+    min: 8,
+    max: 16
+  }).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>ยง?|]).{8,16}$/).withMessage('Password must be 8-16 characters, including at least 1 number, 1 lowercase letter, 1 uppercase letter, and 1 special character'),
+  body('newPassword', 'New password is required').isLength({
+    min: 8,
+    max: 16
+  }).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>ยง?|]).{8,16}$/).withMessage('Password must be 8-16 characters, including at least 1 number, 1 lowercase letter, 1 uppercase letter, and 1 special character'),
+];
