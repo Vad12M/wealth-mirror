@@ -14,16 +14,16 @@ import usePaint from "../../hooks/usePaint";
 import Dialog from "@/ui/dialog/dialog.component";
 import Typography from "@/ui/typography/Typography";
 import PaintMenu from "@/components/paint/PaintMenu";
+import PaintOptions from "@/components/paint/PaintOptions";
 
 interface PaintProps {
 }
 
-const SIZE = 1200;
 const GRID_SIZE = 67;
+const LIMIT = 10000;
 
 export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const {
-
     imageObjects,
     isDraggable,
     onStageMouseUp,
@@ -35,12 +35,16 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     onClear,
     addNewImage,
     stageRef,
+    handleZoomIn,
+    handleZoomOut,
+    zoomLevel,
+    SIZE,
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
   const [optionsPosition, setOptionsPosition] = useState({ x: 0, y: 0 });
   const [settingPopup, setSettingPopup] = useState(false);
-
+  const [newItemType, setNewItemType] = useState<string>('');
 
   const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
@@ -49,17 +53,13 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     setShowOptions(true);
   }, []);
 
-  const handleCloseOptions = useCallback(() => {
-    setShowOptions(false);
-  }, []);
-
   const drawGrid = () => {
     const lines = [];
-    for (let i = 0; i < SIZE / GRID_SIZE; i++) {
+    for (let i = -LIMIT; i <= LIMIT; i += GRID_SIZE) {
       lines.push(
         <KonvaLine
           key={`v-${i}`}
-          points={[i * GRID_SIZE, 0, i * GRID_SIZE, SIZE]}
+          points={[i, -LIMIT, i, LIMIT]}
           stroke="#D1D1D1"
           strokeWidth={1}
         />
@@ -67,36 +67,41 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
       lines.push(
         <KonvaLine
           key={`h-${i}`}
-          points={[0, i * GRID_SIZE, SIZE, i * GRID_SIZE]}
+          points={[-LIMIT, i, LIMIT, i]}
           stroke="#D1D1D1"
           strokeWidth={1}
         />
       );
     }
+
     return lines;
   };
 
   return (
     <Box m={4} width={`${SIZE}px`}>
-     <div className="bg-black p-4 flex  justify-between">
-       <Typography text={'Canvas'} type={'heading3'}/>
-       <PaintMenu
-         // setDrawAction={setDrawAction}
-         // drawAction={drawAction}
-         // color={color}
-         // setColor={setColor}
-         onClear={onClear}
-         // fileRef={fileRef}
-         // onImportImageSelect={onImportImageSelect}
-         // onImportImageClick={onImportImageClick}
-         onExportClick={onExportClick}
-       />
-     </div>
+      <div className="bg-black p-4 flex justify-between">
+        <Typography text={'Canvas'} type={'heading3'}/>
+        <PaintMenu
+          // setDrawAction={setDrawAction}
+          // drawAction={drawAction}
+          // color={color}
+          // setColor={setColor}
+          onClear={onClear}
+          // fileRef={fileRef}
+          // onImportImageSelect={onImportImageSelect}
+          // onImportImageClick={onImportImageClick}
+          onExportClick={onExportClick}
+        />
+      </div>
+      <Box mb={2} className={'space-x-2 flex py-2'}>
+        <button onClick={handleZoomIn} className='text-black px-4 py-2 border rounded-full'>{'+'}</button>
+        <button onClick={handleZoomOut} className='text-black px-4 py-2 border rounded-full'>{'-'}</button>
+      </Box>
+
       <Box
         width={`${SIZE}px`}
         height={`${SIZE}px`}
         border="1px solid black"
-        mt={4}
         overflow="hidden"
         position="relative"
       >
@@ -104,6 +109,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           height={SIZE}
           width={SIZE}
           ref={stageRef}
+          scale={{ x: zoomLevel, y: zoomLevel }}
           onMouseUp={onStageMouseUp}
           onMouseDown={onStageMouseDown}
           onMouseMove={onStageMouseMove}
@@ -128,8 +134,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 image={image}
                 x={0}
                 y={0}
-                height={GRID_SIZE * 2}
-                width={GRID_SIZE * 2}
+                height={GRID_SIZE}
+                width={GRID_SIZE}
                 draggable={isDraggable}
                 onClick={(e) => {
                   e.cancelBubble = true;
@@ -138,103 +144,15 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 }}
               />
             ))}
-
-            {/*{image && (*/}
-            {/*  <KonvaImage*/}
-            {/*    key={image.id}*/}
-            {/*    image={image}*/}
-            {/*    x={0}*/}
-            {/*    y={0}*/}
-            {/*    height={SIZE / 2}*/}
-            {/*    width={SIZE / 2}*/}
-            {/*    draggable={isDraggable}*/}
-            {/*  />*/}
-            {/*)}*/}
-            {/*{arrows.map((arrow) => (*/}
-            {/*  <KonvaArrow*/}
-            {/*    key={arrow.id}*/}
-            {/*    id={arrow.id}*/}
-            {/*    points={arrow.points}*/}
-            {/*    fill={arrow.color}*/}
-            {/*    stroke={arrow.color}*/}
-            {/*    strokeWidth={4}*/}
-            {/*    onClick={onShapeClick}*/}
-            {/*    draggable={isDraggable}*/}
-            {/*  />*/}
-            {/*))}*/}
-            {/*{rectangles.map((rectangle) => (*/}
-            {/*  <KonvaRect*/}
-            {/*    key={rectangle.id}*/}
-            {/*    x={rectangle?.x}*/}
-            {/*    y={rectangle?.y}*/}
-            {/*    height={rectangle?.height}*/}
-            {/*    width={rectangle?.width}*/}
-            {/*    stroke={rectangle?.color}*/}
-            {/*    id={rectangle?.id}*/}
-            {/*    strokeWidth={4}*/}
-            {/*    onClick={onShapeClick}*/}
-            {/*    draggable={isDraggable}*/}
-            {/*  />*/}
-            {/*))}*/}
-            {/*{circles.map((circle) => (*/}
-            {/*  <KonvaCircle*/}
-            {/*    key={circle.id}*/}
-            {/*    id={circle.id}*/}
-            {/*    x={circle?.x}*/}
-            {/*    y={circle?.y}*/}
-            {/*    radius={circle?.radius}*/}
-            {/*    stroke={circle?.color}*/}
-            {/*    strokeWidth={4}*/}
-            {/*    onClick={onShapeClick}*/}
-            {/*    draggable={isDraggable}*/}
-            {/*  />*/}
-            {/*))}*/}
-            {/*{scribbles.map((scribble) => (*/}
-            {/*  <KonvaLine*/}
-            {/*    key={scribble.id}*/}
-            {/*    id={scribble.id}*/}
-            {/*    lineCap="round"*/}
-            {/*    lineJoin="round"*/}
-            {/*    stroke={scribble?.color}*/}
-            {/*    strokeWidth={4}*/}
-            {/*    points={scribble.points}*/}
-            {/*    onClick={onShapeClick}*/}
-            {/*    draggable={isDraggable}*/}
-            {/*  />*/}
-            {/*))}*/}
             <Transformer ref={transformerRef}/>
           </Layer>
         </Stage>
         {showOptions && (
-          <Box
-            position="absolute"
-            left={optionsPosition.x}
-            top={optionsPosition.y}
-            className={'p-4 shadow-lg bg-white'}
-          >
-            <ul className="p-2 flex items-center flex-col space-y-3 text-black">
-              <button onClick={() => {
-                setShowOptions(false)
-                addNewImage('car')
-              }}>
-                {'Car'}
-              </button>
-              <button onClick={() => {
-                setShowOptions(false)
-                addNewImage('house')
-              }}>
-                {'Real estate'}
-              </button>
-              <li>Fortune</li>
-              <li>Card</li>
-              <button
-                onClick={() => handleCloseOptions()}
-                className={'bg-red-500 text-white p-2 rounded-md'}
-              >
-                {'Close'}
-              </button>
-            </ul>
-          </Box>
+          <PaintOptions
+            optionsPosition={optionsPosition}
+            setShowOptions={setShowOptions}
+            addNewImage={addNewImage}
+          />
         )}
         <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-6'}>
           <Typography text={'Setting Form'}/>

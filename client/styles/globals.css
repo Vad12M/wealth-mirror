@@ -14,8 +14,8 @@ body * {
 }
 
 input:-webkit-autofill {
-  transition-delay: 9999s;
-  transition-property: background-color;
+  -webkit-box-shadow: 0 0 0 30px #1E1C1CFF inset !important;
+  -webkit-text-fill-color: #ffff !important;
 }
 
 .animation-slide-fade {

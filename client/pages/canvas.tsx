@@ -17,12 +17,12 @@ export default function CanvasPage() {
 
   return (
     <section className="py-[140px] flex flex-col items-center space-y-6">
-      <div className="m-container flex items-center justify-center  relative">
+      <div className="flex items-center justify-center relative">
         {/*<Button onClick={() => router.push('/payment')} className="absolute top-8 right-8">*/}
         {/*  {'Save'}*/}
         {/*</Button>*/}
 
-        <div className="m-container bg-white p-4">
+        <div className="bg-white p-4">
           <Paint/>
         </div>
       </div>
