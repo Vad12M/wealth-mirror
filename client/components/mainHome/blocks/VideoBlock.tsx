@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import MuteIcon from "@/ui/icons/MuteIcon";
+import UnmuteIcon from "@/ui/icons/UnmuteIcon";
 
 export default function VideoBlock() {
   const videoRef = useRef(null);
@@ -52,7 +54,7 @@ export default function VideoBlock() {
           className="absolute right-0 bottom-[60%] m-4 bg-opacity-50 rounded-full p-1 z-50"
           onClick={() => setMuted(!muted)}
         >
-          {muted ? 'Unmute' : 'Mute'}
+          {!muted ? <MuteIcon/> : <UnmuteIcon/>}
         </button>
         <video
           ref={videoRef}
