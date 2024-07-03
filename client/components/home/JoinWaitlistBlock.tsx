@@ -2,14 +2,23 @@ import Typography from "@/ui/typography/Typography";
 import VerticalLinesIcon from "@/ui/icons/waitlist/VerticalLinesIcon";
 import BlurCircleMDIcon from "@/ui/icons/waitlist/BlurCircleMDIcon";
 import BlurCircleSMIcon from "@/ui/icons/waitlist/BlurCircleSMIcon";
+import styles from './join-waitlist-block.module.scss';
+import { Firefly } from "@/components/home/Firefly";
 
 export default function JoinWaitlistBlock({
   onClick
 }: {
   onClick?: () => void;
 }) {
+  const fireflies = Array.from({ length: 100 });
   return (
+
     <section className="relative min-w-[100%] bg-cover" style={{ backgroundImage: 'url(/yCombinator/Subtract.svg)' }}>
+      <div className={styles.fireflyContainer}>
+        {fireflies.map((_, index) => (
+          <Firefly key={index}/>
+        ))}
+      </div>
       <div className="m-container">
         <div className="absolute">
           <VerticalLinesIcon/>

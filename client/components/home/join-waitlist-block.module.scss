@@ -1,0 +1,30 @@
+.fireflyContainer {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.firefly {
+  position: absolute;
+  bottom: 0;
+  width: 5px;
+  height: 5px;
+  background-color: #00B386;
+  border-radius: 50%;
+  animation: fly 4s linear infinite;
+  animation-delay: var(--animation-delay);
+  opacity: 0;
+}
+
+@keyframes fly {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) translateX(calc(-10vw + 20vw * var(--random-x)));
+  }
+}
