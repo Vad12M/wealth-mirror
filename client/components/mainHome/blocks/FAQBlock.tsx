@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import BlockLayout from "@/components/layouts/BlockLayout";
 import BaseCollapse from "@/components/mainHome/BaseCollapse";
-import { useSpring, animated } from 'react-spring';
 
 export default function FAQBlock({
   primaryElements = ['FAQ’s']
@@ -31,19 +30,9 @@ export default function FAQBlock({
     },
   ]
 
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const { height, transform } = useSpring({
-    height: isOpen ? 'auto' : '0px',
-    transform: isOpen ? 'scaleY(1)' : 'scaleY(0.8)',
-    config: { tension: 200, friction: 15 }
-  });
-
-
   return (
     <BlockLayout title={'FAQ’s'} primaryElements={primaryElements}>
-      <div className="flex flex-col items-center space-y-6 m-container pt-12">
+      <div className="flex flex-col items-center space-y-6 m-container relative bg-naturalBlack">
         {faqs.map((faq, index) => (
           <BaseCollapse key={index} title={faq.title} text={faq.description}/>
         ))}

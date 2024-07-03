@@ -1,6 +1,5 @@
 import BlockLayout from "@/components/layouts/BlockLayout";
 import Typography from "@/ui/typography/Typography";
-import VisualizeIcon from "@/ui/icons/servicesBlock/VisualizeIcon";
 import styles from './servicesBlock.module.scss'
 
 export default function ServicesBlock() {

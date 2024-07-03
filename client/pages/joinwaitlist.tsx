@@ -11,6 +11,7 @@ import Typography from "@/ui/typography/Typography";
 import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
 import useWaitlistValidator from "@/service/validator/useWaitListValidator";
+import { FireflyLayout } from "@/components/FireflyLayout";
 
 export default function Joinwaitlist() {
   const [addWaitUser] = useAddWaitUserMutation();
@@ -35,14 +36,21 @@ export default function Joinwaitlist() {
   }
 
   return (
-    <main className="w-full">
+    <main className="w-full h-full">
       <JoinWaitlistBlock onClick={() => setOpen(true)}/>
-      <div className="w-full flex justify-center -mt-[300px]">
+      <div className="w-full flex justify-center -mt-[300px] relative">
+        <FireflyLayout/>
         <JoinWaitlistGraphicsBlock/>
       </div>
+
       <OurServicesBlock/>
       <PennyWiseBlock onClick={() => setOpen(true)}/>
-      <FAQBlock primaryElements={[]}/>
+
+      <div>
+        <FireflyLayout/>
+        <FAQBlock primaryElements={['FAQ’s']}/>
+      </div>
+
       <Dialog
         isOpen={open}
         onRequestClose={() => setOpen(false)}

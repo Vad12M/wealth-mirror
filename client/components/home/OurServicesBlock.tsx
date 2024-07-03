@@ -3,6 +3,7 @@ import AmbrellaIcon from "@/ui/icons/waitlist/AmbrellaIcon";
 import WalletListIcon from "@/ui/icons/waitlist/WalletListIcon";
 import PlusIcon from "@/ui/icons/PlusIcon";
 import ArrowBottomIcon from "@/ui/icons/ArrowBottomIcon";
+import { FireflyLayout } from "@/components/FireflyLayout";
 
 
 export default function OurServicesBlock() {
@@ -20,6 +21,7 @@ export default function OurServicesBlock() {
 
   return (
     <section className="flex items-center flex-col justify-center pt-[120px] pb-8 relative">
+      <FireflyLayout/>
       <div className='bg-no-repeat bg-bottom w-full h-1/3 absolute bottom-0 bg-cover'
            style={{ backgroundImage: 'url(/yCombinator/OurServicesBG.svg)' }}/>
       <Typography text={'How It Works?'} className="mb-6"/>

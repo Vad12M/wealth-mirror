@@ -16,7 +16,7 @@ export default function BlockLayout({
       <Typography
         text={title}
         type={'h1'}
-        className={'mb-2'}
+        className={description ? 'mb-2' : 'mb-12'}
         primaryElements={primaryElements}
       />
       {description && <Typography
