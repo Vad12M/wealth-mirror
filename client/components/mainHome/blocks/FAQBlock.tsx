@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import BlockLayout from "@/components/layouts/BlockLayout";
 import BaseCollapse from "@/components/mainHome/BaseCollapse";
+import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 
 export default function FAQBlock({
   primaryElements = ['FAQ’s']
 }: {
   primaryElements?: string[];
 }) {
+  const isMobile = useGetIsMobile();
   const faqs = [
     {
       title: 'How fast can I setup and start using Wealth Mirror?',
@@ -32,7 +34,12 @@ export default function FAQBlock({
 
   return (
     <BlockLayout title={'FAQ’s'} primaryElements={primaryElements}>
-      <div className="flex flex-col items-center space-y-6 m-container relative bg-naturalBlack">
+      <div
+        style={{
+          boxShadow: isMobile ? '0px 0px 74.6px 4px rgba(0, 208, 148, 0.30)' : undefined,
+        }}
+        className="flex flex-col items-center md:space-y-6 space-y-2 m-container relative bg-naturalBlack"
+      >
         {faqs.map((faq, index) => (
           <BaseCollapse key={index} title={faq.title} text={faq.description}/>
         ))}

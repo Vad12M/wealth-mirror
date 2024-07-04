@@ -34,7 +34,7 @@ input:-webkit-autofill {
 }
 
 .m-container {
-  width: 1240px;
+  @apply md:max-w-[1240px] max-w-[352px];
   margin: 0 auto;
 }
 

@@ -22,7 +22,7 @@ export default function Header() {
     { name: 'Contact', link: '/contact' }
   ];
 
-  if (asPath.includes('auth')) {
+  if (asPath.includes('auth') || asPath.includes('joinwaitlist')) {
     return null;
   }
 

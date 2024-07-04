@@ -3,6 +3,10 @@ import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
 import { useRouter } from "next/router";
 import useGetUser from "@/hooks/useGetUser";
+import CentralizeIcon from "@/ui/icons/hero/CentralizeIcon";
+import VisualizeIcon from "@/ui/icons/hero/VisualizeIcon";
+import AnalyzeIcon from "@/ui/icons/hero/AnalyzeIcon";
+import ActionsIcon from "@/ui/icons/hero/ActionsIcon";
 
 export default function HeroBlock() {
   const { isLoggedIn } = useGetUser();
@@ -28,20 +32,20 @@ export default function HeroBlock() {
 
         <div className="flex items-center space-x-10 mb-[46px]">
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/hero/centralize.png'}/>
-            <Typography text={'Centralize'} type={'bodySB'} color={'text-black'}/>
+            <CentralizeIcon/>
+            <Typography text={'Centralize'} type={'heading6'} color={'text-primaryLight'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/hero/vizualize.png'}/>
-            <Typography text={'Visualize'} type={'bodySB'} color={'text-black'}/>
+            <VisualizeIcon/>
+            <Typography text={'Visualize'} type={'heading6'} color={'text-primaryLight'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/hero/analyze.png'}/>
-            <Typography text={'Analyze'} type={'bodySB'} color={'text-black'}/>
+            <AnalyzeIcon/>
+            <Typography text={'Analyze'} type={'heading6'} color={'text-primaryLight'}/>
           </div>
           <div className="flex items-center space-x-2">
-            <img className="w-9 h-9" alt={'icon'} src={'/hero/actions.png'}/>
-            <Typography text={'Take Actions'} type={'bodySB'} color={'text-black'}/>
+            <ActionsIcon/>
+            <Typography text={'Take Actions'} type={'heading6'} color={'text-primaryLight'}/>
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import styles from './Button.module.scss'
 import cx from "classnames";
 
 interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
-  typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent';
+  typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent' | 'white' | 'white-shadow';
   prefixBtn?: () => any;
   isGradient?: boolean;
   rounded?: number;
@@ -35,6 +35,13 @@ export function Button({
       break;
     case 'transparent':
       typeClassname = styles.transparentBtn;
+      break;
+    case 'white':
+      typeClassname = styles.whiteBtn;
+      break;
+    case 'white-shadow':
+      typeClassname = styles.whiteShadowBtn;
+      break;
   }
 
   return (

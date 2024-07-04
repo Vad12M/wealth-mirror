@@ -14,9 +14,15 @@ interface ITypography {
     | 'link1'
     | 'heading1'
     | 'heading3'
+    | 'heading4'
+    | 'heading5'
     | 'heading6'
+    | 'heading6SM'
+    | 'body1'
     | 'body2'
-    | 'body2B';
+    | 'body2B'
+    | 'title'
+    | 'footer'
   text: string;
   className?: string;
   color?: string;
@@ -33,16 +39,26 @@ export default function Typography({
   boldElements = [],
 }: ITypography) {
 
-  const highlightPrimaryElements = (text: string, primaryElements?: string[], boldElements?: string[]) => {
-    const elements = (primaryElements || [])?.concat(boldElements || []);
+  const highlightPrimaryElements = (
+    text: string,
+    primaryElements?: string[],
+    boldElements?: string[],
+    highlightClass?: string
+  ) => {
+    const elements = (primaryElements || []).concat(boldElements || []);
     if (elements.length === 0) return text;
 
-    const regex = new RegExp(`(${elements.join('|')})`, 'gi');
+    const escapedElements = elements.map(element => element.replace(/\?/g, '\\?'));
+    const regex = new RegExp(`(${escapedElements.join('|')})`, 'gi');
+
     return text.split(regex).map((part, index) =>
       elements.includes(part) ? (
-        <span key={index} className={!!primaryElements?.length ? styles.primaryElement : styles.boldElement}>
-          {part}
-        </span>
+        <span
+          key={index}
+          className={highlightClass ? highlightClass : !!primaryElements?.length ? styles.primaryElement : styles.boldElement}
+        >
+        {part}
+      </span>
       ) : (
         part
       )
@@ -79,12 +95,24 @@ export default function Typography({
       return <p className={`${styles.heading1} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading3':
       return <p className={`${styles.heading3} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading4':
+      return <p className={`${styles.heading4} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading5':
+      return <p className={`${styles.heading5} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading6':
       return <p className={`${styles.heading6} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading6SM':
+      return <p className={`${styles.heading6SM} ${className} ${color}`}>{highlightedText}</p>;
+    case 'body1':
+      return <p className={`${styles.body1} ${className} ${color}`}>{highlightedText}</p>;
     case 'body2':
       return <p className={`${styles.body2} ${className} ${color}`}>{highlightedText}</p>;
     case 'body2B':
       return <p className={`${styles.body2B} ${className} ${color}`}>{highlightedText}</p>;
+    case 'title':
+      return <p className={`${styles.title} ${className} ${color}`}>{highlightedText}</p>;
+    case 'footer':
+      return <p className={`${styles.footer} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

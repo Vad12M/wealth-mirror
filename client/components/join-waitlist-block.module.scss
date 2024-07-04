@@ -3,7 +3,6 @@
   width: 100vh;
   height: 100vh;
   overflow: hidden;
-  padding: 80px 0;
 }
 
 .left {
@@ -19,8 +18,8 @@
 .firefly {
   position: absolute;
   bottom: 0;
-  width: 100px;
-  height: 100px;
+  width: 180px;
+  height: 180px;
   animation: fly 10s linear infinite;
   animation-delay: var(--animation-delay);
   opacity: 0;
@@ -33,6 +32,6 @@
   }
   100% {
     opacity: 0;
-    transform: translateY(-100vh) translateX(calc(-10vw + 20vw * var(--random-x)));
+    transform: translateY(-30vh) translateX(calc(-10vw + 20vw * var(--random-x)));
   }
 }

@@ -60,7 +60,7 @@ export default function Footer() {
   ]
 
 
-  if (router.pathname.includes('auth')) {
+  if (router.pathname.includes('auth') || router.pathname.includes('joinwaitlist')) {
     return null;
   }
 
