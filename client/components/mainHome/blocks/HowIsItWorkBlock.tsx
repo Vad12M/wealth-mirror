@@ -28,7 +28,7 @@ export default function HowIsItWorkBlock() {
               <Typography
                 text={'Bring in all different aspects of your wealth in a single place.'}
                 type={'body2'}
-                className="w-[210px] text-end"
+                className="w-[210px] text-end opacity-60"
               />
             </div>
           </div>
@@ -41,7 +41,7 @@ export default function HowIsItWorkBlock() {
               <Typography
                 text={'See your Wealth growing in a way like Never Before.'}
                 type={'body2'}
-                className="w-[210px] text-end"
+                className="w-[210px] text-end opacity-60"
               />
             </div>
           </div>
@@ -52,11 +52,12 @@ export default function HowIsItWorkBlock() {
             className="md:w-[436px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
           >
             <div className="flex flex-col items-end mt-8 mr-5">
-              <Typography text={'Centralize'} type={'heading3'} className="mb-2"/>
+              <Typography text={'Analyze'} type={'heading3'} className="mb-2"/>
               <Typography
-                text={'Bring in all different aspects of your wealth in a single place.'}
+                text={'Get daily / monthly / \n' +
+                  'yearly / lifetime analysis of your portfolio.'}
                 type={'body2'}
-                className="w-[210px] text-end"
+                className="w-[200px] text-end opacity-60"
               />
             </div>
           </div>
@@ -65,11 +66,11 @@ export default function HowIsItWorkBlock() {
             className="md:w-[640px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
           >
             <div className="flex flex-col items-end mt-8 mr-5">
-              <Typography text={'Visualize'} type={'heading3'} className="mb-2"/>
+              <Typography text={'Take Actions'} type={'heading3'} className="mb-2"/>
               <Typography
-                text={'See your Wealth growing in a way like Never Before.'}
+                text={'AI Engine that will give valuable recommendations on your wealth.'}
                 type={'body2'}
-                className="w-[210px] text-end"
+                className="w-[210px] text-end opacity-60"
               />
             </div>
           </div>
