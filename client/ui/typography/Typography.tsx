@@ -13,6 +13,7 @@ interface ITypography {
     | 'healine2'
     | 'link1'
     | 'heading1'
+    | 'heading2'
     | 'heading3'
     | 'heading4'
     | 'heading5'
@@ -23,6 +24,7 @@ interface ITypography {
     | 'body2B'
     | 'title'
     | 'footer'
+    | 'txt1'
   text: string;
   className?: string;
   color?: string;
@@ -93,6 +95,8 @@ export default function Typography({
       return <p className={`${styles.link1} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading1':
       return <p className={`${styles.heading1} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading2':
+      return <p className={`${styles.heading2} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading3':
       return <p className={`${styles.heading3} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading4':
@@ -113,6 +117,8 @@ export default function Typography({
       return <p className={`${styles.title} ${className} ${color}`}>{highlightedText}</p>;
     case 'footer':
       return <p className={`${styles.footer} ${className} ${color}`}>{highlightedText}</p>;
+    case 'txt1':
+      return <p className={`${styles.txt1} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

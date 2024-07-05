@@ -6,12 +6,19 @@
 
 .modalContainer {
   @apply bg-naturalBlack relative !important;
+  border-radius: 30px;
 }
 
 .modalContent {
   @apply outline-0 overflow-x-hidden bg-naturalBlack relative;
   @apply flex flex-col m-0;
   max-width: 1400px;
+
+  border-radius: 30px;
+  border: 1px solid #7CDDA9;
+  background: #FFFFFF2E;
+  box-shadow: 0 4px 32.5px 8px rgba(135, 232, 180, 0.39);
+  backdrop-filter: blur(47.900001525878906px)
 }
 
 .closeButton {

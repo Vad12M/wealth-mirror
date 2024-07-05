@@ -77,6 +77,12 @@
   font-weight: 800;
 }
 
+.heading2 {
+  @apply text-[40px] leading-[50px];
+  font-family: 'Inter';
+  font-weight: 700;
+}
+
 .heading3 {
   @apply text-[30px] leading-[37px];
   font-family: 'Inter';
@@ -141,3 +147,9 @@
   font-weight: 400;
 }
 
+.txt1 {
+  @apply text-[75px] leading-[93px];
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+}

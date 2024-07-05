@@ -13,6 +13,7 @@ export interface InputProps {
   invalid?: boolean;
   type?: string;
   label?: string;
+  typeInput?: string;
 }
 
 export default function Input({
