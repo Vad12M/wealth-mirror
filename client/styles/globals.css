@@ -38,6 +38,10 @@ input:-webkit-autofill {
   margin: 0 auto;
 }
 
+.fixed-container {
+  @apply md:w-[1240px] w-[352px];
+}
+
 @keyframes float {
   0% {
     transform: translateY(0);

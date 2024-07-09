@@ -7,7 +7,6 @@ import { IUser } from "@/interfaces/IUser";
 import ProfileInfo from "@/components/profile/ProfileInfo";
 import ProfileChangePassword, { IPasswordForm } from "@/components/profile/ProfileChangePassword";
 
-
 export default function ProfilePage() {
   const [updateMe] = useUpdateMeMutation();
   const [updatePassword] = useChangePasswordMutation();
@@ -46,7 +45,7 @@ export default function ProfilePage() {
   return (
     <section className="py-[140px] flex flex-col items-center">
       <Typography text={'Profile'} className="mb-2"/>
-      <div className='bg-darkGray1 h-[600px] m-container rounded-[40px] py-24 px-20 relative'>
+      <div className='bg-darkGray1 h-[600px] fixed-container rounded-[40px] py-24 px-20 relative'>
         <div className="absolute top-5 right-5">
           <button onClick={() => setIsEditing(!isEditing)} className="bg-primary py-2 px-4 rounded-[20px] text-white">
             {'Edit'}

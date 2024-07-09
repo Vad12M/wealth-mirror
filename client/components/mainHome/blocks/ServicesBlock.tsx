@@ -1,28 +1,32 @@
 import BlockLayout from "@/components/layouts/BlockLayout";
 import Typography from "@/ui/typography/Typography";
 import styles from './servicesBlock.module.scss'
+import CentralizeIcon from "@/ui/icons/hero/CentralizeIcon";
+import VisualizeIcon from "@/ui/icons/hero/VisualizeIcon";
+import AnalyzeIcon from "@/ui/icons/hero/AnalyzeIcon";
+import ActionsIcon from "@/ui/icons/hero/ActionsIcon";
 
 export default function ServicesBlock() {
   const services = [
     {
       title: 'VISUALIZE',
       description: 'Bring in all different aspects of your wealth in a single place.',
-      icon: '/hero/centralize.png'
+      icon: <VisualizeIcon size={100}/>
     },
     {
       title: 'CENTRALIZE',
       description: 'See your Wealth growing in a way like Never Before.',
-      icon: '/hero/vizualize.png'
+      icon: <CentralizeIcon size={100}/>
     },
     {
       title: 'ANALYZE',
       description: ' Get daily/monthly/yearly/lifetime analysis of your portfolio.',
-      icon: '/hero/analyze.png'
+      icon: <AnalyzeIcon size={100}/>
     },
     {
       title: 'Take Actions',
       description: 'AI Engine that will give valuable recommendations on your wealth',
-      icon: '/hero/actions.png'
+      icon: <ActionsIcon size={100}/>
     },
   ]
 
@@ -39,7 +43,7 @@ export default function ServicesBlock() {
             className={`relative flex flex-col items-center space-y-4 py-10 px-8 w-[280px] h-[360px] rounded-[30px] ${styles.serviceCard}`}
           >
             <div className="absolute top-8 bg-white p-6 rounded-full">
-              <img className="w-[100px] h-[100px]" alt={'icon'} src={service.icon}/>
+              {service.icon}
             </div>
             <div className="text-center">
               <Typography text={service.title} type={'sub1'} className="pt-36"/>

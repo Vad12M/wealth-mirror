@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DrawAction } from "@/components/paint/Paint.constants";
 import { KonvaEventObject } from "konva/lib/Node";
 import { v4 as uuidv4 } from "uuid";
@@ -50,11 +50,20 @@ export default function usePaint() {
 
   const addNewImage = (type: string) => {
     let imageUrl = '';
-    if (type === 'car') {
-      imageUrl = '/canvas/Car.svg';
-    } else if (type === 'house') {
-      imageUrl = '/canvas/house.svg';
+
+    switch (type) {
+      case 'car':
+        imageUrl = '/canvas/Car.svg';
+        break;
+      case 'realEstate':
+        imageUrl = '/canvas/Home-1.svg';
+        break;
+      case 'card':
+        imageUrl = '/canvas/CC1.svg';
+        break;
     }
+
+    console.log('imageUrl', imageUrl)
 
     const image = new Image(SIZE / 2, SIZE / 2);
     image.src = imageUrl;

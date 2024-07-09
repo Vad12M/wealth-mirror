@@ -1,19 +1,20 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 
-
 export default function PaintOptions({
   optionsPosition,
-  setShowOptions,
-  addNewImage,
+  addNewItem,
 }: {
   optionsPosition: {
     x: number;
     y: number;
   },
-  setShowOptions: (show: boolean) => void,
-  addNewImage: (type: string) => void,
+  addNewItem: (type: string) => void,
 }) {
+
+  const optionClick = (type: string) => {
+    addNewItem(type);
+  }
 
   return (
     <Box
@@ -23,21 +24,17 @@ export default function PaintOptions({
       className={'p-4 shadow-lg bg-white'}
     >
       <ul className="p-2 flex items-center flex-col space-y-3 text-black">
-        <button onClick={() => {
-          setShowOptions(false)
-          addNewImage('car')
-        }}>
+        <button onClick={() => optionClick('car')}>
           {'Car'}
         </button>
-        <button onClick={() => {
-          setShowOptions(false)
-          addNewImage('house')
-        }}>
+        <button onClick={() => optionClick('realEstate')}>
           {'Real estate'}
         </button>
-        <li>Card</li>
+        <li onClick={() => optionClick('card')}>
+          {'Card'}
+        </li>
         <li>Fortune</li>
-        <button onClick={() => setShowOptions(false)} className={'bg-red-500 text-white p-2 rounded-md'}>
+        <button onClick={() => {}} className={'bg-red-500 text-white p-2 rounded-md'}>
           {'Close'}
         </button>
       </ul>

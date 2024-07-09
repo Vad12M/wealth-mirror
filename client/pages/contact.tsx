@@ -34,7 +34,7 @@ export default function About() {
   }
 
   return (
-    <section className="py-[180px] m-container flex flex-col items-center">
+    <section className="py-[180px] fixed-container flex flex-col items-center">
       <Typography text={'Contact Us'} className="mb-2" primaryElements={['Us']}/>
       <Typography
         text={'Here\'s our pricing plan: affordable, straightforward, and no hidden fees. That\'s it. Let\'s get started!'}

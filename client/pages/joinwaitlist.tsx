@@ -4,7 +4,6 @@ import { useState } from "react";
 import { FireflyLayout } from "@/components/FireflyLayout";
 import PriceBlock from "@/components/mainHome/blocks/PriceBlock";
 import JoinWaitlistPopup from "@/components/home/JoinWaitlistPopup";
-import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 import HowIsItWorkBlock from "@/components/mainHome/blocks/HowIsItWorkBlock";
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";

@@ -15,6 +15,7 @@ import Dialog from "@/ui/dialog/dialog.component";
 import Typography from "@/ui/typography/Typography";
 import PaintMenu from "@/components/paint/PaintMenu";
 import PaintOptions from "@/components/paint/PaintOptions";
+import CanvasHandlerForms from "@/components/paint/CanvasHandlerForms";
 
 interface PaintProps {
 }
@@ -150,12 +151,15 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
         {showOptions && (
           <PaintOptions
             optionsPosition={optionsPosition}
-            setShowOptions={setShowOptions}
-            addNewImage={addNewImage}
+            addNewItem={(type) => {
+              setNewItemType(type)
+              setShowOptions(false)
+              setSettingPopup(true)
+            }}
           />
         )}
-        <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-6'}>
-          <Typography text={'Setting Form'}/>
+        <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-12'}>
+          <CanvasHandlerForms type={newItemType} position={optionsPosition}/>
         </Dialog>
       </Box>
     </Box>
