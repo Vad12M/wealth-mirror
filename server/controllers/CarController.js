@@ -1,18 +1,10 @@
 import CarModel from '../models/Car.js';
-import UserModel from "../models/User.js";
-
 
 export const createCar = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
     const newCar = new CarModel({
       ...req.body,
-      user: user._doc._id,
+      user: req.userId,
     });
     await newCar.save();
 
