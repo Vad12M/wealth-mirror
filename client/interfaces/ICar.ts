@@ -23,7 +23,7 @@ export interface ICarForm {
     y: number;
   };
   type: string;
-  imageUrl?: string;
+  image?: string;
   salePrice?: number;
   expensesPerMonth?: number;
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ICarForm } from "@/interfaces/ICar";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
+import { useCreateCarMutation } from "@/store/api/apiSlice";
 
 export default function CarForm({
   position
@@ -11,6 +12,7 @@ export default function CarForm({
     y: number;
   }
 }) {
+  const [createCar] = useCreateCarMutation();
   const year = new Date().getFullYear();
   const [form, setForm] = useState<ICarForm>({
     name: '',
@@ -18,7 +20,7 @@ export default function CarForm({
     year: year,
     brand: '',
     type: 'car',
-    imageUrl: '',
+    image: '/canvas/Car.svg',
     position: {
       x: position.x || 0,
       y: position.y || 0
@@ -31,6 +33,10 @@ export default function CarForm({
     { name: 'Scooter', value: 'scooter' },
     { name: 'Bike', value: 'bike' }
   ]
+
+  const create = () => {
+    createCar(form);
+  }
 
   return (
     <div className="w-[700px]">
@@ -68,6 +74,7 @@ export default function CarForm({
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
+      <button onClick={create} className="px-4 py-2 bg-primary text-white mt-4">Create</button>
     </div>
   )
 }

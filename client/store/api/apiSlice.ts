@@ -82,6 +82,14 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    createCar: builder.mutation<void, any>({
+      query: (params) => ({
+        url: '/cars/create',
+        method: 'POST',
+        body: JSON.stringify(params)
+      }),
+    }),
+
   })
 })
 
@@ -96,4 +104,5 @@ export const {
   useUpdateMeMutation,
   useChangePasswordMutation,
   useGetCarsQuery,
+  useCreateCarMutation,
 } = apiSlice;

@@ -11,4 +11,6 @@ export const createCarValidator = [
   body('price', 'Price is required').isNumeric().withMessage('Price must be a number'),
   body('position.x', 'Position x is required').isNumeric().withMessage('Position x must be a number'),
   body('position.y', 'Position y is required').isNumeric().withMessage('Position y must be a number'),
+  body('type', 'Type is required'),
+  body('image', 'Image is required'),
 ];
