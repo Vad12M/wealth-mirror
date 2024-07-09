@@ -4,7 +4,7 @@ import UserModel from "../models/User.js";
 
 export const createCar = async (req, res) => {
   try {
-    const user = await UserModel.findById('66680cfc05fde10ae79f7fa4');
+    const user = await UserModel.findById(req.userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
