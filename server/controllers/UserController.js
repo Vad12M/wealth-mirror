@@ -53,9 +53,11 @@ export const login = async (req, res) => {
       }
     }
 
-    const token = jwt.sign({
-      userId: user._id,
-    }, process.env.SECRET, { expiresIn: "12h" });
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.SECRET,
+      { expiresIn: '12h' }
+    );
 
     res.status(200).json({ token });
   } catch (err) {
@@ -64,7 +66,6 @@ export const login = async (req, res) => {
     });
   }
 }
-
 
 export const getMe = async (req, res) => {
   try {

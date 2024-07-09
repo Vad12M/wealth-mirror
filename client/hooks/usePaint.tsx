@@ -4,6 +4,7 @@ import { KonvaEventObject } from "konva/lib/Node";
 import { v4 as uuidv4 } from "uuid";
 import useGetUser from "@/hooks/useGetUser";
 import { useRouter } from "next/router";
+import { useGetCarsQuery } from "@/store/api/apiSlice";
 
 
 const downloadURI = (uri: string | undefined, name: string) => {
@@ -18,6 +19,9 @@ const downloadURI = (uri: string | undefined, name: string) => {
 export default function usePaint() {
   const router = useRouter();
   const { isPaid } = useGetUser();
+
+  const { data: cars } = useGetCarsQuery();
+
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [imageObjects, setImageObjects] = useState<HTMLImageElement[]>([]);

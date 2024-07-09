@@ -76,6 +76,12 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    getCars: builder.query<any[], void>({
+      query: () => ({
+        url: '/cars',
+      }),
+    }),
+
   })
 })
 
@@ -89,4 +95,5 @@ export const {
   useGetWaitUsersQuery,
   useUpdateMeMutation,
   useChangePasswordMutation,
+  useGetCarsQuery,
 } = apiSlice;

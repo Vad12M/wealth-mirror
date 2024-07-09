@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const checkAuth = (req, res, next) => {
-    const token = req.headers.apiauthorization.split(' ')[1];
+    const token = req.headers.authorization.split(' ')[1];
     if (token) {
         try {
             const decoded = jwt.verify(token, 'secret');
