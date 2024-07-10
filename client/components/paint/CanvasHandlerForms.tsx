@@ -13,6 +13,7 @@ export default function CanvasHandlerForms({
     x: number;
     y: number;
   };
+
 }) {
 
   switch (type) {

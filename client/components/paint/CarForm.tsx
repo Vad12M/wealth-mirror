@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { ICarForm } from "@/interfaces/ICar";
+import { ICar, ICarForm } from "@/interfaces/ICar";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
-import { useCreateCarMutation } from "@/store/api/apiSlice";
-import Dropdown from "@/ui/dropdown/dropdown";
+import { useCreateCarMutation, useUpdateCarMutation } from "@/store/api/apiSlice";
 
 export default function CarForm({
-  position
+  position,
+  defaultForm,
+  onClose,
 }: {
-  position: {
+  position?: {
     x: number;
     y: number;
-  }
+  };
+  defaultForm?: ICar;
+  onClose?: () => void;
 }) {
   const [createCar] = useCreateCarMutation();
+  const [updateCar] = useUpdateCarMutation();
   const year = new Date().getFullYear();
   const [form, setForm] = useState<ICarForm>({
     name: '',
@@ -23,8 +27,8 @@ export default function CarForm({
     type: 'car',
     image: '/canvas/Car.svg',
     position: {
-      x: position.x || 0,
-      y: position.y || 0
+      x: position?.x || 0,
+      y: position?.y || 0
     },
   });
 
@@ -36,12 +40,26 @@ export default function CarForm({
   ];
 
   useEffect(() => {
+    if (defaultForm) {
+      setForm({
+        name: defaultForm.name,
+        price: defaultForm.price,
+        year: defaultForm.year,
+        brand: defaultForm.brand,
+        type: defaultForm.type,
+        image: defaultForm.imageUrl,
+        position: defaultForm.position
+      });
+    }
+  }, [defaultForm]);
+
+  useEffect(() => {
     switch (form.type) {
       case 'car':
-        setForm({ ...form, image: '/canvas/Car.svg' });
+        setForm((prevState) => ({ ...prevState, image: '/canvas/Car.svg' }));
         break;
       case 'oldCar':
-        setForm({ ...form, image: '/canvas/CarOld.svg' });
+        setForm((prevState) => ({ ...prevState, image: '/canvas/CarOld.svg' }));
         break;
       case 'scooter':
         setForm({ ...form, image: '/canvas/Scooter.svg' });
@@ -53,7 +71,15 @@ export default function CarForm({
   }, [form.type]);
 
   const create = () => {
-    createCar(form);
+    if (defaultForm) {
+      updateCar({
+        id: defaultForm._id,
+        ...form
+      }).unwrap()
+        .finally(() => onClose?.());
+    } else {
+      createCar(form);
+    }
   }
 
   return (
@@ -94,7 +120,9 @@ export default function CarForm({
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
-      <button onClick={create} className="px-4 py-2 bg-primary text-white mt-4">Create</button>
+      <button onClick={create} className="px-4 py-2 bg-primary text-white mt-4">
+        {defaultForm ? 'Update' : 'Create'}
+      </button>
     </div>
   )
 }

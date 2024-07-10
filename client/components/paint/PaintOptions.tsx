@@ -4,12 +4,14 @@ import React from "react";
 export default function PaintOptions({
   optionsPosition,
   addNewItem,
+  onClose
 }: {
   optionsPosition: {
     x: number;
     y: number;
   },
   addNewItem: (type: string) => void,
+  onClose: () => void
 }) {
 
   const optionClick = (type: string) => {
@@ -34,7 +36,7 @@ export default function PaintOptions({
           {'Card'}
         </li>
         <li>Fortune</li>
-        <button onClick={() => {}} className={'bg-red-500 text-white p-2 rounded-md'}>
+        <button onClick={onClose} className={'bg-red-500 text-white p-2 rounded-md'}>
           {'Close'}
         </button>
       </ul>

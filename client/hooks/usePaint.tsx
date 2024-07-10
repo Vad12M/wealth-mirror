@@ -96,8 +96,10 @@ export default function usePaint() {
     if (type === 'car') {
       updateCar({
         id: id,
-        x: x,
-        y: y,
+        position: {
+          x: x,
+          y: y,
+        }
       })
     }
   }, []);

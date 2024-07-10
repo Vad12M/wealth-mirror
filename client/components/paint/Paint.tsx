@@ -17,6 +17,7 @@ import PaintMenu from "@/components/paint/PaintMenu";
 import PaintOptions from "@/components/paint/PaintOptions";
 import CanvasHandlerForms from "@/components/paint/CanvasHandlerForms";
 import { v4 as uuidv4 } from "uuid";
+import CarForm from "@/components/paint/CarForm";
 
 interface PaintProps {
 }
@@ -48,6 +49,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const [optionsPosition, setOptionsPosition] = useState({ x: 0, y: 0 });
   const [settingPopup, setSettingPopup] = useState(false);
   const [newItemType, setNewItemType] = useState<string>('');
+  const [activeCar, setActiveCar] = useState<any>(null);
+
 
   const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
@@ -143,7 +146,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 onClick={(e) => {
                   e.cancelBubble = true;
                   setSettingPopup(true);
-                  console.log('image clicked')
                 }}
               />
             ))}
@@ -164,7 +166,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     onMouseUp={() => onStageMouseUp('car', car._id)}
                     onClick={(e) => {
                       e.cancelBubble = true;
-                      setSettingPopup(true);
+                      setActiveCar(car);
                     }}
                   />
                 )
@@ -182,10 +184,15 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
               setShowOptions(false)
               setSettingPopup(true)
             }}
+            onClose={() => setShowOptions(false)}
           />
         )}
         <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-12'}>
           <CanvasHandlerForms type={newItemType} position={optionsPosition}/>
+        </Dialog>
+
+        <Dialog isOpen={activeCar} onRequestClose={() => setActiveCar(null)} className={'p-12'}>
+          <CarForm defaultForm={activeCar} onClose={() => setActiveCar(null)}/>
         </Dialog>
       </Box>
     </Box>
