@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ICarForm } from "@/interfaces/ICar";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
 import { useCreateCarMutation } from "@/store/api/apiSlice";
+import Dropdown from "@/ui/dropdown/dropdown";
 
 export default function CarForm({
   position
@@ -32,7 +33,24 @@ export default function CarForm({
     { name: 'Old Car', value: 'oldCar' },
     { name: 'Scooter', value: 'scooter' },
     { name: 'Bike', value: 'bike' }
-  ]
+  ];
+
+  useEffect(() => {
+    switch (form.type) {
+      case 'car':
+        setForm({ ...form, image: '/canvas/Car.svg' });
+        break;
+      case 'oldCar':
+        setForm({ ...form, image: '/canvas/CarOld.svg' });
+        break;
+      case 'scooter':
+        setForm({ ...form, image: '/canvas/Scooter.svg' });
+        break;
+      case 'bike':
+        setForm({ ...form, image: '/canvas/Bike.svg' });
+        break;
+    }
+  }, [form.type]);
 
   const create = () => {
     createCar(form);
@@ -58,6 +76,8 @@ export default function CarForm({
           value={form.name}
           onUpdate={(e) => setForm({ ...form, name: e.target.value })}
         />
+        {/*<Dropdown options={[]} onSelectItem={() => {*/}
+        {/*}}/>*/}
         <Input
           label="Brand"
           value={form.brand}

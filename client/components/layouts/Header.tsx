@@ -13,7 +13,7 @@ export default function Header() {
   const { asPath, push } = useRouter();
   const isJoinWaitlist = asPath.includes('joinwaitlist');
   const { user, isLoggedIn, isAdmin } = useGetUser();
-
+  console.log(isAdmin)
   const list = [
     { name: 'About Us', link: '/about' },
     { name: 'Services', link: '/services' },

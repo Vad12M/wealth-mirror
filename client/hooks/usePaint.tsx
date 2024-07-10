@@ -29,6 +29,14 @@ export default function usePaint() {
   const isPaintRef = useRef(false);
   const stageRef = useRef<any>(null);
   const transformerRef = useRef<any>(null);
+  const [carsItems, setCarsItems] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (cars) {
+      setCarsItems(cars);
+    }
+  }, [cars]);
+
 
   const onExportClick = useCallback(() => {
     if (!isPaid) {
@@ -66,8 +74,6 @@ export default function usePaint() {
         imageUrl = '/canvas/CC1.svg';
         break;
     }
-
-    console.log('imageUrl', imageUrl)
 
     const image = new Image(SIZE / 2, SIZE / 2);
     image.src = imageUrl;
@@ -141,6 +147,7 @@ export default function usePaint() {
     handleZoomIn,
     handleZoomOut,
     zoomLevel,
-    SIZE
+    SIZE,
+    cars
   }
 }

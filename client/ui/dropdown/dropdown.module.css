@@ -1,0 +1,90 @@
+.dropdownInput {
+  @apply px-3 w-full border focus-visible:border-primaryDark cursor-pointer disabled:cursor-auto outline-0;
+}
+
+.dropdownInput::placeholder {
+  @apply text-darkGray2;
+}
+
+.dropdownPanel {
+  @apply overflow-auto border-x border-b border-neutralGray bg-white;
+  z-index: 2000;
+}
+
+.searchPanel {
+  @apply overflow-auto border border-neutralGray bg-white min-w-[300px];
+  z-index: 2000;
+}
+
+.dropdownOption {
+  @apply px-3 py-[13px] bg-white cursor-pointer hover:bg-darkGray1;
+}
+
+.requiredLabel {
+  @apply before:content-['*'] before:text-danger before:mr-[2px];
+}
+
+.requiredLabelActive {
+  @apply before:content-['*'] before:text-danger before:mr-0.5 text-black;
+}
+
+.requiredLabelDisabled {
+  @apply before:content-['*'] before:text-gray before:mr-0.5 text-black;
+}
+
+.requiredLabelDisabledBorder {
+  @apply border-neutralGray;
+}
+
+.invalidInput,
+.invalidInput:hover {
+  @apply border-danger;
+}
+
+.textLabel {
+  @apply relative flex cursor-pointer bg-white;
+  @apply border border-neutralGray focus-visible:border-neutralGray;
+}
+
+.dropdownInput.smallestSize,
+.textLabel.smallestSize {
+  @apply h-7;
+}
+
+.dropdownInput.smallSize,
+.textLabel.smallSize {
+  @apply h-8;
+}
+
+.dropdownInput.mediumSize,
+.textLabel.mediumSize {
+  @apply h-10;
+}
+
+.dropdownInput.largeSize,
+.textLabel.largeSize {
+  @apply h-12;
+}
+
+.dropdownChevron {
+  @apply absolute right-1 top-3 pointer-events-none;
+}
+
+.textLabelChevron {
+  @apply absolute right-1 top-3;
+}
+
+.dropdownChevron.smallestSize,
+.textLabelChevron.smallestSize {
+  @apply top-0.5;
+}
+
+.dropdownChevron.smallSize,
+.textLabelChevron.smallSize {
+  @apply top-1;
+}
+
+.dropdownChevron.mediumSize,
+.textLabelChevron.mediumSize {
+  @apply top-2;
+}

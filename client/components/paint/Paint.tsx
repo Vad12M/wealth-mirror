@@ -16,6 +16,7 @@ import Typography from "@/ui/typography/Typography";
 import PaintMenu from "@/components/paint/PaintMenu";
 import PaintOptions from "@/components/paint/PaintOptions";
 import CanvasHandlerForms from "@/components/paint/CanvasHandlerForms";
+import { v4 as uuidv4 } from "uuid";
 
 interface PaintProps {
 }
@@ -40,6 +41,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     handleZoomOut,
     zoomLevel,
     SIZE,
+    cars
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
@@ -145,6 +147,29 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 }}
               />
             ))}
+
+            {(cars || []).map((car) => {
+                const image = new Image(SIZE / 2, SIZE / 2);
+                image.src = car.image;
+                image.id = uuidv4();
+                return (
+                  <KonvaImage
+                    key={car.id}
+                    image={image}
+                    x={car.position.x}
+                    y={car.position.y}
+                    height={GRID_SIZE}
+                    width={GRID_SIZE}
+                    draggable={isDraggable}
+                    onClick={(e) => {
+                      e.cancelBubble = true;
+                      setSettingPopup(true);
+                    }}
+                  />
+                )
+              }
+            )}
+
             <Transformer ref={transformerRef}/>
           </Layer>
         </Stage>
