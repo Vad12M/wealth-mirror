@@ -90,6 +90,17 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    updateCar: builder.mutation<void, any>({
+      query: (params) => {
+        const { id, ...rest } = params;
+        return {
+          url: `/cars/update/${id}`,
+          method: 'PUT',
+          body: JSON.stringify(rest)
+        }
+      },
+    }),
+
   })
 })
 
@@ -105,4 +116,5 @@ export const {
   useChangePasswordMutation,
   useGetCarsQuery,
   useCreateCarMutation,
+  useUpdateCarMutation,
 } = apiSlice;

@@ -113,7 +113,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           width={SIZE}
           ref={stageRef}
           scale={{ x: zoomLevel, y: zoomLevel }}
-          onMouseUp={onStageMouseUp}
+          // onMouseUp={onStageMouseUp}
           onMouseDown={onStageMouseDown}
           onMouseMove={onStageMouseMove}
           onClick={handleCanvasClick}
@@ -161,6 +161,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     height={GRID_SIZE}
                     width={GRID_SIZE}
                     draggable={isDraggable}
+                    onMouseUp={() => onStageMouseUp('car', car._id)}
                     onClick={(e) => {
                       e.cancelBubble = true;
                       setSettingPopup(true);

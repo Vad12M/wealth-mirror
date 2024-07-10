@@ -8,7 +8,7 @@ import { getMe, login, register, updateMe, updatePassword } from "./controllers/
 import { checkAuth } from "./utils/checkAuth.js";
 import { addWaitUser, contact, getContacts, getWaitUsers } from "./controllers/NewClientController.js";
 import { addWaitUserValidator, contactValidator } from "./validations/newClient.js";
-import { createCar, getCars } from "./controllers/CarController.js";
+import { createCar, getCars, updateCar } from "./controllers/CarController.js";
 import { createCarValidator } from "./validations/car.js";
 
 dotenv.config();
@@ -43,8 +43,9 @@ app.get('/contacts', getContacts);
 
 
 //car
-app.post('/cars/create', createCarValidator, createCar);
-app.get('/cars', getCars);
+app.post('/cars/create', checkAuth, createCarValidator, createCar);
+app.post('/cars/update/:id', checkAuth, updateCar);
+app.get('/cars', checkAuth, getCars);
 
 
 app.listen(process.env.PORT, () => {

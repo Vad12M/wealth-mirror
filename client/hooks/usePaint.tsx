@@ -4,7 +4,7 @@ import { KonvaEventObject } from "konva/lib/Node";
 import { v4 as uuidv4 } from "uuid";
 import useGetUser from "@/hooks/useGetUser";
 import { useRouter } from "next/router";
-import { useGetCarsQuery } from "@/store/api/apiSlice";
+import { useGetCarsQuery, useUpdateCarMutation } from "@/store/api/apiSlice";
 
 
 const downloadURI = (uri: string | undefined, name: string) => {
@@ -19,7 +19,7 @@ const downloadURI = (uri: string | undefined, name: string) => {
 export default function usePaint() {
   const router = useRouter();
   const { isPaid } = useGetUser();
-
+  const [updateCar] = useUpdateCarMutation();
   const { data: cars } = useGetCarsQuery();
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
@@ -85,15 +85,28 @@ export default function usePaint() {
     setImageObjects([]);
   }, []);
 
-  const onStageMouseUp = useCallback(() => {
+  const onStageMouseUp = useCallback((type: string, id: string) => {
     isPaintRef.current = false;
+    const stage = stageRef?.current;
+    const pos = stage?.getPointerPosition();
+    const x = pos?.x || 0;
+    const y = pos?.y || 0;
+    currentShapeRef.current = id;
+
+    if (type === 'car') {
+      updateCar({
+        id: id,
+        x: x,
+        y: y,
+      })
+    }
   }, []);
 
   const currentShapeRef = useRef<string>();
 
   const onStageMouseDown = useCallback(
     (e: KonvaEventObject<MouseEvent>) => {
-      if (drawAction === DrawAction.Select) return;
+      // if (drawAction === DrawAction.Select) return;
       isPaintRef.current = true;
       const stage = stageRef?.current;
       const pos = stage?.getPointerPosition();
@@ -101,6 +114,8 @@ export default function usePaint() {
       const y = pos?.y || 0;
       const id = uuidv4();
       currentShapeRef.current = id;
+
+      console.log('onStageMouseDown', { x, y, id })
     },
     [drawAction]
   );
@@ -113,6 +128,7 @@ export default function usePaint() {
     const pos = stage?.getPointerPosition();
     const x = pos?.x || 0;
     const y = pos?.y || 0;
+
   }, [drawAction]);
 
   const isDraggable = drawAction === DrawAction.Select;
