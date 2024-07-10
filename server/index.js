@@ -44,7 +44,7 @@ app.get('/contacts', getContacts);
 
 //car
 app.post('/cars/create', checkAuth, createCarValidator, createCar);
-app.post('/cars/update/:id', checkAuth, updateCar);
+app.put('/cars/update/:id', checkAuth, updateCar);
 app.get('/cars', checkAuth, getCars);
 
 
