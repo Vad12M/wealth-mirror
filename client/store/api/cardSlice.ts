@@ -1,18 +1,17 @@
 import { baseApi } from "@/store/api/baseApi";
-import { ICar, ICarForm } from "@/interfaces/ICar";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-// const transformResponse = <T extends any>(response: IAPIResponse<T>) => response.data
+import { ICard, ICardForm } from "@/interfaces/ICard";
 
 export const cardSlice = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getCards: builder.query<ICar[], void>({
+    getCards: builder.query<ICard[], void>({
       query: () => ({
         url: '/cards',
       }),
       providesTags: [{ type: LIST_CONTENT_TAG, id: 'cards' }]
     }),
 
-    createCard: builder.mutation<void, ICarForm>({
+    createCard: builder.mutation<void, ICardForm>({
       query: (params) => ({
         url: '/cards/create',
         method: 'POST',
