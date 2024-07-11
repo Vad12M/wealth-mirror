@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
-import { useCreateCardMutation, useUpdateCardMutation } from "@/store/api/cardSlice";
+import { useCreateCardMutation, useDeleteCardMutation, useUpdateCardMutation } from "@/store/api/cardSlice";
 import { ICard, ICardForm } from "@/interfaces/ICard";
+import { Button } from "@/ui/button/Button";
 
 export default function CardForm({
   position,
@@ -16,8 +17,9 @@ export default function CardForm({
   defaultForm?: ICard;
   onClose?: () => void;
 }) {
-  const [createCar] = useCreateCardMutation();
-  const [updateCar] = useUpdateCardMutation();
+  const [deleteCard] = useDeleteCardMutation();
+  const [createCard] = useCreateCardMutation();
+  const [updateCard] = useUpdateCardMutation();
   const [form, setForm] = useState<ICardForm>({
     name: '',
     amount: 0,
@@ -47,23 +49,23 @@ export default function CardForm({
     }
   }, [form.isPrimary]);
 
-  const create = () => {
+  const handleClick = () => {
     if (defaultForm) {
-      updateCar({
+      updateCard({
         id: defaultForm._id,
         ...form
       }).unwrap()
         .finally(() => onClose?.());
     } else {
-      createCar(form).unwrap()
+      createCard(form).unwrap()
         .finally(() => onClose?.());
     }
   }
 
   return (
-    <div className="w-[700px]">
-      <Typography text={'Car Form'} type={'heading1'} className="mb-4"/>
-      <div className="flex flex-col space-y-6">
+    <div className="w-[700px] flex items-center flex-col">
+      <Typography text={'Car Form'} type={'heading2'} className="mb-4"/>
+      <div className="flex flex-col space-y-6 w-full">
         <Input
           label="Name"
           value={form.name}
@@ -83,9 +85,14 @@ export default function CardForm({
           <Typography text={'Is Primary'} type={'body1'}/>
         </div>
       </div>
-      <button onClick={create} className="px-4 py-2 bg-primary text-white mt-4">
-        {defaultForm ? 'Update' : 'Create'}
-      </button>
+      <div className="flex items-center space-x-4">
+        <Button onClick={handleClick} typeButton="white">
+          {defaultForm ? 'Update' : 'Create'}
+        </Button>
+        {defaultForm && <Button onClick={() => deleteCard(defaultForm._id)} typeButton="white-shadow">
+          {'Delete'}
+        </Button>}
+      </div>
     </div>
   )
 }

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ICar, ICarForm } from "@/interfaces/ICar";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
-import { useCreateCarMutation, useUpdateCarMutation } from "@/store/api/carSlice";
+import { useCreateCarMutation, useDeleteCarMutation, useUpdateCarMutation } from "@/store/api/carSlice";
+import { Button } from "@/ui/button/Button";
 
 export default function CarForm({
   position,
@@ -16,6 +17,7 @@ export default function CarForm({
   defaultForm?: ICar;
   onClose?: () => void;
 }) {
+  const [deleteCar] = useDeleteCarMutation();
   const [createCar] = useCreateCarMutation();
   const [updateCar] = useUpdateCarMutation();
   const year = new Date().getFullYear();
@@ -70,7 +72,7 @@ export default function CarForm({
     }
   }, [form.type]);
 
-  const create = () => {
+  const handleClick = () => {
     if (defaultForm) {
       updateCar({
         id: defaultForm._id,
@@ -84,8 +86,8 @@ export default function CarForm({
   }
 
   return (
-    <div className="w-[700px]">
-      <Typography text={'Car Form'} type={'heading1'} className="mb-4"/>
+    <div className="w-[700px] flex items-center flex-col">
+      <Typography text={'Car Form'} type={'heading2'} className="mb-4"/>
       <div className="mb-6">
         {types.map((type) => (
           <button
@@ -97,7 +99,7 @@ export default function CarForm({
           </button>
         ))}
       </div>
-      <div className="flex flex-col space-y-6">
+      <div className="flex flex-col space-y-6 w-full">
         <Input
           label="Name"
           value={form.name}
@@ -121,9 +123,14 @@ export default function CarForm({
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
-      <button onClick={create} className="px-4 py-2 bg-primary text-white mt-4">
-        {defaultForm ? 'Update' : 'Create'}
-      </button>
+      <div className="flex items-center space-x-4 mt-8">
+        <Button onClick={handleClick} typeButton="white">
+          {defaultForm ? 'Update' : 'Create'}
+        </Button>
+        {defaultForm && <Button onClick={() => deleteCar(defaultForm._id)} typeButton="white-shadow">
+          {'Delete'}
+        </Button>}
+      </div>
     </div>
   )
 }

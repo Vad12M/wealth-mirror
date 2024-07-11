@@ -1,20 +1,23 @@
 import { baseApi } from "@/store/api/baseApi";
-// const transformResponse = <T extends any>(response: IAPIResponse<T>) => response.data
+import { ICar, ICarForm } from "@/interfaces/ICar";
+import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
 
 export const carSlice = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getCars: builder.query<any[], void>({
+    getCars: builder.query<ICar[], void>({
       query: () => ({
         url: '/cars',
       }),
+      providesTags: [{ type: LIST_CONTENT_TAG, id: 'cars' }]
     }),
 
-    createCar: builder.mutation<void, any>({
+    createCar: builder.mutation<void, ICarForm>({
       query: (params) => ({
         url: '/cars/create',
         method: 'POST',
         body: JSON.stringify(params)
       }),
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'cars' }]
     }),
 
     updateCar: builder.mutation<void, any>({
@@ -26,13 +29,15 @@ export const carSlice = baseApi.injectEndpoints({
           body: JSON.stringify(rest)
         }
       },
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'cars' }]
     }),
 
-    deleteCar: builder.mutation<void, number>({
+    deleteCar: builder.mutation<void, string>({
       query: (id) => ({
         url: `/cars/delete/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'cars' }]
     }),
 
     deleteAllCars: builder.mutation<void, void>({
@@ -40,6 +45,7 @@ export const carSlice = baseApi.injectEndpoints({
         url: '/cars/delete/all',
         method: 'DELETE',
       }),
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'cars' }]
     }),
 
   })

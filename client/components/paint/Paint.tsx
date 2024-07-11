@@ -18,6 +18,9 @@ import PaintOptions from "@/components/paint/PaintOptions";
 import CanvasHandlerForms from "@/components/paint/CanvasHandlerForms";
 import { v4 as uuidv4 } from "uuid";
 import CarForm from "@/components/paint/CarForm";
+import { ICar } from "@/interfaces/ICar";
+import { ICard } from "@/interfaces/ICard";
+import CardForm from "@/components/paint/CardForm";
 
 interface PaintProps {
 }
@@ -40,14 +43,16 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     handleZoomOut,
     zoomLevel,
     SIZE,
-    cars
+    cars,
+    cards
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
   const [optionsPosition, setOptionsPosition] = useState({ x: 0, y: 0 });
   const [settingPopup, setSettingPopup] = useState(false);
   const [newItemType, setNewItemType] = useState<string>('');
-  const [activeCar, setActiveCar] = useState<any>(null);
+  const [activeCar, setActiveCar] = useState<ICar>();
+  const [activeCard, setActiveCard] = useState<ICard>();
 
 
   const handleCanvasClick = useCallback((e: any) => {
@@ -155,6 +160,30 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
               }
             )}
 
+            {(cards || []).map((card) => {
+                const image = new Image(SIZE / 2, SIZE / 2);
+                image.src = card.image;
+                image.id = uuidv4();
+                return (
+                  <KonvaImage
+                    key={card.id}
+                    image={image}
+                    x={card.position.x}
+                    y={card.position.y}
+                    height={GRID_SIZE}
+                    width={GRID_SIZE}
+                    draggable={isDraggable}
+                    onMouseUp={() => onStageMouseUp('card', card._id)}
+                    onClick={(e) => {
+                      e.cancelBubble = true;
+                      setActiveCard(card);
+                    }}
+                  />
+                )
+              }
+            )}
+
+
             <Transformer ref={transformerRef}/>
           </Layer>
         </Stage>
@@ -173,8 +202,12 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           <CanvasHandlerForms type={newItemType} position={optionsPosition} onClose={() => setSettingPopup(false)}/>
         </Dialog>
 
-        <Dialog isOpen={activeCar} onRequestClose={() => setActiveCar(null)} className={'p-12'}>
-          <CarForm defaultForm={activeCar} onClose={() => setActiveCar(null)}/>
+        <Dialog isOpen={!!activeCar} onRequestClose={() => setActiveCar(undefined)} className={'p-12'}>
+          <CarForm defaultForm={activeCar} onClose={() => setActiveCar(undefined)}/>
+        </Dialog>
+
+        <Dialog isOpen={!!activeCard} onRequestClose={() => setActiveCard(undefined)} className={'p-12'}>
+          <CardForm defaultForm={activeCard} onClose={() => setActiveCard(undefined)}/>
         </Dialog>
       </Box>
     </Box>

@@ -20,9 +20,7 @@ const downloadURI = (uri: string | undefined, name: string) => {
 export default function usePaint() {
   const router = useRouter();
   const { isPaid } = useGetUser();
-  const { updateItem, clearAll } = useCanvas();
-
-  const { data: cars } = useGetCarsQuery();
+  const { updateItem, clearAll, cars, cards } = useCanvas();
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -65,7 +63,7 @@ export default function usePaint() {
     const x = pos?.x || 0;
     const y = pos?.y || 0;
     currentShapeRef.current = id;
-    updateItem(id, type, x, y);
+    updateItem(id, type, x - 38, y - 38);
   }, []);
 
   const currentShapeRef = useRef<string>();
@@ -126,6 +124,7 @@ export default function usePaint() {
     handleZoomOut,
     zoomLevel,
     SIZE,
-    cars
+    cars,
+    cards
   }
 }

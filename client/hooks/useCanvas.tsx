@@ -1,5 +1,5 @@
-import { useDeleteAllCarsMutation, useUpdateCarMutation } from "@/store/api/carSlice";
-import { useDeleteAllCardsMutation, useUpdateCardMutation } from "@/store/api/cardSlice";
+import { useDeleteAllCarsMutation, useGetCarsQuery, useUpdateCarMutation } from "@/store/api/carSlice";
+import { useDeleteAllCardsMutation, useGetCardsQuery, useUpdateCardMutation } from "@/store/api/cardSlice";
 
 
 export default function useCanvas() {
@@ -8,6 +8,9 @@ export default function useCanvas() {
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
+
+  const { data: cars } = useGetCarsQuery();
+  const { data: cards } = useGetCardsQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -33,7 +36,9 @@ export default function useCanvas() {
 
   return {
     clearAll,
-    updateItem
+    updateItem,
+    cars,
+    cards
   }
 
 }

@@ -21,8 +21,8 @@ export default function CanvasHandlerForms({
     case 'car':
       return <CarForm position={position} onClose={onClose}/>
     case 'realEstate':
-      return <HouseForm/>
+      return <HouseForm />
     case 'card':
-      return <CardForm/>
+      return <CardForm position={position} onClose={onClose}/>
   }
 }
