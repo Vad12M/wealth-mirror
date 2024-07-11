@@ -75,32 +75,6 @@ export const apiSlice = baseApi.injectEndpoints({
         url: '/wait-users',
       }),
     }),
-
-    getCars: builder.query<any[], void>({
-      query: () => ({
-        url: '/cars',
-      }),
-    }),
-
-    createCar: builder.mutation<void, any>({
-      query: (params) => ({
-        url: '/cars/create',
-        method: 'POST',
-        body: JSON.stringify(params)
-      }),
-    }),
-
-    updateCar: builder.mutation<void, any>({
-      query: (params) => {
-        const { id, ...rest } = params;
-        return {
-          url: `/cars/update/${id}`,
-          method: 'PUT',
-          body: JSON.stringify(rest)
-        }
-      },
-    }),
-
   })
 })
 
@@ -114,7 +88,4 @@ export const {
   useGetWaitUsersQuery,
   useUpdateMeMutation,
   useChangePasswordMutation,
-  useGetCarsQuery,
-  useCreateCarMutation,
-  useUpdateCarMutation,
 } = apiSlice;

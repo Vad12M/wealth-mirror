@@ -27,7 +27,6 @@ const LIMIT = 10000;
 
 export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const {
-    imageObjects,
     isDraggable,
     onStageMouseUp,
     onStageMouseDown,
@@ -36,7 +35,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     onExportClick,
     transformerRef,
     onClear,
-    addNewImage,
     stageRef,
     handleZoomIn,
     handleZoomOut,
@@ -134,22 +132,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
             />
           </Layer>
           <Layer>
-            {imageObjects.map((image) => (
-              <KonvaImage
-                key={image.id}
-                image={image}
-                x={0}
-                y={0}
-                height={GRID_SIZE}
-                width={GRID_SIZE}
-                draggable={isDraggable}
-                onClick={(e) => {
-                  e.cancelBubble = true;
-                  setSettingPopup(true);
-                }}
-              />
-            ))}
-
             {(cars || []).map((car) => {
                 const image = new Image(SIZE / 2, SIZE / 2);
                 image.src = car.image;
@@ -188,7 +170,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           />
         )}
         <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-12'}>
-          <CanvasHandlerForms type={newItemType} position={optionsPosition}/>
+          <CanvasHandlerForms type={newItemType} position={optionsPosition} onClose={() => setSettingPopup(false)}/>
         </Dialog>
 
         <Dialog isOpen={activeCar} onRequestClose={() => setActiveCar(null)} className={'p-12'}>

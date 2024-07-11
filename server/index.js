@@ -8,8 +8,10 @@ import { getMe, login, register, updateMe, updatePassword } from "./controllers/
 import { checkAuth } from "./utils/checkAuth.js";
 import { addWaitUser, contact, getContacts, getWaitUsers } from "./controllers/NewClientController.js";
 import { addWaitUserValidator, contactValidator } from "./validations/newClient.js";
-import { createCar, getCars, updateCar } from "./controllers/CarController.js";
+import { createCar, deleteAllCars, deleteCar, getCars, updateCar } from "./controllers/CarController.js";
 import { createCarValidator } from "./validations/car.js";
+import { createCard, deleteAllCards, deleteCard, getCards, updateCard } from "./controllers/CardController.js";
+import { createCardValidator } from "./validations/card.js";
 
 dotenv.config();
 
@@ -46,6 +48,20 @@ app.get('/contacts', getContacts);
 app.post('/cars/create', checkAuth, createCarValidator, createCar);
 app.put('/cars/update/:id', checkAuth, updateCar);
 app.get('/cars', checkAuth, getCars);
+app.delete('/cars/delete/:id', checkAuth, deleteCar);
+app.delete('/cars/delete/all', checkAuth, deleteAllCars);
+
+// card
+app.post('/cards/create', checkAuth, createCardValidator, createCard);
+app.put('/cards/update/:id', checkAuth, updateCard);
+app.get('/cards', checkAuth, getCards);
+app.delete('/cards/delete/:id', checkAuth, deleteCard);
+app.delete('/cards/delete/all', checkAuth, deleteAllCards);
+
+// real estate
+app.post('/real-estate/create', checkAuth, createCarValidator, createCar);
+app.put('/real-estate/update/:id', checkAuth, updateCar);
+app.get('/real-estate', checkAuth, getCars);
 
 
 app.listen(process.env.PORT, () => {

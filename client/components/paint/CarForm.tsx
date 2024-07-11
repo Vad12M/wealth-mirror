@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ICar, ICarForm } from "@/interfaces/ICar";
 import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
-import { useCreateCarMutation, useUpdateCarMutation } from "@/store/api/apiSlice";
+import { useCreateCarMutation, useUpdateCarMutation } from "@/store/api/carSlice";
 
 export default function CarForm({
   position,
@@ -78,7 +78,8 @@ export default function CarForm({
       }).unwrap()
         .finally(() => onClose?.());
     } else {
-      createCar(form);
+      createCar(form).unwrap()
+        .finally(() => onClose?.());
     }
   }
 

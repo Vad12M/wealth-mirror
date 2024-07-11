@@ -47,3 +47,43 @@ export const getCars = async (req, res) => {
     });
   }
 }
+
+export const deleteCar = async (req, res) => {
+  try {
+    const car = await CarModel.findOne({ _id: req.params.id, user: req.userId });
+    if (!car) {
+      return res.status(404).json({
+        message: 'Car not found',
+      });
+    }
+
+    await CarModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      message: 'Car deleted',
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+}
+
+export const deleteAllCars = async (req, res) => {
+  try {
+    const cars = await CarModel.find({ user: req.userId });
+    if (!cars) {
+      return res.status(404).json({
+        message: 'Cars not found',
+      });
+    }
+
+    await CarModel.deleteMany({ user: req.userId });
+    res.status(200).json({
+      message: 'Cars deleted',
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+}

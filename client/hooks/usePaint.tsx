@@ -4,7 +4,8 @@ import { KonvaEventObject } from "konva/lib/Node";
 import { v4 as uuidv4 } from "uuid";
 import useGetUser from "@/hooks/useGetUser";
 import { useRouter } from "next/router";
-import { useGetCarsQuery, useUpdateCarMutation } from "@/store/api/apiSlice";
+import { useGetCarsQuery } from "@/store/api/carSlice";
+import useCanvas from "@/hooks/useCanvas";
 
 
 const downloadURI = (uri: string | undefined, name: string) => {
@@ -19,24 +20,16 @@ const downloadURI = (uri: string | undefined, name: string) => {
 export default function usePaint() {
   const router = useRouter();
   const { isPaid } = useGetUser();
-  const [updateCar] = useUpdateCarMutation();
+  const { updateItem, clearAll } = useCanvas();
+
   const { data: cars } = useGetCarsQuery();
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [imageObjects, setImageObjects] = useState<HTMLImageElement[]>([]);
   const [SIZE, setSIZE] = useState<number>(1)
   const isPaintRef = useRef(false);
   const stageRef = useRef<any>(null);
   const transformerRef = useRef<any>(null);
-  const [carsItems, setCarsItems] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (cars) {
-      setCarsItems(cars);
-    }
-  }, [cars]);
-
 
   const onExportClick = useCallback(() => {
     if (!isPaid) {
@@ -60,29 +53,9 @@ export default function usePaint() {
     return () => window.removeEventListener('resize', handleResize)
   }, []);
 
-  const addNewImage = (type: string) => {
-    let imageUrl = '';
-
-    switch (type) {
-      case 'car':
-        imageUrl = '/canvas/Car.svg';
-        break;
-      case 'realEstate':
-        imageUrl = '/canvas/Home-1.svg';
-        break;
-      case 'card':
-        imageUrl = '/canvas/CC1.svg';
-        break;
-    }
-
-    const image = new Image(SIZE / 2, SIZE / 2);
-    image.src = imageUrl;
-    image.id = uuidv4();
-    setImageObjects([...imageObjects, image]);
-  };
 
   const onClear = useCallback(() => {
-    setImageObjects([]);
+    clearAll();
   }, []);
 
   const onStageMouseUp = useCallback((type: string, id: string) => {
@@ -92,16 +65,7 @@ export default function usePaint() {
     const x = pos?.x || 0;
     const y = pos?.y || 0;
     currentShapeRef.current = id;
-
-    if (type === 'car') {
-      updateCar({
-        id: id,
-        position: {
-          x: x,
-          y: y,
-        }
-      })
-    }
+    updateItem(id, type, x, y);
   }, []);
 
   const currentShapeRef = useRef<string>();
@@ -116,8 +80,6 @@ export default function usePaint() {
       const y = pos?.y || 0;
       const id = uuidv4();
       currentShapeRef.current = id;
-
-      console.log('onStageMouseDown', { x, y, id })
     },
     [drawAction]
   );
@@ -151,7 +113,6 @@ export default function usePaint() {
 
 
   return {
-    imageObjects,
     onStageMouseUp,
     onStageMouseDown,
     onStageMouseMove,
@@ -159,7 +120,6 @@ export default function usePaint() {
     isDraggable,
     transformerRef,
     onBgClick,
-    addNewImage,
     onClear,
     onExportClick,
     handleZoomIn,
