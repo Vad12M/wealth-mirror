@@ -7,7 +7,7 @@ import Input from "@/ui/input/input";
 import Typography from "@/ui/typography/Typography";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { Button } from "@/ui/button/Button";
-import Link from "next/link";
+import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 
 export default function Register() {
   const [register, { isLoading }] = useRegisterMutation();
@@ -123,9 +123,9 @@ export default function Register() {
         >
           {'Register'}
         </Button>
-        <Link href={'/auth/login'}>
+        <Anchor href={'/auth/login'}>
           <Typography text={'Sign in'} className={'mt-6'} type="body" color={'text-primary'}/>
-        </Link>
+        </Anchor>
       </div>
     </AuthLayout>
   )

@@ -1,6 +1,7 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode, RefObject, useEffect, useRef } from 'react';
+import { ReactNode, RefObject, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { CursorState, customCursorMutations } from "@/store/reducers/customCursor.reducer";
+import Link from "next/link";
 
 export function useCustomCursorHighlight<T extends Element>(ref: RefObject<T>, deps: any) {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export const CustomCursorHighlight = ({ children, className }: { children: React
   return (<div ref={ref} className={className}>{children}</div>);
 }
 
-function useActiveState<T extends Element>(ref: RefObject<T>) {
+export function useActiveState<T extends Element>(ref: RefObject<T>) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,14 +54,8 @@ function useActiveState<T extends Element>(ref: RefObject<T>) {
   }, []);
 }
 
-export function Anchor<T extends AnchorHTMLAttributes<HTMLAnchorElement>>({ children, ...props }: T) {
+export function Anchor({ children, ...props }: { children: ReactNode } & any) {
   const ref = useRef<HTMLAnchorElement>(null);
   useActiveState(ref);
-  return <a {...props} ref={ref}>{children}</a>
-}
-
-export function Button<T extends ButtonHTMLAttributes<HTMLButtonElement>>({ children, ...props }: T) {
-  const ref = useRef<HTMLButtonElement>(null);
-  useActiveState(ref);
-  return <button {...props} ref={ref}>{children}</button>
+  return <Link {...props} ref={ref} href={props.href}>{children}</Link>
 }

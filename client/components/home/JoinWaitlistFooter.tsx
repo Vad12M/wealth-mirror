@@ -4,7 +4,7 @@ import { Twitter } from "react-bootstrap-icons";
 import InstagramIcon from "@/ui/icons/socials/InstagramIcon";
 import LinkedinIcon from "@/ui/icons/socials/LinkedinIcon";
 import YoutubeIcon from "@/ui/icons/socials/YoutubeIcon";
-import Link from "next/link";
+import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 
 export default function JoinWaitlistFooter() {
   const currentYear = new Date().getFullYear();
@@ -40,14 +40,14 @@ export default function JoinWaitlistFooter() {
       />
       <div className="flex items-center space-x-4 transform md:mb-0 mb-[60px]">
         {footerData.map((item, index) => (
-          <Link
+          <Anchor
             key={index}
             href={item.link}
             target={'_blank'}
             className="w-10 h-10 rounded-[16px] bg-[#18181C] flex items-center justify-center"
           >
             {item.icon}
-          </Link>
+          </Anchor>
         ))}
       </div>
     </div>

@@ -1,6 +1,7 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, useRef } from 'react'
 import styles from './Button.module.scss'
 import cx from "classnames";
+import { useActiveState } from "@/components/custom-cursor/CustomCursorHighlight";
 
 interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
   typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent' | 'white' | 'white-shadow';
@@ -19,7 +20,8 @@ export function Button({
   loading,
   ...props
 }: IButton) {
-
+  const ref = useRef<HTMLButtonElement>(null);
+  useActiveState(ref);
   const buttonStyles = cx(`${styles.button}`, {})
 
   let typeClassname = '';
@@ -46,6 +48,7 @@ export function Button({
 
   return (
     <button
+      ref={ref}
       onClick={props.onClick}
       className={`${typeClassname} ${buttonStyles} ${props.className}`}
       style={{

@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { Button } from "@/ui/button/Button";
 import { useRouter } from "next/router";
 import styles from './header.module.scss'
 import Typography from "@/ui/typography/Typography";
@@ -11,6 +9,8 @@ import useGetUser from "@/hooks/useGetUser";
 import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 import MainLogoMobile from "@/ui/icons/logos/MainLogoMobile";
 import { useState } from "react";
+import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
+import { Button } from "@/ui/button/Button";
 
 export default function Header() {
   const isMobile = useGetIsMobile();
@@ -34,33 +34,39 @@ export default function Header() {
   return (
     <>
       <header className="absolute z-50 top-0 left-[50%] transform translate-x-[-50%]">
-        <div className="flex items-center justify-between fixed-container py-10">
-          <Link href={"/"} className="flex items-center space-x-3">
+        <div className="flex items-center justify-between w-screen px-20 py-10">
+          <Anchor href={"/"} className="flex items-center space-x-3">
             {isJoinWaitlist
               ? <GradientLogo/>
               : isMobile ? <MainLogoMobile/> : <MainLogo/>}
             <Typography text={'Wealth Mirror'} type={'navBar'} color={asPath === '/' ? 'text-black' : 'text-white'}/>
-          </Link>
+          </Anchor>
 
-          <ul className={`hidden md:flex items-center space-x-8 py-3 px-4 ${styles.list}`}>
+          <ul
+            className={`hidden md:flex items-center justify-center space-x-8 py-3 px-4 ${styles.list}`}
+            style={{
+              boxShadow: '0px 4px 8.9px 0px rgba(69, 130, 68, 0.26)',
+              backdropFilter: 'blur(16.899999618530273px)'
+            }}
+          >
             {list.map((item, index) => (
               <li key={index}>
-                <Link href={item.link} className="px-4">
-                  {item.name}
-                </Link>
+                <Anchor href={item.link} className="flex items-center">
+                  <Typography text={item.name} type={'body2'} color="text-primaryDark" className="px-4"/>
+                </Anchor>
               </li>
             ))}
           </ul>
 
           <div className="md:flex items-center space-x-4 pr-3 hidden">
             {!isLoggedIn ? (
-              <Link href={'/auth/login'}>
-                <Typography text={'Login'} type={'button'}/>
-              </Link>
+              <Anchor href={'/auth/login'} className="border px-[28px] py-2 border-naturalBlack rounded-[48px]">
+                <Typography text={'Login'} type={'button'} color={"text-naturalBlack"}/>
+              </Anchor>
             ) : (
-              <Link href={'/profile'}>
+              <Anchor href={'/profile'} className="border px-[28px] py-2 border-naturalBlack rounded-[48px]">
                 <Typography text={`${user?.firstName || ''} ${user?.lastName || ''}`} type={'button'}/>
-              </Link>
+              </Anchor>
             )}
 
             {isAdmin &&
@@ -106,11 +112,8 @@ export default function Header() {
       {mobileMenu &&
         <div className="bg-naturalBlack">
           <div
-            className={`fixed top-0 left-0 w-full h-screen z-50 px-10 py-20`}
-            style={{
-              background: '#BCE8BB4D',
-              backdropFilter: 'blur(42.150001525878906px)'
-            }}
+            className={`fixed top-0 left-0 w-full h-screen z-50 px-10 py-20 bg-primary`}
+            style={{ background: '#78d8a4' }}
           >
             <button onClick={() => setMobileMenu(!mobileMenu)} className="flex items-center space-x-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
@@ -122,12 +125,13 @@ export default function Header() {
             </button>
             <div className='pt-[40%] px-4'>
               {list.map((item, index) => (
-                <Link href={item.link} key={index} className="block py-4" onClick={() => setMobileMenu(!mobileMenu)}>
+                <Anchor href={item.link} key={index} className="block py-4" onClick={() => setMobileMenu(!mobileMenu)}>
                   <Typography text={item.name} type={'heading4NotBold'} color={'text-naturalBlack'}/>
-                </Link>
+                </Anchor>
               ))}
             </div>
-            <div className="flex items-center justify-center space-x-3 absolute bottom-20 left-[50%] transform translate-x-[-50%]">
+            <div
+              className="flex items-center justify-center space-x-3 absolute bottom-20 left-[50%] transform translate-x-[-50%]">
               <MainLogoMobile/>
               <Typography text={'Wealth Mirror'} type={'navBar'} color={asPath === '/' ? 'text-black' : 'text-white'}/>
             </div>

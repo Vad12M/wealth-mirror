@@ -9,8 +9,8 @@ import { useRouter } from "next/router";
 import { useLoginMutation } from "@/store/api/apiSlice";
 import { ILogin } from "@/interfaces/IAuth";
 import { loginByToken } from "@/store/actions/global.actions";
-import Link from "next/link";
 import { setUserToken } from "@/service/useAuthHandler";
+import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 
 export default function LoginPage() {
   const [login, { isLoading }] = useLoginMutation();
@@ -75,9 +75,9 @@ export default function LoginPage() {
         </Button>
         <div className="flex items-center space-x-1">
           <Typography text={'Don’t have an account?'} className={'mt-6'} type="body"/>
-          <Link href={'/auth/register'}>
+          <Anchor href={'/auth/register'}>
             <Typography text={'Sign up'} className={'mt-6'} type="body" color={'text-primary'}/>
-          </Link>
+          </Anchor>
         </div>
       </div>
     </AuthLayout>

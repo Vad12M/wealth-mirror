@@ -15,9 +15,21 @@ const clickVariants: Variants = {
     height: 60
   },
   hover: {
-    width: 80,
-    height: 80,
+    width: [60, 30],
+    height: [60, 30],
     backgroundColor: 'rgba(55,151,162,0.3)'
+  }
+}
+
+const dotVariants: Variants = {
+  pressed: {
+    scale: 1
+  },
+  default: {
+    scale: 1
+  },
+  hover: {
+    scale: 2
   }
 }
 
@@ -29,14 +41,14 @@ const CustomCursor = () => {
   const mouseDelayedTop = useMotionValue<number>(0);
   const mouseDelayedLeft = useMotionValue<number>(0);
 
-  const dotTop = useTransform(mouseTop, t => `${t}px`);
-  const dotLeft = useTransform(mouseLeft, l => `${l}px`);
+  const dotTop = useTransform(mouseTop, t => `${t - 3.5}px`);
+  const dotLeft = useTransform(mouseLeft, l => `${l - 3.5}px`);
   const outlineTop = useTransform(mouseDelayedTop, t => `${t}px`);
   const outlineLeft = useTransform(mouseDelayedLeft, l => `${l}px`);
 
-  const cusrorState = useAppSelector(state => state.customCursor.value);
+  const cursorState = useAppSelector((state) => state.customCursor.value);
   const [variant, setVariant] = useState<string>('default');
-  useEffect(() => setVariant(cusrorState === CursorState.active ? 'hover' : 'default'), [cusrorState]);
+  useEffect(() => setVariant(cursorState === CursorState.active ? 'hover' : 'default'), [cursorState]);
 
   useIsomorphicLayoutEffect(() => {
     const onMouseMove = (e: MouseEvent | PointerEvent) => {
@@ -60,11 +72,24 @@ const CustomCursor = () => {
     return null;
   }
 
-  return <>
-    <motion.div initial="default" animate={variant} variants={clickVariants}
-                style={{ left: outlineLeft, top: outlineTop, opacity }} className={styles.cursorDotOutline}/>
-    <motion.div style={{ left: dotLeft, top: dotTop, opacity }} className={styles.cursorDot}/>
-  </>;
-}
+  return (
+    <>
+      <motion.div
+        initial="default"
+        animate={variant}
+        variants={clickVariants}
+        style={{ left: outlineLeft, top: outlineTop, opacity }}
+        className={styles.cursorDotOutline}
+      />
+      <motion.div
+        initial="default"
+        animate={variant}
+        variants={dotVariants}
+        style={{ left: dotLeft, top: dotTop, opacity }}
+        className={styles.cursorDot}
+      />
+    </>
+  );
+};
 
 export default CustomCursor;

@@ -1,5 +1,4 @@
 import Typography from "@/ui/typography/Typography";
-import Link from "next/link";
 import FacebookIcon from "@/ui/icons/socials/FacebookIcon";
 import { Twitter } from "react-bootstrap-icons";
 import InstagramIcon from "@/ui/icons/socials/InstagramIcon";
@@ -7,6 +6,7 @@ import LinkedinIcon from "@/ui/icons/socials/LinkedinIcon";
 import YoutubeIcon from "@/ui/icons/socials/YoutubeIcon";
 import { useRouter } from "next/router";
 import GradientLogo from "@/ui/icons/logos/GradientLogo";
+import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 
 export default function Footer() {
   const router = useRouter();
@@ -75,10 +75,10 @@ export default function Footer() {
       >
         <div className="m-container flex items-start justify-between">
           <div className="flex flex-col">
-            <Link href={"/"} className="flex items-center space-x-3 mb-[30px]">
+            <Anchor href={"/"} className="flex items-center space-x-3 mb-[30px]">
               <GradientLogo/>
               <Typography text={'Wealth Mirror'} type={'sub1'}/>
-            </Link>
+            </Anchor>
             <Typography
               text={'We want Your Wealth to Grow with You ❤️'}
               type={'body'}
@@ -92,9 +92,9 @@ export default function Footer() {
               {columns.map((item, index) => (
                 <div key={index} className="flex flex-col space-y-2">
                   {item.column.map((column, index) => (
-                    <Link key={index} href={column.link} target={'_blank'}>
+                    <Anchor key={index} href={column.link} target={'_blank'}>
                       <Typography text={column.title} type={'body'} color={'text-bodyGray'}/>
-                    </Link>
+                    </Anchor>
                   ))}
                 </div>
               ))}
@@ -111,14 +111,14 @@ export default function Footer() {
         />
         <div className="flex items-center space-x-4 transform">
           {footerData.map((item, index) => (
-            <Link
+            <Anchor
               key={index}
               href={item.link}
               target={'_blank'}
               className="w-10 h-10 rounded-[16px] bg-[#18181C] flex items-center justify-center"
             >
               {item.icon}
-            </Link>
+            </Anchor>
           ))}
         </div>
       </div>
