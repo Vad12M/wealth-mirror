@@ -143,7 +143,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 image.id = uuidv4();
                 return (
                   <KonvaImage
-                    key={car.id}
+                    key={car._id}
                     image={image}
                     x={car.position.x}
                     y={car.position.y}
@@ -162,11 +162,12 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
 
             {(cards || []).map((card) => {
                 const image = new Image(SIZE / 2, SIZE / 2);
+                // @ts-ignore
                 image.src = card.image;
                 image.id = uuidv4();
                 return (
                   <KonvaImage
-                    key={card.id}
+                    key={card._id}
                     image={image}
                     x={card.position.x}
                     y={card.position.y}

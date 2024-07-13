@@ -49,7 +49,7 @@ export default function CarForm({
         year: defaultForm.year,
         brand: defaultForm.brand,
         type: defaultForm.type,
-        image: defaultForm.imageUrl,
+        image: defaultForm.image,
         position: defaultForm.position
       });
     }
