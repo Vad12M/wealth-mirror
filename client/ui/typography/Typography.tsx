@@ -12,6 +12,7 @@ interface ITypography {
     | 'healine4'
     | 'healine2'
     | 'link1'
+    | 'link2'
     | 'heading1'
     | 'heading2'
     | 'heading3'
@@ -25,6 +26,8 @@ interface ITypography {
     | 'title'
     | 'footer'
     | 'txt1'
+    | 'navBar'
+    | 'heading4NotBold'
   text: string;
   className?: string;
   color?: string;
@@ -93,6 +96,8 @@ export default function Typography({
       return <p className={`${styles.healine2} ${className} ${color}`}>{highlightedText}</p>;
     case 'link1':
       return <p className={`${styles.link1} ${className} ${color}`}>{highlightedText}</p>;
+    case 'link2':
+      return <p className={`${styles.link2} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading1':
       return <p className={`${styles.heading1} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading2':
@@ -119,6 +124,10 @@ export default function Typography({
       return <p className={`${styles.footer} ${className} ${color}`}>{highlightedText}</p>;
     case 'txt1':
       return <p className={`${styles.txt1} ${className} ${color}`}>{highlightedText}</p>;
+    case 'navBar':
+      return <p className={`${styles.navBar} ${className} ${color}`}>{highlightedText}</p>;
+    case 'heading4NotBold':
+      return <p className={`${styles.heading4NotBold} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

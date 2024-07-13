@@ -27,14 +27,16 @@ export default function JoinWaitlistBlock({
           <MainLogo/>
           <Typography type={isMobile ? "heading5" : "heading3"} text={"Wealth Mirror"} color={'text-black'}/>
         </div>
-        <div className="flex md:flex-row flex-col items-center justify-center mb-8 space-x-6 z-10 md:w-full w-[290px]">
+        <div className="flex lg:flex-row flex-col items-center justify-center mb-8 lg:space-x-6 z-10 md:w-full w-[290px]">
           <Typography
             type={isMobile ? "heading3" : "title"}
             text={"See Your Wealth Growing with You️"}
             className={'text-center md:mb-0 mb-2'}
             color={'text-primaryDark'}
           />
-          <HeartIcon size={isMobile ? 28 : 52}/>
+          <div>
+            <HeartIcon size={isMobile ? 28 : 52}/>
+          </div>
         </div>
         <Typography
           text={"Wealth Mirror helps its users to manage their Tangible/Intangible Assets and Liabilities to make informed decisions and achieve their financial goals with clarity and confidence."}

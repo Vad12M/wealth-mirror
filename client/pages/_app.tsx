@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: any) {
               <CustomCursor/>
             </div>
           </ErrorBoundary>
-          <ErrorBoundary><Footer/></ErrorBoundary>
+          {/*<ErrorBoundary><Footer/></ErrorBoundary>*/}
         </Provider>
       </div>
     </div>

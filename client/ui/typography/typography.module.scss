@@ -71,6 +71,12 @@
   font-family: 'Nunito';
 }
 
+.link2 {
+  @apply text-[12px];
+  font-weight: 500;
+  font-family: 'Nunito';
+}
+
 .heading1 {
   @apply text-[50px] leading-[62px];
   font-family: 'Inter';
@@ -93,6 +99,12 @@
   @apply text-[22px] leading-[27px];
   font-family: 'Inter';
   font-weight: 700;
+}
+
+.heading4NotBold {
+  @apply text-[22px] leading-[27px];
+  font-family: 'Inter';
+  font-weight: 400;
 }
 
 .heading5 {
@@ -152,4 +164,12 @@
   font-family: Inter;
   font-style: normal;
   font-weight: 800;
+}
+
+.navBar {
+  @apply text-[22px];
+  font-family: Inter;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 700;
 }

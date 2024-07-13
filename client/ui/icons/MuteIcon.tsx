@@ -1,6 +1,6 @@
-export default function MuteIcon() {
+export default function MuteIcon({ size = 50 }: { size?: number }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 473 360" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 473 360" fill="none">
       <path
         d="M0 240.654V117.848C0 110.116 6.26803 103.848 14 103.848H75.7749C78.8431 103.848 81.8263 102.84 84.2658 100.979L212.509 3.15594C221.724 -3.8728 235 2.69802 235 14.2872V345.494C235 357.123 221.644 363.683 212.441 356.574L84.2859 257.575C81.8347 255.681 78.8247 254.654 75.7273 254.654H14C6.26801 254.654 0 248.386 0 240.654Z"
         fill="#E0FFDF"/>

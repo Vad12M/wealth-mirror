@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import MuteIcon from "@/ui/icons/MuteIcon";
 import UnmuteIcon from "@/ui/icons/UnmuteIcon";
+import styles from "./videoBlock.module.scss";
+import { useGetIsMobile } from "@/hooks/useGetIsMobile";
+import Typography from "@/ui/typography/Typography";
 
 export default function VideoBlock() {
+  const isMobile = useGetIsMobile();
   const videoRef = useRef(null);
   const [scale, setScale] = useState(1);
   const [muted, setMuted] = useState(true);
@@ -44,28 +48,44 @@ export default function VideoBlock() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen mt-[130px]">
+    <div className="flex items-center justify-center">
       <div
-        id="scale-block"
-        className="transition-transform duration-200 ease-out w-1/2 h-[650px] mt-10 relative"
-        style={{ transform: `scale(${scale})` }}
-      >
-        <button
-          className="absolute right-0 bottom-[60%] m-4 bg-opacity-50 rounded-full p-1 z-50"
-          onClick={() => setMuted(!muted)}
+        className={`flex flex-col items-center justify-center md:h-[1000px] h-[350px] w-full md:max-w-[2100px] ${styles.blurBorder}`}>
+        <div
+          id="scale-block"
+          className="transition-transform duration-200 ease-out w-1/2 mt-10 relative"
+          style={{ transform: `scale(${scale})` }}
         >
-          {!muted ? <MuteIcon/> : <UnmuteIcon/>}
-        </button>
-        <video
-          ref={videoRef}
-          width="100%"
-          height="100%"
-          controls={false}
-          loop={true}
-          muted={muted}
-        >
-          <source src="/hero/video.mp4" type="video/mp4"/>
-        </video>
+          {!isMobile ? <button
+              className="absolute right-0 bottom-[40%] m-4 bg-opacity-50 rounded-full p-1 z-50 flex flex-col items-center space-y-3"
+              onClick={() => setMuted(!muted)}
+            >
+              {!muted
+                ? <MuteIcon size={50}/>
+                : <UnmuteIcon size={50}/>}
+              <Typography text={muted ? 'Tap to unmute' : 'Tap to mute'} type={'link2'} color={'text-primaryLight2'}/>
+            </button>
+
+            : <button
+              className="absolute bottom-0 left-[37%] bg-opacity-50 rounded-full p-1 z-50 flex flex-col items-center"
+              onClick={() => setMuted(!muted)}
+            >
+              {!muted
+                ? <MuteIcon size={25}/>
+                : <UnmuteIcon size={25}/>}
+              <Typography text={muted ? 'Tap to unmute' : 'Tap to mute'} type={'link2'} color={'text-primaryLight2'}/>
+            </button>}
+          <video
+            ref={videoRef}
+            width="100%"
+            height="100%"
+            controls={false}
+            loop={true}
+            muted={muted}
+          >
+            <source src="/hero/video.mp4" type="video/mp4"/>
+          </video>
+        </div>
       </div>
     </div>
   );
