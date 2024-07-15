@@ -28,6 +28,9 @@ interface ITypography {
     | 'txt1'
     | 'navBar'
     | 'heading4NotBold'
+    | 'oops'
+    | 'oops_desc'
+    | 'button_monserrat';
   text: string;
   className?: string;
   color?: string;
@@ -128,6 +131,12 @@ export default function Typography({
       return <p className={`${styles.navBar} ${className} ${color}`}>{highlightedText}</p>;
     case 'heading4NotBold':
       return <p className={`${styles.heading4NotBold} ${className} ${color}`}>{highlightedText}</p>;
+    case 'oops':
+      return <p className={`${styles.oops} ${className} ${color}`}>{highlightedText}</p>;
+    case 'oops_desc':
+      return <p className={`${styles.oops_desc} ${className} ${color}`}>{highlightedText}</p>;
+    case 'button_monserrat':
+      return <p className={`${styles.button_monserrat} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

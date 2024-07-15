@@ -14,6 +14,11 @@ const config: Config = {
         primaryLight: '#4B5754',
         primaryLight2: '#E0FFDF',
 
+        border1: '#458244',
+
+        opsColor: '#BCE8BB',
+
+
         white: '#FFF',
         black: '#112520',
         grayBody: '#838B7F',

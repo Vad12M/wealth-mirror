@@ -34,12 +34,12 @@ export default function Header() {
   return (
     <>
       <header className="absolute z-50 top-0 left-[50%] transform translate-x-[-50%]">
-        <div className="flex items-center justify-between w-screen px-20 py-10">
+        <div className="flex items-center justify-between w-screen md:px-20 px-8 py-10">
           <Anchor href={"/"} className="flex items-center space-x-3">
             {isJoinWaitlist
               ? <GradientLogo/>
               : isMobile ? <MainLogoMobile/> : <MainLogo/>}
-            <Typography text={'Wealth Mirror'} type={'navBar'} color={asPath === '/' ? 'text-black' : 'text-white'}/>
+            <Typography text={'Wealth Mirror'} type={'navBar'} color={'text-black'}/>
           </Anchor>
 
           <ul

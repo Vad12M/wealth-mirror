@@ -173,3 +173,26 @@
   line-height: normal;
   font-weight: 700;
 }
+
+.oops {
+  @apply text-[160px] leading-[176px];
+  font-family: Unbounded;
+  font-style: normal;
+  font-weight: 700;
+}
+
+
+.oops_desc {
+  @apply text-[28px] leading-[28px];
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.button_monserrat {
+  @apply text-[20px];
+  font-family: Montserrat;
+  line-height: normal;
+  font-style: normal;
+  font-weight: 700;
+}
