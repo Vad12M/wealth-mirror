@@ -11,7 +11,6 @@ import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
 import useGetUser from "@/hooks/useGetUser";
 import { useRouter } from "next/router";
-import JoinWaitlistFooter from "@/components/home/JoinWaitlistFooter";
 
 
 export default function Home() {
@@ -52,7 +51,6 @@ export default function Home() {
           {'Try Wealth Mirror'}
         </Button>
       </div>
-      <JoinWaitlistFooter/>
     </main>
   );
 }

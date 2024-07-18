@@ -11,10 +11,12 @@ import MainLogoMobile from "@/ui/icons/logos/MainLogoMobile";
 import { useState } from "react";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import { Button } from "@/ui/button/Button";
+import { router } from "next/client";
 
 export default function Header() {
   const isMobile = useGetIsMobile();
   const { asPath, push } = useRouter();
+  const router = useRouter();
   const isJoinWaitlist = asPath.includes('joinwaitlist');
   const { user, isLoggedIn, isAdmin } = useGetUser();
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -49,24 +51,39 @@ export default function Header() {
               backdropFilter: 'blur(16.899999618530273px)'
             }}
           >
-            {list.map((item, index) => (
-              <li key={index}>
-                <Anchor href={item.link} className="flex items-center">
-                  <Typography text={item.name} type={'body2'} color="text-primaryDark" className="px-4"/>
-                </Anchor>
-              </li>
-            ))}
+            {list.map((item, index) => {
+              const active = asPath === item.link;
+              return (
+                <li key={index}>
+                  <Anchor href={item.link}>
+                    <div
+                      className={`group relative flex items-center border rounded-[30px] p-1 ${active ? 'border-border1' : 'border-transparent hover:border-gray'}`}
+                      style={{
+                        background: active ? 'rgba(20, 130, 114, 0.15)' : 'transparent',
+                        boxShadow: active ? '0px 4px 8.9px 0px rgba(69, 130, 68, 0.26)' : 'none',
+                        fontWeight: active ? 'bold' : 'normal'
+                      }}
+                    >
+                      <Typography text={item.name} type={active ? 'body2A' : 'body2'} color="text-primaryDark"
+                                  className="px-4"/>
+                      {!active && <div
+                        className="border-b border-grayBody rounded-l-[28px] rounded-r-[40px] h-10 absolute w-full -ml-0.5 hidden group-hover:block"/>}
+                    </div>
+                  </Anchor>
+                </li>
+              )
+            })}
           </ul>
 
           <div className="md:flex items-center space-x-4 pr-3 hidden">
             {!isLoggedIn ? (
-              <Anchor href={'/auth/login'} className="border px-[28px] py-2 border-naturalBlack rounded-[48px]">
-                <Typography text={'Login'} type={'button'} color={"text-naturalBlack"}/>
-              </Anchor>
+              <Button typeButton={'standard'} onClick={() => router.push('/auth/login')}>
+                {'Login'}
+              </Button>
             ) : (
-              <Anchor href={'/profile'} className="border px-[28px] py-2 border-naturalBlack rounded-[48px]">
-                <Typography text={`${user?.firstName || ''} ${user?.lastName || ''}`} type={'button'}/>
-              </Anchor>
+              <Button typeButton={'standard'} onClick={() => router.push('/profile')}>
+                {`${user?.firstName || ''} ${user?.lastName || ''}`}
+              </Button>
             )}
 
             {isAdmin &&
@@ -90,11 +107,7 @@ export default function Header() {
             )}
           </div>
 
-
-          <button
-            className="flex flex-col items-end space-y-1 md:hidden"
-            onClick={() => setMobileMenu(!mobileMenu)}
-          >
+          <button className="flex flex-col items-end space-y-1 md:hidden" onClick={() => setMobileMenu(!mobileMenu)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="2" viewBox="0 0 20 2" fill="none">
               <path d="M19 1H1" stroke="#112520" strokeWidth="2" strokeLinecap="round"/>
             </svg>
@@ -130,6 +143,8 @@ export default function Header() {
                 </Anchor>
               ))}
             </div>
+
+
             <div
               className="flex items-center justify-center space-x-3 absolute bottom-20 left-[50%] transform translate-x-[-50%]">
               <MainLogoMobile/>

@@ -144,6 +144,12 @@
   font-weight: 700;
 }
 
+.body2A {
+  @apply text-[16px] leading-[25px];
+  font-family: Inter;
+  font-weight: 700;
+}
+
 
 .title {
   @apply text-[60px] leading-[84px];

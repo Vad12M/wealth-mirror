@@ -8,7 +8,6 @@ import HowIsItWorkBlock from "@/components/mainHome/blocks/HowIsItWorkBlock";
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
-import JoinWaitlistFooter from "@/components/home/JoinWaitlistFooter";
 
 export default function Joinwaitlist() {
   const [open, setOpen] = useState(false);
@@ -42,7 +41,6 @@ export default function Joinwaitlist() {
         </Button>
       </div>
       <JoinWaitlistPopup open={open} setOpen={setOpen}/>
-      <JoinWaitlistFooter/>
     </main>
   );
 }

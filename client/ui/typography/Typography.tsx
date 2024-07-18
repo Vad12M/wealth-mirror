@@ -23,6 +23,7 @@ interface ITypography {
     | 'body1'
     | 'body2'
     | 'body2B'
+    | 'body2A'
     | 'title'
     | 'footer'
     | 'txt1'
@@ -121,6 +122,8 @@ export default function Typography({
       return <p className={`${styles.body2} ${className} ${color}`}>{highlightedText}</p>;
     case 'body2B':
       return <p className={`${styles.body2B} ${className} ${color}`}>{highlightedText}</p>;
+    case 'body2A':
+      return <p className={`${styles.body2A} ${className} ${color}`}>{highlightedText}</p>;
     case 'title':
       return <p className={`${styles.title} ${className} ${color}`}>{highlightedText}</p>;
     case 'footer':
