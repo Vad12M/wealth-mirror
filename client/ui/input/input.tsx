@@ -44,7 +44,7 @@ export default function Input({
   return <div className={`flex flex-col ${className} ${disabled && 'opacity-60'}`}>
     {label && <Typography
       text={label}
-      type={'body'}
+      type={'body1'}
       className={'mb-2'}
     />}
     <div className="relative">

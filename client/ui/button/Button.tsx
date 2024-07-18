@@ -4,7 +4,7 @@ import cx from "classnames";
 import { useActiveState } from "@/components/custom-cursor/CustomCursorHighlight";
 
 interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
-  typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent' | 'white' | 'white-shadow' | 'standard';
+  typeButton?: 'primary' | 'secondary' | 'primary-dark' | 'transparent' | 'white' | 'white-shadow' | 'standard' | 'standard-white';
   prefixBtn?: () => any;
   isGradient?: boolean;
   rounded?: number;
@@ -46,6 +46,9 @@ export function Button({
       break;
     case 'standard':
       typeClassname = styles.standardBtn;
+      break;
+    case 'standard-white':
+      typeClassname = styles.standardWhiteBtn;
       break;
   }
 

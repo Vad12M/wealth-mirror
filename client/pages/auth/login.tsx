@@ -1,5 +1,4 @@
 import AuthLayout from "@/components/layouts/AuthLayout";
-import AuthLogo from "@/ui/icons/logos/AuthLogo";
 import Typography from "@/ui/typography/Typography";
 import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
@@ -11,6 +10,7 @@ import { ILogin } from "@/interfaces/IAuth";
 import { loginByToken } from "@/store/actions/global.actions";
 import { setUserToken } from "@/service/useAuthHandler";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
+import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 
 export default function LoginPage() {
   const [login, { isLoading }] = useLoginMutation();
@@ -35,34 +35,49 @@ export default function LoginPage() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout type={'login'}>
       <div className="flex items-center justify-center flex-col h-screen">
-        <AuthLogo/>
-        <Typography text={'Sign in to your account'} className={'mb-4 mt-6'} type="sub1"/>
-        <Typography text={'Start your demo version'} className={'mb-6'} type="body" color="text-gray"/>
-        <Input
-          label={'Email'}
-          value={form.email}
-          placeholder={'Email'}
-          onUpdate={(e) => {
-            setForm({ ...form, email: e.target.value })
-            validator.clear(['email'])
-          }}
-          className={'mb-6 w-[400px]'}
-          invalid={validator.isFieldInvalid('email')}
-        />
-        <Input
-          label={'Password'}
-          value={form.password}
-          placeholder={'Password'}
-          onUpdate={(e) => {
-            setForm({ ...form, password: e.target.value })
-            validator.clear(['password'])
-          }}
-          className={'mb-4 w-[400px]'}
-          invalid={validator.isFieldInvalid('password')}
-          type={'password'}
-        />
+        <div className="absolute top-12 left-10">
+          <Anchor href={"/"} className="flex items-center space-x-3 mb-10">
+            <PrimaryLogo/>
+            <Typography text={'Wealth Mirror'} type={'navBar'} color={'text-white'}/>
+          </Anchor>
+          <Anchor href={'/'}>
+            <Typography text={'Back to homepage'} type={'link2'} color={'text-primary'} className="pl-4"/>
+          </Anchor>
+        </div>
+        <div className="flex flex-col">
+          <Typography text={'Log in'} className={'mb-2'} type="heading2"/>
+          <Typography
+            text={'See your wealth like never before.'}
+            className={'mb-[60px]'}
+            type="body1"
+            color="text-grayBody2"
+          />
+          <Input
+            label={'Email'}
+            value={form.email}
+            placeholder={'Email'}
+            onUpdate={(e) => {
+              setForm({ ...form, email: e.target.value })
+              validator.clear(['email'])
+            }}
+            className={'mb-6 w-[400px]'}
+            invalid={validator.isFieldInvalid('email')}
+          />
+          <Input
+            label={'Password'}
+            value={form.password}
+            placeholder={'Password'}
+            onUpdate={(e) => {
+              setForm({ ...form, password: e.target.value })
+              validator.clear(['password'])
+            }}
+            className={'mb-4 w-[400px]'}
+            invalid={validator.isFieldInvalid('password')}
+            type={'password'}
+          />
+        </div>
         <Button
           typeButton={'primary'}
           className={'w-[400px] mt-6 flex justify-center h-[46px]'}
@@ -71,12 +86,12 @@ export default function LoginPage() {
           loading={isLoading}
           disabled={isLoading}
         >
-          {'Sign In'}
+          {'Log in'}
         </Button>
         <div className="flex items-center space-x-1">
-          <Typography text={'Don’t have an account?'} className={'mt-6'} type="body"/>
+          <Typography text={'Don’t have an account?'} className={'mt-6'} type="link2" color={"text-grayBody2"}/>
           <Anchor href={'/auth/register'}>
-            <Typography text={'Sign up'} className={'mt-6'} type="body" color={'text-primary'}/>
+            <Typography text={'Sign up'} className={'mt-6'} type="link2" color={'text-primary'}/>
           </Anchor>
         </div>
       </div>

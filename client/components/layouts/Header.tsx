@@ -11,7 +11,7 @@ import MainLogoMobile from "@/ui/icons/logos/MainLogoMobile";
 import { useState } from "react";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import { Button } from "@/ui/button/Button";
-import { router } from "next/client";
+import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 
 export default function Header() {
   const isMobile = useGetIsMobile();
@@ -20,6 +20,7 @@ export default function Header() {
   const isJoinWaitlist = asPath.includes('joinwaitlist');
   const { user, isLoggedIn, isAdmin } = useGetUser();
   const [mobileMenu, setMobileMenu] = useState(false);
+  const isWhite = ['/about', '/pricing', '/contact', '/services'].includes(asPath);
 
   const list = [
     { name: 'About Us', link: '/about' },
@@ -40,16 +41,11 @@ export default function Header() {
           <Anchor href={"/"} className="flex items-center space-x-3">
             {isJoinWaitlist
               ? <GradientLogo/>
-              : isMobile ? <MainLogoMobile/> : <MainLogo/>}
-            <Typography text={'Wealth Mirror'} type={'navBar'} color={'text-black'}/>
+              : isMobile ? <MainLogoMobile/> : (isWhite ? <PrimaryLogo/> : <MainLogo/>)}
+            <Typography text={'Wealth Mirror'} type={'navBar'} color={isWhite ? 'text-white' : 'text-black'}/>
           </Anchor>
-
           <ul
-            className={`hidden md:flex items-center justify-center space-x-8 py-3 px-4 ${styles.list}`}
-            style={{
-              boxShadow: '0px 4px 8.9px 0px rgba(69, 130, 68, 0.26)',
-              backdropFilter: 'blur(16.899999618530273px)'
-            }}
+            className={`hidden md:flex items-center justify-center space-x-8 py-3 px-4 ${isWhite ? styles.listWhite : styles.list}`}
           >
             {list.map((item, index) => {
               const active = asPath === item.link;
@@ -57,17 +53,21 @@ export default function Header() {
                 <li key={index}>
                   <Anchor href={item.link}>
                     <div
-                      className={`group relative flex items-center border rounded-[30px] p-1 ${active ? 'border-border1' : 'border-transparent hover:border-gray'}`}
+                      className={`group relative flex items-center border rounded-[30px] p-1 ${active ? 'border-border1' : `border-transparent ${isWhite ? 'hover:border-white' : 'hover:border-gray'} `}`}
                       style={{
                         background: active ? 'rgba(20, 130, 114, 0.15)' : 'transparent',
                         boxShadow: active ? '0px 4px 8.9px 0px rgba(69, 130, 68, 0.26)' : 'none',
                         fontWeight: active ? 'bold' : 'normal'
                       }}
                     >
-                      <Typography text={item.name} type={active ? 'body2A' : 'body2'} color="text-primaryDark"
-                                  className="px-4"/>
+                      <Typography
+                        text={item.name}
+                        type={active ? 'body2A' : 'body2'}
+                        color={isWhite ? 'text-white' : "text-primaryDark"}
+                        className="px-4"
+                      />
                       {!active && <div
-                        className="border-b border-grayBody rounded-l-[28px] rounded-r-[40px] h-10 absolute w-full -ml-0.5 hidden group-hover:block"/>}
+                        className={`border-b ${isWhite ? 'border-white' : 'border-grayBody'} rounded-l-[28px] rounded-r-[40px] h-10 absolute w-full -ml-0.5 hidden group-hover:block`}/>}
                     </div>
                   </Anchor>
                 </li>
@@ -77,11 +77,11 @@ export default function Header() {
 
           <div className="md:flex items-center space-x-4 pr-3 hidden">
             {!isLoggedIn ? (
-              <Button typeButton={'standard'} onClick={() => router.push('/auth/login')}>
+              <Button typeButton={isWhite ? 'standard-white' : 'standard'} onClick={() => router.push('/auth/login')}>
                 {'Login'}
               </Button>
             ) : (
-              <Button typeButton={'standard'} onClick={() => router.push('/profile')}>
+              <Button typeButton={isWhite ? 'standard-white' : 'standard'} onClick={() => router.push('/profile')}>
                 {`${user?.firstName || ''} ${user?.lastName || ''}`}
               </Button>
             )}
@@ -125,8 +125,10 @@ export default function Header() {
       {mobileMenu &&
         <div className="bg-naturalBlack">
           <div
-            className={`fixed top-0 left-0 w-full h-screen z-50 px-10 py-20 bg-primary`}
-            style={{ background: '#78d8a4' }}
+            className={`fixed top-0 left-0 w-full h-screen z-50 px-10 py-20  bg-[#77A276FF] bg-cover`}
+            style={{
+              backgroundImage: 'url("/mobile-header-menu.svg")',
+            }}
           >
             <button onClick={() => setMobileMenu(!mobileMenu)} className="flex items-center space-x-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
@@ -136,7 +138,7 @@ export default function Header() {
               </svg>
               <Typography text={'Back'} type={'body2'} color={'text-black'}/>
             </button>
-            <div className='pt-[40%] px-4'>
+            <div className='pt-[40%] px-4 mb-12'>
               {list.map((item, index) => (
                 <Anchor href={item.link} key={index} className="block py-4" onClick={() => setMobileMenu(!mobileMenu)}>
                   <Typography text={item.name} type={'heading4NotBold'} color={'text-naturalBlack'}/>
@@ -144,6 +146,21 @@ export default function Header() {
               ))}
             </div>
 
+            {!isLoggedIn ? (
+              <Button typeButton={'standard'} onClick={() => router.push('/auth/login')}>
+                {'Login'}
+              </Button>
+            ) : (
+              <Button typeButton={'standard'} onClick={() => router.push('/profile')}>
+                {`${user?.firstName || ''} ${user?.lastName || ''}`}
+              </Button>
+            )}
+
+            {!isLoggedIn && <div>
+              <Button typeButton={'standard'} onClick={() => router.push('/auth/register')} className='block mt-3'>
+                {'New here? Sign up!'}
+              </Button>
+            </div>}
 
             <div
               className="flex items-center justify-center space-x-3 absolute bottom-20 left-[50%] transform translate-x-[-50%]">

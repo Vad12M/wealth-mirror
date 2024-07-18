@@ -1,33 +1,30 @@
-import Typography from "@/ui/typography/Typography";
-import AuthLayoutDecorRightIcon from "@/ui/icons/AuthLayoutDecorRightIcon";
-import AuthLayoutDecorLeftIcon from "@/ui/icons/AuthLayoutDecorLeftIcon";
+import JoinWaitlistFooter from "@/components/home/JoinWaitlistFooter";
 
-export default function AuthLayout({ children }: {
+export default function AuthLayout({ children, type }: {
   children: React.ReactNode
+  type?: 'login' | 'register'
 }) {
   return (
-    <div className="flex justify-center">
+    <div className="flex w-full z-10">
       <div className="w-1/2">
         {children}
       </div>
-      <div className="w-1/2 bg-primary flex flex-col items-center justify-center h-screen relative">
-        <div className="absolute top-[45%] right-10">
-          <AuthLayoutDecorRightIcon/>
-        </div>
-        <div className="absolute top-72 left-10">
-          <AuthLayoutDecorLeftIcon/>
-        </div>
-        <div className="bg-white rounded-[36px] mb-4 text-black px-2">
-          {'QUOTES'}
-        </div>
-        <Typography
-          text={'Love the simplicity of the service and the prompt customer support. We can’t imagine working without it.'}
-          className={'text-center px-12 mb-[110px]'}
-        />
-        <div className="w-[88px] h-[88px] rounded-full bg-black mb-6"/>
-        <Typography text={'John Doe'} type={'sub1'} className='mb-1'/>
-        <Typography text={'CEO & Founder at Flex.co'} type={'body'}/>
-
+      {type === 'login' ? <div
+          className="w-1/2 h-screen border-l border-primary flex flex-col items-center  relative overflow-hidden"
+          style={{
+            boxShadow: '1px 8px 70.5px 32px rgba(0, 179, 134, 0.40)',
+            background: 'rgba(242, 255, 185, 0.35)'
+          }}
+        >
+          <img src={'/login/groupIcons.svg'} className="z-10 w-full h-[85%]" alt={'group-icons'}/>
+          <img src={'/login/podium.svg'} className="absolute -bottom-20 right-8" alt={'podium'}/>
+          <img src={'/login/login.svg'} className="absolute bottom-0" alt={'bg'}/>
+        </div> :
+        <div className="w-1/2 h-screen flex flex-col items-center relative overflow-hidden bg-[#233725]">
+          <img src={'/register/group-canvas.svg'} className="absolute top-[30%]" alt={'bg'}/>
+        </div>}
+      <div className="absolute w-full z-50 bg-naturalBlack bottom-0">
+        <JoinWaitlistFooter/>
       </div>
     </div>
   )

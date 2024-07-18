@@ -92,6 +92,28 @@
   border: 1px solid #E0FFDF;
 }
 
+.standardWhiteBtn {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 157.4%; /* 25.184px */
+
+  display: inline-flex;
+  padding: 6px 28px;
+  align-items: center;
+  border-radius: 48px;
+  border: 1px solid #FFF;
+  color: white;
+}
+
+.standardWhiteBtn:hover {
+  background: #E0FFDF;
+  border: 1px solid #E0FFDF;
+  color: black;
+}
+
+
 
 .loader {
   @apply w-6 h-6 border-2 border-t-[transparent] border-b-[transparent] border-l-[white] border-r-[white] rounded-full animate-spin;

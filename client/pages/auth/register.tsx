@@ -8,6 +8,7 @@ import Typography from "@/ui/typography/Typography";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { Button } from "@/ui/button/Button";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
+import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 
 export default function Register() {
   const [register, { isLoading }] = useRegisterMutation();
@@ -41,78 +42,74 @@ export default function Register() {
 
   return (
     <AuthLayout>
-      <div className="w-full flex flex-col items-center justify-center mt-[20%]">
-        <Typography text={'Register'} className={'text-2xl font-bold mb-4'}/>
-        <Input
-          value={form.firstName}
-          placeholder={'First Name'}
-          onUpdate={(e) => {
-            setForm({ ...form, firstName: e.target.value })
-            validator.clear(['firstName'])
-          }}
-          className={'mb-2 w-[400px]'}
-          invalid={validator.isFieldInvalid('firstName')}
-        />
-        <Input
-          value={form.lastName}
-          placeholder={'Last Name'}
-          onUpdate={(e) => {
-            setForm({ ...form, lastName: e.target.value })
-            validator.clear(['lastName'])
-          }}
-          className={'mb-2 w-[400px]'}
-          invalid={validator.isFieldInvalid('lastName')}
-        />
-        <Input
-          value={form.email}
-          placeholder={'Email'}
-          onUpdate={(e) => {
-            setForm({ ...form, email: e.target.value })
-            validator.clear(['email'])
-          }}
-          className={'mb-2 w-[400px]'}
-          invalid={validator.isFieldInvalid('email')}
-        />
-        <Input
-          value={form.phone}
-          placeholder={'Phone'}
-          onUpdate={(e) => {
-            setForm({ ...form, phone: e.target.value })
-            validator.clear(['phone'])
-          }}
-          className={'mb-2 w-[400px]'}
-          invalid={validator.isFieldInvalid('phone')}
-        />
-        {/*<Input*/}
-        {/*  value={form.address}*/}
-        {/*  placeholder={'Address'}*/}
-        {/*  onUpdate={(e) => setForm({ ...form, address: e.target.value })}*/}
-        {/*  className={'mb-2 w-[400px]'}*/}
-        {/*/>*/}
-        <Input
-          value={form.password}
-          placeholder={'Password'}
-          onUpdate={(e) => {
-            setForm({ ...form, password: e.target.value })
-            validator.clear(['password'])
-          }}
-          className={'mb-2 w-[400px]'}
-          invalid={validator.isFieldInvalid('password')}
-          type={'password'}
-        />
-        {/*<Input*/}
-        {/*  value={form.confirmPassword}*/}
-        {/*  placeholder={'Confirm Password'}*/}
-        {/*  onUpdate={(e) => {*/}
-        {/*    setForm({ ...form, confirmPassword: e.target.value })*/}
-        {/*    validator.clear(['confirmPassword'])*/}
-        {/*  }}*/}
-        {/*  className={'mb-2 w-[400px]'}*/}
-        {/*  invalid={validator.isFieldInvalid('confirmPassword')}*/}
-        {/*  type={'password'}*/}
-        {/*/>*/}
-        {error && <Typography text={error} className={'mb-2'} color={'text-danger'} type={'body'}/>}
-
+      <div className="flex items-center justify-center flex-col h-screen">
+        <div className="absolute top-12 left-10">
+          <Anchor href={"/"} className="flex items-center space-x-3 mb-10">
+            <PrimaryLogo/>
+            <Typography text={'Wealth Mirror'} type={'navBar'} color={'text-white'}/>
+          </Anchor>
+        </div>
+        <div className="flex flex-col">
+          <Typography text={'Sign Up'} className={'mb-2'} type="heading2"/>
+          <Typography
+            text={'See your wealth like never before.'}
+            className={'mb-[60px]'}
+            type="body1"
+            color="text-grayBody2"
+          />
+          <Input
+            value={form.firstName}
+            placeholder={'First Name'}
+            onUpdate={(e) => {
+              setForm({ ...form, firstName: e.target.value })
+              validator.clear(['firstName'])
+            }}
+            className={'mb-2 w-[400px]'}
+            invalid={validator.isFieldInvalid('firstName')}
+          />
+          <Input
+            value={form.lastName}
+            placeholder={'Last Name'}
+            onUpdate={(e) => {
+              setForm({ ...form, lastName: e.target.value })
+              validator.clear(['lastName'])
+            }}
+            className={'mb-2 w-[400px]'}
+            invalid={validator.isFieldInvalid('lastName')}
+          />
+          <Input
+            value={form.phone}
+            placeholder={'Phone'}
+            onUpdate={(e) => {
+              setForm({ ...form, phone: e.target.value })
+              validator.clear(['phone'])
+            }}
+            className={'mb-2 w-[400px]'}
+            invalid={validator.isFieldInvalid('phone')}
+          />
+          <Input
+            value={form.email}
+            placeholder={'Email'}
+            onUpdate={(e) => {
+              setForm({ ...form, email: e.target.value })
+              validator.clear(['email'])
+            }}
+            className={'mb-2 w-[400px]'}
+            invalid={validator.isFieldInvalid('email')}
+          />
+          <Input
+            value={form.password}
+            placeholder={'Password'}
+            onUpdate={(e) => {
+              setForm({ ...form, password: e.target.value })
+              validator.clear(['password'])
+            }}
+            className={'mb-2 w-[400px]'}
+            invalid={validator.isFieldInvalid('password')}
+            type={'password'}
+          />
+          {error && <Typography text={error} className={'mb-2'} color={'text-danger'} type={'body'}/>}
+        </div>
         <Button
           typeButton={'primary'}
           onClick={handleRegister}
@@ -121,11 +118,8 @@ export default function Register() {
           disabled={isLoading}
           rounded={6}
         >
-          {'Register'}
+          {'Sign Up'}
         </Button>
-        <Anchor href={'/auth/login'}>
-          <Typography text={'Sign in'} className={'mt-6'} type="body" color={'text-primary'}/>
-        </Anchor>
       </div>
     </AuthLayout>
   )

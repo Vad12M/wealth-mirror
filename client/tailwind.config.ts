@@ -18,10 +18,10 @@ const config: Config = {
 
         opsColor: '#BCE8BB',
 
-
         white: '#FFF',
         black: '#112520',
         grayBody: '#838B7F',
+        grayBody2: '#BEBEBE',
 
 
         naturalBlack: '#000',
