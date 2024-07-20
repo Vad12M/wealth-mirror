@@ -12,6 +12,21 @@ import { createCar, deleteAllCars, deleteCar, getCars, updateCar } from "./contr
 import { createCarValidator } from "./validations/car.js";
 import { createCard, deleteAllCards, deleteCard, getCards, updateCard } from "./controllers/CardController.js";
 import { createCardValidator } from "./validations/card.js";
+import {
+  createRealEstate, deleteAllRealEstates,
+  deleteRealEstate,
+  getRealEstates,
+  updateRealEstate
+} from "./controllers/RealEstateController.js";
+import { createRealEstateValidator } from "./validations/realEstate.js";
+import {
+  createFortune,
+  deleteAllFortunes,
+  deleteFortune,
+  getFortunes,
+  updateFortune
+} from "./controllers/FortuneController.js";
+import { createFortuneValidator } from "./validations/fortune.js";
 
 dotenv.config();
 
@@ -59,9 +74,18 @@ app.delete('/cards/delete/:id', checkAuth, deleteCard);
 app.delete('/cards/delete/all', checkAuth, deleteAllCards);
 
 // real estate
-app.post('/real-estate/create', checkAuth, createCarValidator, createCar);
-app.put('/real-estate/update/:id', checkAuth, updateCar);
-app.get('/real-estate', checkAuth, getCars);
+app.post('/realEstates/create', checkAuth, createRealEstateValidator, createRealEstate());
+app.put('/realEstates/update/:id', checkAuth, updateRealEstate);
+app.get('/realEstates', checkAuth, getRealEstates);
+app.delete('/realEstates/delete/:id', checkAuth, deleteRealEstate);
+app.delete('/realEstates/delete/all', checkAuth, deleteAllRealEstates);
+
+// fortune
+app.post('/fortunes/create', checkAuth, createFortuneValidator, createFortune);
+app.put('/fortunes/update/:id', checkAuth, updateFortune);
+app.get('/fortunes', checkAuth, getFortunes);
+app.delete('/fortunes/delete/:id', checkAuth, deleteFortune);
+app.delete('/fortunes/delete/all', checkAuth, deleteAllFortunes);
 
 
 app.listen(process.env.PORT, () => {
