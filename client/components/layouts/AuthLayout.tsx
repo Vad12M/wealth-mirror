@@ -80,7 +80,7 @@ export default function AuthLayout({ children, type }: {
               ))}
               <div className="flex items-center space-x-1 absolute right-0 bottom-28 z-10">
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <StarIcon/>
+                  <StarIcon key={index}/>
                 ))}
               </div>
               <div className="flex items-center space-x-8 absolute right-0 bottom-5 z-10">
