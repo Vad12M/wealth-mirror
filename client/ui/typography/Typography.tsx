@@ -31,7 +31,9 @@ interface ITypography {
     | 'heading4NotBold'
     | 'oops'
     | 'oops_desc'
-    | 'button_monserrat';
+    | 'button_monserrat'
+    | 'registerTitle'
+    | 'registerDesc'
   text: string;
   className?: string;
   color?: string;
@@ -140,6 +142,10 @@ export default function Typography({
       return <p className={`${styles.oops_desc} ${className} ${color}`}>{highlightedText}</p>;
     case 'button_monserrat':
       return <p className={`${styles.button_monserrat} ${className} ${color}`}>{highlightedText}</p>;
+    case 'registerTitle':
+      return <p className={`${styles.registerTitle} ${className} ${color}`}>{highlightedText}</p>;
+    case 'registerDesc':
+      return <p className={`${styles.registerDesc} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

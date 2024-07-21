@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: any) {
             </div>
           </ErrorBoundary>
           {/*<ErrorBoundary><Footer/></ErrorBoundary>*/}
-          <div className="fixed-container mx-auto">
+          <div className="fixed-container mx-auto z-10">
             <JoinWaitlistFooter/>
           </div>
         </Provider>

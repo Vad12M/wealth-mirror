@@ -202,3 +202,18 @@
   font-style: normal;
   font-weight: 700;
 }
+
+
+.registerTitle {
+  @apply text-[24px] leading-[38px];
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.registerDesc {
+  @apply text-[16px] leading-[38px];
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+}

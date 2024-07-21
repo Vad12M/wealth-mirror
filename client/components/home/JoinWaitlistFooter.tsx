@@ -32,7 +32,7 @@ export default function JoinWaitlistFooter() {
   ];
 
   return (
-    <div className="m-container flex md:flex-row flex-col-reverse items-center justify-center space-x-10 py-14 md:py-10">
+    <div className="m-container bg-naturalBlack flex md:flex-row flex-col-reverse items-center justify-center space-x-10 py-14 md:py-10">
       <Typography
         color={'text-bodyGray'}
         text={`© WealthMirror ${currentYear} | Made with ❤️ for the 🌎`}

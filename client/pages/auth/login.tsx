@@ -3,7 +3,7 @@ import Typography from "@/ui/typography/Typography";
 import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
 import useLoginValidator from "@/service/validator/useLoginValidator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useLoginMutation } from "@/store/api/apiSlice";
 import { ILogin } from "@/interfaces/IAuth";
@@ -11,10 +11,17 @@ import { loginByToken } from "@/store/actions/global.actions";
 import { setUserToken } from "@/service/useAuthHandler";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
+import { useGetIsMobile } from "@/hooks/useGetIsMobile";
+import HeaderMobileMenu from "@/components/layouts/HeaderMobileMenu";
+import useGetUser from "@/hooks/useGetUser";
 
 export default function LoginPage() {
+  const isMobile = useGetIsMobile();
   const [login, { isLoading }] = useLoginMutation();
-  const router = useRouter()
+  const router = useRouter();
+  const { isLoggedIn } = useGetUser();
+  const [mobileMenu, setMobileMenu] = useState(false);
+
   const [form, setForm] = useState<ILogin>({
     email: '',
     password: '',
@@ -34,10 +41,16 @@ export default function LoginPage() {
     }
   }
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/canvas')
+    }
+  }, [isLoggedIn]);
+
   return (
     <AuthLayout type={'login'}>
-      <div className="flex items-center justify-center flex-col h-screen">
-        <div className="absolute top-12 left-10">
+      <div className="flex items-center justify-center flex-col md:h-screen h-auto">
+        <div className="absolute top-12 left-10 md:block hidden">
           <Anchor href={"/"} className="flex items-center space-x-3 mb-10">
             <PrimaryLogo/>
             <Typography text={'Wealth Mirror'} type={'navBar'} color={'text-white'}/>
@@ -46,8 +59,25 @@ export default function LoginPage() {
             <Typography text={'Back to homepage'} type={'link2'} color={'text-primary'} className="pl-4"/>
           </Anchor>
         </div>
+        <div className="items-center justify-between flex md:hidden w-full py-10 px-6 mb-[80px]">
+          <Anchor href={"/"} className="flex items-center space-x-3">
+            <PrimaryLogo/>
+            <Typography text={'Wealth Mirror'} type={'navBar'} color={'text-white'}/>
+          </Anchor>
+          <button className="flex flex-col items-end space-y-1 md:hidden" onClick={() => setMobileMenu(!mobileMenu)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="2" viewBox="0 0 20 2" fill="none">
+              <path d="M19 1H1" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="2" viewBox="0 0 12 2" fill="none">
+              <path d="M11 1H1" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="2" viewBox="0 0 20 2" fill="none">
+              <path d="M19 1H1" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
         <div className="flex flex-col">
-          <Typography text={'Log in'} className={'mb-2'} type="heading2"/>
+          <Typography text={'Log in'} className={'mb-2'} type={isMobile ? "heading3" : "heading2"}/>
           <Typography
             text={'See your wealth like never before.'}
             className={'mb-[60px]'}
@@ -62,7 +92,7 @@ export default function LoginPage() {
               setForm({ ...form, email: e.target.value })
               validator.clear(['email'])
             }}
-            className={'mb-6 w-[400px]'}
+            className={'mb-6 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('email')}
           />
           <Input
@@ -73,14 +103,14 @@ export default function LoginPage() {
               setForm({ ...form, password: e.target.value })
               validator.clear(['password'])
             }}
-            className={'mb-4 w-[400px]'}
+            className={'mb-4 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('password')}
             type={'password'}
           />
         </div>
         <Button
           typeButton={'primary'}
-          className={'w-[400px] mt-6 flex justify-center h-[46px]'}
+          className={'md:w-[400px] w-[340px] mt-6 flex justify-center h-[46px]'}
           onClick={handleLogin}
           rounded={6}
           loading={isLoading}
@@ -94,7 +124,10 @@ export default function LoginPage() {
             <Typography text={'Sign up'} className={'mt-6'} type="link2" color={'text-primary'}/>
           </Anchor>
         </div>
+
+        <img src={'/login/podium.svg'} className="-mt-28 -mb-20 block md:hidden" alt={'podium'}/>
       </div>
+      {mobileMenu && <HeaderMobileMenu mobileMenu={mobileMenu} setMobileMenu={setMobileMenu}/>}
     </AuthLayout>
   )
 }
