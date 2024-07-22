@@ -74,7 +74,7 @@ app.delete('/cards/delete/:id', checkAuth, deleteCard);
 app.delete('/cards/delete/all', checkAuth, deleteAllCards);
 
 // real estate
-app.post('/realEstates/create', checkAuth, createRealEstateValidator, createRealEstate());
+app.post('/realEstates/create', checkAuth, createRealEstateValidator, createRealEstate);
 app.put('/realEstates/update/:id', checkAuth, updateRealEstate);
 app.get('/realEstates', checkAuth, getRealEstates);
 app.delete('/realEstates/delete/:id', checkAuth, deleteRealEstate);

@@ -21,6 +21,8 @@ import CarForm from "@/components/paint/CarForm";
 import { ICar } from "@/interfaces/ICar";
 import { ICard } from "@/interfaces/ICard";
 import CardForm from "@/components/paint/CardForm";
+import { IRealEstate } from "@/interfaces/IRealEstate";
+import RealEstateForm from "@/components/paint/RealEstateForm";
 
 interface PaintProps {
 }
@@ -53,7 +55,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const [newItemType, setNewItemType] = useState<string>('');
   const [activeCar, setActiveCar] = useState<ICar>();
   const [activeCard, setActiveCard] = useState<ICard>();
-
+  const [activeRealEstate, setActiveRealEstate] = useState<IRealEstate>();
 
   const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
@@ -209,6 +211,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
 
         <Dialog isOpen={!!activeCard} onRequestClose={() => setActiveCard(undefined)} className={'p-12'}>
           <CardForm defaultForm={activeCard} onClose={() => setActiveCard(undefined)}/>
+        </Dialog>
+
+        <Dialog isOpen={!!activeRealEstate} onRequestClose={() => setActiveRealEstate(undefined)} className={'p-12'}>
+          <RealEstateForm defaultForm={activeRealEstate} onClose={() => setActiveRealEstate(undefined)}/>
         </Dialog>
       </Box>
     </Box>

@@ -20,7 +20,7 @@ const downloadURI = (uri: string | undefined, name: string) => {
 export default function usePaint() {
   const router = useRouter();
   const { isPaid } = useGetUser();
-  const { updateItem, clearAll, cars, cards } = useCanvas();
+  const { updateItem, clearAll, cars, cards, realEstates } = useCanvas();
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -125,6 +125,7 @@ export default function usePaint() {
     zoomLevel,
     SIZE,
     cars,
-    cards
+    cards,
+    realEstates
   }
 }

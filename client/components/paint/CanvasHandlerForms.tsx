@@ -1,7 +1,7 @@
 import React from "react";
 import CarForm from "@/components/paint/CarForm";
-import HouseForm from "@/components/paint/HouseForm";
 import CardForm from "@/components/paint/CardForm";
+import RealEstateForm from "@/components/paint/RealEstateForm";
 
 
 export default function CanvasHandlerForms({
@@ -21,7 +21,7 @@ export default function CanvasHandlerForms({
     case 'car':
       return <CarForm position={position} onClose={onClose}/>
     case 'realEstate':
-      return <HouseForm />
+      return <RealEstateForm position={position} onClose={onClose}/>
     case 'card':
       return <CardForm position={position} onClose={onClose}/>
   }
