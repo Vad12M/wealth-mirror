@@ -5,20 +5,28 @@ import {
   useGetRealEstatesQuery,
   useUpdateRealEstateMutation
 } from "@/store/api/realEstateSlice";
+import {
+  useDeleteAllFortunesMutation,
+  useGetFortunesQuery,
+  useUpdateFortuneMutation
+} from "@/store/api/fortuneSlice";
 
 
 export default function useCanvas() {
   const [deleteAllCars] = useDeleteAllCarsMutation();
   const [deleteAllCards] = useDeleteAllCardsMutation();
   const [deleteAllRealEstates] = useDeleteAllRealEstatesMutation();
+  const [deleteAllFortunes] = useDeleteAllFortunesMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
   const [updateRealEstate] = useUpdateRealEstateMutation();
+  const [updateFortune] = useUpdateFortuneMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
   const { data: realEstates } = useGetRealEstatesQuery();
+  const { data: fortunes } = useGetFortunesQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -35,6 +43,9 @@ export default function useCanvas() {
       case 'realEstate':
         updateRealEstate(defaultParams);
         break;
+      case 'fortune':
+        updateFortune(defaultParams);
+        break;
       default:
         break;
     }
@@ -44,6 +55,7 @@ export default function useCanvas() {
     deleteAllCars();
     deleteAllCards();
     deleteAllRealEstates();
+    deleteAllFortunes();
   }
 
   return {
@@ -51,6 +63,7 @@ export default function useCanvas() {
     updateItem,
     cars,
     cards,
-    realEstates
+    realEstates,
+    fortunes,
   }
 }

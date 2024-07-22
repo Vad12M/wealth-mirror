@@ -22,6 +22,7 @@ const FortuneSchema = new mongoose.Schema({
     x: { type: Number, required: true },
     y: { type: Number, required: true }
   },
+  image: { type: String, required: false },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 }, {
   timestamps: true

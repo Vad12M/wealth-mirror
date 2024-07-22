@@ -23,6 +23,8 @@ import { ICard } from "@/interfaces/ICard";
 import CardForm from "@/components/paint/CardForm";
 import { IRealEstate } from "@/interfaces/IRealEstate";
 import RealEstateForm from "@/components/paint/RealEstateForm";
+import { IFortune } from "@/interfaces/IFortune";
+import FortuneForm from "@/components/paint/FortuneForm";
 
 interface PaintProps {
 }
@@ -46,7 +48,9 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     zoomLevel,
     SIZE,
     cars,
-    cards
+    cards,
+    realEstates,
+    fortunes
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
@@ -56,6 +60,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const [activeCar, setActiveCar] = useState<ICar>();
   const [activeCard, setActiveCard] = useState<ICard>();
   const [activeRealEstate, setActiveRealEstate] = useState<IRealEstate>();
+  const [activeFortune, setActiveFortune] = useState<IFortune>();
 
   const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
@@ -186,7 +191,53 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
               }
             )}
 
+            {(realEstates || []).map((realEstate) => {
+                const image = new Image(SIZE / 2, SIZE / 2);
+                // @ts-ignore
+                image.src = realEstate.image;
+                image.id = uuidv4();
+                return (
+                  <KonvaImage
+                    key={realEstate._id}
+                    image={image}
+                    x={realEstate.position.x}
+                    y={realEstate.position.y}
+                    height={GRID_SIZE}
+                    width={GRID_SIZE}
+                    draggable={isDraggable}
+                    onMouseUp={() => onStageMouseUp('realEstate', realEstate._id)}
+                    onClick={(e) => {
+                      e.cancelBubble = true;
+                      setActiveRealEstate(realEstate);
+                    }}
+                  />
+                )
+              }
+            )}
 
+            {(fortunes || []).map((fortune) => {
+                const image = new Image(SIZE / 2, SIZE / 2);
+                // @ts-ignore
+                image.src = fortune.image;
+                image.id = uuidv4();
+                return (
+                  <KonvaImage
+                    key={fortune._id}
+                    image={image}
+                    x={fortune.position.x}
+                    y={fortune.position.y}
+                    height={GRID_SIZE}
+                    width={GRID_SIZE}
+                    draggable={isDraggable}
+                    onMouseUp={() => onStageMouseUp('realEstate', fortune._id)}
+                    onClick={(e) => {
+                      e.cancelBubble = true;
+                      setActiveFortune(fortune);
+                    }}
+                  />
+                )
+              }
+            )}
             <Transformer ref={transformerRef}/>
           </Layer>
         </Stage>
@@ -215,6 +266,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
 
         <Dialog isOpen={!!activeRealEstate} onRequestClose={() => setActiveRealEstate(undefined)} className={'p-12'}>
           <RealEstateForm defaultForm={activeRealEstate} onClose={() => setActiveRealEstate(undefined)}/>
+        </Dialog>
+
+        <Dialog isOpen={!!activeFortune} onRequestClose={() => setActiveFortune(undefined)} className={'p-12'}>
+          <FortuneForm defaultForm={activeFortune} onClose={() => setActiveFortune(undefined)}/>
         </Dialog>
       </Box>
     </Box>
