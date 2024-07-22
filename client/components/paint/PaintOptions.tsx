@@ -35,7 +35,9 @@ export default function PaintOptions({
         <li onClick={() => optionClick('card')}>
           {'Card'}
         </li>
-        <li>Fortune</li>
+        <li onClick={() => optionClick('fortune')}>
+          {'Fortune'}
+        </li>
         <button onClick={onClose} className={'bg-red-500 text-white p-2 rounded-md'}>
           {'Close'}
         </button>
