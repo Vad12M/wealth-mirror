@@ -59,16 +59,6 @@ export default function usePaint() {
     clearAll();
   }, []);
 
-  const onStageMouseUp = useCallback((type: string, id: string) => {
-    isPaintRef.current = false;
-    const stage = stageRef?.current;
-    const pos = stage?.getPointerPosition();
-    const x = pos?.x || 0;
-    const y = pos?.y || 0;
-    currentShapeRef.current = id;
-    updateItem(id, type, x - 38, y - 38);
-  }, []);
-
   const currentShapeRef = useRef<string>();
 
   const onStageMouseDown = useCallback(
@@ -114,7 +104,6 @@ export default function usePaint() {
 
 
   return {
-    onStageMouseUp,
     onStageMouseDown,
     onStageMouseMove,
     stageRef,
@@ -130,6 +119,7 @@ export default function usePaint() {
     cars,
     cards,
     realEstates,
-    fortunes
+    fortunes,
+    updateItem
   }
 }

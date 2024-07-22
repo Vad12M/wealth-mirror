@@ -29,13 +29,12 @@ import FortuneForm from "@/components/paint/FortuneForm";
 interface PaintProps {
 }
 
-const GRID_SIZE = 67;
+export const GRID_SIZE = 67;
 const LIMIT = 10000;
 
 export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const {
     isDraggable,
-    onStageMouseUp,
     onStageMouseDown,
     onStageMouseMove,
     onBgClick,
@@ -50,7 +49,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     cars,
     cards,
     realEstates,
-    fortunes
+    fortunes,
+    updateItem
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
@@ -145,27 +145,30 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           </Layer>
           <Layer>
             {(cars || []).map((car) => {
-                const image = new Image(SIZE / 2, SIZE / 2);
-                image.src = car.image;
-                image.id = uuidv4();
-                return (
-                  <KonvaImage
-                    key={car._id}
-                    image={image}
-                    x={car.position.x}
-                    y={car.position.y}
-                    height={GRID_SIZE}
-                    width={GRID_SIZE}
-                    draggable={isDraggable}
-                    onMouseUp={() => onStageMouseUp('car', car._id)}
-                    onClick={(e) => {
-                      e.cancelBubble = true;
-                      setActiveCar(car);
-                    }}
-                  />
-                )
-              }
-            )}
+              const image = new Image(SIZE / 2, SIZE / 2);
+              image.src = car.image;
+              image.id = uuidv4();
+              return (
+                <KonvaImage
+                  key={car._id}
+                  image={image}
+                  x={car.position.x}
+                  y={car.position.y}
+                  height={GRID_SIZE}
+                  width={GRID_SIZE}
+                  draggable={isDraggable}
+                  onDragEnd={(e) => {
+                    const node = e.target;
+                    const { x, y } = node.absolutePosition();
+                    updateItem(car._id, 'car', x, y)
+                  }}
+                  onClick={(e) => {
+                    e.cancelBubble = true;
+                    setActiveCar(car);
+                  }}
+                />
+              )
+            })}
 
             {(cards || []).map((card) => {
                 const image = new Image(SIZE / 2, SIZE / 2);
@@ -181,7 +184,11 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     height={GRID_SIZE}
                     width={GRID_SIZE}
                     draggable={isDraggable}
-                    onMouseUp={() => onStageMouseUp('card', card._id)}
+                    onDragEnd={(e) => {
+                      const node = e.target;
+                      const { x, y } = node.absolutePosition();
+                      updateItem(card._id, 'card', x, y)
+                    }}
                     onClick={(e) => {
                       e.cancelBubble = true;
                       setActiveCard(card);
@@ -205,7 +212,11 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     height={GRID_SIZE}
                     width={GRID_SIZE}
                     draggable={isDraggable}
-                    onMouseUp={() => onStageMouseUp('realEstate', realEstate._id)}
+                    onDragEnd={(e) => {
+                      const node = e.target;
+                      const { x, y } = node.absolutePosition();
+                      updateItem(realEstate._id, 'realEstate', x, y)
+                    }}
                     onClick={(e) => {
                       e.cancelBubble = true;
                       setActiveRealEstate(realEstate);
@@ -229,7 +240,11 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     height={GRID_SIZE}
                     width={GRID_SIZE}
                     draggable={isDraggable}
-                    onMouseUp={() => onStageMouseUp('realEstate', fortune._id)}
+                    onDragEnd={(e) => {
+                      const node = e.target;
+                      const { x, y } = node.absolutePosition();
+                      updateItem(fortune._id, 'fortune', x, y)
+                    }}
                     onClick={(e) => {
                       e.cancelBubble = true;
                       setActiveFortune(fortune);
