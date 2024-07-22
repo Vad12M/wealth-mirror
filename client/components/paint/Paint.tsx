@@ -7,9 +7,7 @@ import {
   Line as KonvaLine,
   Transformer,
 } from "react-konva";
-import {
-  Box,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import usePaint from "../../hooks/usePaint";
 import Dialog from "@/ui/dialog/dialog.component";
 import Typography from "@/ui/typography/Typography";
@@ -61,6 +59,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const [activeCard, setActiveCard] = useState<ICard>();
   const [activeRealEstate, setActiveRealEstate] = useState<IRealEstate>();
   const [activeFortune, setActiveFortune] = useState<IFortune>();
+  const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
 
   const handleCanvasClick = useCallback((e: any) => {
     const stage = e.target.getStage();
@@ -93,27 +92,30 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     return lines;
   };
 
+  const handleDragEnd = (e: any) => {
+    if (!isDraggable) {
+      setStagePosition(e.target.position());
+    }
+  };
+
   return (
     <Box m={4} width={`${SIZE}px`}>
       <div className="bg-black p-4 flex justify-between">
         <Typography text={'Canvas'} type={'heading3'}/>
         <PaintMenu
-          // setDrawAction={setDrawAction}
-          // drawAction={drawAction}
-          // color={color}
-          // setColor={setColor}
           onClear={onClear}
-          // fileRef={fileRef}
-          // onImportImageSelect={onImportImageSelect}
-          // onImportImageClick={onImportImageClick}
           onExportClick={onExportClick}
         />
       </div>
       <Box mb={2} className={'space-x-2 flex py-2'}>
         <button onClick={handleZoomIn} className='text-black px-4 py-2 border rounded-full'>{'+'}</button>
+        <Typography
+          text={`Zoom: ${Math.round(zoomLevel * 100)}%`}
+          type={'body2'}
+          color={"text-black"}
+        />
         <button onClick={handleZoomOut} className='text-black px-4 py-2 border rounded-full'>{'-'}</button>
       </Box>
-
       <Box
         width={`${SIZE}px`}
         height={`${SIZE}px`}
@@ -126,7 +128,9 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           width={SIZE}
           ref={stageRef}
           scale={{ x: zoomLevel, y: zoomLevel }}
-          // onMouseUp={onStageMouseUp}
+          position={stagePosition}
+          draggable
+          onDragEnd={handleDragEnd}
           onMouseDown={onStageMouseDown}
           onMouseMove={onStageMouseMove}
           onClick={handleCanvasClick}
@@ -160,7 +164,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   onDragEnd={(e) => {
                     const node = e.target;
                     const { x, y } = node.absolutePosition();
-                    updateItem(car._id, 'car', x, y)
+                    updateItem(car._id, 'car', x / zoomLevel, y / zoomLevel)
                   }}
                   onClick={(e) => {
                     e.cancelBubble = true;
@@ -187,7 +191,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     onDragEnd={(e) => {
                       const node = e.target;
                       const { x, y } = node.absolutePosition();
-                      updateItem(card._id, 'card', x, y)
+                      updateItem(card._id, 'card', x / zoomLevel, y / zoomLevel)
                     }}
                     onClick={(e) => {
                       e.cancelBubble = true;
@@ -215,7 +219,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     onDragEnd={(e) => {
                       const node = e.target;
                       const { x, y } = node.absolutePosition();
-                      updateItem(realEstate._id, 'realEstate', x, y)
+                      updateItem(realEstate._id, 'realEstate', x / zoomLevel, y / zoomLevel)
                     }}
                     onClick={(e) => {
                       e.cancelBubble = true;
@@ -243,7 +247,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                     onDragEnd={(e) => {
                       const node = e.target;
                       const { x, y } = node.absolutePosition();
-                      updateItem(fortune._id, 'fortune', x, y)
+                      updateItem(fortune._id, 'fortune', x / zoomLevel, y / zoomLevel)
                     }}
                     onClick={(e) => {
                       e.cancelBubble = true;

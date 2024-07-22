@@ -95,11 +95,17 @@ export default function usePaint() {
   );
 
   const handleZoomIn = () => {
-    setZoomLevel((prevZoom) => prevZoom * 1.1);
+    setZoomLevel((prevZoom) => {
+      const newZoom = prevZoom + 0.1;
+      return newZoom <= 3 ? newZoom : 3;
+    });
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prevZoom) => prevZoom / 1.1);
+    setZoomLevel((prevZoom) => {
+      const newZoom = prevZoom - 0.1;
+      return newZoom >= -3 ? newZoom : -3;
+    });
   };
 
 

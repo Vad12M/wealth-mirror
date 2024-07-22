@@ -127,7 +127,7 @@ export default function CarForm({
         <Button onClick={handleClick} typeButton="white">
           {defaultForm ? 'Update' : 'Create'}
         </Button>
-        {defaultForm && <Button onClick={() => deleteCar(defaultForm._id)} typeButton="white-shadow">
+        {defaultForm && <Button onClick={() => deleteCar(defaultForm._id).finally(() => onClose?.())} typeButton="white-shadow">
           {'Delete'}
         </Button>}
       </div>

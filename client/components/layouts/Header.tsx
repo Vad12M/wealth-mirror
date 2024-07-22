@@ -13,7 +13,6 @@ import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import { Button } from "@/ui/button/Button";
 import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 import HeaderMobileMenu from "@/components/layouts/HeaderMobileMenu";
-import useCanvas from "@/hooks/useCanvas";
 
 export default function Header() {
   const isMobile = useGetIsMobile();
@@ -22,7 +21,7 @@ export default function Header() {
   const isJoinWaitlist = asPath.includes('joinwaitlist');
   const { user, isLoggedIn, isAdmin } = useGetUser();
   const [mobileMenu, setMobileMenu] = useState(false);
-  const isWhite = ['/about', '/pricing', '/contact', '/services'].includes(asPath);
+  const isWhite = ['/about', '/pricing', '/contact', '/services', '/canvas'].includes(asPath);
 
   const list = [
     { name: 'About Us', link: '/about' },

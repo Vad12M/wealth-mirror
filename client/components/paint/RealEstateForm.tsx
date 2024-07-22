@@ -77,9 +77,13 @@ export default function RealEstateForm({
         <Button onClick={handleClick} typeButton="white">
           {defaultForm ? 'Update' : 'Create'}
         </Button>
-        {defaultForm && <Button onClick={() => deleteRealEstate(defaultForm._id)} typeButton="white-shadow">
-          {'Delete'}
-        </Button>}
+        {defaultForm &&
+          <Button
+            onClick={() => deleteRealEstate(defaultForm._id).finally(() => onClose?.())}
+            typeButton="white-shadow"
+          >
+            {'Delete'}
+          </Button>}
       </div>
     </div>
   )

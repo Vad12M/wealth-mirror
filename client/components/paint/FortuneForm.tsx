@@ -140,9 +140,10 @@ export default function FortuneForm({
         <Button onClick={handleClick} typeButton="white">
           {defaultForm ? 'Update' : 'Create'}
         </Button>
-        {defaultForm && <Button onClick={() => deleteFortune(defaultForm._id)} typeButton="white-shadow">
-          {'Delete'}
-        </Button>}
+        {defaultForm &&
+          <Button onClick={() => deleteFortune(defaultForm._id).finally(() => onClose?.())} typeButton="white-shadow">
+            {'Delete'}
+          </Button>}
       </div>
     </div>
   )
