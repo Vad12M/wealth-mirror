@@ -58,9 +58,6 @@ export default function useCanvas() {
     deleteAllFortunes();
   }
 
-  const getAmount = (type: string) => {
-
-  }
 
   return {
     clearAll,

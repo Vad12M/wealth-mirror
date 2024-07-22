@@ -27,7 +27,8 @@ export default function usePaint() {
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [SIZE, setSIZE] = useState<number>(1)
+  const [sizeWidth, setSizeWidth] = useState<number>(1);
+  const [sizeHeight, setSizeHeight] = useState<number>(1);
   const isPaintRef = useRef(false);
   const stageRef = useRef<any>(null);
   const transformerRef = useRef<any>(null);
@@ -43,12 +44,16 @@ export default function usePaint() {
   }, []);
 
   useEffect(() => {
-    if (SIZE === 1) {
-      setSIZE((window.innerWidth - 200) as any)
+    if (sizeWidth === 1) {
+      setSizeWidth((window.innerWidth - 200) as any)
+    }
+
+    if (sizeHeight === 1) {
+      setSizeHeight((window.innerHeight - 200) as any)
     }
 
     const handleResize = () => {
-      setSIZE((window.innerWidth - 200) as any)
+      setSizeWidth((window.innerWidth - 200) as any)
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
@@ -121,7 +126,8 @@ export default function usePaint() {
     handleZoomIn,
     handleZoomOut,
     zoomLevel,
-    SIZE,
+    sizeWidth,
+    sizeHeight,
     cars,
     cards,
     realEstates,
