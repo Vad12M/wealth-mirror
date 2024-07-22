@@ -8,14 +8,21 @@ import { getMe, login, register, updateMe, updatePassword } from "./controllers/
 import { checkAuth } from "./utils/checkAuth.js";
 import { addWaitUser, contact, getContacts, getWaitUsers } from "./controllers/NewClientController.js";
 import { addWaitUserValidator, contactValidator } from "./validations/newClient.js";
-import { createCar, deleteAllCars, deleteCar, getCars, updateCar } from "./controllers/CarController.js";
+import { createCar, deleteAllCars, deleteCar, getCars, getCarsAmount, updateCar } from "./controllers/CarController.js";
 import { createCarValidator } from "./validations/car.js";
-import { createCard, deleteAllCards, deleteCard, getCards, updateCard } from "./controllers/CardController.js";
+import {
+  createCard,
+  deleteAllCards,
+  deleteCard,
+  getCards,
+  getCardsAmount,
+  updateCard
+} from "./controllers/CardController.js";
 import { createCardValidator } from "./validations/card.js";
 import {
   createRealEstate, deleteAllRealEstates,
   deleteRealEstate,
-  getRealEstates,
+  getRealEstates, getRealEstatesAmount,
   updateRealEstate
 } from "./controllers/RealEstateController.js";
 import { createRealEstateValidator } from "./validations/realEstate.js";
@@ -65,6 +72,7 @@ app.put('/cars/update/:id', checkAuth, updateCar);
 app.get('/cars', checkAuth, getCars);
 app.delete('/cars/delete/:id', checkAuth, deleteCar);
 app.delete('/cars/delete/all', checkAuth, deleteAllCars);
+app.get('/cars/amount', checkAuth, getCarsAmount);
 
 // card
 app.post('/cards/create', checkAuth, createCardValidator, createCard);
@@ -72,6 +80,7 @@ app.put('/cards/update/:id', checkAuth, updateCard);
 app.get('/cards', checkAuth, getCards);
 app.delete('/cards/delete/:id', checkAuth, deleteCard);
 app.delete('/cards/delete/all', checkAuth, deleteAllCards);
+app.get('/cards/amount', checkAuth, getCardsAmount);
 
 // real estate
 app.post('/realEstates/create', checkAuth, createRealEstateValidator, createRealEstate);
@@ -79,6 +88,7 @@ app.put('/realEstates/update/:id', checkAuth, updateRealEstate);
 app.get('/realEstates', checkAuth, getRealEstates);
 app.delete('/realEstates/delete/:id', checkAuth, deleteRealEstate);
 app.delete('/realEstates/delete/all', checkAuth, deleteAllRealEstates);
+app.get('/realEstates/amount', checkAuth, getRealEstatesAmount);
 
 // fortune
 app.post('/fortunes/create', checkAuth, createFortuneValidator, createFortune);

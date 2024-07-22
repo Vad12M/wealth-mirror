@@ -107,10 +107,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           onExportClick={onExportClick}
         />
       </div>
-      <Box mb={2} className={'space-x-2 flex py-2'}>
+      <Box mb={2} className={'space-x-2 flex py-2 items-center'}>
         <button onClick={handleZoomIn} className='text-black px-4 py-2 border rounded-full'>{'+'}</button>
         <Typography
-          text={`Zoom: ${Math.round(zoomLevel * 100)}%`}
+          text={`${Math.round(zoomLevel * 100)}%`}
           type={'body2'}
           color={"text-black"}
         />

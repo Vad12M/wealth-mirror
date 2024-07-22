@@ -87,3 +87,17 @@ export const deleteAllCars = async (req, res) => {
     });
   }
 }
+
+export const getCarsAmount = async (req, res) => {
+  try {
+    const cars = await CarModel.find({ user: req.userId });
+    const amount = cars.reduce((total, car) => total + !!car.salePrice ? 0 : car.price, 0);
+    res.status(200).json({
+      amount,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+}
