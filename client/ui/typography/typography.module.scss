@@ -217,3 +217,18 @@
   font-style: normal;
   font-weight: 600;
 }
+
+.subHeading4 {
+  @apply text-[18px] leading-[24px];
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.smallModerate {
+  @apply text-[12px] leading-[16px];
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+}
+

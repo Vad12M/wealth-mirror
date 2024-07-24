@@ -34,6 +34,8 @@ interface ITypography {
     | 'button_monserrat'
     | 'registerTitle'
     | 'registerDesc'
+    | "subHeading4"
+    | 'smallModerate';
   text: string;
   className?: string;
   color?: string;
@@ -146,6 +148,10 @@ export default function Typography({
       return <p className={`${styles.registerTitle} ${className} ${color}`}>{highlightedText}</p>;
     case 'registerDesc':
       return <p className={`${styles.registerDesc} ${className} ${color}`}>{highlightedText}</p>;
+    case 'subHeading4':
+      return <p className={`${styles.subHeading4} ${className} ${color}`}>{highlightedText}</p>;
+    case 'smallModerate':
+      return <p className={`${styles.smallModerate} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

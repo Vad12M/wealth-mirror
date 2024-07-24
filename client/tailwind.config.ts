@@ -40,6 +40,10 @@ const config: Config = {
         mediumColor: "#969696",
         neutralGray: '#404040',
         danger: '#B31B1B',
+
+
+        // canvas
+        secondaryGray: '#344054',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

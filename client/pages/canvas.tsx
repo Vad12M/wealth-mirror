@@ -22,7 +22,7 @@ export default function CanvasPage() {
         {/*  {'Save'}*/}
         {/*</Button>*/}
 
-        <div className="bg-white p-4">
+        <div className="bg-white">
           <Paint/>
         </div>
       </div>

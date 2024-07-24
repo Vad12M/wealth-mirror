@@ -63,10 +63,12 @@ export default function FortuneForm({
   useEffect(() => {
     switch (form.type) {
       case 'stock':
-      case 'bond':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-1.svg' }));
+        setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-4.svg' }));
         break;
       case 'mutualFund':
+        setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-1.svg' }));
+        break;
+      case 'bond':
         setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-2.svg' }));
         break;
       case 'epf':

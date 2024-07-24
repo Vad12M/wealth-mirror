@@ -62,12 +62,12 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
   const [activeFortune, setActiveFortune] = useState<IFortune>();
   const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
 
-  const handleCanvasClick = useCallback((e: any) => {
+  const handleCanvasClick = (e: any) => {
     const stage = e.target.getStage();
     const pos = stage.getPointerPosition();
     setOptionsPosition({ x: pos.x, y: pos.y });
-    setShowOptions(true);
-  }, []);
+    setShowOptions(!showOptions);
+  }
 
   const drawGrid = () => {
     const lines = [];
@@ -81,7 +81,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           stroke="#334E46"
           strokeWidth={1}
           dash={dashPattern}
-          rotation={45}
+          rotation={50}
         />
       );
       lines.push(
@@ -91,7 +91,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           stroke="#334E46"
           strokeWidth={1}
           dash={dashPattern}
-          rotation={30}
+          rotation={38}
         />
       );
     }
@@ -159,14 +159,30 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
             const image = new Image(GRID_SIZE, GRID_SIZE);
             image.src = car.image;
             image.id = uuidv4();
+            let height = 100;
+            let width = 100;
+
+            switch (car.type) {
+              case 'car':
+              case 'oldCar':
+                height = 105;
+                width = 100;
+                break;
+              case 'bike':
+              case 'scooter':
+                height = 70;
+                width = 70;
+                break;
+            }
+
             return (
               <KonvaImage
                 key={car._id}
                 image={image}
                 x={car.position.x}
                 y={car.position.y}
-                height={64}
-                width={64}
+                height={height}
+                width={width}
                 draggable={isDraggable}
                 onDragEnd={(e) => {
                   const node = e.target;
@@ -192,8 +208,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   image={image}
                   x={card.position.x}
                   y={card.position.y}
-                  height={GRID_SIZE}
-                  width={GRID_SIZE}
+                  height={90}
+                  width={70}
                   draggable={isDraggable}
                   onDragEnd={(e) => {
                     const node = e.target;
@@ -220,8 +236,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   image={image}
                   x={realEstate.position.x}
                   y={realEstate.position.y}
-                  height={104}
-                  width={68}
+                  height={550}
+                  width={450}
                   draggable={isDraggable}
                   onDragEnd={(e) => {
                     const node = e.target;
@@ -239,6 +255,31 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
 
           {(fortunes || []).map((fortune) => {
               const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
+              let height = 100;
+              let width = 100;
+
+              switch (fortune.type) {
+                case 'stock':
+                  height = 180;
+                  width = 90;
+                  break;
+                case 'mutualFund':
+                  height = 190;
+                  width = 100;
+                  break;
+                case 'bond':
+                  height = 190;
+                  width = 105;
+                  break;
+                case 'epf':
+                case 'ppf':
+                case 'nps':
+                  height = 180;
+                  width = 120;
+                  break;
+              }
+
+
               // @ts-ignore
               image.src = fortune.image;
               image.id = uuidv4();
@@ -248,8 +289,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   image={image}
                   x={fortune.position.x}
                   y={fortune.position.y}
-                  height={GRID_SIZE * 3 }
-                  width={GRID_SIZE * 2}
+                  height={height}
+                  width={width}
                   draggable={isDraggable}
                   onDragEnd={(e) => {
                     const node = e.target;
