@@ -35,7 +35,10 @@ interface ITypography {
     | 'registerTitle'
     | 'registerDesc'
     | "subHeading4"
-    | 'smallModerate';
+    | 'smallModerate'
+    | 'canvasTitle'
+    | 'labelsMedium'
+    | 'labelsSmall';
   text: string;
   className?: string;
   color?: string;
@@ -152,6 +155,12 @@ export default function Typography({
       return <p className={`${styles.subHeading4} ${className} ${color}`}>{highlightedText}</p>;
     case 'smallModerate':
       return <p className={`${styles.smallModerate} ${className} ${color}`}>{highlightedText}</p>;
+    case 'canvasTitle':
+      return <p className={`${styles.canvasTitle} ${className} ${color}`}>{highlightedText}</p>;
+    case 'labelsMedium':
+      return <p className={`${styles.labelsMedium} ${className} ${color}`}>{highlightedText}</p>;
+    case 'labelsSmall':
+      return <p className={`${styles.labelsSmall} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

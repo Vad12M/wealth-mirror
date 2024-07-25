@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import {
   Stage,
   Layer,
@@ -9,20 +9,12 @@ import {
 } from "react-konva";
 import { Box } from "@chakra-ui/react";
 import usePaint from "../../hooks/usePaint";
-import Dialog from "@/ui/dialog/dialog.component";
 import Typography from "@/ui/typography/Typography";
 import PaintOptions from "@/components/paint/PaintOptions";
-import CanvasHandlerForms from "@/components/paint/CanvasHandlerForms";
 import { v4 as uuidv4 } from "uuid";
-import CarForm from "@/components/paint/CarForm";
-import { ICar } from "@/interfaces/ICar";
-import { ICard } from "@/interfaces/ICard";
-import CardForm from "@/components/paint/CardForm";
-import { IRealEstate } from "@/interfaces/IRealEstate";
-import RealEstateForm from "@/components/paint/RealEstateForm";
-import { IFortune } from "@/interfaces/IFortune";
-import FortuneForm from "@/components/paint/FortuneForm";
 import { Button } from "@/ui/button/Button";
+import PaintHeader from "@/components/paint/PaintHeader";
+import PaintLeftMenu from "@/components/paint/PaintLeftMenu";
 
 interface PaintProps {
 }
@@ -54,12 +46,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
 
   const [showOptions, setShowOptions] = useState(false);
   const [optionsPosition, setOptionsPosition] = useState({ x: 0, y: 0 });
-  const [settingPopup, setSettingPopup] = useState(false);
-  const [newItemType, setNewItemType] = useState<string>('');
-  const [activeCar, setActiveCar] = useState<ICar>();
-  const [activeCard, setActiveCard] = useState<ICard>();
-  const [activeRealEstate, setActiveRealEstate] = useState<IRealEstate>();
-  const [activeFortune, setActiveFortune] = useState<IFortune>();
+  const [activeItem, setActiveItem] = useState<any>();
+  const [activeType, setActiveType] = useState<string>('');
   const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
 
   const handleCanvasClick = (e: any) => {
@@ -67,6 +55,17 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     const pos = stage.getPointerPosition();
     setOptionsPosition({ x: pos.x, y: pos.y });
     setShowOptions(!showOptions);
+    if (showOptions) {
+      setActiveItem(null);
+      setActiveType('');
+    }
+  }
+
+  const handleActiveItem = (item: any, type: string) => {
+    setOptionsPosition({ x: item.position.x, y: item.position.y });
+    setShowOptions(!showOptions);
+    setActiveType(type);
+    setActiveItem(item);
   }
 
   const drawGrid = () => {
@@ -115,13 +114,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
       overflow="hidden"
       position="relative"
     >
-      {/*<div className="bg-black p-4 flex justify-between">*/}
-      {/*  <Typography text={'Canvas'} type={'heading3'}/>*/}
-      {/*  <PaintMenu*/}
-      {/*    onClear={onClear}*/}
-      {/*    onExportClick={onExportClick}*/}
-      {/*  />*/}
-      {/*</div>*/}
+
       <Stage
         height={sizeHeight}
         width={sizeWidth}
@@ -191,7 +184,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  setActiveCar(car);
+                  handleActiveItem(car, 'car');
                 }}
               />
             )
@@ -218,7 +211,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   }}
                   onClick={(e) => {
                     e.cancelBubble = true;
-                    setActiveCard(card);
+                    handleActiveItem(card, 'card');
                   }}
                 />
               )
@@ -246,7 +239,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   }}
                   onClick={(e) => {
                     e.cancelBubble = true;
-                    setActiveRealEstate(realEstate);
+                    handleActiveItem(realEstate, 'realEstate');
                   }}
                 />
               )
@@ -279,7 +272,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   break;
               }
 
-
               // @ts-ignore
               image.src = fortune.image;
               image.id = uuidv4();
@@ -299,7 +291,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   }}
                   onClick={(e) => {
                     e.cancelBubble = true;
-                    setActiveFortune(fortune);
+                    handleActiveItem(fortune, 'fortune');
                   }}
                 />
               )
@@ -311,55 +303,27 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
       {showOptions && (
         <PaintOptions
           optionsPosition={optionsPosition}
-          addNewItem={(type) => {
-            setNewItemType(type);
-            setSettingPopup(true);
+          defaultForm={activeItem}
+          type={activeType}
+          onClose={() => {
+            setShowOptions(false);
+            setActiveItem(null);
+            setActiveType('');
           }}
-          onClose={() => setShowOptions(false)}
         />
       )}
-      <Dialog isOpen={settingPopup} onRequestClose={() => setSettingPopup(false)} className={'p-12'}>
-        <CanvasHandlerForms type={newItemType} position={optionsPosition} onClose={() => setSettingPopup(false)}/>
-      </Dialog>
-
-      <Dialog isOpen={!!activeCar} onRequestClose={() => setActiveCar(undefined)} className={'p-12'}>
-        <CarForm defaultForm={activeCar} onClose={() => setActiveCar(undefined)}/>
-      </Dialog>
-
-      <Dialog isOpen={!!activeCard} onRequestClose={() => setActiveCard(undefined)} className={'p-12'}>
-        <CardForm defaultForm={activeCard} onClose={() => setActiveCard(undefined)}/>
-      </Dialog>
-
-      <Dialog isOpen={!!activeRealEstate} onRequestClose={() => setActiveRealEstate(undefined)} className={'p-12'}>
-        <RealEstateForm defaultForm={activeRealEstate} onClose={() => setActiveRealEstate(undefined)}/>
-      </Dialog>
-
-      <Dialog isOpen={!!activeFortune} onRequestClose={() => setActiveFortune(undefined)} className={'p-12'}>
-        <FortuneForm defaultForm={activeFortune} onClose={() => setActiveFortune(undefined)}/>
-      </Dialog>
       <Box
-        className='space-x-2 flex items-center absolute right-2 bottom-4 rounded-[45px] p-2'
-        style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.50)',
-        }}
+        className='space-x-2 flex items-center absolute right-8 bottom-6 rounded-[45px] p-2'
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.50)' }}
       >
-        <Button
-          onClick={handleZoomOut}
-          typeButton="none"
-        >
+        <Button onClick={handleZoomOut} typeButton="none">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4.16675 10H15.8334" stroke="white" strokeWidth="1.66667" strokeLinecap="round"
                   strokeLinejoin="round"/>
           </svg>
         </Button>
-        <Typography
-          text={`${Math.round(zoomLevel * 100)}%`}
-          type={'body2'}
-        />
-        <Button
-          onClick={handleZoomIn}
-          typeButton="none"
-        >
+        <Typography text={`${Math.round(zoomLevel * 100)}%`} type={'body2'}/>
+        <Button onClick={handleZoomIn} typeButton="none">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path
               d="M9.99984 15.8332V9.99984M9.99984 9.99984V4.1665M9.99984 9.99984L4.1665 9.99984M9.99984 9.99984L15.8332 9.99984"
@@ -367,8 +331,19 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           </svg>
         </Button>
       </Box>
+      <Box className={`absolute top-0 left-0`} width={`${sizeWidth - 100}px`}>
+        <PaintHeader exportClick={onExportClick}/>
+      </Box>
+      <Box className={`absolute left-10 transform -translate-x-1/2 -translate-y-1/2`} style={{ top: '50%' }}>
+        <PaintLeftMenu exportClick={onExportClick} addClick={() => {
+          setOptionsPosition({
+            x: 80,
+            y: (sizeHeight / 2) - 100
+          })
+          setShowOptions(!showOptions)
+        }}/>
+      </Box>
     </Box>
-
   );
 });
 

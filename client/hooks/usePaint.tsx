@@ -45,15 +45,16 @@ export default function usePaint() {
 
   useEffect(() => {
     if (sizeWidth === 1) {
-      setSizeWidth((window.innerWidth - 200) as any)
+      setSizeWidth((window.innerWidth) as any)
     }
 
     if (sizeHeight === 1) {
-      setSizeHeight((window.innerHeight - 200) as any)
+      setSizeHeight((window.innerHeight) as any)
     }
 
     const handleResize = () => {
-      setSizeWidth((window.innerWidth - 200) as any)
+      setSizeWidth((window.innerWidth) as any)
+      setSizeHeight((window.innerHeight) as any)
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)

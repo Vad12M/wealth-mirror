@@ -18,6 +18,15 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #ffff !important;
 }
 
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+  border: none;
+}
+
 .animation-slide-fade {
   animation: slideFade 0.7s;
 }

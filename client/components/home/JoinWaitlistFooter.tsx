@@ -5,8 +5,10 @@ import InstagramIcon from "@/ui/icons/socials/InstagramIcon";
 import LinkedinIcon from "@/ui/icons/socials/LinkedinIcon";
 import YoutubeIcon from "@/ui/icons/socials/YoutubeIcon";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
+import { useRouter } from "next/router";
 
 export default function JoinWaitlistFooter() {
+  const router = useRouter();
   const currentYear = new Date().getFullYear();
   const footerData = [
     {
@@ -31,8 +33,14 @@ export default function JoinWaitlistFooter() {
     }
   ];
 
+
+  if (router.asPath.includes('canvas')) {
+    return null;
+  }
+
   return (
-    <div className="m-container bg-naturalBlack flex md:flex-row flex-col-reverse items-center justify-center space-x-10 py-14 md:py-10">
+    <div
+      className="m-container bg-naturalBlack flex md:flex-row flex-col-reverse items-center justify-center space-x-10 py-14 md:py-10">
       <Typography
         color={'text-bodyGray'}
         text={`© WealthMirror ${currentYear} | Made with ❤️ for the 🌎`}

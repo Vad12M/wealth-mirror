@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Input from "@/ui/input/input";
-import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import {
   useCreateRealEstateMutation,
@@ -8,6 +6,7 @@ import {
   useUpdateRealEstateMutation
 } from "@/store/api/realEstateSlice";
 import { IRealEstate, IRealEstateForm } from "@/interfaces/IRealEstate";
+import InputForm from "@/ui/input/inputForm";
 
 export default function RealEstateForm({
   position,
@@ -21,9 +20,9 @@ export default function RealEstateForm({
   defaultForm?: IRealEstate;
   onClose?: () => void;
 }) {
-  const [deleteRealEstate] = useDeleteRealEstateMutation();
-  const [createRealEstate] = useCreateRealEstateMutation();
-  const [updateRealEstate] = useUpdateRealEstateMutation();
+  const [deleteRealEstate, { isLoading: isLoadingDelete }] = useDeleteRealEstateMutation();
+  const [createRealEstate, { isLoading: isLoadingCreate }] = useCreateRealEstateMutation();
+  const [updateRealEstate, { isLoading: isLoadingUpdate }] = useUpdateRealEstateMutation();
   const [form, setForm] = useState<IRealEstateForm>({
     location: '',
     price: 0,
@@ -59,32 +58,37 @@ export default function RealEstateForm({
   }
 
   return (
-    <div className="w-[700px] flex items-center flex-col">
-      <Typography text={'Real Estate Form'} type={'heading2'} className="mb-4"/>
-      <div className="flex flex-col space-y-6 w-full">
-        <Input
+    <div className="w-[252px] flex items-center flex-col">
+      <div className="flex flex-col space-y-4 w-full">
+        <InputForm
           label="Location"
           value={form.location}
+          placeholder="Enter location"
           onUpdate={(e) => setForm({ ...form, location: e.target.value })}
         />
-        <Input
+        <InputForm
           label="Price"
-          value={form.price}
+          value={!!form.price ? form.price.toString() : ''}
+          placeholder="Enter price"
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
-      <div className="flex items-center space-x-4 mt-8">
-        <Button onClick={handleClick} typeButton="white">
-          {defaultForm ? 'Update' : 'Create'}
-        </Button>
-        {defaultForm &&
-          <Button
-            onClick={() => deleteRealEstate(defaultForm._id).finally(() => onClose?.())}
-            typeButton="white-shadow"
-          >
-            {'Delete'}
-          </Button>}
-      </div>
+      <Button
+        typeButton="none"
+        className="bg-primary text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
+        onClick={handleClick}
+        loading={isLoadingCreate || isLoadingUpdate}
+      >
+        {defaultForm ? 'Update Asset' : 'Add Asset'}
+      </Button>
+      {defaultForm && <Button
+        typeButton="none"
+        className="bg-danger text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
+        onClick={() => deleteRealEstate(defaultForm._id).finally(() => onClose?.())}
+        loading={isLoadingDelete}
+      >
+        {'Remove Asset'}
+      </Button>}
     </div>
   )
 }

@@ -1,6 +1,17 @@
-export default function PrimaryLogo() {
+export default function PrimaryLogo({
+  height = 35,
+  width = 26
+}: {
+  height?: number;
+  width?: number;
+}) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="35" viewBox="0 0 26 35" fill="none">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="0 0 26 35" fill="none"
+    >
       <path
         d="M25.2783 9.72353L19.445 9.72353L19.445 2.91797C19.445 1.30714 20.7508 0.00130423 22.3617 0.00130437C23.9725 0.00130451 25.2783 1.30714 25.2783 2.91797L25.2783 9.72353Z"
         fill="#FBFBFB"/>

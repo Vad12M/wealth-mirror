@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ICar, ICarForm } from "@/interfaces/ICar";
-import Input from "@/ui/input/input";
-import Typography from "@/ui/typography/Typography";
 import { useCreateCarMutation, useDeleteCarMutation, useUpdateCarMutation } from "@/store/api/carSlice";
 import { Button } from "@/ui/button/Button";
+import InputForm from "@/ui/input/inputForm";
 
 export default function CarForm({
   position,
@@ -17,9 +16,9 @@ export default function CarForm({
   defaultForm?: ICar;
   onClose?: () => void;
 }) {
-  const [deleteCar] = useDeleteCarMutation();
-  const [createCar] = useCreateCarMutation();
-  const [updateCar] = useUpdateCarMutation();
+  const [deleteCar, { isLoading: isLoadingDelete }] = useDeleteCarMutation();
+  const [createCar, { isLoading: isLoadingCreate }] = useCreateCarMutation();
+  const [updateCar, { isLoading: isLoadingUpdate }] = useUpdateCarMutation();
   const year = new Date().getFullYear();
   const [form, setForm] = useState<ICarForm>({
     name: '',
@@ -43,6 +42,7 @@ export default function CarForm({
 
   useEffect(() => {
     if (defaultForm) {
+      console.log(defaultForm)
       setForm({
         name: defaultForm.name,
         price: defaultForm.price,
@@ -86,51 +86,62 @@ export default function CarForm({
   }
 
   return (
-    <div className="w-[700px] flex items-center flex-col">
-      <Typography text={'Car Form'} type={'heading2'} className="mb-4"/>
-      <div className="mb-6">
-        {types.map((type) => (
-          <button
-            key={type.value}
-            onClick={() => setForm({ ...form, type: type.value })}
-            className={`px-4 py-2 border ${form.type === type.value ? 'bg-primary text-white' : ''}`}
-          >
-            {type.name}
-          </button>
-        ))}
-      </div>
-      <div className="flex flex-col space-y-6 w-full">
-        <Input
+    <div className="w-[252px] flex items-center flex-col">
+      {/*<div className="mb-6">*/}
+      {/*  {types.map((type) => (*/}
+      {/*    <button*/}
+      {/*      key={type.value}*/}
+      {/*      onClick={() => setForm({ ...form, type: type.value })}*/}
+      {/*      className={`px-4 py-2 border ${form.type === type.value ? 'bg-primary text-white' : ''}`}*/}
+      {/*    >*/}
+      {/*      {type.name}*/}
+      {/*    </button>*/}
+      {/*  ))}*/}
+      {/*</div>*/}
+      <div className="flex flex-col space-y-2 w-full">
+        <InputForm
           label="Name"
           value={form.name}
+          placeholder={'Enter name'}
           onUpdate={(e) => setForm({ ...form, name: e.target.value })}
         />
         {/*<Dropdown options={[]} onSelectItem={() => {*/}
         {/*}}/>*/}
-        <Input
+        <InputForm
           label="Brand"
           value={form.brand}
+          placeholder={'Enter brand'}
           onUpdate={(e) => setForm({ ...form, brand: e.target.value })}
         />
-        <Input
+        <InputForm
           label="Year"
           value={form.year}
+          placeholder={'Enter year'}
           onUpdate={(e) => setForm({ ...form, year: Number(e.target.value) })}
         />
-        <Input
+        <InputForm
           label="Price"
-          value={form.price}
+          value={!!form.price ? form.price.toString() : ''}
+          placeholder={'Enter price'}
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
-      <div className="flex items-center space-x-4 mt-8">
-        <Button onClick={handleClick} typeButton="white">
-          {defaultForm ? 'Update' : 'Create'}
-        </Button>
-        {defaultForm && <Button onClick={() => deleteCar(defaultForm._id).finally(() => onClose?.())} typeButton="white-shadow">
-          {'Delete'}
-        </Button>}
-      </div>
+      <Button
+        typeButton="none"
+        className="bg-primary text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
+        onClick={handleClick}
+        loading={isLoadingCreate || isLoadingUpdate}
+      >
+        {defaultForm ? 'Update Asset' : 'Add Asset'}
+      </Button>
+      {defaultForm && <Button
+        typeButton="none"
+        className="bg-danger text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
+        onClick={() => deleteCar(defaultForm._id).finally(() => onClose?.())}
+        loading={isLoadingDelete}
+      >
+        {'Remove Asset'}
+      </Button>}
     </div>
   )
 }

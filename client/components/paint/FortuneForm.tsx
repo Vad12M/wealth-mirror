@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Input from "@/ui/input/input";
-import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
 import { useCreateFortuneMutation, useDeleteFortuneMutation, useUpdateFortuneMutation } from "@/store/api/fortuneSlice";
+import InputForm from "@/ui/input/inputForm";
 
 export default function FortuneForm({
   position,
@@ -17,9 +16,9 @@ export default function FortuneForm({
   defaultForm?: IFortune;
   onClose?: () => void;
 }) {
-  const [deleteFortune] = useDeleteFortuneMutation();
-  const [createFortune] = useCreateFortuneMutation();
-  const [updateFortune] = useUpdateFortuneMutation();
+  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
+  const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
+  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
   const [form, setForm] = useState<IFortuneForm>({
     name: '',
     code: '',
@@ -93,60 +92,72 @@ export default function FortuneForm({
   }
 
   return (
-    <div className="w-[700px] flex items-center flex-col">
-      <Typography text={'Car Form'} type={'heading2'} className="mb-4"/>
-      <div className="mb-6">
-        {types.map((type) => (
-          <button
-            key={type.value}
-            onClick={() => setForm({ ...form, type: type.value })}
-            className={`px-4 py-2 border ${form.type === type.value ? 'bg-primary text-white' : ''}`}
-          >
-            {type.name}
-          </button>
-        ))}
-      </div>
-      <div className="flex flex-col space-y-6 w-full">
-        <Input
+    <div className="w-[252px] flex items-center flex-col max-h-[350px] overflow-hidden overflow-y-auto">
+      {/*<div className="mb-6">*/}
+      {/*  {types.map((type) => (*/}
+      {/*    <button*/}
+      {/*      key={type.value}*/}
+      {/*      onClick={() => setForm({ ...form, type: type.value })}*/}
+      {/*      className={`px-4 py-2 border ${form.type === type.value ? 'bg-primary text-white' : ''}`}*/}
+      {/*    >*/}
+      {/*      {type.name}*/}
+      {/*    </button>*/}
+      {/*  ))}*/}
+      {/*</div>*/}
+      <div className="flex flex-col space-y-4 w-full">
+        <InputForm
           label="Name"
           value={form.name}
+          placeholder={'Enter name'}
           onUpdate={(e) => setForm({ ...form, name: e.target.value })}
         />
-        <Input
+        <InputForm
           label="Code"
           value={form.code}
+          placeholder={'Enter code'}
           onUpdate={(e) => setForm({ ...form, code: e.target.value })}
         />
-        <Input
+        <InputForm
           label="Quantity"
-          value={form.quantity}
+          value={!!form.quantity ? form.quantity.toString() : ''}
+          placeholder={'Enter quantity'}
           onUpdate={(e) => setForm({ ...form, quantity: Number(e.target.value) })}
         />
-        <Input
+        <InputForm
           label="Amount"
-          value={form.amount}
+          value={!!form.amount ? form.amount.toString() : ''}
+          placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
-        <Input
+        <InputForm
           label="Amount of Dividends"
-          value={form.amountOfDividends}
+          value={!!form.amountOfDividends ? form.amountOfDividends.toString() : ''}
+          placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amountOfDividends: Number(e.target.value) })}
         />
-        <Input
+        <InputForm
           label="Period of Receiving Dividends"
           value={form.periodOfReceivingDividends}
+          placeholder={'Enter period'}
           onUpdate={(e) => setForm({ ...form, periodOfReceivingDividends: e.target.value })}
         />
       </div>
-      <div className="flex items-center space-x-4 mt-8">
-        <Button onClick={handleClick} typeButton="white">
-          {defaultForm ? 'Update' : 'Create'}
-        </Button>
-        {defaultForm &&
-          <Button onClick={() => deleteFortune(defaultForm._id).finally(() => onClose?.())} typeButton="white-shadow">
-            {'Delete'}
-          </Button>}
-      </div>
+      <Button
+        typeButton="none"
+        className="bg-primary text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
+        onClick={handleClick}
+        loading={isLoadingCreate || isLoadingUpdate}
+      >
+        {defaultForm ? 'Update Asset' : 'Add Asset'}
+      </Button>
+      {defaultForm && <Button
+        typeButton="none"
+        className="bg-danger text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
+        onClick={() => deleteFortune(defaultForm._id).finally(() => onClose?.())}
+        loading={isLoadingDelete}
+      >
+        {'Remove Asset'}
+      </Button>}
     </div>
   )
 }

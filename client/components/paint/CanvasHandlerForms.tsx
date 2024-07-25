@@ -4,28 +4,29 @@ import CardForm from "@/components/paint/CardForm";
 import RealEstateForm from "@/components/paint/RealEstateForm";
 import FortuneForm from "@/components/paint/FortuneForm";
 
-
 export default function CanvasHandlerForms({
   type,
   position,
-  onClose
+  defaultForm,
+  onClose,
 }: {
   type: string;
   position: {
     x: number;
     y: number;
   };
-  onClose: () => void;
+  defaultForm?: any;
+  onClose?: () => void;
 }) {
 
   switch (type) {
     case 'car':
-      return <CarForm position={position} onClose={onClose}/>
+      return <CarForm position={position} defaultForm={defaultForm} onClose={onClose}/>
     case 'realEstate':
-      return <RealEstateForm position={position} onClose={onClose}/>
+      return <RealEstateForm position={position} defaultForm={defaultForm} onClose={onClose}/>
     case 'card':
-      return <CardForm position={position} onClose={onClose}/>
+      return <CardForm position={position} defaultForm={defaultForm} onClose={onClose}/>
     case 'fortune':
-      return <FortuneForm position={position} onClose={onClose}/>
+      return <FortuneForm position={position} defaultForm={defaultForm} onClose={onClose}/>
   }
 }

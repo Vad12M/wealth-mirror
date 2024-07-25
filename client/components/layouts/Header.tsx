@@ -21,7 +21,7 @@ export default function Header() {
   const isJoinWaitlist = asPath.includes('joinwaitlist');
   const { user, isLoggedIn, isAdmin } = useGetUser();
   const [mobileMenu, setMobileMenu] = useState(false);
-  const isWhite = ['/about', '/pricing', '/contact', '/services', '/canvas'].includes(asPath);
+  const isWhite = ['/about', '/pricing', '/contact', '/services', '/canvas', '/payment', '/admin', '/profile'].includes(asPath);
 
   const list = [
     { name: 'About Us', link: '/about' },
@@ -31,7 +31,7 @@ export default function Header() {
     { name: 'Contact', link: '/contact' }
   ];
 
-  if (asPath.includes('auth') || asPath.includes('joinwaitlist')) {
+  if (asPath.includes('auth') || asPath.includes('joinwaitlist') || asPath.includes('canvas')){
     return null;
   }
 
