@@ -86,7 +86,7 @@ export default function CarForm({
   }
 
   return (
-    <div className="w-[252px] flex items-center flex-col">
+    <div className="w-[252px] flex items-center flex-col pr-2">
       {/*<div className="mb-6">*/}
       {/*  {types.map((type) => (*/}
       {/*    <button*/}

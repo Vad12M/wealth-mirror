@@ -92,7 +92,7 @@ export default function FortuneForm({
   }
 
   return (
-    <div className="w-[252px] flex items-center flex-col max-h-[350px] overflow-hidden overflow-y-auto">
+    <div className="w-[252px] flex items-center flex-col pr-2">
       {/*<div className="mb-6">*/}
       {/*  {types.map((type) => (*/}
       {/*    <button*/}

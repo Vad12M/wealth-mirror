@@ -5,7 +5,7 @@ import {
   Rect as KonvaRect,
   Image as KonvaImage,
   Line as KonvaLine,
-  Transformer,
+  Transformer, Rect,
 } from "react-konva";
 import { Box } from "@chakra-ui/react";
 import usePaint from "../../hooks/usePaint";
@@ -27,7 +27,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     isDraggable,
     onStageMouseDown,
     onStageMouseMove,
-    onBgClick,
     onExportClick,
     transformerRef,
     onClear,
@@ -105,7 +104,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     }
   };
 
-
   return (
     <Box
       width={`${sizeWidth}px`}
@@ -128,25 +126,25 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
         onClick={handleCanvasClick}
       >
         <Layer>
-          <KonvaRect
+          <Rect
             x={-LIMIT}
             y={-LIMIT}
             width={2 * LIMIT}
             height={2 * LIMIT}
-            fill="#233B34"
-            cla
+            // fill="#233B34"
+            fillLinearGradientStartPoint={{ x: 0, y: 0 }}
+            fillLinearGradientEndPoint={{ x: 0, y: sizeHeight }}
+            fillLinearGradientColorStops={[0, '#065145', 1, '#7FC440']}
           />
-          {drawGrid()}
-          <KonvaRect
+          <Rect
             x={0}
             y={0}
-            height={sizeHeight}
             width={sizeWidth}
-            fill="transparent"
-            id="bg"
-            onClick={onBgClick}
+            height={sizeHeight}
           />
+          {drawGrid()}
         </Layer>
+
         <Layer>
           {(cars || []).map((car) => {
             const image = new Image(GRID_SIZE, GRID_SIZE);

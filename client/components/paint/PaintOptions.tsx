@@ -8,6 +8,7 @@ import OptionHouse from "@/ui/icons/canvas/OptionHouse";
 import CanvasHandlerForms from "@/components/paint/CanvasHandlerForms";
 import { Button } from "@/ui/button/Button";
 import OptionsLeftArrow from "@/ui/icons/canvas/OptionsLeftArrow";
+import styles from "./PaintOptions.module.scss";
 
 export default function PaintOptions({
   optionsPosition,
@@ -36,7 +37,7 @@ export default function PaintOptions({
       position="absolute"
       left={optionsPosition.x}
       top={optionsPosition.y}
-      className={'py-4 px-6 shadow-lg rounded-[20px]'}
+      className={`py-4 pl-4 ${['car', 'fortune'].includes(newItemType) ? '' : 'pr-4'} shadow-lg rounded-[20px]`}
       style={{
         background: '#23292E',
         backdropFilter: 'blur(12px)'
@@ -83,12 +84,14 @@ export default function PaintOptions({
             <Typography text={'Fill details'} type={'subHeading4'}/>
             <div/>
           </div>
-          <CanvasHandlerForms
-            type={newItemType}
-            position={optionsPosition}
-            defaultForm={defaultForm}
-            onClose={onClose}
-          />
+          <div className={`max-h-[350px] overflow-hidden overflow-y-auto ${styles.scrollable} mr-1`}>
+            <CanvasHandlerForms
+              type={newItemType}
+              position={optionsPosition}
+              defaultForm={defaultForm}
+              onClose={onClose}
+            />
+          </div>
         </div>}
     </Box>
   )

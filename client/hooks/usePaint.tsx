@@ -29,6 +29,7 @@ export default function usePaint() {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [sizeWidth, setSizeWidth] = useState<number>(1);
   const [sizeHeight, setSizeHeight] = useState<number>(1);
+
   const isPaintRef = useRef(false);
   const stageRef = useRef<any>(null);
   const transformerRef = useRef<any>(null);
@@ -110,7 +111,7 @@ export default function usePaint() {
   const handleZoomOut = () => {
     setZoomLevel((prevZoom) => {
       const newZoom = prevZoom - 0.1;
-      return newZoom >= -3 ? newZoom : -3;
+      return newZoom >= 0.1 ? newZoom : 0.1;
     });
   };
 
