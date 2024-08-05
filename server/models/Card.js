@@ -4,6 +4,7 @@ const CardSchema = new mongoose.Schema({
   name: { type: String, required: true },
   isPrimary: { type: Boolean, required: false },
   amount: { type: Number, required: true },
+  type: { type: String, required: true },
   profitAndLoss: {
     date: {
       type: Date,

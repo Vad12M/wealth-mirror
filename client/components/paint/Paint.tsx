@@ -112,7 +112,6 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
       overflow="hidden"
       position="relative"
     >
-
       <Stage
         height={sizeHeight}
         width={sizeWidth}

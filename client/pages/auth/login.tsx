@@ -110,7 +110,7 @@ export default function LoginPage() {
         </div>
         <Button
           typeButton={'primary'}
-          className={'md:w-[400px] w-[340px] mt-6 flex justify-center h-[46px]'}
+          className={'md:w-[400px] w-[340px] mt-6 flex justify-center h-[46px] z-50'}
           onClick={handleLogin}
           rounded={6}
           loading={isLoading}
@@ -118,7 +118,7 @@ export default function LoginPage() {
         >
           {'Log in'}
         </Button>
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1 z-50">
           <Typography text={'Don’t have an account?'} className={'mt-6'} type="link2" color={"text-grayBody2"}/>
           <Anchor href={'/auth/register'}>
             <Typography text={'Sign up'} className={'mt-6'} type="link2" color={'text-primary'}/>

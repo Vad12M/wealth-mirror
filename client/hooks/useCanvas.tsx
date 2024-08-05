@@ -52,12 +52,12 @@ export default function useCanvas() {
   }
 
   const clearAll = () => {
+    console.log('clear all')
     deleteAllCars();
     deleteAllCards();
     deleteAllRealEstates();
     deleteAllFortunes();
   }
-
 
   return {
     clearAll,

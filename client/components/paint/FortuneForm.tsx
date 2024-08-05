@@ -27,7 +27,7 @@ export default function FortuneForm({
     amountOfDividends: 0,
     periodOfReceivingDividends: '',
     type: 'stock',
-    image: '/canvas/Car.svg',
+    image: '/canvas/OldCar.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0

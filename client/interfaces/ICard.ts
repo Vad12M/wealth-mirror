@@ -2,6 +2,7 @@ export interface ICard {
   _id: string;
   name: string;
   amount: number;
+  type: string;
   image?: string;
   isPrimary: boolean;
   expensesPerMonth: number;
@@ -13,6 +14,7 @@ export interface ICard {
 
 export interface ICardForm {
   name: string;
+  type: string;
   amount: number;
   image?: string;
   isPrimary?: boolean;

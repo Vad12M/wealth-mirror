@@ -48,30 +48,30 @@ export default function PaintOptions({
           <div className="flex flex-col space-y-3">
             <div className="flex items-center space-x-3">
               <button className="bg-white rounded-[12px] p-2" onClick={() => setNewItemType('fortune')}>
-                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center">
+                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center mb-1">
                   <OptionStock/>
                 </div>
-                <Typography text={'Stock'} className={'text-secondaryGray'} type={'subHeading4'}/>
+                <Typography text={'Stock'} color={'text-secondaryGray'} type={'subHeading4'}/>
               </button>
               <button className="bg-white rounded-[12px] p-2" onClick={() => setNewItemType('car')}>
-                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center">
+                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center mb-1">
                   <OptionCar/>
                 </div>
-                <Typography text={'Vehicle'} className={'text-secondaryGray'} type={'subHeading4'}/>
+                <Typography text={'Vehicle'} color={'text-secondaryGray'} type={'subHeading4'}/>
               </button>
             </div>
             <div className="flex items-center space-x-3">
               <button className="bg-white rounded-[12px] p-2" onClick={() => setNewItemType('card')}>
-                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center">
+                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center mb-1">
                   <OptionCard/>
                 </div>
-                <Typography text={'Card'} className={'text-secondaryGray'} type={'subHeading4'}/>
+                <Typography text={'Card'} color={'text-secondaryGray'} type={'subHeading4'}/>
               </button>
               <button className="bg-white rounded-[12px] p-2" onClick={() => setNewItemType('realEstate')}>
-                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center">
+                <div className="bg-[##D9FBEE] h-[75px] w-[85px] flex items-center justify-center mb-1">
                   <OptionHouse/>
                 </div>
-                <Typography text={'House'} className={'text-secondaryGray'} type={'subHeading4'}/>
+                <Typography text={'House'} color={'text-secondaryGray'} type={'subHeading4'}/>
               </button>
             </div>
           </div>
