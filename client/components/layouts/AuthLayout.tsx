@@ -115,7 +115,7 @@ export default function AuthLayout({ children, type }: {
             ))}
           </Swiper>
         </div>}
-      <div className="flex items-center space-x-8 absolute right-36 bottom-[135px] z-50">
+      {type === 'register' && <div className="flex items-center space-x-8 absolute right-36 bottom-[135px] z-50 group">
         <Button
           typeButton="none"
           className="p-5 rounded-full border border-white hover:bg-white transition duration-600 group"
@@ -130,7 +130,7 @@ export default function AuthLayout({ children, type }: {
         >
           <ArrowRight/>
         </Button>
-      </div>
+      </div>}
       <div className="absolute w-full z-50 bg-naturalBlack bottom-0 md:block hidden">
         <JoinWaitlistFooter/>
       </div>

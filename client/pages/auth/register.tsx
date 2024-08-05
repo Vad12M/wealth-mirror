@@ -45,7 +45,7 @@ export default function Register() {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout type={'register'}>
       <div className="flex items-center justify-center flex-col md:h-screen h-auto">
         <div className="absolute top-12 left-10 md:block hidden">
           <Anchor href={"/"} className="flex items-center space-x-3 mb-10">
