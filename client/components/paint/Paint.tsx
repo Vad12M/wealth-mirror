@@ -58,14 +58,14 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
       setActiveItem(null);
       setActiveType('');
     }
-  }
+  };
 
   const handleActiveItem = (item: any, type: string) => {
     setOptionsPosition({ x: item.position.x, y: item.position.y });
     setShowOptions(!showOptions);
     setActiveType(type);
     setActiveItem(item);
-  }
+  };
 
   const drawGrid = () => {
     const lines = [];
@@ -97,10 +97,23 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     return lines;
   };
 
+  const updateGradientPosition = (position: { x: number, y: number }) => {
+    const stage = stageRef.current;
+    if (stage) {
+      const width = sizeWidth / zoomLevel;
+      const height = sizeHeight / zoomLevel;
 
-  const handleDragEnd = (e: any) => {
-    if (!isDraggable) {
-      setStagePosition(e.target.position());
+      return (
+        <KonvaRect
+          x={-position.x / zoomLevel}
+          y={-position.y / zoomLevel}
+          width={width}
+          height={height}
+          fillLinearGradientStartPoint={{ x: 0, y: 0 }}
+          fillLinearGradientEndPoint={{ x: 0, y: height }}
+          fillLinearGradientColorStops={[0, '#065145', 1, '#7FC440']}
+        />
+      );
     }
   };
 
@@ -119,22 +132,22 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
         scale={{ x: zoomLevel, y: zoomLevel }}
         position={stagePosition}
         draggable
-        onDragEnd={handleDragEnd}
+        onDragMove={(e) => {
+          setStagePosition(e.target.position());
+        }}
         onMouseDown={onStageMouseDown}
         onMouseMove={onStageMouseMove}
         onClick={handleCanvasClick}
       >
         <Layer>
-          <Rect
+          <KonvaRect
             x={-LIMIT}
             y={-LIMIT}
             width={2 * LIMIT}
             height={2 * LIMIT}
-            // fill="#233B34"
-            fillLinearGradientStartPoint={{ x: 0, y: 0 }}
-            fillLinearGradientEndPoint={{ x: 0, y: sizeHeight }}
-            fillLinearGradientColorStops={[0, '#065145', 1, '#7FC440']}
+            fill="#065145" // Колір фону, змініть на бажаний
           />
+          {updateGradientPosition(stagePosition)}
           <Rect
             x={0}
             y={0}
@@ -174,7 +187,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 height={height}
                 width={width}
                 draggable={isDraggable}
+                onDragMove={(e) => e.cancelBubble = true}
+                onDragStart={(e) => e.cancelBubble = true}
                 onDragEnd={(e) => {
+                  e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
                   updateItem(car._id, 'car', x / zoomLevel, y / zoomLevel)
@@ -201,7 +217,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   height={90}
                   width={70}
                   draggable={isDraggable}
+                  onDragMove={(e) => e.cancelBubble = true}
+                  onDragStart={(e) => e.cancelBubble = true}
                   onDragEnd={(e) => {
+                    e.cancelBubble = true;
                     const node = e.target;
                     const { x, y } = node.absolutePosition();
                     updateItem(card._id, 'card', x / zoomLevel, y / zoomLevel)
@@ -229,7 +248,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   height={550}
                   width={450}
                   draggable={isDraggable}
+                  onDragMove={(e) => e.cancelBubble = true}
+                  onDragStart={(e) => e.cancelBubble = true}
                   onDragEnd={(e) => {
+                    e.cancelBubble = true;
                     const node = e.target;
                     const { x, y } = node.absolutePosition();
                     updateItem(realEstate._id, 'realEstate', x / zoomLevel, y / zoomLevel)
@@ -281,7 +303,10 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   height={height}
                   width={width}
                   draggable={isDraggable}
+                  onDragMove={(e) => e.cancelBubble = true}
+                  onDragStart={(e) => e.cancelBubble = true}
                   onDragEnd={(e) => {
+                    e.cancelBubble = true;
                     const node = e.target;
                     const { x, y } = node.absolutePosition();
                     updateItem(fortune._id, 'fortune', x / zoomLevel, y / zoomLevel)
