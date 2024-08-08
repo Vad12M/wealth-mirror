@@ -254,8 +254,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                   width = 90;
                   break;
                 case 'mutualFund':
-                  height = 190;
-                  width = 100;
+                  height = 80;
+                  width = 80;
                   break;
                 case 'bond':
                   height = 190;
