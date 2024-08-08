@@ -38,7 +38,8 @@ interface ITypography {
     | 'smallModerate'
     | 'canvasTitle'
     | 'labelsMedium'
-    | 'labelsSmall';
+    | 'labelsSmall'
+    | 'labelsVerySmall';
   text: string;
   className?: string;
   color?: string;
@@ -161,6 +162,8 @@ export default function Typography({
       return <p className={`${styles.labelsMedium} ${className} ${color}`}>{highlightedText}</p>;
     case 'labelsSmall':
       return <p className={`${styles.labelsSmall} ${className} ${color}`}>{highlightedText}</p>;
+    case 'labelsVerySmall':
+      return <p className={`${styles.labelsVerySmall} ${className} ${color}`}>{highlightedText}</p>;
     default:
       return <p className={`${styles.body} ${className} ${color}`}>{highlightedText}</p>;
   }

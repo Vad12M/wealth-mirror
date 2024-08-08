@@ -264,8 +264,8 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
                 case 'epf':
                 case 'ppf':
                 case 'nps':
-                  height = 180;
-                  width = 120;
+                  height = 100;
+                  width = 100;
                   break;
               }
 

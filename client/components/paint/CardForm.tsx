@@ -48,6 +48,10 @@ export default function CardForm({
         position: defaultForm.position,
         type: defaultForm.type,
       });
+
+      if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+        (sliderRef.current as any).swiper.slideTo(types.findIndex((el) => el.value === defaultForm.type));
+      }
     }
   }, [defaultForm]);
 
@@ -115,7 +119,7 @@ export default function CardForm({
           ref={sliderRef}
           loop={true}
           slidesPerView={'auto'}
-          onActiveIndexChange={(e) => setForm({ ...form, type: types[e.activeIndex].value })}
+          onActiveIndexChange={(e) => setForm({ ...form, type: types[e.realIndex].value })}
         >
           {types.map((el, index) => (
             <SwiperSlide key={index} className="flex justify-center">
@@ -125,6 +129,7 @@ export default function CardForm({
                     className="bg-[#D9FBEE] h-[45px] w-[45px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
                     {iconsHandler(el.value)}
                   </div>
+                  <Typography text={el.name} type={'labelsVerySmall'} color="text-black"/>
                 </div>
               </div>
             </SwiperSlide>

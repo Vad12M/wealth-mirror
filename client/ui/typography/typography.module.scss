@@ -253,3 +253,10 @@
   font-style: normal;
   font-weight: 500;
 }
+
+.labelsVerySmall {
+  @apply text-[9px] leading-[12px];
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+}

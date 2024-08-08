@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/ui/button/Button";
 import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
 import { useCreateFortuneMutation, useDeleteFortuneMutation, useUpdateFortuneMutation } from "@/store/api/fortuneSlice";
 import InputForm from "@/ui/input/inputForm";
+import { Swiper, SwiperSlide } from "swiper/react";
+import ChevroneLeftIcon from "@/ui/icons/ChevroneLeftIcon";
+import ChevroneRightIcon from "@/ui/icons/ChevroneRightIcon";
+import Stock from "@/ui/icons/canvas/fortune/Stock";
+import MutualFounds from "@/ui/icons/canvas/fortune/MutualFounds";
+import Typography from "@/ui/typography/Typography";
+import Dropdown from "@/ui/dropdown/dropdown";
+import Saving from "@/ui/icons/canvas/fortune/Saving";
 
 export default function FortuneForm({
   position,
@@ -16,9 +24,11 @@ export default function FortuneForm({
   defaultForm?: IFortune;
   onClose?: () => void;
 }) {
+  const sliderRef = useRef(null);
   const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
   const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
   const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
+  const [localeType, setLocaleType] = useState('stock');
   const [form, setForm] = useState<IFortuneForm>({
     name: '',
     code: '',
@@ -27,7 +37,7 @@ export default function FortuneForm({
     amountOfDividends: 0,
     periodOfReceivingDividends: '',
     type: 'stock',
-    image: '/canvas/OldCar.svg',
+    image: '/canvas/Fortune-4.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -36,11 +46,9 @@ export default function FortuneForm({
 
   const types = [
     { name: 'Stock', value: 'stock' },
-    { name: 'Bond', value: 'bond' },
+    // { name: 'Bond', value: 'bond' },
     { name: 'Mutual Fund', value: 'mutualFund' },
-    { name: 'ETF', value: 'etf' },
-    { name: 'PPF', value: 'ppf' },
-    { name: 'NPS', value: 'nps' },
+    { name: 'Saving', value: 'saving' },
   ];
 
   useEffect(() => {
@@ -56,6 +64,12 @@ export default function FortuneForm({
         image: defaultForm.image,
         position: defaultForm.position
       });
+
+      if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+        (sliderRef.current as any).swiper.slideTo(types
+          .findIndex((el) => el.value === (['nps', 'ppf', 'epf'].includes(defaultForm.type) ? 'saving' : defaultForm.type))
+        );
+      }
     }
   }, [defaultForm]);
 
@@ -65,15 +79,13 @@ export default function FortuneForm({
         setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-4.svg' }));
         break;
       case 'mutualFund':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-1.svg' }));
+        setForm((prevState) => ({ ...prevState, image: '/canvas/MutualFunds.svg' }));
         break;
       case 'bond':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/Fortune-2.svg' }));
-        break;
-      case 'epf':
-      case 'ppf':
       case 'nps':
-        setForm({ ...form, image: '/canvas/Fortune-3.svg' });
+      case 'etf':
+      case 'ppf':
+        setForm({ ...form, image: '/canvas/Saving.svg' });
         break;
     }
   }, [form.type]);
@@ -91,26 +103,96 @@ export default function FortuneForm({
     }
   }
 
+  const iconsHandler = (type: string) => {
+    switch (type) {
+      case 'stock':
+        return <Stock/>
+      case 'mutualFund':
+        return <MutualFounds/>
+      case 'saving':
+        return <Saving/>
+    }
+  }
+
+  const handlePrev = () => {
+    if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+      (sliderRef.current as any).swiper.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+      (sliderRef.current as any).swiper.slideNext();
+    }
+  };
+
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
-      {/*<div className="mb-6">*/}
-      {/*  {types.map((type) => (*/}
-      {/*    <button*/}
-      {/*      key={type.value}*/}
-      {/*      onClick={() => setForm({ ...form, type: type.value })}*/}
-      {/*      className={`px-4 py-2 border ${form.type === type.value ? 'bg-primary text-white' : ''}`}*/}
-      {/*    >*/}
-      {/*      {type.name}*/}
-      {/*    </button>*/}
-      {/*  ))}*/}
-      {/*</div>*/}
+      <div className="relative w-full">
+        <Swiper
+          className="w-full flex justify-center max-h-[80px] overflow-hidden"
+          ref={sliderRef}
+          slidesPerView="auto"
+          loop={true}
+          onActiveIndexChange={(e) => {
+            const activeType = types[e.activeIndex].value;
+            if (activeType === 'stock' || activeType === 'mutualFund') {
+              setForm({ ...form, type: activeType });
+            } else {
+              setForm({ ...form, type: 'nps' });
+            }
+            setLocaleType(types[e.realIndex].value)
+          }}
+        >
+          {types.map((el, index) => (
+            <SwiperSlide key={index} className="flex justify-center">
+              <div className="flex justify-center">
+                <div className="flex flex-col bg-white rounded-[10px] w-[62px] h-[80px] justify-center items-center">
+                  <div
+                    className="bg-[#D9FBEE] h-[45px] w-[45px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
+                    {iconsHandler(el.value)}
+                  </div>
+                  <Typography text={el.name} type={'labelsVerySmall'} color="text-black"/>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button className='absolute left-1 top-5 z-50' onClick={handlePrev}>
+          <ChevroneLeftIcon/>
+        </button>
+        <button className='absolute right-1 top-5 z-50' onClick={handleNext}>
+          <ChevroneRightIcon/>
+        </button>
+      </div>
       <div className="flex flex-col space-y-4 w-full">
-        <InputForm
-          label="Name"
-          value={form.name}
-          placeholder={'Enter name'}
-          onUpdate={(e) => setForm({ ...form, name: e.target.value })}
-        />
+        {localeType === 'saving' && <Dropdown
+          options={[
+            { value: 'nps', label: 'NPS' },
+            { value: 'ppf', label: 'PPF' },
+            { value: 'epf', label: 'EPF' },
+          ]}
+          label={'Type'}
+          value={form.type}
+          onChange={(e: any) => setForm({ ...form, type: e.target.value })}
+        />}
+        {localeType === 'stock' && <Dropdown
+          options={[
+            { value: 'apple', label: 'Apple' },
+            { value: 'google', label: 'Google' },
+            { value: 'microsoft', label: 'Microsoft' },
+          ]}
+          label={'Type'}
+          value={form.type}
+          onChange={(e: any) => setForm({ ...form, type: e.target.value })}
+        />}
+        {localeType !== 'stock' &&
+          <InputForm
+            label="Name"
+            value={form.name}
+            placeholder={'Enter name'}
+            onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+          />}
         <InputForm
           label="Code"
           value={form.code}

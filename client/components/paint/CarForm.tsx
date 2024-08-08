@@ -11,6 +11,7 @@ import Bike from "@/ui/icons/canvas/car/Bike";
 import Scooter from "@/ui/icons/canvas/car/Scooter";
 import Car from "@/ui/icons/canvas/car/Car";
 import 'swiper/swiper-bundle.css';
+import Typography from "@/ui/typography/Typography";
 
 export default function CarForm({
   position,
@@ -60,7 +61,12 @@ export default function CarForm({
         image: defaultForm.image,
         position: defaultForm.position
       });
+
+      if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+        (sliderRef.current as any).swiper.slideTo(types.findIndex((el) => el.value === defaultForm.type));
+      }
     }
+
   }, [defaultForm]);
 
   useEffect(() => {
@@ -117,7 +123,6 @@ export default function CarForm({
         return <Bike/>
     }
   }
-
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
       <div className="relative w-full">
@@ -125,7 +130,8 @@ export default function CarForm({
           className="w-full flex justify-center max-h-[80px] overflow-hidden"
           ref={sliderRef}
           slidesPerView="auto"
-          onActiveIndexChange={(e) => setForm({ ...form, type: types[e.activeIndex].value })}
+          loop={true}
+          onActiveIndexChange={(e) => setForm({ ...form, type: types[e.realIndex].value })}
         >
           {types.map((el, index) => (
             <SwiperSlide key={index} className="flex justify-center">
@@ -134,6 +140,7 @@ export default function CarForm({
                   <div className="bg-[#D9FBEE] h-[45px] w-[45px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
                     {iconsHandler(el.value)}
                   </div>
+                  <Typography text={el.name} type={'labelsVerySmall'} color="text-black"/>
                 </div>
               </div>
             </SwiperSlide>
