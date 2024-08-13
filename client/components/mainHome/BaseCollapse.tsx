@@ -37,9 +37,11 @@ export default function BaseCollapse({
         border: '2px solid rgba(255, 255, 255, 0.08)',
       }}
     >
-      <button onClick={handleToggle} className="w-full flex justify-between items-center">
+      <button onClick={handleToggle} className="w-full flex justify-between items-center space-x-2">
         <Typography text={title} type={isMobile ? 'heading6SM' : 'heading4'} color={'text-primary'}  className="text-start"/>
-        {isOpen ? <CircleBottomPrimaryArrowIcon /> : <CircleRightArrowIcon />}
+        <div>
+          {isOpen ? <CircleBottomPrimaryArrowIcon /> : <CircleRightArrowIcon />}
+        </div>
       </button>
       <div
         ref={contentRef}

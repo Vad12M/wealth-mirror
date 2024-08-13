@@ -9,6 +9,7 @@ import { Button } from "@/ui/button/Button";
 import LogoutIcon from "@/ui/icons/LogoutIcon";
 import { removeUserToken } from "@/service/useAuthHandler";
 import { useState } from "react";
+import Stats from "@/ui/icons/canvas/header/Stats";
 
 export default function PaintHeader({
   exportClick
@@ -32,7 +33,7 @@ export default function PaintHeader({
           </Anchor>
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
-              <Coin/>
+              <Stats/>
               <Typography text={'₹ 2.8 Cr'} type={'labelsMedium'}/>
             </div>
             <div className="flex items-center space-x-2">

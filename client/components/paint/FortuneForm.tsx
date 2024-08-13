@@ -211,18 +211,18 @@ export default function FortuneForm({
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
-        <InputForm
+        {defaultForm && <InputForm
           label="Amount of Dividends"
           value={!!form.amountOfDividends ? form.amountOfDividends.toString() : ''}
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amountOfDividends: Number(e.target.value) })}
-        />
-        <InputForm
+        />}
+        {defaultForm && <InputForm
           label="Period of Receiving Dividends"
           value={form.periodOfReceivingDividends}
           placeholder={'Enter period'}
           onUpdate={(e) => setForm({ ...form, periodOfReceivingDividends: e.target.value })}
-        />
+        />}
       </div>
       <Button
         typeButton="none"
