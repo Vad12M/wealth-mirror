@@ -3,6 +3,7 @@ import Typography from "@/ui/typography/Typography";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useAuthHandler from "@/service/useAuthHandler";
+import WaitlistTable from "@/components/tables/WaitlistTable";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -39,26 +40,7 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {selectedTab === 'waitUsers' && (
-        <table className="m-container border">
-          <thead className="">
-          <tr>
-            <th className="py-2 px-4 border">ID</th>
-            <th className="py-2 px-4 border">Name</th>
-            <th className="py-2 px-4 border">Email</th>
-          </tr>
-          </thead>
-          <tbody>
-          {waitUsers?.map((waitUser, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="py-2 px-4 border text-center">{index + 1}</td>
-              <td className="py-2 px-4 border text-center">{waitUser.name}</td>
-              <td className="py-2 px-4 border text-center">{waitUser.email}</td>
-            </tr>
-          ))}
-          </tbody>
-        </table>
-      )}
+      {selectedTab === 'waitUsers' && <WaitlistTable waitUsers={waitUsers}/>}
 
       {selectedTab === 'contacts' && (
         <table className="m-container border">

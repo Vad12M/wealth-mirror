@@ -13,6 +13,7 @@ import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import { Button } from "@/ui/button/Button";
 import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 import HeaderMobileMenu from "@/components/layouts/HeaderMobileMenu";
+import { ChartNoAxesCombined } from "lucide-react";
 
 export default function Header() {
   const isMobile = useGetIsMobile();
@@ -35,7 +36,7 @@ export default function Header() {
     { name: 'Contact', link: '/contact' }
   ];
 
-  if (asPath.includes('auth') || asPath.includes('joinwaitlist') || asPath.includes('canvas')){
+  if (asPath.includes('auth') || asPath.includes('joinwaitlist') || asPath.includes('canvas')) {
     return null;
   }
 
@@ -50,7 +51,7 @@ export default function Header() {
             <Typography text={'Wealth Mirror'} type={'navBar'} color={isWhite ? 'text-white' : 'text-black'}/>
           </Anchor>
           <ul
-            className={`hidden md:flex items-center justify-center space-x-8 py-3 px-4 ${isWhite ? styles.listWhite : styles.list}`}
+            className={`mx-4 hidden md:flex items-center justify-center space-x-8 py-3 px-4 ${isWhite ? styles.listWhite : styles.list}`}
           >
             {list.map((item, index) => {
               const active = asPath === item.link;
@@ -69,7 +70,7 @@ export default function Header() {
                         text={item.name}
                         type={active ? 'body2A' : 'body2'}
                         color={isWhite ? 'text-white' : "text-primaryDark"}
-                        className="px-4"
+                        className="px-4 whitespace-nowrap"
                       />
                       {!active && <div
                         className={`border-b ${isWhite ? 'border-white' : 'border-grayBody'} rounded-l-[28px] rounded-r-[40px] h-10 absolute w-full -ml-0.5 hidden group-hover:block`}/>}
@@ -86,14 +87,18 @@ export default function Header() {
                 {'Login'}
               </Button>
             ) : (
-              <Button typeButton={isWhite ? 'standard-white' : 'standard'} onClick={() => router.push('/profile')}>
+              <Button
+                typeButton={isWhite ? 'standard-white' : 'standard'}
+                onClick={() => router.push('/profile')}
+                className="whitespace-nowrap"
+              >
                 {`${user?.firstName || ''} ${user?.lastName || ''}`}
               </Button>
             )}
 
             {isAdmin &&
               <Button typeButton={'primary-dark'} isGradient={isJoinWaitlist} onClick={() => push('/admin')}>
-                {'Admin Panel'}
+                <ChartNoAxesCombined/>
               </Button>}
 
             {!isLoggedIn ? <Button

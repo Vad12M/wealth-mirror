@@ -1,18 +1,9 @@
 import {
-  Box, Button,
-  ButtonGroup,
+  Button,
   Flex,
-  IconButton,
-  Popover,
-  PopoverArrow, PopoverCloseButton,
-  PopoverContent,
-  PopoverTrigger
 } from "@chakra-ui/react";
-import { PAINT_OPTIONS } from "@/components/paint/Paint.constants";
-import { SketchPicker } from "react-color";
-import { Download, Upload, XLg } from "react-bootstrap-icons";
+import { Download } from "react-bootstrap-icons";
 import React from "react";
-
 
 export default function PaintMenu({
   onClear,
@@ -21,8 +12,6 @@ export default function PaintMenu({
   onClear: any;
   onExportClick: any;
 }) {
-
-
   return (
     <Flex justifyContent={"space-between"} alignItems="center">
       <Flex gap={4} alignItems="center" height="100%">

@@ -1,8 +1,13 @@
 
-export default function Stock(){
-
+export default function Stock({
+  width = 60,
+  height = 106,
+}: {
+  width?: number;
+  height?: number;
+}){
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="106" viewBox="0 0 60 106" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 60 106" fill="none">
       <path
         d="M0.820068 84.0059L0.826032 88.6261C0.831993 88.9537 1.04632 89.2814 1.46924 89.5314L28.4852 105.225L28.4733 100.611L1.46328 84.9112C1.03447 84.6611 0.820068 84.3335 0.820068 84.0059Z"
         fill="#DBE6FA"/>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ICar, ICarForm } from "@/interfaces/ICar";
 import { useCreateCarMutation, useDeleteCarMutation, useUpdateCarMutation } from "@/store/api/carSlice";
-import { Button } from "@/ui/button/Button";
 import InputForm from "@/ui/input/inputForm";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ChevroneRightIcon from "@/ui/icons/ChevroneRightIcon";
@@ -12,8 +11,9 @@ import Scooter from "@/ui/icons/canvas/car/Scooter";
 import Car from "@/ui/icons/canvas/car/Car";
 import 'swiper/swiper-bundle.css';
 import Typography from "@/ui/typography/Typography";
+import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 
-export default function CarForm({
+export default function Crypto({
   position,
   defaultForm,
   onClose,
@@ -181,23 +181,14 @@ export default function CarForm({
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
-      <Button
-        typeButton="none"
-        className="bg-primary text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
-        onClick={handleClick}
-        loading={isLoadingCreate || isLoadingUpdate}
-      >
-        {defaultForm ? 'Update Asset' : 'Add Asset'}
-      </Button>
-      {defaultForm && <Button
-          typeButton="none"
-          className="bg-danger text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
-          onClick={() => deleteCar(defaultForm._id).finally(() => onClose?.())}
-          loading={isLoadingDelete}
-        >
-          {'Remove Asset'}
-        </Button>
-      }
+      <FormButtonsBlock
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
+        isEdit={!!defaultForm}
+        deleteClick={() => defaultForm ? deleteCar(defaultForm._id).finally(() => onClose?.()) : null}
+        handleClick={handleClick}
+        type={'Car'}
+      />
     </div>
   )
 }

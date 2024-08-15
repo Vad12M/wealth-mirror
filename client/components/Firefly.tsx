@@ -9,10 +9,9 @@ export const Firefly = ({
   const [x, setX] = useState(Math.random());
   const [delay, setDelay] = useState(Math.random() * 12);
   const images = [
-    '/canvas/CarOld.svg',
+    '/canvas/Car.svg',
     '/canvas/CarOld.svg',
     '/canvas/Cash.svg',
-    '/canvas/CreditCard.svg',
     '/canvas/CC1.svg',
     '/canvas/CC2.svg',
     '/canvas/DC1.svg',

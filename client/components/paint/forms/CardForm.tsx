@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Typography from "@/ui/typography/Typography";
 import { useCreateCardMutation, useDeleteCardMutation, useUpdateCardMutation } from "@/store/api/cardSlice";
 import { ICard, ICardForm } from "@/interfaces/ICard";
-import { Button } from "@/ui/button/Button";
 import InputForm from "@/ui/input/inputForm";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ChevroneLeftIcon from "@/ui/icons/ChevroneLeftIcon";
@@ -11,6 +10,7 @@ import CreditCard from "@/ui/icons/canvas/card/CreditCard";
 import DebitCard from "@/ui/icons/canvas/card/DebitCard";
 import MetalCard from "@/ui/icons/canvas/card/MetalCard";
 import 'swiper/swiper-bundle.css';
+import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 
 export default function CardForm({
   position,
@@ -164,22 +164,14 @@ export default function CardForm({
           <Typography text={'Is Primary'} type={'body1'}/>
         </div>
       </div>
-      <Button
-        typeButton="none"
-        className="bg-primary text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
-        onClick={handleClick}
-        loading={isLoadingCreate || isLoadingUpdate}
-      >
-        {defaultForm ? 'Update Asset' : 'Add Asset'}
-      </Button>
-      {defaultForm && <Button
-        typeButton="none"
-        className="bg-danger text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
-        onClick={() => deleteCard(defaultForm._id).finally(() => onClose?.())}
-        loading={isLoadingDelete}
-      >
-        {'Remove Asset'}
-      </Button>}
+      <FormButtonsBlock
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
+        isEdit={!!defaultForm}
+        deleteClick={() => defaultForm ? deleteCard(defaultForm._id).finally(() => onClose?.()) : null}
+        handleClick={handleClick}
+        type={'Card'}
+      />
     </div>
   )
 }

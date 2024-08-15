@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@/ui/button/Button";
 import {
   useCreateRealEstateMutation,
   useDeleteRealEstateMutation,
@@ -7,6 +6,7 @@ import {
 } from "@/store/api/realEstateSlice";
 import { IRealEstate, IRealEstateForm } from "@/interfaces/IRealEstate";
 import InputForm from "@/ui/input/inputForm";
+import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 
 export default function RealEstateForm({
   position,
@@ -73,22 +73,14 @@ export default function RealEstateForm({
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
         />
       </div>
-      <Button
-        typeButton="none"
-        className="bg-primary text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
-        onClick={handleClick}
-        loading={isLoadingCreate || isLoadingUpdate}
-      >
-        {defaultForm ? 'Update Asset' : 'Add Asset'}
-      </Button>
-      {defaultForm && <Button
-        typeButton="none"
-        className="bg-danger text-white px-3.5 py-2.5 rounded-[38px] w-full mt-4"
-        onClick={() => deleteRealEstate(defaultForm._id).finally(() => onClose?.())}
-        loading={isLoadingDelete}
-      >
-        {'Remove Asset'}
-      </Button>}
+      <FormButtonsBlock
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
+        isEdit={!!defaultForm}
+        deleteClick={() => defaultForm ? deleteRealEstate(defaultForm._id).finally(() => onClose?.()) : null}
+        handleClick={handleClick}
+        type={'Real Estate'}
+      />
     </div>
   )
 }
