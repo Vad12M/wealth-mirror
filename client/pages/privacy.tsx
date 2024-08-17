@@ -54,7 +54,7 @@ export default function Privacy() {
       <ListBlock
         title={"Information Sharing and Disclosure"}
         list={[
-          { text: "Third-Party Service Providers: We may share your information with trusted third-party service providers who assist us in operating our website, conducting business, or servicing you. These parties are obligated to keep your information confidential and use it only for the purposes specified.", },
+          { text: "Third-Party Service Providers: We may share your information with trusted third-party services providers who assist us in operating our website, conducting business, or servicing you. These parties are obligated to keep your information confidential and use it only for the purposes specified.", },
           { text: "Legal Requirements: We may disclose your information if required by law or in response to valid requests by public authorities.", },
           { text: "Business Transfers: In the event of a merger, acquisition, or asset sale, your personal information may be transferred. We will notify you before your personal information is transferred and becomes subject to a different Privacy Policy.", },
         ]}

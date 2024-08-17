@@ -27,11 +27,11 @@ export default function CancellationAndRefund() {
         list={[
           {
             subTitle: "Initial Purchase:",
-            text: "Initial Purchase: Refunds are available for initial subscription purchases within the first 14 days of service, provided that no substantial use of the service has occurred.",
+            text: "Initial Purchase: Refunds are available for initial subscription purchases within the first 14 days of services, provided that no substantial use of the services has occurred.",
           },
           {
             subTitle: "Renewals:",
-            text: "Renewals: Refunds for subscription renewals are available within 7 days of the renewal date, given that the service has not been used during this period."
+            text: "Renewals: Refunds for subscription renewals are available within 7 days of the renewal date, given that the services has not been used during this period."
           },
           {
             subTitle: "Special Circumstances:",
@@ -59,7 +59,7 @@ export default function CancellationAndRefund() {
         list={[
           {
             subTitle: "One-Time Services:",
-            text: "One-Time Services: Payments for one-time services or consultations are non-refundable once the service has been delivered.",
+            text: "One-Time Services: Payments for one-time services or consultations are non-refundable once the services has been delivered.",
           },
           {
             subTitle: "Promotional Offers:",

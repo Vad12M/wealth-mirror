@@ -19,6 +19,7 @@ export default function StockForm({
   defaultForm?: IFortune;
   onClose?: () => void;
 }) {
+
   const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
   const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
   const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();

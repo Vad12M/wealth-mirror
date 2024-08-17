@@ -15,7 +15,7 @@ export default function BlurCircleSMIcon() {
         <radialGradient id="paint0_radial_219_586" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
                         gradientTransform="translate(61.2 13.1999) rotate(87.7365) scale(101.279 1193.11)">
           <stop stopColor="#494955"/>
-          <stop offset="1" stop-color="#141414"/>
+          <stop offset="1" stopColor="#141414"/>
         </radialGradient>
       </defs>
     </svg>

@@ -94,28 +94,28 @@ export default function Money() {
       <defs>
         <linearGradient id="paint0_linear_2847_48400" x1="26.0578" y1="21.4779" x2="24.6436" y2="21.9387"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#F5C314"/>
-          <stop offset="1" stop-color="#EBB90A"/>
+          <stop stopColor="#F5C314"/>
+          <stop offset="1" stopColor="#EBB90A"/>
         </linearGradient>
         <linearGradient id="paint1_linear_2847_48400" x1="26.0578" y1="20.6245" x2="24.6436" y2="21.0851"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#F5C314"/>
-          <stop offset="1" stop-color="#EBB90A"/>
+          <stop stopColor="#F5C314"/>
+          <stop offset="1" stopColor="#EBB90A"/>
         </linearGradient>
         <linearGradient id="paint2_linear_2847_48400" x1="26.0578" y1="19.765" x2="24.6436" y2="20.2258"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#F5C314"/>
-          <stop offset="1" stop-color="#EBB90A"/>
+          <stop stopColor="#F5C314"/>
+          <stop offset="1" stopColor="#EBB90A"/>
         </linearGradient>
         <linearGradient id="paint3_linear_2847_48400" x1="26.0578" y1="18.889" x2="24.6436" y2="19.3498"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#F5C314"/>
-          <stop offset="1" stop-color="#EBB90A"/>
+          <stop stopColor="#F5C314"/>
+          <stop offset="1" stopColor="#EBB90A"/>
         </linearGradient>
         <linearGradient id="paint4_linear_2847_48400" x1="26.0578" y1="18.0307" x2="24.6436" y2="18.4914"
                         gradientUnits="userSpaceOnUse">
-          <stop stop-color="#F5C314"/>
-          <stop offset="1" stop-color="#EBB90A"/>
+          <stop stopColor="#F5C314"/>
+          <stop offset="1" stopColor="#EBB90A"/>
         </linearGradient>
       </defs>
     </svg>
