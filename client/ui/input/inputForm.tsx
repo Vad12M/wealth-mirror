@@ -5,12 +5,14 @@ export default function InputForm({
   placeholder,
   value,
   onUpdate,
-  label
+  label,
+  disabled,
 }: {
   placeholder?: string;
   value?: string | number;
   onUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
+  disabled?: boolean;
 }) {
   return (
     <div className="flex flex-col space-y-2">
@@ -20,6 +22,7 @@ export default function InputForm({
         placeholder={placeholder}
         value={value}
         onChange={onUpdate}
+        disabled={disabled}
       />
     </div>
   )

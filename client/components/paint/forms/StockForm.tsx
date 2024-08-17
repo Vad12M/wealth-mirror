@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
-import { useCreateFortuneMutation, useDeleteFortuneMutation, useUpdateFortuneMutation } from "@/store/api/fortuneSlice";
+import {
+  useCreateFortuneMutation,
+  useDeleteFortuneMutation,
+  useGetStocksQuery,
+  useUpdateFortuneMutation
+} from "@/store/api/fortuneSlice";
 import InputForm from "@/ui/input/inputForm";
 import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
@@ -19,7 +24,7 @@ export default function StockForm({
   defaultForm?: IFortune;
   onClose?: () => void;
 }) {
-
+  const { data: stocks } = useGetStocksQuery();
   const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
   const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
   const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
@@ -77,26 +82,25 @@ export default function StockForm({
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <Dropdown
-          options={[
-            { value: 'apple', label: 'Apple' },
-            { value: 'google', label: 'Google' },
-            { value: 'microsoft', label: 'Microsoft' },
-          ]}
-          label={'Type'}
-          value={form.type}
-          onChange={(e: any) => setForm({ ...form, type: e.target.value })}
-        />
-        <InputForm
-          label="Name"
+          options={stocks?.map((stock: any) => ({
+            label: stock.name,
+            value: stock.ticker
+          })) || []}
+          label={'Name'}
           value={form.name}
-          placeholder={'Enter name'}
-          onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+          onChange={(value) => {
+            const stock = stocks?.find((stock: any) => stock.ticker === value);
+            if (stock) {
+              setForm({ ...form, name: stock.name, code: stock.ticker });
+            }
+          }}
         />
         <InputForm
           label="Code"
           value={form.code}
           placeholder={'Enter code'}
           onUpdate={(e) => setForm({ ...form, code: e.target.value })}
+          disabled
         />
         <InputForm
           label="Quantity"
