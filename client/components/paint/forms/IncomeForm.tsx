@@ -48,10 +48,10 @@ export default function IncomeForm({
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
       <div className="flex flex-col bg-white rounded-[10px] w-[72px] h-[90px] justify-center items-center">
-        <div className="bg-[#D9FBEE] h-[55px] w-[55px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
+        <div className="h-[55px] w-[73px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
           <OptionIncome/>
         </div>
-        <Typography text={'Fixed Deposit'} type={'labelsVerySmall'} color="text-black"/>
+        <Typography text={'Income'} type={'labelsVerySmall'} color="text-black"/>
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <InputForm
@@ -79,7 +79,7 @@ export default function IncomeForm({
         isEdit={!!defaultForm}
         // deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
         handleClick={handleClick}
-        type={'Fixed Deposit'}
+        type={'Income'}
       />
     </div>
   )
