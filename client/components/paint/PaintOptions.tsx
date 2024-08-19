@@ -15,6 +15,8 @@ import OptionCrypto from "@/ui/icons/canvas/OptionCrypto";
 import OptionMutualFunds from "@/ui/icons/canvas/OptionMutualFunds";
 import OptionLiquidCash from "@/ui/icons/canvas/OptionLiquidCash";
 import OptionSaving from "@/ui/icons/canvas/OptionSaving";
+import OptionIncome from "@/ui/icons/canvas/OptionIncome";
+import OptionExpense from "@/ui/icons/canvas/OptionExpense";
 
 export default function PaintOptions({
   optionsPosition,
@@ -70,6 +72,10 @@ export default function PaintOptions({
             <div className="flex items-center space-x-3">
               {buttonLayout('mutualFunds', <OptionMutualFunds/>, 'Mutual Funds', 'D7EFFE')}
               {buttonLayout('car', <OptionCar/>, 'Vehicle')}
+            </div>
+            <div className="flex items-center space-x-3">
+              {buttonLayout('income', <OptionIncome/>, 'Income')}
+              {buttonLayout('expense', <OptionExpense/>, 'Expense')}
             </div>
             <div className="flex items-center space-x-3">
               {buttonLayout('fixedDeposit', <OptionFixedDeposit/>, 'Fixed Deposit', 'D9FBEE')}

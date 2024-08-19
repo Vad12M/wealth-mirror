@@ -50,7 +50,7 @@ export const fortuneSlice = baseApi.injectEndpoints({
 
     getStocks: builder.query<any, void>({
       query: () => ({
-        url: '/stocks?limit=1000',
+        url: '/stocks?limit=10',
       }),
       providesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
     }),

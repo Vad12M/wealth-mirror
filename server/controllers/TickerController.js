@@ -8,7 +8,6 @@ export const getStocks = async (req, res) => {
 
   try {
     const stocks = await getStocksAPI(limit, search);
-    console.log(stocks);
     res.status(200).json(stocks.results);
   } catch (error) {
     res.status(500).json({

@@ -8,6 +8,8 @@ import LiquidCashForm from "@/components/paint/forms/LiquidCashForm";
 import CryptoForm from "@/components/paint/forms/CryptoForm";
 import FixedDepositForm from "@/components/paint/forms/FixedDepositForm";
 import SavingForm from "@/components/paint/forms/SavingForm";
+import IncomeForm from "@/components/paint/forms/IncomeForm";
+import ExpenseForm from "@/components/paint/forms/ExpenseForm";
 
 export default function CanvasHandlerForms({
   type,
@@ -43,5 +45,9 @@ export default function CanvasHandlerForms({
       return <SavingForm position={position} defaultForm={defaultForm} onClose={onClose}/>
     case 'card':
       return <CardForm position={position} defaultForm={defaultForm} onClose={onClose}/>
+    case 'income':
+      return <IncomeForm position={position} defaultForm={defaultForm} onClose={onClose}/>
+    case 'expense':
+      return <ExpenseForm position={position} defaultForm={defaultForm} onClose={onClose}/>
   }
 }

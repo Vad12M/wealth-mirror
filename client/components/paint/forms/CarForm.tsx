@@ -160,7 +160,7 @@ export default function Crypto({
           placeholder={'Enter name'}
           onUpdate={(e) => setForm({ ...form, name: e.target.value })}
         />
-        {/*<Dropdown options={[]} onSelectItem={() => {*/}
+        {/*<SearchDropdown options={[]} onSelectItem={() => {*/}
         {/*}}/>*/}
         <InputForm
           label="Brand"
