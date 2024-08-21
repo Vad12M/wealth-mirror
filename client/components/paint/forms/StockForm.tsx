@@ -41,7 +41,7 @@ export default function StockForm({
       y: position?.y || 0
     },
   });
-  const { data: stocks } = useGetStocksQuery();
+  const { data: stocks } = useGetStocksQuery({ search: form.code });
 
   useEffect(() => {
     if (defaultForm) {
