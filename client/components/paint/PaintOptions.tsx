@@ -63,7 +63,7 @@ export default function PaintOptions({
       }}
     >
       {!newItemType ? <div className={`flex flex-col items-center overflow-hidden overflow-y-auto max-h-[280px] ${styles.scrollable}`}>
-          <Typography text={'Select an asset'} className={'mb-2'} type={'subHeading4'}/>
+          <Typography text={'Add your Wealth'} className={'mb-2'} type={'subHeading4'}/>
           <div className="flex flex-col space-y-3 pr-2">
             <div className="flex items-center space-x-3">
               {buttonLayout('stock', <OptionStock/>, 'Stock')}
