@@ -82,13 +82,13 @@ export default function HowIsItWorkBlock() {
           }}
             className="relative md:w-[640px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
           >
-            <video
-              src={'/howItWorks/takeactions.mp4'}
-              autoPlay
-              loop
-              muted
-              className="md:w-[640px] w-[306px] md:h-[351px] h-[351px] md:rounded-[40px] rounded-[20px] absolute"
-            />
+            {/*<video*/}
+            {/*  src={'/howItWorks/takeactions.mp4'}*/}
+            {/*  autoPlay*/}
+            {/*  loop*/}
+            {/*  muted*/}
+            {/*  className="md:w-[640px] w-[306px] md:h-[351px] h-[351px] md:rounded-[40px] rounded-[20px] absolute"*/}
+            {/*/>*/}
             <div className="flex flex-col items-end mt-8 mr-5">
               <Typography text={'Take Actions'} type={'heading3'} className="mb-2"/>
               <Typography
