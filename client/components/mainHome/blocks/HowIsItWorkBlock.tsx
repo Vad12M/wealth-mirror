@@ -20,10 +20,20 @@ export default function HowIsItWorkBlock() {
       >
         <div className="flex md:flex-row flex-col items-center md:space-x-8 space-x-0 md:space-y-0 space-y-8">
           <div
-            style={{ backgroundImage: 'url("/howItWorks/bg-1.svg")' }}
-            className="md:w-[592px] w-[306px] md:h-[289px] h-[313px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
+            // style={{ backgroundImage: 'url("/howItWorks/c1.svg")' }}
+            className="relative md:w-[592px] w-[306px] md:h-[289px] h-[313px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
           >
-            <div className="flex flex-col items-end mb-16 mr-5">
+            <img
+              src="/howItWorks/c1-gradient.svg"
+              alt="gradient"
+              className="absolute md:rounded-[40px] rounded-[20px] md:w-[588px] w-[303px] md:h-[286px] h-[310px] z-10"
+            />
+            <img
+              src="/howItWorks/c1.svg"
+              alt="gradient"
+              className="absolute md:rounded-[40px] rounded-[20px] md:w-[388px] w-[303px] md:h-[286px] h-[310px] left-0"
+            />
+            <div className="flex flex-col items-end mb-16 mr-5 z-20">
               <Typography text={'Centralize'} type={'heading3'} className="mb-2"/>
               <Typography
                 text={'Bring in all different aspects of your wealth in a single place.'}
@@ -33,10 +43,15 @@ export default function HowIsItWorkBlock() {
             </div>
           </div>
           <div
-            style={{ backgroundImage: 'url("/howItWorks/bg-2.svg")' }}
-            className="md:w-[484px] w-[306px] h-[289px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
+            style={{ backgroundImage: 'url("/howItWorks/v1.svg")' }}
+            className="relative md:w-[484px] w-[306px] h-[289px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
           >
-            <div className="flex flex-col items-end mb-[76px] mr-5">
+            <img
+              src="/howItWorks/v1-gradient.svg"
+              alt="gradient"
+              className="absolute md:rounded-[40px] rounded-[20px] md:w-[481px] w-[306px] h-[287px]"
+            />
+            <div className="flex flex-col items-end mb-[76px] mr-5 z-10">
               <Typography text={'Visualize'} type={'heading3'} className="mb-2"/>
               <Typography
                 text={'See your Wealth growing in a way like Never Before.'}
@@ -48,7 +63,7 @@ export default function HowIsItWorkBlock() {
         </div>
         <div className="flex md:flex-row flex-col items-center md:space-x-8 space-x-0 md:space-y-0 space-y-8">
           <div
-            style={{ backgroundImage: 'url("/howItWorks/bg-3.svg")' }}
+            style={{ backgroundImage: 'url("/howItWorks/a1.svg")' }}
             className="md:w-[436px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
           >
             <div className="flex flex-col items-end mt-8 mr-5">
@@ -62,9 +77,18 @@ export default function HowIsItWorkBlock() {
             </div>
           </div>
           <div
-            style={{ backgroundImage: 'url("/howItWorks/bg-4.svg")' }}
-            className="md:w-[640px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
+            style={{
+              backgroundImage: 'url("/howItWorks/t1.svg")'
+          }}
+            className="relative md:w-[640px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
           >
+            <video
+              src={'/howItWorks/takeactions.mp4'}
+              autoPlay
+              loop
+              muted
+              className="md:w-[640px] w-[306px] md:h-[351px] h-[351px] md:rounded-[40px] rounded-[20px] absolute"
+            />
             <div className="flex flex-col items-end mt-8 mr-5">
               <Typography text={'Take Actions'} type={'heading3'} className="mb-2"/>
               <Typography
