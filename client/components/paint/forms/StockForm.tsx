@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
-import {
-  useCreateFortuneMutation,
-  useDeleteFortuneMutation,
-  useUpdateFortuneMutation
-} from "@/store/api/fortuneSlice";
 import InputForm from "@/ui/input/inputForm";
 import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import SearchDropdown from "@/ui/searchDropdown/searchDropdown";
-import { useGetExternalStocksQuery } from "@/store/api/stockSlice";
+import {
+  useCreateStockMutation,
+  useDeleteStockMutation,
+  useGetExternalStocksQuery,
+  useUpdateStockMutation
+} from "@/store/api/stockSlice";
 
 export default function StockForm({
   position,
@@ -24,9 +24,9 @@ export default function StockForm({
   defaultForm?: IFortune;
   onClose?: () => void;
 }) {
-  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
-  const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
-  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
+  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteStockMutation();
+  const [createFortune, { isLoading: isLoadingCreate }] = useCreateStockMutation();
+  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateStockMutation();
   const [form, setForm] = useState<IFortuneForm>({
     name: '',
     code: '',

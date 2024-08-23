@@ -1,7 +1,6 @@
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 import Typography from "@/ui/typography/Typography";
-import Coin from "@/ui/icons/canvas/header/Coin";
 import Money from "@/ui/icons/canvas/header/Money";
 import House from "@/ui/icons/canvas/header/House";
 import Stock from "@/ui/icons/canvas/header/Stock";

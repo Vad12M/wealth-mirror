@@ -3,6 +3,7 @@ import { Image as KonvaImage } from "react-konva";
 import React from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { IFortune } from "@/interfaces/IFortune";
+import Tooltip from "@/ui/tooltip/tooltip";
 
 export default function StocksElements({
   stocks,

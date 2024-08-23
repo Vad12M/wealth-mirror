@@ -41,6 +41,7 @@ export default function RealEstateForm({
       x: position?.x || 0,
       y: position?.y || 0
     },
+    purchaseDate: '2023-08-24T00:00:00.000Z'
   });
 
   const categories = [
@@ -56,7 +57,8 @@ export default function RealEstateForm({
         location: defaultForm.location,
         price: defaultForm.price,
         image: defaultForm.image,
-        position: defaultForm.position
+        position: defaultForm.position,
+        purchaseDate: defaultForm.purchaseDate
       });
     }
   }, [defaultForm]);

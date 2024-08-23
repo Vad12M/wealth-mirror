@@ -50,7 +50,7 @@ export const stockSlice = baseApi.injectEndpoints({
 
     getExternalStocks: builder.query<any, { search?: string }>({
       query: (params) => ({
-        url: '/stocks?limit=10',
+        url: '/external/stocks?limit=10',
         params,
       }),
       providesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]

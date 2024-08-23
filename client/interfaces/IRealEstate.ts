@@ -10,6 +10,7 @@ export interface IRealEstate {
     x: number;
     y: number;
   };
+  purchaseDate: string;
 }
 
 export interface IRealEstateForm {
@@ -23,4 +24,5 @@ export interface IRealEstateForm {
   };
   image?: string;
   salePrice?: number;
+  purchaseDate?: string;
 }
