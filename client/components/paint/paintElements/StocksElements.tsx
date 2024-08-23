@@ -1,9 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import { Image as KonvaImage } from "react-konva";
-import React from "react";
+import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
+import React, { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { IFortune } from "@/interfaces/IFortune";
-import Tooltip from "@/ui/tooltip/tooltip";
 
 export default function StocksElements({
   stocks,
@@ -18,7 +17,19 @@ export default function StocksElements({
   handleActiveItem: (item: IFortune, type: string) => void;
   zoomLevel: number;
 }) {
+  const [tooltip, setTooltip] = useState<{
+    visible: boolean;
+    stock: IFortune | undefined;
+    x: number;
+    y: number;
+  }>({
+    visible: false,
+    stock: undefined,
+    x: 0,
+    y: 0,
+  });
 
+  const tooltipRef = useRef(null);
   if (!stocks.length) {
     return null;
   }
@@ -50,9 +61,53 @@ export default function StocksElements({
                 e.cancelBubble = true;
                 handleActiveItem(stock, 'stock');
               }}
+              onMouseEnter={() => {
+                setTooltip({
+                  visible: true,
+                  stock: stock,
+                  x: stock.position.x + 80,
+                  y: stock.position.y,
+                });
+              }}
+              onMouseLeave={() => {
+                setTooltip({
+                  visible: false,
+                  stock: undefined,
+                  x: 0,
+                  y: 0,
+                });
+              }}
             />
           )
         }
+      )}
+
+      {tooltip.visible && (
+        <Group ref={tooltipRef}>
+          <Rect
+            x={tooltip.x}
+            y={tooltip.y}
+            width={320}
+            height={70}
+            fill="black"
+            opacity={0.75}
+            cornerRadius={4}
+          />
+          <Text
+            x={tooltip.x + 10}
+            y={tooltip.y + 10}
+            text={tooltip.stock?.name}
+            fill="white"
+            fontSize={14}
+          />
+          <Text
+            x={tooltip.x + 10}
+            y={tooltip.y + 30}
+            text={'Code: ' + tooltip.stock?.code}
+            fill="white"
+            fontSize={14}
+          />
+        </Group>
       )}
     </>
   )

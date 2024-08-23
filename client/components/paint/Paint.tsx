@@ -17,6 +17,7 @@ import RealEstateElements from "@/components/paint/paintElements/RealEstateEleme
 import StocksElements from "@/components/paint/paintElements/StocksElements";
 import CardsElements from "@/components/paint/paintElements/CardsElements";
 import CarElements from "@/components/paint/paintElements/CarElements";
+import PaintZoom from "@/components/paint/PaintZoom";
 
 interface PaintProps {
 }
@@ -117,6 +118,13 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     }
   };
 
+  const commonProps = {
+    isDraggable,
+    updateItem,
+    handleActiveItem,
+    zoomLevel
+  }
+
   return (
     <Box
       width={`${sizeWidth}px`}
@@ -140,55 +148,17 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
         onClick={handleCanvasClick}
       >
         <Layer>
-          <KonvaRect
-            x={-LIMIT}
-            y={-LIMIT}
-            width={2 * LIMIT}
-            height={2 * LIMIT}
-            fill="#065145" // Колір фону, змініть на бажаний
-          />
+          <KonvaRect x={-LIMIT} y={-LIMIT} width={2 * LIMIT} height={2 * LIMIT} fill="#065145"/>
           {updateGradientPosition(stagePosition)}
-          <Rect
-            x={0}
-            y={0}
-            width={sizeWidth}
-            height={sizeHeight}
-          />
+          <Rect x={0} y={0} width={sizeWidth} height={sizeHeight}/>
           {drawGrid()}
         </Layer>
 
         <Layer>
-          <CarElements
-            cars={cars || []}
-            isDraggable={isDraggable}
-            updateItem={updateItem}
-            handleActiveItem={handleActiveItem}
-            zoomLevel={zoomLevel}
-          />
-
-          <CardsElements
-            cards={cards || []}
-            isDraggable={isDraggable}
-            updateItem={updateItem}
-            handleActiveItem={handleActiveItem}
-            zoomLevel={zoomLevel}
-          />
-
-          <RealEstateElements
-            realEstates={realEstates || []}
-            isDraggable={isDraggable}
-            updateItem={updateItem}
-            handleActiveItem={handleActiveItem}
-            zoomLevel={zoomLevel}
-          />
-
-          <StocksElements
-            stocks={stocks || []}
-            isDraggable={isDraggable}
-            updateItem={updateItem}
-            handleActiveItem={handleActiveItem}
-            zoomLevel={zoomLevel}
-          />
+          <CarElements cars={cars || []} {...commonProps}/>
+          <CardsElements cards={cards || []}{...commonProps}/>
+          <RealEstateElements realEstates={realEstates || []}{...commonProps}/>
+          <StocksElements stocks={stocks || []}{...commonProps}/>
 
           {/*{(fortunes || [])*/}
           {/*  .filter(el => el.type !== 'stock')*/}
@@ -261,37 +231,16 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           }}
         />
       )}
-      <Box
-        className='space-x-2 flex items-center absolute right-8 bottom-6 rounded-[45px] p-2'
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.50)' }}
-      >
-        <Button onClick={handleZoomOut} typeButton="none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4.16675 10H15.8334" stroke="white" strokeWidth="1.66667" strokeLinecap="round"
-                  strokeLinejoin="round"/>
-          </svg>
-        </Button>
-        <Typography text={`${Math.round(zoomLevel * 100)}%`} type={'body2'}/>
-        <Button onClick={handleZoomIn} typeButton="none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path
-              d="M9.99984 15.8332V9.99984M9.99984 9.99984V4.1665M9.99984 9.99984L4.1665 9.99984M9.99984 9.99984L15.8332 9.99984"
-              stroke="white" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </Button>
-      </Box>
       <Box className={`absolute top-0 left-0`} width={`${sizeWidth - 100}px`}>
         <PaintHeader exportClick={onExportClick}/>
       </Box>
       <Box className={`absolute left-10 transform -translate-x-1/2 -translate-y-1/2`} style={{ top: '50%' }}>
         <PaintLeftMenu exportClick={onExportClick} addClick={() => {
-          setOptionsPosition({
-            x: 80,
-            y: (sizeHeight / 2) - 100
-          })
+          setOptionsPosition({ x: 80, y: (sizeHeight / 2) - 100 })
           setShowOptions(!showOptions)
         }}/>
       </Box>
+      <PaintZoom zoomLevel={zoomLevel} handleZoomIn={handleZoomIn} handleZoomOut={handleZoomOut}/>
     </Box>
   );
 });
