@@ -1,6 +1,6 @@
 import { getStocksAPI } from "../services/tickers.service.js";
 
-export const getStocks = async (req, res) => {
+export const getExternalStocks = async (req, res) => {
   const {
     limit,
     search

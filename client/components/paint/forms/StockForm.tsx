@@ -3,7 +3,6 @@ import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
 import {
   useCreateFortuneMutation,
   useDeleteFortuneMutation,
-  useGetStocksQuery,
   useUpdateFortuneMutation
 } from "@/store/api/fortuneSlice";
 import InputForm from "@/ui/input/inputForm";
@@ -11,6 +10,7 @@ import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import SearchDropdown from "@/ui/searchDropdown/searchDropdown";
+import { useGetExternalStocksQuery } from "@/store/api/stockSlice";
 
 export default function StockForm({
   position,
@@ -41,7 +41,7 @@ export default function StockForm({
       y: position?.y || 0
     },
   });
-  const { data: stocks } = useGetStocksQuery({ search: form.code });
+  const { data: stocks } = useGetExternalStocksQuery({ search: form.code });
 
   useEffect(() => {
     if (defaultForm) {

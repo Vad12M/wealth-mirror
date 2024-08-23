@@ -22,7 +22,8 @@ export default function usePaint() {
   const {
     updateItem, clearAll,
     cars, cards,
-    realEstates, fortunes
+    realEstates, fortunes,
+    stocks,
   } = useCanvas();
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
@@ -130,10 +131,7 @@ export default function usePaint() {
     zoomLevel,
     sizeWidth,
     sizeHeight,
-    cars,
-    cards,
-    realEstates,
-    fortunes,
-    updateItem
+    updateItem,
+    cars, cards, realEstates, fortunes, stocks
   }
 }

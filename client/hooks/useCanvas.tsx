@@ -10,6 +10,7 @@ import {
   useGetFortunesQuery,
   useUpdateFortuneMutation
 } from "@/store/api/fortuneSlice";
+import { useDeleteAllStocksMutation, useGetStocksQuery, useUpdateStockMutation } from "@/store/api/stockSlice";
 
 
 export default function useCanvas() {
@@ -17,16 +18,19 @@ export default function useCanvas() {
   const [deleteAllCards] = useDeleteAllCardsMutation();
   const [deleteAllRealEstates] = useDeleteAllRealEstatesMutation();
   const [deleteAllFortunes] = useDeleteAllFortunesMutation();
+  const [deleteAllStocks] = useDeleteAllStocksMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
   const [updateRealEstate] = useUpdateRealEstateMutation();
   const [updateFortune] = useUpdateFortuneMutation();
+  const [updateStock] = useUpdateStockMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
   const { data: realEstates } = useGetRealEstatesQuery();
   const { data: fortunes } = useGetFortunesQuery();
+  const { data: stocks } = useGetStocksQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -46,17 +50,18 @@ export default function useCanvas() {
       case 'fortune':
         updateFortune(defaultParams);
         break;
-      default:
+      case 'stock':
+        updateStock(defaultParams);
         break;
     }
   }
 
   const clearAll = () => {
-    console.log('clear all')
     deleteAllCars();
     deleteAllCards();
     deleteAllRealEstates();
     deleteAllFortunes();
+    deleteAllStocks();
   }
 
   return {
@@ -66,5 +71,6 @@ export default function useCanvas() {
     cards,
     realEstates,
     fortunes,
+    stocks
   }
 }

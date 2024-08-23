@@ -36,7 +36,7 @@ const SearchDropdown = ({ options, value, onChange, label, placeholder }: {
       />
       {isOpen && <div className="relative" ref={containerRef}>
         <div
-          className="rounded-[8px] border border-[#D0D5DD] bg-white w-full py-2.5 px-3.5 absolute left-0 top-full mt-1 overflow-hidden overflow-y-auto z-10"
+          className="rounded-[8px] border border-[#D0D5DD] bg-white w-full absolute left-0 top-full mt-1 overflow-hidden overflow-y-auto z-10"
           style={{
             maxHeight: '200px',
             boxShadow: '0px 5px 2px 0px rgba(16, 24, 40, 0.07)',
@@ -45,11 +45,13 @@ const SearchDropdown = ({ options, value, onChange, label, placeholder }: {
           {options.slice(0, 5).map((option, index) => (
             <div
               key={index}
-              className="cursor-pointer py-2 px-2 rounded-[8px] text-black hover:bg-primary"
+              className="cursor-pointer py-2 px-4 text-black"
               onClick={() => {
                 onChange(option.value);
                 setIsOpen(false);
               }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F7F7F7'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
             >
               {option.label}
             </div>

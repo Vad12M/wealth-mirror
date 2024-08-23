@@ -47,15 +47,6 @@ export const fortuneSlice = baseApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'fortunes' }]
     }),
-
-    getStocks: builder.query<any, { search?: string }>({
-      query: (params) => ({
-        url: '/stocks?limit=10',
-        params,
-      }),
-      providesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
-    }),
-
   })
 })
 
@@ -65,5 +56,4 @@ export const {
   useUpdateFortuneMutation,
   useDeleteFortuneMutation,
   useDeleteAllFortunesMutation,
-  useGetStocksQuery,
 } = fortuneSlice;

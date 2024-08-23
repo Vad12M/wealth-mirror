@@ -1,5 +1,7 @@
 export interface IRealEstate {
   _id: string;
+  category: string;
+  type: string;
   location: string;
   price: number;
   image: string;
@@ -11,6 +13,8 @@ export interface IRealEstate {
 }
 
 export interface IRealEstateForm {
+  category: string;
+  type: string
   location: string;
   price: number;
   position: {

@@ -3,6 +3,8 @@ import BlockLayout from "@/components/layouts/BlockLayout";
 import Typography from "@/ui/typography/Typography";
 
 export default function HowIsItWorkBlock() {
+  const [hoveredType, setHoveredType] = React.useState<string | null>(null);
+
   return (
     <BlockLayout
       title={'How it Works?'}
@@ -17,22 +19,28 @@ export default function HowIsItWorkBlock() {
           background: 'rgba(255, 255, 255, 0.12)',
           boxShadow: '0px 0px 74.6px 4px rgba(0, 179, 134, 0.39)'
         }}
+        onMouseEnter={() => setHoveredType('centralize')}
+        onMouseLeave={() => setHoveredType(null)}
       >
         <div className="flex md:flex-row flex-col items-center md:space-x-8 space-x-0 md:space-y-0 space-y-8">
           <div
-            // style={{ backgroundImage: 'url("/howItWorks/c1.svg")' }}
-            className="relative md:w-[592px] w-[306px] md:h-[289px] h-[313px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
-          >
+            className="relative overflow-hidden md:w-[592px] w-[306px] md:h-[289px] h-[313px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover">
             <img
               src="/howItWorks/c1-gradient.svg"
               alt="gradient"
-              className="absolute md:rounded-[40px] rounded-[20px] md:w-[588px] w-[303px] md:h-[286px] h-[310px] z-10"
+              className="absolute md:rounded-[40px] rounded-[20px] md:w-[588px] w-[303px] md:h-[287px] h-[311px] z-10"
             />
-            <img
-              src="/howItWorks/c1.svg"
-              alt="gradient"
-              className="absolute md:rounded-[40px] rounded-[20px] md:w-[388px] w-[303px] md:h-[286px] h-[310px] left-0"
-            />
+            {hoveredType === 'centralize'
+              ? <video
+                src={'/howItWorks/centralize.mp4'}
+                autoPlay loop muted
+                className="md:rounded-[40px] rounded-[20px] absolute"
+              />
+              : <img
+                src="/howItWorks/c1.svg"
+                alt="gradient"
+                className="absolute md:rounded-[40px] rounded-[20px] md:w-[388px] w-[303px] md:h-[286px] h-[310px] left-0"
+              />}
             <div className="flex flex-col items-end mb-16 mr-5 z-20">
               <Typography text={'Centralize'} type={'heading3'} className="mb-2"/>
               <Typography
@@ -43,9 +51,23 @@ export default function HowIsItWorkBlock() {
             </div>
           </div>
           <div
-            style={{ backgroundImage: 'url("/howItWorks/v1.svg")' }}
-            className="relative md:w-[484px] w-[306px] h-[289px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
+            style={{ backgroundImage: hoveredType === 'visualize' ? undefined : 'url("/howItWorks/v1.svg")' }}
+            className="relative overflow-hidden md:w-[484px] w-[306px] h-[289px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-end bg-no-repeat bg-cover"
+            onMouseEnter={() => setHoveredType('visualize')}
+            onMouseLeave={() => setHoveredType(null)}
           >
+            {hoveredType === 'visualize'
+              ? <video
+                src={'/howItWorks/visualize.mp4'}
+                autoPlay loop muted
+                className="md:rounded-[40px] rounded-[20px] absolute h-full"
+              />
+              : <img
+                src="/howItWorks/v1-gradient.svg"
+                alt="gradient"
+                className="absolute md:rounded-[40px] rounded-[20px] md:w-[481px] w-[306px] h-[287px]"
+              />}
+
             <img
               src="/howItWorks/v1-gradient.svg"
               alt="gradient"
@@ -64,9 +86,23 @@ export default function HowIsItWorkBlock() {
         <div className="flex md:flex-row flex-col items-center md:space-x-8 space-x-0 md:space-y-0 space-y-8">
           <div
             style={{ backgroundImage: 'url("/howItWorks/a1.svg")' }}
-            className="md:w-[436px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
+            className=" overflow-hidden relative md:w-[436px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
+            onMouseEnter={() => setHoveredType('analyse')}
+            onMouseLeave={() => setHoveredType(null)}
           >
-            <div className="flex flex-col items-end mt-8 mr-5">
+            {hoveredType === 'analyse' &&
+              <video
+                src={'/howItWorks/analyse.mp4'}
+                autoPlay loop muted
+                className="md:rounded-[40px] rounded-[20px] absolute"
+              />
+            }
+            <img
+              src="/howItWorks/a1-gradient.svg"
+              alt="gradient"
+              className="absolute md:rounded-[40px] rounded-[20px] md:w-[432px] w-[306px] md:h-[349px] h-[349px]"
+            />
+            <div className="flex flex-col items-end mt-8 mr-5 z-20">
               <Typography text={'Analyze'} type={'heading3'} className="mb-2"/>
               <Typography
                 text={'Get daily / monthly / \n' +
@@ -77,19 +113,26 @@ export default function HowIsItWorkBlock() {
             </div>
           </div>
           <div
-            style={{
-              backgroundImage: 'url("/howItWorks/t1.svg")'
-          }}
-            className="relative md:w-[640px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
+            style={{ backgroundImage: 'url("/howItWorks/t1.svg")' }}
+            className="overflow-hidden relative md:w-[640px] w-[306px] h-[351px] md:rounded-[40px] rounded-[20px] border border-primary flex justify-end items-start"
+            onMouseEnter={() => setHoveredType('takeActions')}
+            onMouseLeave={() => setHoveredType(null)}
           >
-            {/*<video*/}
-            {/*  src={'/howItWorks/takeactions.mp4'}*/}
-            {/*  autoPlay*/}
-            {/*  loop*/}
-            {/*  muted*/}
-            {/*  className="md:w-[640px] w-[306px] md:h-[351px] h-[351px] md:rounded-[40px] rounded-[20px] absolute"*/}
-            {/*/>*/}
-            <div className="flex flex-col items-end mt-8 mr-5">
+            {hoveredType === 'takeActions' &&
+              <video
+                src={'/howItWorks/takeaction.mp4'}
+                autoPlay
+                loop
+                muted
+                className="md:rounded-[40px] rounded-[20px] absolute"
+              />}
+            <img
+              src="/howItWorks/t1-gradient.svg"
+              alt="gradient"
+              className="absolute md:rounded-[40px] rounded-[20px] md:w-[636px] w-[306px] md:h-[349px] h-[349px]"
+            />
+
+            <div className="flex flex-col items-end mt-8 mr-5 z-10">
               <Typography text={'Take Actions'} type={'heading3'} className="mb-2"/>
               <Typography
                 text={'AI Engine that will give valuable recommendations on your wealth.'}

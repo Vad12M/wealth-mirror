@@ -34,7 +34,8 @@ import {
   updateFortune
 } from "./controllers/FortuneController.js";
 import { createFortuneValidator } from "./validations/fortune.js";
-import { getStocks } from "./controllers/TickerController.js";
+import { getExternalStocks } from "./controllers/TickerController.js";
+import { createStock, deleteAllStocks, deleteStock, getStocks, updateStock } from "./controllers/StockController.js";
 
 dotenv.config();
 
@@ -98,9 +99,16 @@ app.get('/fortunes', checkAuth, getFortunes);
 app.delete('/fortunes/delete/:id', checkAuth, deleteFortune);
 app.delete('/fortunes/delete/all', checkAuth, deleteAllFortunes);
 
+//  stock
+app.post('/stocks/create', checkAuth, createFortuneValidator, createStock);
+app.put('/stocks/update/:id', checkAuth, updateStock);
+app.get('/stocks', checkAuth, getStocks);
+app.delete('/stocks/delete/:id', checkAuth, deleteStock);
+app.delete('/stocks/delete/all', checkAuth, deleteAllStocks);
+
 
 // tickers
-app.get('/stocks', getStocks);
+app.get('/external/stocks', getExternalStocks);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

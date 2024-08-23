@@ -1,32 +1,65 @@
 import React from 'react';
 import Typography from "@/ui/typography/Typography";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 
-const Dropdown = ({ options, value, onChange, label }: {
+const Dropdown = ({ options, value, onChange, label, placeholder }: {
   options: { value: string, label: string }[];
   value: string;
   onChange: (value: string) => void;
   label?: string;
+  placeholder?: string;
 }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const containerRef = React.useRef(null);
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  useOnClickOutside([containerRef], () => {
+    setIsOpen(false);
+  });
+
   return (
-    <div className="relative inline-block w-full">
-      {label && <Typography text={label} type={'labelsSmall'} className="mb-2" />}
-      <div className="relative">
-        <select
-          className="text-black outline-0 block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-10 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          {options.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M10 12l-4-4h8z" />
-          </svg>
+    <div className="flex flex-col space-y-2">
+      {label && <Typography text={label} type={'labelsSmall'}/>}
+      <div
+        ref={containerRef}
+        className="relative rounded-[8px] border border-[#D0D5DD] bg-white w-full cursor-pointer"
+        style={{
+          boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+        }}
+        onClick={toggleDropdown}
+      >
+        <div className="flex items-center justify-between py-2.5 px-3.5">
+          <span className="text-black">
+            {options.find(option => option.value === value)?.label || placeholder}
+          </span>
+          <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+            ▼
+          </span>
         </div>
+        {isOpen && (
+          <div
+            className="rounded-[8px] border border-[#D0D5DD] bg-white w-full absolute left-0 top-full mt-1 overflow-hidden overflow-y-auto z-10"
+            style={{
+              maxHeight: '200px',
+              boxShadow: '0px 5px 2px 0px rgba(16, 24, 40, 0.07)',
+            }}
+          >
+            {options.map((option, index) => (
+              <div
+                key={index}
+                className="cursor-pointer py-2 px-4 text-black"
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F7F7F7'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
+              >
+                {option.label}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
