@@ -15,9 +15,8 @@ const clickVariants: Variants = {
     height: 60
   },
   hover: {
-    width: [60, 30],
-    height: [60, 30],
-    backgroundColor: 'rgba(55,151,162,0.3)'
+    width: [60, 60],
+    height: [60, 60],
   }
 }
 
@@ -29,7 +28,19 @@ const dotVariants: Variants = {
     scale: 1
   },
   hover: {
-    scale: 2
+    scale: 2.5
+  }
+}
+
+const hoverVariants: Variants = {
+  pressed: {
+    opacity: 0
+  },
+  default: {
+    opacity: [0, 0]
+  },
+  hover: {
+    opacity: [0, 1]
   }
 }
 
@@ -45,6 +56,9 @@ const CustomCursor = () => {
   const dotLeft = useTransform(mouseLeft, l => `${l - 3.5}px`);
   const outlineTop = useTransform(mouseDelayedTop, t => `${t}px`);
   const outlineLeft = useTransform(mouseDelayedLeft, l => `${l}px`);
+  const cursorLeft = useTransform(mouseLeft, l => `${l + 4}px`);
+  const cursorTop = useTransform(mouseTop, t => `${t + 13}px`);
+
 
   const cursorState = useAppSelector((state) => state.customCursor.value);
   const [variant, setVariant] = useState<string>('default');
@@ -88,6 +102,20 @@ const CustomCursor = () => {
         style={{ left: dotLeft, top: dotTop, opacity }}
         className={styles.cursorDot}
       />
+      <motion.div
+        initial="default"
+        animate={variant}
+        variants={hoverVariants}
+        style={{
+          left: cursorLeft,
+          top: cursorTop,
+          backgroundImage: `url('/hover-cursor.svg')`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+      }}
+        className={styles.cursorHover}
+      />
+
     </>
   );
 };

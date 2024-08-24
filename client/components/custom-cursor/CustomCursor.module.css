@@ -1,5 +1,6 @@
 .cursorDot,
-.cursorDotOutline {
+.cursorDotOutline,
+.cursorHover {
   pointer-events: none;
   position: fixed;
   top: 50%;
@@ -18,5 +19,11 @@
 .cursorDotOutline {
   width: 80px;
   height: 80px;
-  background-color: rgba(0, 179, 134, 0.1);
+  background-color: rgba(0, 179, 134, 0.10);
+  border: #00B386 1px solid;
+}
+
+.cursorHover {
+  width: 30px;
+  height: 30px;
 }
