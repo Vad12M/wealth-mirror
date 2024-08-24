@@ -3,6 +3,7 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import React, { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { IFortune } from "@/interfaces/IFortune";
+import { Button } from "@/ui/button/Button";
 
 export default function StocksElements({
   stocks,
@@ -41,43 +42,45 @@ export default function StocksElements({
           image.src = stock.image;
           image.id = uuidv4();
           return (
-            <KonvaImage
-              key={stock._id}
-              image={image}
-              x={stock.position.x}
-              y={stock.position.y}
-              height={180}
-              width={90}
-              draggable={isDraggable}
-              onDragMove={(e) => e.cancelBubble = true}
-              onDragStart={(e) => e.cancelBubble = true}
-              onDragEnd={(e) => {
-                e.cancelBubble = true;
-                const node = e.target;
-                const { x, y } = node.absolutePosition();
-                updateItem(stock._id, 'stock', x / zoomLevel, y / zoomLevel)
-              }}
-              onClick={(e) => {
-                e.cancelBubble = true;
-                handleActiveItem(stock, 'stock');
-              }}
-              onMouseEnter={() => {
-                setTooltip({
-                  visible: true,
-                  stock: stock,
-                  x: stock.position.x + 80,
-                  y: stock.position.y,
-                });
-              }}
-              onMouseLeave={() => {
-                setTooltip({
-                  visible: false,
-                  stock: undefined,
-                  x: 0,
-                  y: 0,
-                });
-              }}
-            />
+            <Button typeButton={'none'}>
+              <KonvaImage
+                key={stock._id}
+                image={image}
+                x={stock.position.x}
+                y={stock.position.y}
+                height={180}
+                width={90}
+                draggable={isDraggable}
+                onDragMove={(e) => e.cancelBubble = true}
+                onDragStart={(e) => e.cancelBubble = true}
+                onDragEnd={(e) => {
+                  e.cancelBubble = true;
+                  const node = e.target;
+                  const { x, y } = node.absolutePosition();
+                  updateItem(stock._id, 'stock', x / zoomLevel, y / zoomLevel)
+                }}
+                onClick={(e) => {
+                  e.cancelBubble = true;
+                  handleActiveItem(stock, 'stock');
+                }}
+                onMouseEnter={() => {
+                  setTooltip({
+                    visible: true,
+                    stock: stock,
+                    x: stock.position.x + 80,
+                    y: stock.position.y,
+                  });
+                }}
+                onMouseLeave={() => {
+                  setTooltip({
+                    visible: false,
+                    stock: undefined,
+                    x: 0,
+                    y: 0,
+                  });
+                }}
+              />
+            </Button>
           )
         }
       )}

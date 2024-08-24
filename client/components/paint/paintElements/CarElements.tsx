@@ -3,6 +3,7 @@ import { Image as KonvaImage } from "react-konva";
 import React from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { ICar } from "@/interfaces/ICar";
+import { Button } from "@/ui/button/Button";
 
 export default function CarElements({
   cars,
@@ -46,27 +47,29 @@ export default function CarElements({
           }
 
           return (
-            <KonvaImage
-              key={car._id}
-              image={image}
-              x={car.position.x}
-              y={car.position.y}
-              height={height}
-              width={width}
-              draggable={isDraggable}
-              onDragMove={(e) => e.cancelBubble = true}
-              onDragStart={(e) => e.cancelBubble = true}
-              onDragEnd={(e) => {
-                e.cancelBubble = true;
-                const node = e.target;
-                const { x, y } = node.absolutePosition();
-                updateItem(car._id, 'car', x / zoomLevel, y / zoomLevel)
-              }}
-              onClick={(e) => {
-                e.cancelBubble = true;
-                handleActiveItem(car, 'car');
-              }}
-            />
+            <Button typeButton={'none'}>
+              <KonvaImage
+                key={car._id}
+                image={image}
+                x={car.position.x}
+                y={car.position.y}
+                height={height}
+                width={width}
+                draggable={isDraggable}
+                onDragMove={(e) => e.cancelBubble = true}
+                onDragStart={(e) => e.cancelBubble = true}
+                onDragEnd={(e) => {
+                  e.cancelBubble = true;
+                  const node = e.target;
+                  const { x, y } = node.absolutePosition();
+                  updateItem(car._id, 'car', x / zoomLevel, y / zoomLevel)
+                }}
+                onClick={(e) => {
+                  e.cancelBubble = true;
+                  handleActiveItem(car, 'car');
+                }}
+              />
+            </Button>
           )
         }
       )}
