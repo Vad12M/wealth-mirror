@@ -5,24 +5,9 @@ import useInnerWidth from "@/hooks/useInnerWidth";
 import { useAppSelector } from "@/store";
 import { CursorState } from "@/store/reducers/customCursor.reducer";
 
-const clickVariants: Variants = {
-  pressed: {
-    width: [90, 20],
-    height: [90, 20],
-  },
-  default: {
-    width: 60,
-    height: 60
-  },
-  hover: {
-    width: [60, 60],
-    height: [60, 60],
-  }
-}
-
 const dotVariants: Variants = {
   pressed: {
-    scale: 1
+    scale: 2.5
   },
   default: {
     scale: 1
@@ -33,15 +18,21 @@ const dotVariants: Variants = {
 }
 
 const hoverVariants: Variants = {
-  pressed: {
-    opacity: 0
-  },
-  default: {
-    opacity: [0, 0]
-  },
-  hover: {
-    opacity: [0, 1]
-  }
+  pressed: { opacity: 0 },
+  default: { opacity: [0, 0] },
+  hover: { opacity: [0, 1] }
+}
+
+const defaultVariants: Variants = {
+  pressed: { opacity: 0 },
+  default: { opacity: 1 },
+  hover: { opacity: 0 }
+}
+
+const clickedVariants: Variants = {
+  pressed: { opacity: 1 },
+  default: { opacity: 0 },
+  hover: { opacity: 0 }
 }
 
 const CustomCursor = () => {
@@ -58,6 +49,8 @@ const CustomCursor = () => {
   const outlineLeft = useTransform(mouseDelayedLeft, l => `${l}px`);
   const cursorLeft = useTransform(mouseLeft, l => `${l + 4}px`);
   const cursorTop = useTransform(mouseTop, t => `${t + 13}px`);
+  const defaultCursorTop = useTransform(mouseTop, t => `${t + 14}px`);
+  const defaultCursorLeft = useTransform(mouseLeft, l => `${l + 12}px`);
 
 
   const cursorState = useAppSelector((state) => state.customCursor.value);
@@ -91,7 +84,6 @@ const CustomCursor = () => {
       <motion.div
         initial="default"
         animate={variant}
-        variants={clickVariants}
         style={{ left: outlineLeft, top: outlineTop, opacity }}
         className={styles.cursorDotOutline}
       />
@@ -112,10 +104,35 @@ const CustomCursor = () => {
           backgroundImage: `url('/hover-cursor.svg')`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
-      }}
+        }}
         className={styles.cursorHover}
       />
-
+      <motion.div
+        initial="default"
+        animate={variant}
+        variants={defaultVariants}
+        style={{
+          left: defaultCursorLeft,
+          top: defaultCursorTop,
+          backgroundImage: `url('/default-cursor.svg')`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }}
+        className={styles.cursorHover}
+      />
+      <motion.div
+        initial="default"
+        animate={variant}
+        variants={clickedVariants}
+        style={{
+          left: defaultCursorLeft,
+          top: defaultCursorTop,
+          backgroundImage: `url('/clicked-cursor.svg')`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+        }}
+        className={styles.cursorHover}
+      />
     </>
   );
 };

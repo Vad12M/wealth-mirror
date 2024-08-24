@@ -17,8 +17,8 @@
 }
 
 .cursorDotOutline {
-  width: 80px;
-  height: 80px;
+  width: 55px;
+  height: 55px;
   background-color: rgba(0, 179, 134, 0.10);
   border: #00B386 1px solid;
 }
