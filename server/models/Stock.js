@@ -5,6 +5,7 @@ const StockSchema = new mongoose.Schema({
   code: { type: String, required: true },
   amount: { type: Number, required: true },
   quantity: { type: Number, required: true },
+  purchaseDate: { type: Date, required: true },
   profitAndLoss: {
     date: {
       type: Date,

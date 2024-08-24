@@ -11,6 +11,8 @@ import {
   useGetExternalStocksQuery,
   useUpdateStockMutation
 } from "@/store/api/stockSlice";
+import { parseISO } from "date-fns";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
 
 export default function StockForm({
   position,
@@ -36,6 +38,7 @@ export default function StockForm({
     periodOfReceivingDividends: '',
     type: 'stock',
     image: '/canvas/Fortune-4.svg',
+    purchaseDate: '',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -54,7 +57,8 @@ export default function StockForm({
         periodOfReceivingDividends: defaultForm.periodOfReceivingDividends,
         type: defaultForm.type,
         image: defaultForm.image,
-        position: defaultForm.position
+        position: defaultForm.position,
+        purchaseDate: defaultForm.purchaseDate,
       });
     }
   }, [defaultForm]);
@@ -104,10 +108,18 @@ export default function StockForm({
           onUpdate={(e) => setForm({ ...form, quantity: Number(e.target.value) })}
         />
         <InputForm
-          label="Amount"
+          label="Purchased Price"
           value={!!form.amount ? form.amount.toString() : ''}
-          placeholder={'Enter amount'}
+          placeholder={'Enter purchased price'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
+        />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, purchaseDate: startDate }));
+          }}
+          initialSelectDate={form.purchaseDate ? parseISO(form.purchaseDate) : undefined}
+          label={'Date of purchase'}
+          placeholder={'Select date'}
         />
         {defaultForm && <InputForm
           label="Amount of Dividends"

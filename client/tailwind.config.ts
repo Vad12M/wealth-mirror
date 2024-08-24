@@ -41,6 +41,8 @@ const config: Config = {
         neutralGray: '#404040',
         danger: '#B31B1B',
 
+        calendarGray: '#5e725d',
+
 
         // canvas
         secondaryGray: '#344054',

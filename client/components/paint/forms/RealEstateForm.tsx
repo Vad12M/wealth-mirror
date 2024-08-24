@@ -14,6 +14,8 @@ import ChevroneRightIcon from "@/ui/icons/ChevroneRightIcon";
 import Dropdown from "@/ui/dropdown/dropdown";
 import OptionResidential from "@/ui/icons/canvas/OptionResidential";
 import OptionCommercial from "@/ui/icons/canvas/OptionCommercial";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 
 export default function RealEstateForm({
   position,
@@ -41,7 +43,7 @@ export default function RealEstateForm({
       x: position?.x || 0,
       y: position?.y || 0
     },
-    purchaseDate: '2023-08-24T00:00:00.000Z'
+    purchaseDate: ""
   });
 
   const categories = [
@@ -159,10 +161,18 @@ export default function RealEstateForm({
           onUpdate={(e) => setForm({ ...form, location: e.target.value })}
         />
         <InputForm
-          label="Price"
+          label="Purchased Price"
           value={!!form.price ? form.price.toString() : ''}
-          placeholder="Enter price"
+          placeholder="Enter purchased price"
           onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
+        />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, purchaseDate: startDate }));
+          }}
+          initialSelectDate={form.purchaseDate ? parseISO(form.purchaseDate) : undefined}
+          label={'Date of purchase'}
+          placeholder={'Select date'}
         />
       </div>
       <FormButtonsBlock

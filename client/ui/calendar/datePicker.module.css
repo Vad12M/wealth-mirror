@@ -1,0 +1,117 @@
+.datePicker :global(.react-datepicker__month-text--keyboard-selected),
+.datePicker :global(.react-datepicker__quarter-text--keyboard-selected),
+.datePicker :global(.react-datepicker__year-text--keyboard-selected) {
+  @apply bg-[#1F1F1F7D];
+}
+
+.datePicker :global(.react-datepicker__day--keyboard-selected) {
+  @apply bg-[#1F1F1F7D] text-white !important;
+}
+
+
+.datePicker {
+  @apply border-none bg-[#5e725d] px-2 pb-4;
+}
+
+.datePicker :global(.react-datepicker__day) {
+  @apply text-white hover:bg-primaryDark hover:text-white rounded-full;
+}
+
+.datePicker :global(.react-datepicker__day--selected),
+.datePicker :global(.react-datepicker__day--in-selecting-range),
+.datePicker :global(.react-datepicker__day--in-range),
+.datePicker :global(.react-datepicker__month-text--selected),
+.datePicker :global(.react-datepicker__month-text--in-selecting-range),
+.datePicker :global(.react-datepicker__month-text--in-range),
+.datePicker :global(.react-datepicker__quarter-text--selected),
+.datePicker :global(.react-datepicker__quarter-text--in-selecting-range),
+.datePicker :global(.react-datepicker__quarter-text--in-range),
+.datePicker :global(.react-datepicker__year-text--selected),
+.datePicker :global(.react-datepicker__year-text--in-selecting-range),
+.datePicker :global(.react-datepicker__year-text--in-range),
+.datePicker :global(.react-datepicker__day--today.react-datepicker__day--selected),
+.datePicker :global(.react-datepicker__day--today.react-datepicker__day--keyboard-selected) {
+  @apply bg-primary hover:bg-primaryDark text-white rounded-full;
+}
+
+.datePicker :global(.react-datepicker__day--today.react-datepicker__day--selected),
+.datePicker :global(.react-datepicker__day--today.react-datepicker__day--keyboard-selected) {
+  @apply border-primaryDark hover:border-primaryDark;
+}
+
+.datePicker :global(.react-datepicker__day--selected.react-datepicker__day--range-start) {
+  @apply rounded-full rounded-r-none !important;
+}
+
+.datePicker :global(.react-datepicker__day--range-end.react-datepicker__day--range-end) {
+  @apply rounded-full rounded-l-none !important;
+}
+
+.datePicker :global(.react-datepicker__day--in-range) {
+  @apply rounded-none !important;
+}
+
+.datePicker :global(.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range)),
+.datePicker :global(.react-datepicker__month-text--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range)),
+.datePicker :global(.react-datepicker__quarter-text--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range)),
+.datePicker :global(.react-datepicker__year-text--in-selecting-range:not(.react-datepicker__day--in-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--in-range)) {
+  @apply bg-primary !important;
+}
+
+.datePicker :global(.react-datepicker__day--disabled) {
+  @apply text-primary bg-calendarGray hover:border-none;
+}
+
+.datePicker :global(.custom-day) {
+  @apply flex flex-col w-full h-full justify-center;
+}
+
+.datePicker :global(.react-datepicker__day-name) {
+  @apply uppercase text-center text-[#B5BEC6] px-4 text-[11px] font-medium;
+  @apply m-0 h-9 flex items-center justify-center;
+  font-family: Inter;
+}
+
+.datePicker :global(.react-datepicker__day-names) {
+  @apply flex justify-center;
+}
+
+.datePicker :global(.react-datepicker__week) {
+  @apply flex justify-center;
+}
+
+.datePicker :global(.react-datepicker__header) {
+  @apply bg-calendarGray border-0;
+}
+
+.datePicker :global(.react-datepicker__month) {
+  @apply m-0;
+}
+
+.datePicker :global(.react-datepicker) {
+  @apply border-0 w-full;
+}
+
+.datePicker :global(.react-datepicker__day--outside-month) {
+  @apply invisible;
+}
+
+.datePicker :global(.react-datepicker__day--today) {
+  @apply border bg-grayBody font-medium rounded-full border-transparent;
+}
+
+.datePicker :global(.react-datepicker__day--today:hover) {
+  @apply border border-grayBody bg-primary font-medium;
+}

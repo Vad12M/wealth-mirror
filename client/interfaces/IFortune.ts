@@ -4,6 +4,7 @@ export interface IFortune {
   code: string;
   type: string;
   amount: number;
+  purchaseDate: string;
   quantity: number;
   periodOfReceivingDividends: string;
   amountOfDividends: number;
@@ -19,6 +20,7 @@ export interface IFortuneForm {
   code: string;
   type: string;
   amount: number;
+  purchaseDate: string;
   quantity: number;
   periodOfReceivingDividends?: string;
   amountOfDividends?: number;

@@ -29,6 +29,7 @@
     "react-animate-height": "^3.2.3",
     "react-bootstrap-icons": "^1.11.4",
     "react-color": "^2.19.3",
+    "react-datepicker": "^7.3.0",
     "react-dom": "^18",
     "react-konva": "^18.2.10",
     "react-modal": "^3.16.1",
