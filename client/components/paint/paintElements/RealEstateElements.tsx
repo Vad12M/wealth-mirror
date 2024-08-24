@@ -31,8 +31,8 @@ export default function RealEstateElements({
           image.src = realEstate.image;
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'}>
-              <KonvaImage
+            <Button typeButton={'none'}  key={realEstate._id}>
+            <KonvaImage
                 key={realEstate._id}
                 image={image}
                 x={realEstate.position.x}

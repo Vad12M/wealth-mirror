@@ -47,8 +47,8 @@ export default function CarElements({
           }
 
           return (
-            <Button typeButton={'none'}>
-              <KonvaImage
+            <Button typeButton={'none'}  key={car._id}>
+            <KonvaImage
                 key={car._id}
                 image={image}
                 x={car.position.x}

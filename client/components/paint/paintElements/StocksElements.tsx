@@ -42,7 +42,7 @@ export default function StocksElements({
           image.src = stock.image;
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'}>
+            <Button typeButton={'none'} key={stock._id}>
               <KonvaImage
                 key={stock._id}
                 image={image}

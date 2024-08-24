@@ -30,9 +30,8 @@ export default function CardsElements({
           image.src = card.image || '';
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'}>
+            <Button typeButton={'none'}  key={card._id}>
               <KonvaImage
-                key={card._id}
                 image={image}
                 x={card.position.x}
                 y={card.position.y}
