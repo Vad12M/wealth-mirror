@@ -34,6 +34,7 @@ export default function MutualFundsForm({
       x: position?.x || 0,
       y: position?.y || 0
     },
+    purchaseDate: ''
   });
 
   useEffect(() => {
@@ -47,7 +48,8 @@ export default function MutualFundsForm({
         periodOfReceivingDividends: defaultForm.periodOfReceivingDividends,
         type: defaultForm.type,
         image: defaultForm.image,
-        position: defaultForm.position
+        position: defaultForm.position,
+        purchaseDate: defaultForm.purchaseDate
       });
     }
   }, [defaultForm]);
