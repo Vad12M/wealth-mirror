@@ -5,8 +5,14 @@ import Input from "@/ui/input/input";
 import { Button } from "@/ui/button/Button";
 import { useContactMutation } from "@/store/api/apiSlice";
 import useContactValidator from "@/service/validator/useContactValidator";
+import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
+import Contact1 from "@/ui/icons/contact/Contact1";
+import Contact2 from "@/ui/icons/contact/Contact2";
+import Contact3 from "@/ui/icons/contact/Contact3";
+import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 
 export default function About() {
+  const isMobile = useGetIsMobile();
   const [postContact] = useContactMutation();
   const [form, setForm] = useState<IContactForm>({
     fullName: '',
@@ -34,21 +40,25 @@ export default function About() {
   }
 
   return (
-    <section className="py-[180px] fixed-container flex flex-col items-center">
-      <Typography text={'Contact Us'} className="mb-2" primaryElements={['Us']}/>
-      <Typography
-        text={'Here\'s our pricing plan: affordable, straightforward, and no hidden fees. That\'s it. Let\'s get started!'}
-        className="mb-20 text-center  w-[470px]"
-        color={'text-bodyGray'}
-        type={'bodyB1'}
-      />
+    <section className="pt-[180px] pb-[60px] fixed-container flex space-x-[72px]">
+      <div className="md:w-1/2 w-full flex flex-col items-center md:items-start">
+        <Typography text={'Contact Us'} className="mb-2" primaryElements={['Us']} type={isMobile ? "heading3" : "heading1"}/>
+        <div className='mb-12 flex flex-col md:flex-row items-center space-x-1'>
+          <Typography text={'Please reach out to us at:'} color={'text-bodyGray'} type={'bodyB1'}/>
+          <Anchor
+            href={"mailto: wealthmirrorofficial@gmail.com"}
+            className="text-bodyGray underline"
+            style={{ fontFamily: 'Open Sans' }}
+          >
+            {'wealthmirrorofficial@gmail.com'}
+          </Anchor>
+        </div>
 
-      <div className="flex flex-col space-y-10 w-full items-center">
-        <div className="flex items-center space-x-6 w-full">
+        <div className="flex flex-col space-y-5 w-full md:items-start items-center">
           <Input
-            label={'Full name *'}
+            label={'Full Name'}
             value={form.fullName}
-            placeholder={'John David'}
+            placeholder={'John Doe'}
             onUpdate={(e) => {
               setForm({ ...form, fullName: e.target.value })
               validator.clear(['fullName'])
@@ -57,9 +67,9 @@ export default function About() {
             invalid={validator.isFieldInvalid('fullName')}
           />
           <Input
-            label={'Your email *'}
+            label={'Your Email'}
             value={form.email}
-            placeholder={'example@yourmail.com'}
+            placeholder={'johndoe@yourmail.com'}
             onUpdate={(e) => {
               setForm({ ...form, email: e.target.value })
               validator.clear(['email'])
@@ -67,33 +77,48 @@ export default function About() {
             className={'w-full'}
             invalid={validator.isFieldInvalid('email')}
           />
-        </div>
-        <div className="flex items-center space-x-6 w-full">
           <Input
-            label={'Company'}
+            label={'Your Company'}
             value={form.company}
-            placeholder={'yourcompany name here'}
+            placeholder={'Your Company Name'}
             onUpdate={(e) => setForm({ ...form, company: e.target.value })}
             className={'w-full'}
           />
           <Input
-            label={'Subject'}
+            label={'Message Subject'}
             value={form.subject}
-            placeholder={'How can we Help'}
+            placeholder={'Subject of your message'}
             onUpdate={(e) => setForm({ ...form, subject: e.target.value })}
             className={'w-full'}
           />
+          <div className='flex flex-col pb-4 w-full'>
+            <Typography text={"Your Message"} type={'body1'} className={'mb-2'}/>
+            <textarea
+              className={'w-full h-[180px] p-4 rounded-[8px]  bg-transparent outline-0'}
+              placeholder={'Hello! I would like to talk about....'}
+              style={{ border: '1px solid rgba(188, 232, 187, 0.75)' }}
+              onChange={(e) => setForm((prevState) => ({ ...prevState, message: e.target.value }))}
+            />
+          </div>
+          <Button
+            onClick={handleContact}
+            className="text-[18px] font-bold text-[#458244] bg-white rounded-[43px] py-2 px-6 w-[180px]"
+            typeButton={'none'}
+          >
+            {'Send Message'}
+          </Button>
         </div>
-        <Input
-          label={'Message'}
-          value={form.message}
-          placeholder={'Hello there,I would like to talk about how to...'}
-          onUpdate={(e) => setForm({ ...form, message: e.target.value })}
-          className={'w-full mb-[36]'}
-        />
-        <Button onClick={handleContact} className="w-60">
-          {'Send Message'}
-        </Button>
+      </div>
+      <div className="w-1/2 relative md:block hidden">
+        <div className="ml-36 mt-10 mb-6">
+          <Contact1/>
+        </div>
+        <div>
+          <Contact2/>
+        </div>
+        <div className="absolute -right-[80px] top-[300px]">
+          <Contact3/>
+        </div>
       </div>
     </section>
   )

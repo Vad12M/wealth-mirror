@@ -1,5 +1,4 @@
 import useBaseLocalValidator from "./useBaseLocalValidator";
-import { IWaitUser } from "@/interfaces/IWaitUser";
 import { IContactForm } from "@/interfaces/IContactForm";
 
 const useContactValidator = (formFields: IContactForm) => {
