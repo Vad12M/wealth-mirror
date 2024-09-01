@@ -48,8 +48,8 @@ export default function MutualFundsElements({
                 image={image}
                 x={mutualFund.position.x}
                 y={mutualFund.position.y}
-                height={180}
-                width={90}
+                height={80}
+                width={80}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}

@@ -1,6 +1,8 @@
 import React from 'react';
 import Typography from "@/ui/typography/Typography";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
+import ChevroneUpIcon from "@/ui/icons/ChevroneUpIcon";
+import ChevroneDownIcon from "@/ui/icons/ChevroneDownIcon";
 
 const Dropdown = ({ options, value, onChange, label, placeholder }: {
   options: { value: string, label: string }[];
@@ -17,6 +19,8 @@ const Dropdown = ({ options, value, onChange, label, placeholder }: {
     setIsOpen(false);
   });
 
+  const result = options.find(option => option.value === value)?.label;
+
   return (
     <div className="flex flex-col space-y-2">
       {label && <Typography text={label} type={'labelsSmall'}/>}
@@ -29,12 +33,10 @@ const Dropdown = ({ options, value, onChange, label, placeholder }: {
         onClick={toggleDropdown}
       >
         <div className="flex items-center justify-between py-2.5 px-3.5">
-          <span className="text-black">
-            {options.find(option => option.value === value)?.label || placeholder}
+          <span className={`text-black ${!result ? 'opacity-50' : ""} `}>
+            {result || placeholder}
           </span>
-          <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
-            ▼
-          </span>
+          {isOpen ? <ChevroneUpIcon/> : <ChevroneDownIcon/>}
         </div>
         {isOpen && (
           <div

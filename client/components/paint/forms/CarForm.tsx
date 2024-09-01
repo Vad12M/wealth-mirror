@@ -12,6 +12,10 @@ import Car from "@/ui/icons/canvas/car/Car";
 import 'swiper/swiper-bundle.css';
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
+import Dropdown from "@/ui/dropdown/dropdown";
+import { MARKS_LIST } from "@/service/globalConstants";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 
 export default function Crypto({
   position,
@@ -29,12 +33,12 @@ export default function Crypto({
   const [deleteCar, { isLoading: isLoadingDelete }] = useDeleteCarMutation();
   const [createCar, { isLoading: isLoadingCreate }] = useCreateCarMutation();
   const [updateCar, { isLoading: isLoadingUpdate }] = useUpdateCarMutation();
-  const year = new Date().getFullYear();
   const [form, setForm] = useState<ICarForm>({
     name: '',
     price: 0,
-    year: year,
     brand: '',
+    variant: '',
+    purchaseDate: '',
     type: 'car',
     image: '/canvas/OldCar.svg',
     position: {
@@ -50,13 +54,20 @@ export default function Crypto({
     { name: 'Bike', value: 'bike' }
   ];
 
+  const variants = [
+    { label: 'Petrol', value: 'petrol' },
+    { label: 'Diesel', value: 'diesel' },
+    { label: 'EV', value: 'ev' },
+  ];
+
   useEffect(() => {
     if (defaultForm) {
       setForm({
         name: defaultForm.name,
         price: defaultForm.price,
-        year: defaultForm.year,
         brand: defaultForm.brand,
+        variant: defaultForm.variant,
+        purchaseDate: defaultForm.purchaseDate,
         type: defaultForm.type,
         image: defaultForm.image,
         position: defaultForm.position
@@ -137,7 +148,8 @@ export default function Crypto({
             <SwiperSlide key={index} className="flex justify-center">
               <div className="flex justify-center">
                 <div className="flex flex-col bg-white rounded-[10px] w-[62px] h-[80px] justify-center items-center">
-                  <div className="bg-[#D9FBEE] h-[45px] w-[45px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
+                  <div
+                    className="bg-[#D9FBEE] h-[45px] w-[45px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
                     {iconsHandler(el.value)}
                   </div>
                   <Typography text={el.name} type={'labelsVerySmall'} color="text-black"/>
@@ -158,27 +170,35 @@ export default function Crypto({
           label="Name"
           value={form.name}
           placeholder={'Enter name'}
-          onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, name: e.target.value }))}
         />
-        {/*<SearchDropdown options={[]} onSelectItem={() => {*/}
-        {/*}}/>*/}
-        <InputForm
+        <Dropdown
           label="Brand"
           value={form.brand}
           placeholder={'Enter brand'}
-          onUpdate={(e) => setForm({ ...form, brand: e.target.value })}
+          onChange={(value) => setForm((prevState) => ({ ...prevState, brand: value }))}
+          options={MARKS_LIST}
+        />
+        <Dropdown
+          label="Variant"
+          value={form.variant}
+          placeholder={'Enter variant'}
+          onChange={(value) => setForm((prevState) => ({ ...prevState, variant: value }))}
+          options={variants}
         />
         <InputForm
-          label="Year"
-          value={form.year}
-          placeholder={'Enter year'}
-          onUpdate={(e) => setForm({ ...form, year: Number(e.target.value) })}
-        />
-        <InputForm
-          label="Price"
+          label="Purchased Price"
           value={!!form.price ? form.price.toString() : ''}
-          placeholder={'Enter price'}
-          onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
+          placeholder={'Enter purchased price'}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, price: Number(e.target.value) }))}
+        />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, purchaseDate: startDate }));
+          }}
+          initialSelectDate={form.purchaseDate ? parseISO(form.purchaseDate) : undefined}
+          label={'Date of purchase'}
+          placeholder={'Select date'}
         />
       </div>
       <FormButtonsBlock

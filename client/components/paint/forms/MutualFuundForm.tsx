@@ -34,7 +34,7 @@ export default function MutualFundsForm({
     category: '',
     units: 0,
     purchasePrice: 0,
-    image: '/canvas/MutualFounds.svg',
+    image: '/canvas/MutualFunds.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0

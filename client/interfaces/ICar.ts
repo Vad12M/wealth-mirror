@@ -2,12 +2,11 @@ export interface ICar {
   _id: string;
   name: string;
   brand: string;
-  year: number;
   type: string;
   price: number;
+  purchaseDate: string;
+  variant: string;
   image: string;
-  salePrice: number;
-  expensesPerMonth: number;
   position: {
     x: number;
     y: number;
@@ -17,8 +16,9 @@ export interface ICar {
 export interface ICarForm {
   name: string;
   price: number;
-  year: number;
   brand: string;
+  variant: string;
+  purchaseDate: string;
   position: {
     x: number;
     y: number;
@@ -26,5 +26,4 @@ export interface ICarForm {
   type: string;
   image?: string;
   salePrice?: number;
-  expensesPerMonth?: number;
 }
