@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const FortuneSchema = new mongoose.Schema({
+const StockSchema = new mongoose.Schema({
   name: { type: String, required: true },
   code: { type: String, required: true },
-  type: { type: String, required: true }, // 'stock', 'bond', 'mutual fund', 'epf', 'ppf', 'nps'
   amount: { type: Number, required: true },
   quantity: { type: Number, required: true },
+  purchaseDate: { type: Date, required: true },
   profitAndLoss: {
     date: {
       type: Date,
@@ -28,4 +28,4 @@ const FortuneSchema = new mongoose.Schema({
   timestamps: true
 });
 
-export default mongoose.model("Fortune", FortuneSchema);
+export default mongoose.model("Stock", StockSchema);
