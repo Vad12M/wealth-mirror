@@ -6,7 +6,6 @@ export interface ICar {
   price: number;
   purchaseDate: string;
   variant: string;
-  image: string;
   position: {
     x: number;
     y: number;
@@ -24,6 +23,5 @@ export interface ICarForm {
     y: number;
   };
   type: string;
-  image?: string;
   salePrice?: number;
 }

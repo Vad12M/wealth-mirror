@@ -39,7 +39,7 @@ export default function MutualFundsElements({
     <>
       {mutualFunds.map((mutualFund) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = mutualFund.image;
+          image.src = '/canvas/MutualFunds.svg';
           image.id = uuidv4();
           return (
             <Button typeButton={'none'} key={mutualFund._id}>

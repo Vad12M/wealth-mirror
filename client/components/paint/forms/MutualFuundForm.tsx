@@ -34,7 +34,6 @@ export default function MutualFundsForm({
     category: '',
     units: 0,
     purchasePrice: 0,
-    image: '/canvas/MutualFunds.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -47,7 +46,6 @@ export default function MutualFundsForm({
       setForm({
         name: defaultForm.name,
         code: defaultForm.code,
-        image: defaultForm.image,
         position: defaultForm.position,
         purchaseDate: defaultForm.purchaseDate,
         purchasePrice: defaultForm.purchasePrice,

@@ -27,28 +27,36 @@ export default function CarElements({
     <>
       {cars.map((car) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = car.image || '';
           image.id = uuidv4();
-
           let height = 100;
           let width = 100;
 
           switch (car.type) {
             case 'car':
+              image.src = '/canvas/Car.svg';
+              height = 105;
+              width = 100;
+              break;
             case 'oldCar':
+              image.src = '/canvas/OldCar.svg';
               height = 105;
               width = 100;
               break;
             case 'bike':
+              image.src = '/canvas/Bike.svg';
+              height = 70;
+              width = 70;
+              break;
             case 'scooter':
+              image.src = '/canvas/Scooter.svg';
               height = 70;
               width = 70;
               break;
           }
 
           return (
-            <Button typeButton={'none'}  key={car._id}>
-            <KonvaImage
+            <Button typeButton={'none'} key={car._id}>
+              <KonvaImage
                 key={car._id}
                 image={image}
                 x={car.position.x}

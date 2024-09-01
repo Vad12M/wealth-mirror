@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
-import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import SearchDropdown from "@/ui/searchDropdown/searchDropdown";
@@ -13,6 +12,12 @@ import {
 import { parseISO } from "date-fns";
 import InputCalendar from "@/ui/inputCalendar/inputCalendar";
 import { IStock, IStockForm } from "@/interfaces/IStock";
+import { Swiper, SwiperSlide } from "swiper/react";
+import ChevroneLeftIcon from "@/ui/icons/ChevroneLeftIcon";
+import ChevroneRightIcon from "@/ui/icons/ChevroneRightIcon";
+import OptionStock from "@/ui/icons/canvas/OptionStock";
+import OptionIndianStock from "@/ui/icons/canvas/OptionIndianStock";
+import OptionEUStock from "@/ui/icons/canvas/OptionEUStock";
 
 export default function StockForm({
   position,
@@ -26,6 +31,7 @@ export default function StockForm({
   defaultForm?: IStock;
   onClose?: () => void;
 }) {
+  const sliderRef = useRef(null);
   const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteStockMutation();
   const [createFortune, { isLoading: isLoadingCreate }] = useCreateStockMutation();
   const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateStockMutation();
@@ -35,9 +41,8 @@ export default function StockForm({
     quantity: 0,
     amount: 0,
     amountOfDividends: 0,
+    type: 'us-stock',
     periodOfReceivingDividends: '',
-    type: 'stock',
-    image: '/canvas/Fortune-4.svg',
     purchaseDate: '',
     position: {
       x: position?.x || 0,
@@ -56,7 +61,6 @@ export default function StockForm({
         amountOfDividends: defaultForm.amountOfDividends,
         periodOfReceivingDividends: defaultForm.periodOfReceivingDividends,
         type: defaultForm.type,
-        image: defaultForm.image,
         position: defaultForm.position,
         purchaseDate: defaultForm.purchaseDate,
       });
@@ -76,14 +80,74 @@ export default function StockForm({
     }
   }
 
+  const types = [
+    { name: 'US Stocks', value: 'us-stock' },
+    { name: 'Indian Stocks', value: 'indian-stock' },
+    { name: 'EU Stocks', value: 'eu-stock' },
+  ]
+
+  const handlePrev = () => {
+    if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+      (sliderRef.current as any).swiper.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
+      (sliderRef.current as any).swiper.slideNext();
+    }
+  };
+
+  const iconsHandler = (type: string) => {
+    switch (type) {
+      case 'us-stock':
+        return <OptionStock/>
+      case 'indian-stock':
+        return <OptionIndianStock/>
+      case 'eu-stock':
+        return <OptionEUStock/>
+    }
+  }
+
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
-      <div className="flex flex-col bg-white rounded-[10px] w-[72px] h-[90px] justify-center items-center">
-        <div className="bg-[#D9FBEE] h-[55px] w-[55px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
-          <Stock height={50} width={90}/>
-        </div>
-        <Typography text={'Stock'} type={'labelsVerySmall'} color="text-black"/>
+      <div className="relative w-full">
+        <Swiper
+          className={'w-full flex justify-center h-full'}
+          ref={sliderRef}
+          loop={true}
+          slidesPerView={'auto'}
+          onActiveIndexChange={(e) => setForm({
+            ...form, type: types[e.realIndex].value,
+          })}
+        >
+          {types.map((el, index) => (
+            <SwiperSlide key={index} className="flex justify-center">
+              <div className="flex justify-center">
+                <div className="flex flex-col bg-white rounded-[10px] w-[62px] h-[80px] justify-center items-center">
+                  <div
+                    className="h-[55px] w-[65px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
+                    {iconsHandler(el.value)}
+                  </div>
+                  <Typography text={el.name} type={'labelsVerySmall'} color="text-black"/>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button className='absolute left-1 top-5 z-50' onClick={handlePrev}>
+          <ChevroneLeftIcon/>
+        </button>
+        <button className='absolute right-1 top-5 z-50' onClick={handleNext}>
+          <ChevroneRightIcon/>
+        </button>
       </div>
+      {/*<div className="flex flex-col bg-white rounded-[10px] w-[72px] h-[90px] justify-center items-center">*/}
+      {/*  <div className="bg-[#D9FBEE] h-[55px] w-[55px] flex items-center justify-center mb-1 p-2 rounded-[8px]">*/}
+      {/*    <Stock height={50} width={90}/>*/}
+      {/*  </div>*/}
+      {/*  <Typography text={'Stock'} type={'labelsVerySmall'} color="text-black"/>*/}
+      {/*</div>*/}
       <div className="flex flex-col space-y-4 w-full">
         <SearchDropdown
           placeholder={'example: AMZN'}

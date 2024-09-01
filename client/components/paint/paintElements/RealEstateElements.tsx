@@ -27,12 +27,19 @@ export default function RealEstateElements({
     <>
       {(realEstates || []).map((realEstate) => {
           const image = new Image(GRID_SIZE, GRID_SIZE);
-          // @ts-ignore
-          image.src = realEstate.image;
           image.id = uuidv4();
+          switch (realEstate.category) {
+            case 'residential':
+              image.src = '/canvas/Home-1.svg';
+              break;
+            case 'commercial':
+              image.src = '/canvas/Home-5.svg';
+              break;
+          }
+
           return (
-            <Button typeButton={'none'}  key={realEstate._id}>
-            <KonvaImage
+            <Button typeButton={'none'} key={realEstate._id}>
+              <KonvaImage
                 key={realEstate._id}
                 image={image}
                 x={realEstate.position.x}

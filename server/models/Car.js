@@ -7,7 +7,6 @@ const CarSchema = new mongoose.Schema({
   variant: { type: String, required: true },
   purchaseDate: { type: Date, required: true },
   price: { type: Number, required: true },
-  image: { type: String, required: false },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   position: {
     x: { type: Number, required: true },

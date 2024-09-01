@@ -4,7 +4,6 @@ export interface IRealEstate {
   type: string;
   location: string;
   price: number;
-  image: string;
   salePrice: number;
   position: {
     x: number;
@@ -22,7 +21,6 @@ export interface IRealEstateForm {
     x: number;
     y: number;
   };
-  image?: string;
   salePrice?: number;
   purchaseDate?: string;
 }

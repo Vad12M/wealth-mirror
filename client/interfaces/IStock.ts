@@ -8,7 +8,6 @@ export interface IStock {
   periodOfReceivingDividends: string;
   purchaseDate: string;
   type: string;
-  image: string;
   position: {
     x: number;
     y: number;
@@ -23,7 +22,6 @@ export interface IStockForm {
   amountOfDividends: number;
   periodOfReceivingDividends: string;
   type: string;
-  image: string;
   position: {
     x: number;
     y: number;

@@ -32,7 +32,6 @@ export default function CardForm({
   const [form, setForm] = useState<ICardForm>({
     name: '',
     amount: 0,
-    image: '/canvas/CC2.svg',
     type: 'debit',
     position: {
       x: position?.x || 0,
@@ -60,20 +59,6 @@ export default function CardForm({
     { name: 'Debit Card', value: 'debit' },
     { name: 'Metal Card', value: 'metal' }
   ];
-
-  useEffect(() => {
-    switch (form.type) {
-      case 'credit':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/CC1.svg' }));
-        break;
-      case 'debit':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/DC1.svg' }));
-        break;
-      case 'metal':
-        setForm({ ...form, image: '/canvas/CC2.svg' });
-        break;
-    }
-  }, [form.type]);
 
   const handleClick = () => {
     if (defaultForm) {

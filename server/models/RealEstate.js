@@ -17,7 +17,6 @@ const RealEstateSchema = new mongoose.Schema({
     },
   },
   salePrice: { type: Number, required: false },
-  image: { type: String, required: false },
   position: {
     x: { type: Number, required: true },
     y: { type: Number, required: true }

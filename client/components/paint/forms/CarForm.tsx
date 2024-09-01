@@ -40,7 +40,6 @@ export default function Crypto({
     variant: '',
     purchaseDate: '',
     type: 'car',
-    image: '/canvas/OldCar.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -69,7 +68,6 @@ export default function Crypto({
         variant: defaultForm.variant,
         purchaseDate: defaultForm.purchaseDate,
         type: defaultForm.type,
-        image: defaultForm.image,
         position: defaultForm.position
       });
 
@@ -79,23 +77,6 @@ export default function Crypto({
     }
 
   }, [defaultForm]);
-
-  useEffect(() => {
-    switch (form.type) {
-      case 'car':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/Car.svg' }));
-        break;
-      case 'oldCar':
-        setForm((prevState) => ({ ...prevState, image: '/canvas/CarOld.svg' }));
-        break;
-      case 'scooter':
-        setForm({ ...form, image: '/canvas/Scooter.svg' });
-        break;
-      case 'bike':
-        setForm({ ...form, image: '/canvas/Bike.svg' });
-        break;
-    }
-  }, [form.type]);
 
   const handleClick = () => {
     if (defaultForm) {

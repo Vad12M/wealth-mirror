@@ -39,8 +39,19 @@ export default function StocksElements({
     <>
       {stocks.map((stock) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = stock.image;
           image.id = uuidv4();
+          switch (stock.type) {
+            case 'us-stock':
+              image.src = '/canvas/Stock-4.svg';
+              break;
+            case 'eu-stock':
+              image.src = '/canvas/Stock-5.svg';
+              break;
+            case 'indian-stock':
+              image.src = '/canvas/Stock-3.svg';
+              break;
+          }
+
           return (
             <Button typeButton={'none'} key={stock._id}>
               <KonvaImage

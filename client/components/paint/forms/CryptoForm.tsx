@@ -21,7 +21,7 @@ export default function CryptoForm({
     name: '',
     quantity: 0,
     amount: 0,
-    image: '/canvas/Fortune-4.svg',
+    image: '/canvas/Stock-4.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0

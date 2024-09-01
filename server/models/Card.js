@@ -25,7 +25,6 @@ const CardSchema = new mongoose.Schema({
       required: function () { return this.expensesPerMonth && this.expensesPerMonth.amount != null; }
     },
   },
-  image: { type: String, required: false },
   position: {
     x: { type: Number, required: true },
     y: { type: Number, required: true }

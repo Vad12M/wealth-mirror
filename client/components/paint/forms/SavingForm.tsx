@@ -28,7 +28,7 @@ export default function SavingForm({
     amountOfDividends: 0,
     periodOfReceivingDividends: '',
     type: 'nps',
-    image: '/canvas/Fortune-4.svg',
+    image: '/canvas/Stock-4.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0

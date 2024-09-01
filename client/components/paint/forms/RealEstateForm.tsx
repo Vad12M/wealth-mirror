@@ -38,7 +38,6 @@ export default function RealEstateForm({
     type: '',
     location: '',
     price: 0,
-    image: '/canvas/Home-1.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -58,7 +57,6 @@ export default function RealEstateForm({
         type: defaultForm.type,
         location: defaultForm.location,
         price: defaultForm.price,
-        image: defaultForm.image,
         position: defaultForm.position,
         purchaseDate: defaultForm.purchaseDate
       });
@@ -119,7 +117,6 @@ export default function RealEstateForm({
           onActiveIndexChange={(e) => setForm({
             ...form,
             category: categories[e.realIndex].value,
-            image: categories[e.realIndex].value === 'residential' ? '/canvas/Home-1.svg' : '/canvas/Home-5.svg',
             type: '',
           })}
         >

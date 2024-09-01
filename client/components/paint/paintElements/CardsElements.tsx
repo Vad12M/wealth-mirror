@@ -27,10 +27,22 @@ export default function CardsElements({
     <>
       {cards.map((card) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = card.image || '';
           image.id = uuidv4();
+
+          switch (card.type) {
+            case 'credit':
+              image.src = '/canvas/CC1.svg';
+              break;
+            case 'debit':
+              image.src = '/canvas/DC1.svg';
+              break;
+            case 'metal':
+              image.src = '/canvas/CC2.svg';
+              break;
+          }
+
           return (
-            <Button typeButton={'none'}  key={card._id}>
+            <Button typeButton={'none'} key={card._id}>
               <KonvaImage
                 image={image}
                 x={card.position.x}
