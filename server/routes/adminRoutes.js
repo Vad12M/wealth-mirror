@@ -1,16 +1,11 @@
 import express from "express";
-import { getMe, login, register, updateMe, updatePassword } from "../controllers/UserController.js";
-import { loginValidator, registerValidator, updateMeValidator, updatePasswordValidator } from "../validations/auth.js";
 import {handleValidationErrors} from "../utils/handleValidationErrors.js";
-import {checkAuth} from "../utils/checkAuth.js";
+import { addWaitUserValidator, contactValidator } from "../validations/newClient.js";
+import { addWaitUser, contact, getContacts, getWaitUsers } from "../controllers/NewClientController.js";
 
-export const authRouter = express.Router();
+export const adminRouter = express.Router();
 
-authRouter.post("/auth/login", loginValidator, handleValidationErrors, login);
-authRouter.post("/auth/register", registerValidator, handleValidationErrors, register);
-authRouter.get('/auth/me', checkAuth, getMe);
-authRouter.put('/user/update', checkAuth, updateMeValidator, handleValidationErrors, updateMe);
-authRouter.post('/user/update-password', checkAuth, updatePasswordValidator, handleValidationErrors, updatePassword);
-
-
-export default router;
+adminRouter.post('/addWaitUser', addWaitUserValidator, handleValidationErrors, addWaitUser);
+adminRouter.post('/contact', contactValidator, handleValidationErrors, contact);
+adminRouter.get('/wait-users', getWaitUsers);
+adminRouter.get('/contacts', getContacts);

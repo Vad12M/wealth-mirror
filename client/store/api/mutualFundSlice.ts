@@ -1,69 +1,59 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
+import { IMutualFund, IMutualFundForm } from "@/interfaces/IMutualFund";
 
-export const stockSlice = baseApi.injectEndpoints({
+export const mutualFundSlice = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getStocks: builder.query<IFortune[], void>({
+    getMutualFunds: builder.query<IMutualFund[], void>({
       query: () => ({
-        url: '/stocks',
+        url: '/mutualFunds',
       }),
-      providesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
+      providesTags: [{ type: LIST_CONTENT_TAG, id: 'mutualFunds' }]
     }),
 
-    createStock: builder.mutation<void, IFortuneForm>({
+    createMutualFund: builder.mutation<void, IMutualFundForm>({
       query: (params) => ({
-        url: '/stocks/create',
+        url: '/mutualFunds/create',
         method: 'POST',
         body: JSON.stringify(params)
       }),
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'mutualFunds' }]
     }),
 
-    updateStock: builder.mutation<void, any>({
+    updateMutualFund: builder.mutation<void, any>({
       query: (params) => {
         const { id, ...rest } = params;
         return {
-          url: `/stocks/update/${id}`,
+          url: `/mutualFunds/update/${id}`,
           method: 'PUT',
           body: JSON.stringify(rest)
         }
       },
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'mutualFunds' }]
     }),
 
-    deleteStock: builder.mutation<void, string>({
+    deleteMutualFund: builder.mutation<void, string>({
       query: (id) => ({
-        url: `/stocks/delete/${id}`,
+        url: `/mutualFunds/delete/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'mutualFunds' }]
     }),
 
-    deleteAllStocks: builder.mutation<void, void>({
+    deleteAllMutualFunds: builder.mutation<void, void>({
       query: () => ({
-        url: '/stocks/delete/all',
+        url: '/mutualFunds/deleteAll',
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'mutualFunds' }]
     }),
-
-    getExternalStocks: builder.query<any, { search?: string }>({
-      query: (params) => ({
-        url: '/external/stocks?limit=10',
-        params,
-      }),
-      providesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
-    }),
-
   })
 })
 
 export const {
-  useGetStocksQuery,
-  useCreateStockMutation,
-  useUpdateStockMutation,
-  useDeleteStockMutation,
-  useDeleteAllStocksMutation,
-  useGetExternalStocksQuery
-} = stockSlice;
+  useGetMutualFundsQuery,
+  useCreateMutualFundMutation,
+  useUpdateMutualFundMutation,
+  useDeleteMutualFundMutation,
+  useDeleteAllMutualFundsMutation,
+} = mutualFundSlice;

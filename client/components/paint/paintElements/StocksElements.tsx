@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import React, { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
-import { IFortune } from "@/interfaces/IFortune";
 import { Button } from "@/ui/button/Button";
+import { IStock } from "@/interfaces/IStock";
 
 export default function StocksElements({
   stocks,
@@ -12,15 +12,15 @@ export default function StocksElements({
   handleActiveItem,
   zoomLevel,
 }: {
-  stocks: IFortune[];
+  stocks: IStock[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IFortune, type: string) => void;
+  handleActiveItem: (item: IStock, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    stock: IFortune | undefined;
+    stock: IStock | undefined;
     x: number;
     y: number;
   }>({

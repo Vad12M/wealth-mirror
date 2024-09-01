@@ -1,15 +1,17 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
 import { createFortuneValidator } from "../validations/fortune.js";
-import { createStock, deleteAllStocks, deleteStock, getStocks, updateStock } from "../controllers/StockController.js";
-import { getExternalStocks } from "../controllers/TickerController.js";
+import {
+  createMutualFund, deleteAllMutualFunds,
+  deleteMutualFund,
+  getMutualFunds,
+  updateMutualFund
+} from "../controllers/MutualFundController.js";
 
-export const stockRouter = express.Router();
+export const mutualFundRouter = express.Router();
 
-stockRouter.post('/stocks/create', checkAuth, createFortuneValidator, createStock);
-stockRouter.put('/stocks/update/:id', checkAuth, updateStock);
-stockRouter.get('/stocks', checkAuth, getStocks);
-stockRouter.delete('/stocks/delete/:id', checkAuth, deleteStock);
-stockRouter.delete('/stocks/delete/all', checkAuth, deleteAllStocks);
-
-stockRouter.get('/external/stocks', getExternalStocks);
+mutualFundRouter.post('/mutualFunds/create', checkAuth, createFortuneValidator, createMutualFund);
+mutualFundRouter.put('/mutualFunds/update/:id', checkAuth, updateMutualFund);
+mutualFundRouter.get('/mutualFunds', checkAuth, getMutualFunds);
+mutualFundRouter.delete('/mutualFunds/delete/:id', checkAuth, deleteMutualFund);
+mutualFundRouter.delete('/mutualFunds/delete/all', checkAuth, deleteAllMutualFunds);

@@ -1,20 +1,18 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
-import { createCarValidator } from "../validations/car.js";
+import { createRealEstateValidator } from "../validations/realEstate.js";
 import {
-  createCar,
-  deleteAllCars,
-  deleteCar,
-  getCars,
-  getCarsAmount,
-  updateCar
-} from "../controllers/CarController.js";
+  createRealEstate, deleteAllRealEstates,
+  deleteRealEstate,
+  getRealEstates, getRealEstatesAmount,
+  updateRealEstate
+} from "../controllers/RealEstateController.js";
 
-export const carRouter = express.Router();
+export const realEstateRouter = express.Router();
 
-carRouter.post('/cars/create', checkAuth, createCarValidator, createCar);
-carRouter.put('/cars/update/:id', checkAuth, updateCar);
-carRouter.get('/cars', checkAuth, getCars);
-carRouter.delete('/cars/delete/:id', checkAuth, deleteCar);
-carRouter.delete('/cars/delete/all', checkAuth, deleteAllCars);
-carRouter.get('/cars/amount', checkAuth, getCarsAmount);
+realEstateRouter.post('/realEstates/create', checkAuth, createRealEstateValidator, createRealEstate);
+realEstateRouter.put('/realEstates/update/:id', checkAuth, updateRealEstate);
+realEstateRouter.get('/realEstates', checkAuth, getRealEstates);
+realEstateRouter.delete('/realEstates/delete/:id', checkAuth, deleteRealEstate);
+realEstateRouter.delete('/realEstates/delete/all', checkAuth, deleteAllRealEstates);
+realEstateRouter.get('/realEstates/amount', checkAuth, getRealEstatesAmount);

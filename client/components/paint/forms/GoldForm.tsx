@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IFortune } from "@/interfaces/IFortune";
 import InputForm from "@/ui/input/inputForm";
 import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
@@ -15,7 +14,7 @@ export default function GoldForm({
     x: number;
     y: number;
   };
-  defaultForm?: IFortune;
+  defaultForm?: any;
   onClose?: () => void;
 }) {
   const [form, setForm] = useState<IGoldForm>({

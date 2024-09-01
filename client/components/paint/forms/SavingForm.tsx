@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
-import { useCreateFortuneMutation, useDeleteFortuneMutation, useUpdateFortuneMutation } from "@/store/api/fortuneSlice";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import Dropdown from "@/ui/dropdown/dropdown";
@@ -16,13 +14,13 @@ export default function SavingForm({
     x: number;
     y: number;
   };
-  defaultForm?: IFortune;
+  defaultForm?: any;
   onClose?: () => void;
 }) {
-  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
-  const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
-  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
-  const [form, setForm] = useState<IFortuneForm>({
+  // const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
+  // const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
+  // const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
+  const [form, setForm] = useState<any>({
     name: '',
     code: '',
     quantity: 0,
@@ -57,16 +55,16 @@ export default function SavingForm({
 
 
   const handleClick = () => {
-    if (defaultForm) {
-      updateFortune({
-        id: defaultForm._id,
-        ...form
-      }).unwrap()
-        .finally(() => onClose?.());
-    } else {
-      createFortune(form).unwrap()
-        .finally(() => onClose?.());
-    }
+    // if (defaultForm) {
+    //   updateFortune({
+    //     id: defaultForm._id,
+    //     ...form
+    //   }).unwrap()
+    //     .finally(() => onClose?.());
+    // } else {
+    //   createFortune(form).unwrap()
+    //     .finally(() => onClose?.());
+    // }
   }
 
   return (
@@ -107,14 +105,14 @@ export default function SavingForm({
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
       </div>
-      <FormButtonsBlock
-        isLoading={isLoadingCreate || isLoadingUpdate}
-        isLoadingDelete={isLoadingDelete}
-        isEdit={!!defaultForm}
-        deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
-        handleClick={handleClick}
-        type={'Saving'}
-      />
+      {/*<FormButtonsBlock*/}
+      {/*  isLoading={isLoadingCreate || isLoadingUpdate}*/}
+      {/*  isLoadingDelete={isLoadingDelete}*/}
+      {/*  isEdit={!!defaultForm}*/}
+      {/*  deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}*/}
+      {/*  handleClick={handleClick}*/}
+      {/*  type={'Saving'}*/}
+      {/*/>*/}
     </div>
   )
 }

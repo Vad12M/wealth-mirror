@@ -1,26 +1,26 @@
 import { v4 as uuidv4 } from "uuid";
 import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
-import React, { useRef, useState } from "react";
+import { IMutualFund } from "@/interfaces/IMutualFund";
+import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IStock } from "@/interfaces/IStock";
 
-export default function StocksElements({
-  stocks,
+export default function MutualFundsElements({
+  mutualFunds,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  stocks: IStock[];
+  mutualFunds: IMutualFund[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IStock, type: string) => void;
+  handleActiveItem: (item: IMutualFund, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    stock: IStock | undefined;
+    stock: IMutualFund | undefined;
     x: number;
     y: number;
   }>({
@@ -31,23 +31,23 @@ export default function StocksElements({
   });
 
   const tooltipRef = useRef(null);
-  if (!stocks.length) {
+  if (!mutualFunds.length) {
     return null;
   }
 
   return (
     <>
-      {stocks.map((stock) => {
+      {mutualFunds.map((mutualFund) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = stock.image;
+          image.src = mutualFund.image;
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'} key={stock._id}>
+            <Button typeButton={'none'} key={mutualFund._id}>
               <KonvaImage
-                key={stock._id}
+                key={mutualFund._id}
                 image={image}
-                x={stock.position.x}
-                y={stock.position.y}
+                x={mutualFund.position.x}
+                y={mutualFund.position.y}
                 height={180}
                 width={90}
                 draggable={isDraggable}
@@ -57,18 +57,18 @@ export default function StocksElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(stock._id, 'stock', x / zoomLevel, y / zoomLevel)
+                  updateItem(mutualFund._id, 'mutualFund', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(stock, 'stock');
+                  handleActiveItem(mutualFund, 'mutualFund');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    stock: stock,
-                    x: stock.position.x + 80,
-                    y: stock.position.y,
+                    stock: mutualFund,
+                    x: mutualFund.position.x + 80,
+                    y: mutualFund.position.y,
                   });
                 }}
                 onMouseLeave={() => {

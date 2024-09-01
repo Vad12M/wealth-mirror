@@ -8,9 +8,7 @@ import {
 } from "react-konva";
 import { Box } from "@chakra-ui/react";
 import usePaint from "../../hooks/usePaint";
-import Typography from "@/ui/typography/Typography";
 import PaintOptions from "@/components/paint/PaintOptions";
-import { Button } from "@/ui/button/Button";
 import PaintHeader from "@/components/paint/PaintHeader";
 import PaintLeftMenu from "@/components/paint/PaintLeftMenu";
 import RealEstateElements from "@/components/paint/paintElements/RealEstateElements";
@@ -18,6 +16,7 @@ import StocksElements from "@/components/paint/paintElements/StocksElements";
 import CardsElements from "@/components/paint/paintElements/CardsElements";
 import CarElements from "@/components/paint/paintElements/CarElements";
 import PaintZoom from "@/components/paint/PaintZoom";
+import MutualFundsElements from "@/components/paint/paintElements/MutualFundsElements";
 
 interface PaintProps {
 }
@@ -40,8 +39,9 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     sizeWidth,
     sizeHeight,
     updateItem,
-    cars, cards, realEstates, fortunes,
+    cars, cards, realEstates,
     stocks,
+    mutualFunds
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
@@ -159,6 +159,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           <CardsElements cards={cards || []}{...commonProps}/>
           <RealEstateElements realEstates={realEstates || []}{...commonProps}/>
           <StocksElements stocks={stocks || []}{...commonProps}/>
+          <MutualFundsElements mutualFunds={mutualFunds || []}{...commonProps}/>
 
           {/*{(fortunes || [])*/}
           {/*  .filter(el => el.type !== 'stock')*/}

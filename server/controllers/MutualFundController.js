@@ -1,15 +1,15 @@
-import StockModel from '../models/Stock.js';
+import MutualFundModel from '../models/MutualFund.js';
 
-export const createStock = async (req, res) => {
+export const createMutualFund = async (req, res) => {
   try {
-    const newStock = new StockModel({
+    const newMutualFund = new MutualFundModel({
       ...req.body,
       user: req.userId,
     });
-    await newStock.save();
+    await newMutualFund.save();
 
     res.status(201).json({
-      id: newStock._id,
+      id: newMutualFund._id,
     });
   } catch (error) {
     res.status(500).json({
@@ -18,16 +18,16 @@ export const createStock = async (req, res) => {
   }
 }
 
-export const updateStock = async (req, res) => {
+export const updateMutualFund = async (req, res) => {
   try {
-    const stock = await StockModel.findOne({ _id: req.params.id, user: req.userId });
-    if (!stock) {
+    const mutualFund = await MutualFundModel.findOne({ _id: req.params.id, user: req.userId });
+    if (!mutualFund) {
       return res.status(404).json({
-        message: 'Stock not found',
+        message: 'Mutual Fund not found',
       });
     }
 
-    const updatedStock = await StockModel.findByIdAndUpdate(req.params.id, req.body);
+    const updatedStock = await MutualFundModel.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json(updatedStock);
   } catch (error) {
     res.status(500).json({
@@ -37,10 +37,10 @@ export const updateStock = async (req, res) => {
 }
 
 
-export const getStocks = async (req, res) => {
+export const getMutualFunds = async (req, res) => {
   try {
-    const stocks = await StockModel.find({ user: req.userId });
-    res.status(200).json(stocks);
+    const mutualFunds = await MutualFundModel.find({ user: req.userId });
+    res.status(200).json(mutualFunds);
   } catch (error) {
     res.status(500).json({
       message: error.message
@@ -48,18 +48,18 @@ export const getStocks = async (req, res) => {
   }
 }
 
-export const deleteStock = async (req, res) => {
+export const deleteMutualFund = async (req, res) => {
   try {
-    const stock = await StockModel.findOne({ _id: req.params.id, user: req.userId });
-    if (!stock) {
+    const mutualFund = await MutualFundModel.findOne({ _id: req.params.id, user: req.userId });
+    if (!mutualFund) {
       return res.status(404).json({
-        message: 'Stock not found',
+        message: 'Mutual Fund not found',
       });
     }
 
-    await StockModel.findByIdAndDelete(req.params.id);
+    await MutualFundModel.findByIdAndDelete(req.params.id);
     res.status(200).json({
-      message: 'Stock deleted',
+      message: 'Mutual Fund deleted',
     });
   } catch (error) {
     res.status(500).json({
@@ -68,18 +68,18 @@ export const deleteStock = async (req, res) => {
   }
 }
 
-export const deleteAllStocks = async (req, res) => {
+export const deleteAllMutualFunds = async (req, res) => {
   try {
-    const stocks = await StockModel.find({ user: req.userId });
+    const stocks = await MutualFundModel.find({ user: req.userId });
     if (!stocks) {
       return res.status(404).json({
-        message: 'Stock not found',
+        message: 'Mutual Fund not found',
       });
     }
 
-    await StockModel.deleteMany({ user: req.userId });
+    await MutualFundModel.deleteMany({ user: req.userId });
     res.status(200).json({
-      message: 'Stocks deleted',
+      message: 'Mutual Fund deleted',
     });
   } catch (error) {
     res.status(500).json({

@@ -1,20 +1,20 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
-import { createCarValidator } from "../validations/car.js";
+import { createCardValidator } from "../validations/card.js";
 import {
-  createCar,
-  deleteAllCars,
-  deleteCar,
-  getCars,
-  getCarsAmount,
-  updateCar
-} from "../controllers/CarController.js";
+  createCard,
+  deleteAllCards,
+  deleteCard,
+  getCards,
+  getCardsAmount,
+  updateCard
+} from "../controllers/CardController.js";
 
-export const carRouter = express.Router();
+export const cardRouter = express.Router();
 
-carRouter.post('/cars/create', checkAuth, createCarValidator, createCar);
-carRouter.put('/cars/update/:id', checkAuth, updateCar);
-carRouter.get('/cars', checkAuth, getCars);
-carRouter.delete('/cars/delete/:id', checkAuth, deleteCar);
-carRouter.delete('/cars/delete/all', checkAuth, deleteAllCars);
-carRouter.get('/cars/amount', checkAuth, getCarsAmount);
+cardRouter.post('/cards/create', checkAuth, createCardValidator, createCard);
+cardRouter.put('/cards/update/:id', checkAuth, updateCard);
+cardRouter.get('/cards', checkAuth, getCards);
+cardRouter.delete('/cards/delete/:id', checkAuth, deleteCard);
+cardRouter.delete('/cards/delete/all', checkAuth, deleteAllCards);
+cardRouter.get('/cards/amount', checkAuth, getCardsAmount);

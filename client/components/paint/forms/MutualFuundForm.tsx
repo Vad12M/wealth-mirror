@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
-import { useCreateFortuneMutation, useDeleteFortuneMutation, useUpdateFortuneMutation } from "@/store/api/fortuneSlice";
 import InputForm from "@/ui/input/inputForm";
 import MutualFounds from "@/ui/icons/canvas/fortune/MutualFounds";
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
+import {
+  useCreateMutualFundMutation,
+  useDeleteMutualFundMutation,
+  useUpdateMutualFundMutation
+} from "@/store/api/mutualFundSlice";
+import { IMutualFund, IMutualFundForm } from "@/interfaces/IMutualFund";
+import Dropdown from "@/ui/dropdown/dropdown";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 
 export default function MutualFundsForm({
   position,
@@ -15,21 +22,19 @@ export default function MutualFundsForm({
     x: number;
     y: number;
   };
-  defaultForm?: IFortune;
+  defaultForm?: IMutualFund;
   onClose?: () => void;
 }) {
-  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
-  const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
-  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
-  const [form, setForm] = useState<IFortuneForm>({
+  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteMutualFundMutation();
+  const [createFortune, { isLoading: isLoadingCreate }] = useCreateMutualFundMutation();
+  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateMutualFundMutation();
+  const [form, setForm] = useState<IMutualFundForm>({
     name: '',
     code: '',
-    quantity: 0,
-    amount: 0,
-    amountOfDividends: 0,
-    periodOfReceivingDividends: '',
-    type: 'mutualFund',
-    image: '/canvas/Fortune-4.svg',
+    category: '',
+    units: 0,
+    purchasePrice: 0,
+    image: '/canvas/MutualFounds.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -42,14 +47,12 @@ export default function MutualFundsForm({
       setForm({
         name: defaultForm.name,
         code: defaultForm.code,
-        quantity: defaultForm.quantity,
-        amount: defaultForm.amount,
-        amountOfDividends: defaultForm.amountOfDividends,
-        periodOfReceivingDividends: defaultForm.periodOfReceivingDividends,
-        type: defaultForm.type,
         image: defaultForm.image,
         position: defaultForm.position,
-        purchaseDate: defaultForm.purchaseDate
+        purchaseDate: defaultForm.purchaseDate,
+        purchasePrice: defaultForm.purchasePrice,
+        category: defaultForm.category,
+        units: defaultForm.units
       });
     }
   }, [defaultForm]);
@@ -67,6 +70,12 @@ export default function MutualFundsForm({
     }
   }
 
+  const categories = [
+    { label: 'Equity', value: 'Equity' },
+    { label: 'Debt', value: 'Debt' },
+    { label: 'Hybrid', value: 'Hybrid' },
+  ];
+
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
       <div className="flex flex-col bg-white rounded-[10px] w-[72px] h-[90px] justify-center items-center">
@@ -80,19 +89,40 @@ export default function MutualFundsForm({
           label="Name"
           value={form.name}
           placeholder={'Enter name'}
-          onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, name: e.target.value }))}
+        />
+        <Dropdown
+          label={'Category'}
+          placeholder={'Select category'}
+          options={categories}
+          value={form.category}
+          onChange={(value) => setForm((prevState) => ({ ...prevState, category: value }))}
         />
         <InputForm
-          label="Quantity"
-          value={!!form.quantity ? form.quantity.toString() : ''}
-          placeholder={'Enter quantity'}
-          onUpdate={(e) => setForm({ ...form, quantity: Number(e.target.value) })}
+          label="Code"
+          value={form.code}
+          placeholder={'Enter code'}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, code: e.target.value }))}
         />
         <InputForm
-          label="Amount"
-          value={!!form.amount ? form.amount.toString() : ''}
-          placeholder={'Enter amount'}
-          onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
+          label="Units"
+          value={!!form.units ? form.units.toString() : ''}
+          placeholder={'Enter units'}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, units: Number(e.target.value) }))}
+        />
+        <InputForm
+          label="Purchase Price"
+          value={!!form.purchasePrice ? form.purchasePrice.toString() : ''}
+          placeholder={'Enter purchase price'}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, purchasePrice: Number(e.target.value) }))}
+        />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, purchaseDate: startDate }));
+          }}
+          initialSelectDate={form.purchaseDate ? parseISO(form.purchaseDate) : undefined}
+          label={'Date of purchase'}
+          placeholder={'Select date'}
         />
       </div>
       <FormButtonsBlock

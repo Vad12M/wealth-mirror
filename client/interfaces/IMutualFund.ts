@@ -1,13 +1,11 @@
-export interface IStock {
+export interface IMutualFund {
   _id: string;
   name: string;
   code: string;
-  quantity: number;
-  amount: number;
-  amountOfDividends: number;
-  periodOfReceivingDividends: string;
+  category: string;
+  units: number;
+  purchasePrice: number;
   purchaseDate: string;
-  type: string;
   image: string;
   position: {
     x: number;
@@ -15,18 +13,16 @@ export interface IStock {
   };
 }
 
-export interface IStockForm {
+export interface IMutualFundForm {
   name: string;
   code: string;
-  quantity: number;
-  amount: number;
-  amountOfDividends: number;
-  periodOfReceivingDividends: string;
-  type: string;
+  category: string;
+  units: number;
+  purchasePrice: number;
+  purchaseDate: string;
   image: string;
   position: {
     x: number;
     y: number;
   };
-  purchaseDate: string;
 }

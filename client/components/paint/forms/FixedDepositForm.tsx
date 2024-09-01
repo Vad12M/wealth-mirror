@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IFortune } from "@/interfaces/IFortune";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import OptionFixedDeposit from "@/ui/icons/canvas/OptionFixedDeposit";
@@ -15,7 +14,7 @@ export default function FixedDepositForm({
     x: number;
     y: number;
   };
-  defaultForm?: IFortune;
+  defaultForm?: any;
   onClose?: () => void;
 }) {
   const [form, setForm] = useState<IFixedDepositForm>({

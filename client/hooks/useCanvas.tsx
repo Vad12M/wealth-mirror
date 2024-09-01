@@ -5,32 +5,32 @@ import {
   useGetRealEstatesQuery,
   useUpdateRealEstateMutation
 } from "@/store/api/realEstateSlice";
-import {
-  useDeleteAllFortunesMutation,
-  useGetFortunesQuery,
-  useUpdateFortuneMutation
-} from "@/store/api/fortuneSlice";
 import { useDeleteAllStocksMutation, useGetStocksQuery, useUpdateStockMutation } from "@/store/api/stockSlice";
+import {
+  useDeleteAllMutualFundsMutation,
+  useGetMutualFundsQuery,
+  useUpdateMutualFundMutation
+} from "@/store/api/mutualFundSlice";
 
 
 export default function useCanvas() {
   const [deleteAllCars] = useDeleteAllCarsMutation();
   const [deleteAllCards] = useDeleteAllCardsMutation();
   const [deleteAllRealEstates] = useDeleteAllRealEstatesMutation();
-  const [deleteAllFortunes] = useDeleteAllFortunesMutation();
   const [deleteAllStocks] = useDeleteAllStocksMutation();
+  const [deleteAllMutualFunds] = useDeleteAllMutualFundsMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
   const [updateRealEstate] = useUpdateRealEstateMutation();
-  const [updateFortune] = useUpdateFortuneMutation();
   const [updateStock] = useUpdateStockMutation();
+  const [updateMutualFund] = useUpdateMutualFundMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
   const { data: realEstates } = useGetRealEstatesQuery();
-  const { data: fortunes } = useGetFortunesQuery();
   const { data: stocks } = useGetStocksQuery();
+  const { data: mutualFunds } = useGetMutualFundsQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -47,11 +47,11 @@ export default function useCanvas() {
       case 'realEstate':
         updateRealEstate(defaultParams);
         break;
-      case 'fortune':
-        updateFortune(defaultParams);
-        break;
       case 'stock':
         updateStock(defaultParams);
+        break;
+      case 'mutualFund':
+        updateMutualFund(defaultParams);
         break;
     }
   }
@@ -60,8 +60,8 @@ export default function useCanvas() {
     deleteAllCars();
     deleteAllCards();
     deleteAllRealEstates();
-    deleteAllFortunes();
     deleteAllStocks();
+    deleteAllMutualFunds();
   }
 
   return {
@@ -70,7 +70,7 @@ export default function useCanvas() {
     cars,
     cards,
     realEstates,
-    fortunes,
-    stocks
+    stocks,
+    mutualFunds,
   }
 }

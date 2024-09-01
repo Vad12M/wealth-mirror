@@ -1,18 +1,15 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
-import { createRealEstateValidator } from "../validations/realEstate.js";
-import {
-  createRealEstate, deleteAllRealEstates,
-  deleteRealEstate,
-  getRealEstates, getRealEstatesAmount,
-  updateRealEstate
-} from "../controllers/RealEstateController.js";
+import { createFortuneValidator } from "../validations/fortune.js";
+import { createStock, deleteAllStocks, deleteStock, getStocks, updateStock } from "../controllers/StockController.js";
+import { getExternalStocks } from "../controllers/TickerController.js";
 
-export const realEstateRouter = express.Router();
+export const stockRouter = express.Router();
 
-realEstateRouter.post('/realEstates/create', checkAuth, createRealEstateValidator, createRealEstate);
-realEstateRouter.put('/realEstates/update/:id', checkAuth, updateRealEstate);
-realEstateRouter.get('/realEstates', checkAuth, getRealEstates);
-realEstateRouter.delete('/realEstates/delete/:id', checkAuth, deleteRealEstate);
-realEstateRouter.delete('/realEstates/delete/all', checkAuth, deleteAllRealEstates);
-realEstateRouter.get('/realEstates/amount', checkAuth, getRealEstatesAmount);
+stockRouter.post('/stocks/create', checkAuth, createFortuneValidator, createStock);
+stockRouter.put('/stocks/update/:id', checkAuth, updateStock);
+stockRouter.get('/stocks', checkAuth, getStocks);
+stockRouter.delete('/stocks/delete/:id', checkAuth, deleteStock);
+stockRouter.delete('/stocks/delete/all', checkAuth, deleteAllStocks);
+
+stockRouter.get('/external/stocks', getExternalStocks);

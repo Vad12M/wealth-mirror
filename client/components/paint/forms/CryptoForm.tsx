@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IFortune } from "@/interfaces/IFortune";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import { ICryptoForm } from "@/interfaces/ICrypto";
@@ -15,7 +14,7 @@ export default function CryptoForm({
     x: number;
     y: number;
   };
-  defaultForm?: IFortune;
+  defaultForm?: any;
   onClose?: () => void;
 }) {
   const [form, setForm] = useState<ICryptoForm>({

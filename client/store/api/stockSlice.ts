@@ -1,17 +1,17 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
+import { IStock, IStockForm } from "@/interfaces/IStock";
 
 export const stockSlice = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getStocks: builder.query<IFortune[], void>({
+    getStocks: builder.query<IStock[], void>({
       query: () => ({
         url: '/stocks',
       }),
       providesTags: [{ type: LIST_CONTENT_TAG, id: 'stocks' }]
     }),
 
-    createStock: builder.mutation<void, IFortuneForm>({
+    createStock: builder.mutation<void, IStockForm>({
       query: (params) => ({
         url: '/stocks/create',
         method: 'POST',

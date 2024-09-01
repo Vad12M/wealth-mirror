@@ -1,30 +1,32 @@
-export interface ICar {
+export interface IStock {
   _id: string;
   name: string;
-  brand: string;
-  year: number;
+  code: string;
+  quantity: number;
+  amount: number;
+  amountOfDividends: number;
+  periodOfReceivingDividends: string;
+  purchaseDate: string;
   type: string;
-  price: number;
   image: string;
-  salePrice: number;
-  expensesPerMonth: number;
   position: {
     x: number;
     y: number;
   };
 }
 
-export interface ICarForm {
+export interface IStockForm {
   name: string;
-  price: number;
-  year: number;
-  brand: string;
+  code: string;
+  quantity: number;
+  amount: number;
+  amountOfDividends: number;
+  periodOfReceivingDividends: string;
+  type: string;
+  image: string;
   position: {
     x: number;
     y: number;
   };
-  type: string;
-  image?: string;
-  salePrice?: number;
-  expensesPerMonth?: number;
+  purchaseDate: string;
 }

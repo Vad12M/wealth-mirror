@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IFortune, IFortuneForm } from "@/interfaces/IFortune";
 import InputForm from "@/ui/input/inputForm";
 import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
@@ -13,6 +12,7 @@ import {
 } from "@/store/api/stockSlice";
 import { parseISO } from "date-fns";
 import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { IStock, IStockForm } from "@/interfaces/IStock";
 
 export default function StockForm({
   position,
@@ -23,13 +23,13 @@ export default function StockForm({
     x: number;
     y: number;
   };
-  defaultForm?: IFortune;
+  defaultForm?: IStock;
   onClose?: () => void;
 }) {
   const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteStockMutation();
   const [createFortune, { isLoading: isLoadingCreate }] = useCreateStockMutation();
   const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateStockMutation();
-  const [form, setForm] = useState<IFortuneForm>({
+  const [form, setForm] = useState<IStockForm>({
     name: '',
     code: '',
     quantity: 0,
