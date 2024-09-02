@@ -88,16 +88,3 @@ export const deleteAllCards = async (req, res) => {
   }
 }
 
-export const getCardsAmount = async (req, res) => {
-  try {
-    const cards = await CardModel.find({ user: req.userId });
-    const amount = cards.reduce((acc, card) => acc + card.amount, 0);
-    res.status(200).json({
-      amount,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: error.message
-    });
-  }
-}

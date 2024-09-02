@@ -4,7 +4,7 @@ import { createRealEstateValidator } from "../validations/realEstate.js";
 import {
   createRealEstate, deleteAllRealEstates,
   deleteRealEstate,
-  getRealEstates, getRealEstatesAmount,
+  getRealEstates,
   updateRealEstate
 } from "../controllers/RealEstateController.js";
 
@@ -15,4 +15,3 @@ realEstateRouter.put('/realEstates/update/:id', checkAuth, updateRealEstate);
 realEstateRouter.get('/realEstates', checkAuth, getRealEstates);
 realEstateRouter.delete('/realEstates/delete/:id', checkAuth, deleteRealEstate);
 realEstateRouter.delete('/realEstates/delete/all', checkAuth, deleteAllRealEstates);
-realEstateRouter.get('/realEstates/amount', checkAuth, getRealEstatesAmount);

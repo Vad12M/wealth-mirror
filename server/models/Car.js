@@ -16,4 +16,4 @@ const CarSchema = new mongoose.Schema({
   timestamps: true
 });
 
-export default mongoose.model("OldCar", CarSchema);
+export default mongoose.model("Car", CarSchema);

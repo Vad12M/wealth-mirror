@@ -161,62 +161,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           <StocksElements stocks={stocks || []}{...commonProps}/>
           <MutualFundsElements mutualFunds={mutualFunds || []}{...commonProps}/>
 
-          {/*{(fortunes || [])*/}
-          {/*  .filter(el => el.type !== 'stock')*/}
-          {/*  .map((fortune) => {*/}
-          {/*      const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);*/}
-          {/*      let height = 100;*/}
-          {/*      let width = 100;*/}
 
-          {/*      switch (fortune.type) {*/}
-          {/*        case 'stock':*/}
-          {/*          height = 180;*/}
-          {/*          width = 90;*/}
-          {/*          break;*/}
-          {/*        case 'mutualFund':*/}
-          {/*          height = 80;*/}
-          {/*          width = 80;*/}
-          {/*          break;*/}
-          {/*        case 'bond':*/}
-          {/*          height = 190;*/}
-          {/*          width = 105;*/}
-          {/*          break;*/}
-          {/*        case 'epf':*/}
-          {/*        case 'ppf':*/}
-          {/*        case 'nps':*/}
-          {/*          height = 100;*/}
-          {/*          width = 100;*/}
-          {/*          break;*/}
-          {/*      }*/}
-
-          {/*      // @ts-ignore*/}
-          {/*      image.src = fortune.image;*/}
-          {/*      image.id = uuidv4();*/}
-          {/*      return (*/}
-          {/*        <KonvaImage*/}
-          {/*          key={fortune._id}*/}
-          {/*          image={image}*/}
-          {/*          x={fortune.position.x}*/}
-          {/*          y={fortune.position.y}*/}
-          {/*          height={height}*/}
-          {/*          width={width}*/}
-          {/*          draggable={isDraggable}*/}
-          {/*          onDragMove={(e) => e.cancelBubble = true}*/}
-          {/*          onDragStart={(e) => e.cancelBubble = true}*/}
-          {/*          onDragEnd={(e) => {*/}
-          {/*            e.cancelBubble = true;*/}
-          {/*            const node = e.target;*/}
-          {/*            const { x, y } = node.absolutePosition();*/}
-          {/*            updateItem(fortune._id, 'fortune', x / zoomLevel, y / zoomLevel)*/}
-          {/*          }}*/}
-          {/*          onClick={(e) => {*/}
-          {/*            e.cancelBubble = true;*/}
-          {/*            handleActiveItem(fortune, 'fortune');*/}
-          {/*          }}*/}
-          {/*        />*/}
-          {/*      )*/}
-          {/*    }*/}
-          {/*  )}*/}
           <Transformer ref={transformerRef}/>
         </Layer>
       </Stage>

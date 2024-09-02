@@ -6,7 +6,6 @@ import {
   deleteAllCars,
   deleteCar,
   getCars,
-  getCarsAmount,
   updateCar
 } from "../controllers/CarController.js";
 
@@ -17,4 +16,3 @@ carRouter.put('/cars/update/:id', checkAuth, updateCar);
 carRouter.get('/cars', checkAuth, getCars);
 carRouter.delete('/cars/delete/:id', checkAuth, deleteCar);
 carRouter.delete('/cars/delete/all', checkAuth, deleteAllCars);
-carRouter.get('/cars/amount', checkAuth, getCarsAmount);

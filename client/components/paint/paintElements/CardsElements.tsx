@@ -28,7 +28,6 @@ export default function CardsElements({
       {cards.map((card) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
           image.id = uuidv4();
-
           switch (card.type) {
             case 'credit':
               image.src = '/canvas/CC1.svg';

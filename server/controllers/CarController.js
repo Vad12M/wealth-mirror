@@ -23,7 +23,7 @@ export const updateCar = async (req, res) => {
     const car = await CarModel.findOne({ _id: req.params.id, user: req.userId });
     if (!car) {
       return res.status(404).json({
-        message: 'OldCar not found',
+        message: 'Car not found',
       });
     }
 
@@ -53,13 +53,13 @@ export const deleteCar = async (req, res) => {
     const car = await CarModel.findOne({ _id: req.params.id, user: req.userId });
     if (!car) {
       return res.status(404).json({
-        message: 'OldCar not found',
+        message: 'Car not found',
       });
     }
 
     await CarModel.findByIdAndDelete(req.params.id);
     res.status(200).json({
-      message: 'OldCar deleted',
+      message: 'Car deleted',
     });
   } catch (error) {
     res.status(500).json({

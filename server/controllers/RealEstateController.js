@@ -87,17 +87,3 @@ export const deleteAllRealEstates = async (req, res) => {
     });
   }
 }
-
-export const getRealEstatesAmount = async (req, res) => {
-  try {
-    const realEstates = await RealEstateModel.find({ user: req.userId });
-    const amount = realEstates.reduce((acc, realEstate) => acc + realEstate.price, 0);
-    res.status(200).json({
-      amount,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: error.message
-    });
-  }
-}

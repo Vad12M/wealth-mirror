@@ -6,7 +6,6 @@ import {
   deleteAllCards,
   deleteCard,
   getCards,
-  getCardsAmount,
   updateCard
 } from "../controllers/CardController.js";
 
@@ -17,4 +16,3 @@ cardRouter.put('/cards/update/:id', checkAuth, updateCard);
 cardRouter.get('/cards', checkAuth, getCards);
 cardRouter.delete('/cards/delete/:id', checkAuth, deleteCard);
 cardRouter.delete('/cards/delete/all', checkAuth, deleteAllCards);
-cardRouter.get('/cards/amount', checkAuth, getCardsAmount);
