@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
-import { IExpense, IExpenseForm } from "@/interfaces/IExpense";
+import { IExpenses, IExpensesForm } from "@/interfaces/wealths/IExpenses";
 import OptionExpense from "@/ui/icons/canvas/OptionExpense";
 
 export default function ExpenseForm({
@@ -14,10 +14,10 @@ export default function ExpenseForm({
     x: number;
     y: number;
   };
-  defaultForm?: IExpense;
+  defaultForm?: IExpenses;
   onClose?: () => void;
 }) {
-  const [form, setForm] = useState<IExpenseForm>({
+  const [form, setForm] = useState<IExpensesForm>({
     category: '',
     frequency: '',
     amount: 0,

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Image as KonvaImage } from "react-konva";
 import React from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
-import { ICar } from "@/interfaces/ICar";
+import { ICar } from "@/interfaces/wealths/ICar";
 import { Button } from "@/ui/button/Button";
 
 export default function CarElements({

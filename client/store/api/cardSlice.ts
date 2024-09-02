@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { ICard, ICardForm } from "@/interfaces/ICard";
+import { ICard, ICardForm } from "@/interfaces/wealths/ICard";
 
 export const cardSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

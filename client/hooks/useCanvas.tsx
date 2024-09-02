@@ -11,6 +11,7 @@ import {
   useGetMutualFundsQuery,
   useUpdateMutualFundMutation
 } from "@/store/api/mutualFundSlice";
+import { useDeleteAllIncomesMutation, useGetIncomesQuery, useUpdateIncomeMutation } from "@/store/api/incomeSlice";
 
 
 export default function useCanvas() {
@@ -19,18 +20,21 @@ export default function useCanvas() {
   const [deleteAllRealEstates] = useDeleteAllRealEstatesMutation();
   const [deleteAllStocks] = useDeleteAllStocksMutation();
   const [deleteAllMutualFunds] = useDeleteAllMutualFundsMutation();
+  const [deleteAllIncomes] = useDeleteAllIncomesMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
   const [updateRealEstate] = useUpdateRealEstateMutation();
   const [updateStock] = useUpdateStockMutation();
   const [updateMutualFund] = useUpdateMutualFundMutation();
+  const [updateIncome] = useUpdateIncomeMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
   const { data: realEstates } = useGetRealEstatesQuery();
   const { data: stocks } = useGetStocksQuery();
   const { data: mutualFunds } = useGetMutualFundsQuery();
+  const { data: incomes } = useGetIncomesQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -53,6 +57,9 @@ export default function useCanvas() {
       case 'mutualFund':
         updateMutualFund(defaultParams);
         break;
+      case 'income':
+        updateIncome(defaultParams);
+        break;
     }
   }
 
@@ -62,6 +69,7 @@ export default function useCanvas() {
     deleteAllRealEstates();
     deleteAllStocks();
     deleteAllMutualFunds();
+    deleteAllIncomes();
   }
 
   return {
@@ -72,5 +80,6 @@ export default function useCanvas() {
     realEstates,
     stocks,
     mutualFunds,
+    incomes
   }
 }

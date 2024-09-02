@@ -3,7 +3,11 @@ import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import OptionIncome from "@/ui/icons/canvas/OptionIncome";
-import { IIncome, IIncomeForm } from "@/interfaces/IIncome";
+import { IIncome, IIncomeForm } from "@/interfaces/wealths/IIncome";
+import Dropdown from "@/ui/dropdown/dropdown";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
+import { useCreateIncomeMutation, useDeleteIncomeMutation, useUpdateIncomeMutation } from "@/store/api/incomeSlice";
 
 export default function IncomeForm({
   position,
@@ -17,11 +21,15 @@ export default function IncomeForm({
   defaultForm?: IIncome;
   onClose?: () => void;
 }) {
+  const [deleteIncome, { isLoading: isLoadingDelete }] = useDeleteIncomeMutation();
+  const [createIncome, { isLoading: isLoadingCreate }] = useCreateIncomeMutation();
+  const [updateIncome, { isLoading: isLoadingUpdate }] = useUpdateIncomeMutation();
+
   const [form, setForm] = useState<IIncomeForm>({
     category: '',
     frequency: '',
     amount: 0,
-    image: '/canvas/Stock-4.svg',
+    dateCredited: '',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -35,15 +43,39 @@ export default function IncomeForm({
         category: defaultForm.category,
         frequency: defaultForm.frequency,
         amount: defaultForm.amount,
-        image: defaultForm.image,
-        position: defaultForm.position
+        position: defaultForm.position,
+        dateCredited: defaultForm.dateCredited,
       });
     }
   }, [defaultForm]);
 
   const handleClick = () => {
-
+    if (defaultForm) {
+      updateIncome({
+        id: defaultForm._id,
+        ...form
+      }).unwrap()
+        .finally(() => onClose?.());
+    } else {
+      createIncome(form).unwrap()
+        .finally(() => onClose?.());
+    }
   }
+
+  const categories = [
+    { label: 'Salary', value: 'Salary' },
+    { label: 'Business', value: 'Business' },
+    { label: 'Pension', value: 'Pension' },
+    { label: 'Rental', value: 'Rental' },
+    { label: 'Freelance', value: 'Freelance' },
+    { label: 'Others', value: 'Others' },
+  ];
+
+  const frequencies = [
+    { label: 'Monthly', value: 'Monthly' },
+    { label: 'Yearly', value: 'Yearly' },
+    { label: 'Fixed', value: 'Fixed' },
+  ];
 
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
@@ -54,17 +86,19 @@ export default function IncomeForm({
         <Typography text={'Income'} type={'labelsVerySmall'} color="text-black"/>
       </div>
       <div className="flex flex-col space-y-4 w-full">
-        <InputForm
-          label="Category"
+        <Dropdown
+          label={'Category'}
+          placeholder={'Select category'}
+          options={categories}
           value={form.category}
-          placeholder={'Enter category'}
-          onUpdate={(e) => setForm({ ...form, category: e.target.value })}
+          onChange={(value) => setForm((prevState) => ({ ...prevState, category: value }))}
         />
-        <InputForm
-          label="Frequency"
+        <Dropdown
+          label={'Frequency'}
+          placeholder={'Select frequency'}
+          options={frequencies}
           value={form.frequency}
-          placeholder={'Enter frequency'}
-          onUpdate={(e) => setForm({ ...form, frequency: e.target.value })}
+          onChange={(value) => setForm((prevState) => ({ ...prevState, frequency: value }))}
         />
         <InputForm
           label="Amount"
@@ -72,12 +106,20 @@ export default function IncomeForm({
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, dateCredited: startDate }));
+          }}
+          initialSelectDate={form.dateCredited ? parseISO(form.dateCredited) : undefined}
+          label={'Date Credited'}
+          placeholder={'Select date'}
+        />
       </div>
       <FormButtonsBlock
-        // isLoading={isLoadingCreate || isLoadingUpdate}
-        // isLoadingDelete={isLoadingDelete}
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
         isEdit={!!defaultForm}
-        // deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
+        deleteClick={() => defaultForm ? deleteIncome(defaultForm._id).finally(() => onClose?.()) : null}
         handleClick={handleClick}
         type={'Income'}
       />

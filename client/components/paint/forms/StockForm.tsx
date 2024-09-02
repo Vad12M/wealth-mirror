@@ -11,7 +11,7 @@ import {
 } from "@/store/api/stockSlice";
 import { parseISO } from "date-fns";
 import InputCalendar from "@/ui/inputCalendar/inputCalendar";
-import { IStock, IStockForm } from "@/interfaces/IStock";
+import { IStock, IStockForm } from "@/interfaces/wealths/IStock";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ChevroneLeftIcon from "@/ui/icons/ChevroneLeftIcon";
 import ChevroneRightIcon from "@/ui/icons/ChevroneRightIcon";

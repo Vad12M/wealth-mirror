@@ -1,66 +1,55 @@
 import { v4 as uuidv4 } from "uuid";
 import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IStock } from "@/interfaces/wealths/IStock";
+import { IIncome } from "@/interfaces/wealths/IIncome";
 
-export default function StocksElements({
-  stocks,
+export default function IncomesElements({
+  incomes,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  stocks: IStock[];
+  incomes: IIncome[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IStock, type: string) => void;
+  handleActiveItem: (item: IIncome, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    stock: IStock | undefined;
+    income: IIncome | undefined;
     x: number;
     y: number;
   }>({
     visible: false,
-    stock: undefined,
+    income: undefined,
     x: 0,
     y: 0,
   });
 
   const tooltipRef = useRef(null);
-  if (!stocks.length) {
+  if (!incomes.length) {
     return null;
   }
 
   return (
     <>
-      {stocks.map((stock) => {
+      {incomes.map((income) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
+          image.src = '/canvas/MutualFunds.svg';
           image.id = uuidv4();
-          switch (stock.type) {
-            case 'us-stock':
-              image.src = '/canvas/Stock-4.svg';
-              break;
-            case 'eu-stock':
-              image.src = '/canvas/Stock-5.svg';
-              break;
-            case 'indian-stock':
-              image.src = '/canvas/Stock-3.svg';
-              break;
-          }
-
           return (
-            <Button typeButton={'none'} key={stock._id}>
+            <Button typeButton={'none'} key={income._id}>
               <KonvaImage
-                key={stock._id}
+                key={income._id}
                 image={image}
-                x={stock.position.x}
-                y={stock.position.y}
-                height={180}
-                width={90}
+                x={income.position.x}
+                y={income.position.y}
+                height={80}
+                width={80}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
@@ -68,24 +57,24 @@ export default function StocksElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(stock._id, 'stock', x / zoomLevel, y / zoomLevel)
+                  updateItem(income._id, 'income', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(stock, 'stock');
+                  handleActiveItem(income, 'income');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    stock: stock,
-                    x: stock.position.x + 80,
-                    y: stock.position.y,
+                    income,
+                    x: income.position.x + 80,
+                    y: income.position.y,
                   });
                 }}
                 onMouseLeave={() => {
                   setTooltip({
                     visible: false,
-                    stock: undefined,
+                    income: undefined,
                     x: 0,
                     y: 0,
                   });
@@ -110,14 +99,14 @@ export default function StocksElements({
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 10}
-            text={tooltip.stock?.name}
+            text={tooltip.income?.category}
             fill="white"
             fontSize={14}
           />
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 30}
-            text={'Code: ' + tooltip.stock?.code}
+            text={'Frequency: ' + tooltip.income?.frequency}
             fill="white"
             fontSize={14}
           />

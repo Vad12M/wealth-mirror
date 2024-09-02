@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import OptionFixedDeposit from "@/ui/icons/canvas/OptionFixedDeposit";
-import { IFixedDepositForm } from "@/interfaces/IFixedDeposit";
+import { IFixedDepositForm } from "@/interfaces/wealths/IFixedDeposit";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 
 export default function FixedDepositForm({

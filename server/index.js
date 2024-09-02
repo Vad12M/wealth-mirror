@@ -9,6 +9,9 @@ import { cardRouter } from "./routes/cardRoutes.js";
 import { realEstateRouter } from "./routes/realEstateRoutes.js";
 import { stockRouter } from "./routes/stockRoutes.js";
 import { mutualFundRouter } from "./routes/mutualFundRoutes.js";
+import { incomeRouter } from "./routes/incomeRoutes.js";
+import { expensesRouter } from "./routes/expensesRoutes.js";
+import { fixedDepositRouter } from "./routes/fixedDepostRoutes.js";
 
 dotenv.config();
 
@@ -33,6 +36,9 @@ app.use(cardRouter);
 app.use(realEstateRouter);
 app.use(stockRouter);
 app.use(mutualFundRouter);
+app.use(incomeRouter);
+app.use(expensesRouter);
+app.use(fixedDepositRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

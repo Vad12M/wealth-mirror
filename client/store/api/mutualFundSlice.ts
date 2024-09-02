@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { IMutualFund, IMutualFundForm } from "@/interfaces/IMutualFund";
+import { IMutualFund, IMutualFundForm } from "@/interfaces/wealths/IMutualFund";
 
 export const mutualFundSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

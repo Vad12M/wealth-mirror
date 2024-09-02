@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { IStock, IStockForm } from "@/interfaces/IStock";
+import { IStock, IStockForm } from "@/interfaces/wealths/IStock";
 
 export const stockSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

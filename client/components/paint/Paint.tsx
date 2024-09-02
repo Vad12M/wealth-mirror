@@ -17,6 +17,7 @@ import CardsElements from "@/components/paint/paintElements/CardsElements";
 import CarElements from "@/components/paint/paintElements/CarElements";
 import PaintZoom from "@/components/paint/PaintZoom";
 import MutualFundsElements from "@/components/paint/paintElements/MutualFundsElements";
+import IncomesElements from "@/components/paint/paintElements/IncomesElements";
 
 interface PaintProps {
 }
@@ -40,7 +41,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     sizeHeight,
     updateItem,
     cars, cards, realEstates,
-    stocks,
+    stocks, incomes,
     mutualFunds
   } = usePaint();
 
@@ -160,7 +161,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           <RealEstateElements realEstates={realEstates || []}{...commonProps}/>
           <StocksElements stocks={stocks || []}{...commonProps}/>
           <MutualFundsElements mutualFunds={mutualFunds || []}{...commonProps}/>
-
+          <IncomesElements incomes={incomes || []}{...commonProps}/>
 
           <Transformer ref={transformerRef}/>
         </Layer>

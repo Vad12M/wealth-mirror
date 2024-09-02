@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Image as KonvaImage } from "react-konva";
 import React from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
-import { ICard } from "@/interfaces/ICard";
+import { ICard } from "@/interfaces/wealths/ICard";
 import { Button } from "@/ui/button/Button";
 
 export default function CardsElements({

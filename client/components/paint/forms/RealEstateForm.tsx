@@ -4,7 +4,7 @@ import {
   useDeleteRealEstateMutation,
   useUpdateRealEstateMutation
 } from "@/store/api/realEstateSlice";
-import { IRealEstate, IRealEstateForm } from "@/interfaces/IRealEstate";
+import { IRealEstate, IRealEstateForm } from "@/interfaces/wealths/IRealEstate";
 import InputForm from "@/ui/input/inputForm";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import { Swiper, SwiperSlide } from "swiper/react";

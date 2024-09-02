@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
-import { IMutualFund } from "@/interfaces/IMutualFund";
+import { IMutualFund } from "@/interfaces/wealths/IMutualFund";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";

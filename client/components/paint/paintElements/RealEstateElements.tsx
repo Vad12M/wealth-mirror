@@ -1,4 +1,4 @@
-import { IRealEstate } from "@/interfaces/IRealEstate";
+import { IRealEstate } from "@/interfaces/wealths/IRealEstate";
 import { v4 as uuidv4 } from "uuid";
 import { Image as KonvaImage } from "react-konva";
 import React from "react";

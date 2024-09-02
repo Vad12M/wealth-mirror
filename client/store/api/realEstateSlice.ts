@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { IRealEstate, IRealEstateForm } from "@/interfaces/IRealEstate";
+import { IRealEstate, IRealEstateForm } from "@/interfaces/wealths/IRealEstate";
 
 export const realEstateSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

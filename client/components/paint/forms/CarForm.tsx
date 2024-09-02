@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ICar, ICarForm } from "@/interfaces/ICar";
+import { ICar, ICarForm } from "@/interfaces/wealths/ICar";
 import { useCreateCarMutation, useDeleteCarMutation, useUpdateCarMutation } from "@/store/api/carSlice";
 import InputForm from "@/ui/input/inputForm";
 import { Swiper, SwiperSlide } from 'swiper/react';

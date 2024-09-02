@@ -2,6 +2,8 @@ export interface IFixedDeposit {
   _id: string;
   name: string;
   amount: number;
+  dateOfPurchase: string;
+  maturityDate: string;
   image: string;
   position: {
     x: number;
@@ -12,6 +14,8 @@ export interface IFixedDeposit {
 export interface IFixedDepositForm {
   amount: number;
   name: string;
+  dateOfPurchase: string;
+  maturityDate: string;
   position: {
     x: number;
     y: number;

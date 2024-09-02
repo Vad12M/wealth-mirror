@@ -8,7 +8,7 @@ import {
   useDeleteMutualFundMutation,
   useUpdateMutualFundMutation
 } from "@/store/api/mutualFundSlice";
-import { IMutualFund, IMutualFundForm } from "@/interfaces/IMutualFund";
+import { IMutualFund, IMutualFundForm } from "@/interfaces/wealths/IMutualFund";
 import Dropdown from "@/ui/dropdown/dropdown";
 import InputCalendar from "@/ui/inputCalendar/inputCalendar";
 import { parseISO } from "date-fns";
@@ -25,9 +25,9 @@ export default function MutualFundsForm({
   defaultForm?: IMutualFund;
   onClose?: () => void;
 }) {
-  const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteMutualFundMutation();
-  const [createFortune, { isLoading: isLoadingCreate }] = useCreateMutualFundMutation();
-  const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateMutualFundMutation();
+  const [deleteMutualFund, { isLoading: isLoadingDelete }] = useDeleteMutualFundMutation();
+  const [createMutualFund, { isLoading: isLoadingCreate }] = useCreateMutualFundMutation();
+  const [updateMutualFund, { isLoading: isLoadingUpdate }] = useUpdateMutualFundMutation();
   const [form, setForm] = useState<IMutualFundForm>({
     name: '',
     code: '',
@@ -57,13 +57,13 @@ export default function MutualFundsForm({
 
   const handleClick = () => {
     if (defaultForm) {
-      updateFortune({
+      updateMutualFund({
         id: defaultForm._id,
         ...form
       }).unwrap()
         .finally(() => onClose?.());
     } else {
-      createFortune(form).unwrap()
+      createMutualFund(form).unwrap()
         .finally(() => onClose?.());
     }
   }
@@ -127,7 +127,7 @@ export default function MutualFundsForm({
         isLoading={isLoadingCreate || isLoadingUpdate}
         isLoadingDelete={isLoadingDelete}
         isEdit={!!defaultForm}
-        deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
+        deleteClick={() => defaultForm ? deleteMutualFund(defaultForm._id).finally(() => onClose?.()) : null}
         handleClick={handleClick}
         type={'Mutual Funds'}
       />

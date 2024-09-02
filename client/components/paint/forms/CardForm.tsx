@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Typography from "@/ui/typography/Typography";
 import { useCreateCardMutation, useDeleteCardMutation, useUpdateCardMutation } from "@/store/api/cardSlice";
-import { ICard, ICardForm } from "@/interfaces/ICard";
+import { ICard, ICardForm } from "@/interfaces/wealths/ICard";
 import InputForm from "@/ui/input/inputForm";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ChevroneLeftIcon from "@/ui/icons/ChevroneLeftIcon";

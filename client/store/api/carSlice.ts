@@ -1,5 +1,5 @@
 import { baseApi } from "@/store/api/baseApi";
-import { ICar, ICarForm } from "@/interfaces/ICar";
+import { ICar, ICarForm } from "@/interfaces/wealths/ICar";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
 
 export const carSlice = baseApi.injectEndpoints({
