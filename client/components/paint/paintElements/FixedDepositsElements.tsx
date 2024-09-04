@@ -3,53 +3,53 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IIncome } from "@/interfaces/wealths/IIncome";
+import { IFixedDeposit } from "@/interfaces/wealths/IFixedDeposit";
 
-export default function IncomesElements({
-  incomes,
+export default function FixedDepositsElements({
+  fixedDeposits,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  incomes: IIncome[];
+  fixedDeposits: IFixedDeposit[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IIncome, type: string) => void;
+  handleActiveItem: (item: IFixedDeposit, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    income: IIncome | undefined;
+    fixedDeposit: IFixedDeposit | undefined;
     x: number;
     y: number;
   }>({
     visible: false,
-    income: undefined,
+    fixedDeposit: undefined,
     x: 0,
     y: 0,
   });
 
   const tooltipRef = useRef(null);
-  if (!incomes.length) {
+  if (!fixedDeposits.length) {
     return null;
   }
 
   return (
     <>
-      {incomes.map((income) => {
+      {fixedDeposits.map((fixedDeposit) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = '/canvas/Income.svg';
+          image.src = '/canvas/FixedDeposit.svg';
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'} key={income._id}>
+            <Button typeButton={'none'} key={fixedDeposit._id}>
               <KonvaImage
-                key={income._id}
+                key={fixedDeposit._id}
                 image={image}
-                x={income.position.x}
-                y={income.position.y}
-                height={80}
-                width={80}
+                x={fixedDeposit.position.x}
+                y={fixedDeposit.position.y}
+                height={70}
+                width={70}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
@@ -57,24 +57,24 @@ export default function IncomesElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(income._id, 'income', x / zoomLevel, y / zoomLevel)
+                  updateItem(fixedDeposit._id, 'fixedDeposit', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(income, 'income');
+                  handleActiveItem(fixedDeposit, 'fixedDeposit');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    income,
-                    x: income.position.x + 80,
-                    y: income.position.y,
+                    fixedDeposit,
+                    x: fixedDeposit.position.x + 80,
+                    y: fixedDeposit.position.y,
                   });
                 }}
                 onMouseLeave={() => {
                   setTooltip({
                     visible: false,
-                    income: undefined,
+                    fixedDeposit: undefined,
                     x: 0,
                     y: 0,
                   });
@@ -99,14 +99,14 @@ export default function IncomesElements({
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 10}
-            text={tooltip.income?.category}
+            text={tooltip.fixedDeposit?.name}
             fill="white"
             fontSize={14}
           />
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 30}
-            text={'Frequency: ' + tooltip.income?.frequency}
+            text={'Amount: ' + tooltip.fixedDeposit?.amount}
             fill="white"
             fontSize={14}
           />

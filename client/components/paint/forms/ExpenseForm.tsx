@@ -19,9 +19,10 @@ export default function ExpenseForm({
 }) {
   const [form, setForm] = useState<IExpensesForm>({
     category: '',
+    type: '',
+    dateDebited: '',
     frequency: '',
     amount: 0,
-    image: '/canvas/Stock-4.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -35,8 +36,9 @@ export default function ExpenseForm({
         category: defaultForm.category,
         frequency: defaultForm.frequency,
         amount: defaultForm.amount,
-        image: defaultForm.image,
-        position: defaultForm.position
+        position: defaultForm.position,
+        dateDebited: defaultForm.dateDebited,
+        type: defaultForm.type
       });
     }
   }, [defaultForm]);

@@ -12,6 +12,11 @@ import {
   useUpdateMutualFundMutation
 } from "@/store/api/mutualFundSlice";
 import { useDeleteAllIncomesMutation, useGetIncomesQuery, useUpdateIncomeMutation } from "@/store/api/incomeSlice";
+import {
+  useDeleteAllFixedDepositsMutation,
+  useGetFixedDepositsQuery,
+  useUpdateFixedDepositMutation
+} from "@/store/api/fixedDepositSlice";
 
 
 export default function useCanvas() {
@@ -21,6 +26,7 @@ export default function useCanvas() {
   const [deleteAllStocks] = useDeleteAllStocksMutation();
   const [deleteAllMutualFunds] = useDeleteAllMutualFundsMutation();
   const [deleteAllIncomes] = useDeleteAllIncomesMutation();
+  const [deleteAllFixedDeposits] = useDeleteAllFixedDepositsMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
@@ -28,6 +34,7 @@ export default function useCanvas() {
   const [updateStock] = useUpdateStockMutation();
   const [updateMutualFund] = useUpdateMutualFundMutation();
   const [updateIncome] = useUpdateIncomeMutation();
+  const [updateFixedDeposit] = useUpdateFixedDepositMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
@@ -35,6 +42,7 @@ export default function useCanvas() {
   const { data: stocks } = useGetStocksQuery();
   const { data: mutualFunds } = useGetMutualFundsQuery();
   const { data: incomes } = useGetIncomesQuery();
+  const { data: fixedDeposits } = useGetFixedDepositsQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -60,6 +68,9 @@ export default function useCanvas() {
       case 'income':
         updateIncome(defaultParams);
         break;
+      case 'fixedDeposit':
+        updateFixedDeposit(defaultParams);
+        break;
     }
   }
 
@@ -70,6 +81,7 @@ export default function useCanvas() {
     deleteAllStocks();
     deleteAllMutualFunds();
     deleteAllIncomes();
+    deleteAllFixedDeposits();
   }
 
   return {
@@ -80,6 +92,7 @@ export default function useCanvas() {
     realEstates,
     stocks,
     mutualFunds,
-    incomes
+    incomes,
+    fixedDeposits
   }
 }

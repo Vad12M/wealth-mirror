@@ -4,6 +4,13 @@ import Typography from "@/ui/typography/Typography";
 import OptionFixedDeposit from "@/ui/icons/canvas/OptionFixedDeposit";
 import { IFixedDepositForm } from "@/interfaces/wealths/IFixedDeposit";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
+import {
+  useCreateFixedDepositMutation,
+  useDeleteFixedDepositMutation,
+  useUpdateFixedDepositMutation
+} from "@/store/api/fixedDepositSlice";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 
 export default function FixedDepositForm({
   position,
@@ -17,10 +24,15 @@ export default function FixedDepositForm({
   defaultForm?: any;
   onClose?: () => void;
 }) {
+  const [deleteFixedDeposit, { isLoading: isLoadingDelete }] = useDeleteFixedDepositMutation();
+  const [createFixedDeposit, { isLoading: isLoadingCreate }] = useCreateFixedDepositMutation();
+  const [updateFixedDeposit, { isLoading: isLoadingUpdate }] = useUpdateFixedDepositMutation();
+
   const [form, setForm] = useState<IFixedDepositForm>({
     name: '',
     amount: 0,
-    image: '/canvas/Stock-4.svg',
+    dateOfPurchase: '',
+    maturityDate: '',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -33,14 +45,24 @@ export default function FixedDepositForm({
       setForm({
         name: defaultForm.name,
         amount: defaultForm.amount,
-        image: defaultForm.image,
+        dateOfPurchase: defaultForm.dateOfPurchase,
+        maturityDate: defaultForm.maturityDate,
         position: defaultForm.position
       });
     }
   }, [defaultForm]);
 
   const handleClick = () => {
-
+    if (defaultForm) {
+      updateFixedDeposit({
+        id: defaultForm._id,
+        ...form
+      }).unwrap()
+        .finally(() => onClose?.());
+    } else {
+      createFixedDeposit(form).unwrap()
+        .finally(() => onClose?.());
+    }
   }
 
   return (
@@ -64,12 +86,28 @@ export default function FixedDepositForm({
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, dateOfPurchase: startDate }));
+          }}
+          initialSelectDate={form.dateOfPurchase ? parseISO(form.dateOfPurchase) : undefined}
+          label={'Date of purchase'}
+          placeholder={'Select date'}
+        />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, maturityDate: startDate }));
+          }}
+          initialSelectDate={form.maturityDate ? parseISO(form.maturityDate) : undefined}
+          label={'Maturity date'}
+          placeholder={'Select date'}
+        />
       </div>
       <FormButtonsBlock
-        // isLoading={isLoadingCreate || isLoadingUpdate}
-        // isLoadingDelete={isLoadingDelete}
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
         isEdit={!!defaultForm}
-        // deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
+        deleteClick={() => defaultForm ? deleteFixedDeposit(defaultForm._id).finally(() => onClose?.()) : null}
         handleClick={handleClick}
         type={'Fixed Deposit'}
       />
