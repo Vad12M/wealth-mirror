@@ -17,6 +17,11 @@ import {
   useGetFixedDepositsQuery,
   useUpdateFixedDepositMutation
 } from "@/store/api/fixedDepositSlice";
+import {
+  useDeleteAllExpensesMutation,
+  useGetExpensesQuery,
+  useUpdateExpensesMutation
+} from "@/store/api/expensesSlice";
 
 
 export default function useCanvas() {
@@ -27,6 +32,7 @@ export default function useCanvas() {
   const [deleteAllMutualFunds] = useDeleteAllMutualFundsMutation();
   const [deleteAllIncomes] = useDeleteAllIncomesMutation();
   const [deleteAllFixedDeposits] = useDeleteAllFixedDepositsMutation();
+  const [deleteAllExpenses] = useDeleteAllExpensesMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
@@ -35,6 +41,7 @@ export default function useCanvas() {
   const [updateMutualFund] = useUpdateMutualFundMutation();
   const [updateIncome] = useUpdateIncomeMutation();
   const [updateFixedDeposit] = useUpdateFixedDepositMutation();
+  const [updateExpenses] = useUpdateExpensesMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
@@ -43,6 +50,7 @@ export default function useCanvas() {
   const { data: mutualFunds } = useGetMutualFundsQuery();
   const { data: incomes } = useGetIncomesQuery();
   const { data: fixedDeposits } = useGetFixedDepositsQuery();
+  const { data: expenses } = useGetExpensesQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -71,6 +79,9 @@ export default function useCanvas() {
       case 'fixedDeposit':
         updateFixedDeposit(defaultParams);
         break;
+      case 'expenses':
+        updateExpenses(defaultParams);
+        break;
     }
   }
 
@@ -82,6 +93,7 @@ export default function useCanvas() {
     deleteAllMutualFunds();
     deleteAllIncomes();
     deleteAllFixedDeposits();
+    deleteAllExpenses();
   }
 
   return {
@@ -93,6 +105,7 @@ export default function useCanvas() {
     stocks,
     mutualFunds,
     incomes,
-    fixedDeposits
+    fixedDeposits,
+    expenses
   }
 }

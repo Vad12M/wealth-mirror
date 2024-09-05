@@ -24,7 +24,7 @@ export default function usePaint() {
     cars, cards,
     realEstates, stocks,
     mutualFunds, incomes,
-    fixedDeposits
+    fixedDeposits, expenses
   } = useCanvas();
 
   const [drawAction, setDrawAction] = useState<DrawAction>(DrawAction.Select);
@@ -133,6 +133,7 @@ export default function usePaint() {
     sizeHeight,
     updateItem,
     cars, cards, realEstates, stocks,
-    mutualFunds, incomes, fixedDeposits
+    mutualFunds, incomes, fixedDeposits,
+    expenses
   }
 }

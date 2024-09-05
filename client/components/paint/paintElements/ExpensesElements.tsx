@@ -1,71 +1,55 @@
 import { v4 as uuidv4 } from "uuid";
 import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IStock } from "@/interfaces/wealths/IStock";
+import { IExpenses } from "@/interfaces/wealths/IExpenses";
 
-export default function StocksElements({
-  stocks,
+export default function ExpensesElements({
+  expenses,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  stocks: IStock[];
+  expenses: IExpenses[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IStock, type: string) => void;
+  handleActiveItem: (item: IExpenses, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    stock: IStock | undefined;
+    expense: IExpenses | undefined;
     x: number;
     y: number;
   }>({
     visible: false,
-    stock: undefined,
+    expense: undefined,
     x: 0,
     y: 0,
   });
 
   const tooltipRef = useRef(null);
-  if (!stocks.length) {
+  if (!expenses.length) {
     return null;
   }
 
   return (
     <>
-      {stocks.map((stock) => {
+      {expenses.map((expense) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
+          image.src = '/canvas/Expenses.svg';
           image.id = uuidv4();
-          let height = 190;
-          let width = 90;
-          switch (stock.type) {
-            case 'us-stock':
-              image.src = '/canvas/Stock-4.svg';
-              break;
-            case 'eu-stock':
-              image.src = '/canvas/Stock-5.svg';
-              height = 220;
-              width = 160;
-              break;
-            case 'indian-stock':
-              image.src = '/canvas/Stock-3.svg';
-              width = 120;
-              break;
-          }
-
           return (
-            <Button typeButton={'none'} key={stock._id}>
+            <Button typeButton={'none'} key={expense._id}>
               <KonvaImage
-                key={stock._id}
+                key={expense._id}
                 image={image}
-                x={stock.position.x}
-                y={stock.position.y}
-                height={height}
-                width={width}
+                x={expense.position.x}
+                y={expense.position.y}
+                height={100}
+                width={80}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
@@ -73,24 +57,24 @@ export default function StocksElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(stock._id, 'stock', x / zoomLevel, y / zoomLevel)
+                  updateItem(expense._id, 'expenses', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(stock, 'stock');
+                  handleActiveItem(expense, 'expenses');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    stock: stock,
-                    x: stock.position.x + 80,
-                    y: stock.position.y,
+                    expense,
+                    x: expense.position.x + 80,
+                    y: expense.position.y,
                   });
                 }}
                 onMouseLeave={() => {
                   setTooltip({
                     visible: false,
-                    stock: undefined,
+                    expense: undefined,
                     x: 0,
                     y: 0,
                   });
@@ -115,14 +99,14 @@ export default function StocksElements({
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 10}
-            text={tooltip.stock?.name}
+            text={tooltip.expense?.category}
             fill="white"
             fontSize={14}
           />
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 30}
-            text={'Code: ' + tooltip.stock?.code}
+            text={'Type: ' + tooltip.expense?.type}
             fill="white"
             fontSize={14}
           />
@@ -131,5 +115,3 @@ export default function StocksElements({
     </>
   )
 }
-
-

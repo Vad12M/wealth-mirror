@@ -48,8 +48,8 @@ export default function IncomesElements({
                 image={image}
                 x={income.position.x}
                 y={income.position.y}
-                height={80}
-                width={80}
+                height={75}
+                width={55}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
