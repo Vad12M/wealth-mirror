@@ -3,53 +3,53 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IGold } from "@/interfaces/IGold";
+import { ICrypto } from "@/interfaces/ICrypto";
 
-export default function GoldElements({
-  golds,
+export default function CryptoElements({
+  cryptos,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  golds: IGold[];
+  cryptos: ICrypto[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IGold, type: string) => void;
+  handleActiveItem: (item: ICrypto, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    gold: IGold | undefined;
+    crypto: ICrypto | undefined;
     x: number;
     y: number;
   }>({
     visible: false,
-    gold: undefined,
+    crypto: undefined,
     x: 0,
     y: 0,
   });
 
   const tooltipRef = useRef(null);
-  if (!golds.length) {
+  if (!cryptos.length) {
     return null;
   }
 
   return (
     <>
-      {golds.map((gold) => {
+      {cryptos.map((crypto) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = '/canvas/Gold.svg';
+          image.src = '/canvas/Crypto.svg';
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'} key={gold._id}>
+            <Button typeButton={'none'} key={crypto._id}>
               <KonvaImage
-                key={gold._id}
+                key={crypto._id}
                 image={image}
-                x={gold.position.x}
-                y={gold.position.y}
-                height={70}
-                width={70}
+                x={crypto.position.x}
+                y={crypto.position.y}
+                height={60}
+                width={40}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
@@ -57,24 +57,24 @@ export default function GoldElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(gold._id, 'gold', x / zoomLevel, y / zoomLevel)
+                  updateItem(crypto._id, 'crypto', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(gold, 'gold');
+                  handleActiveItem(crypto, 'crypto');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    gold,
-                    x: gold.position.x + 80,
-                    y: gold.position.y,
+                    crypto,
+                    x: crypto.position.x + 80,
+                    y: crypto.position.y,
                   });
                 }}
                 onMouseLeave={() => {
                   setTooltip({
                     visible: false,
-                    gold: undefined,
+                    crypto: undefined,
                     x: 0,
                     y: 0,
                   });
@@ -99,14 +99,14 @@ export default function GoldElements({
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 10}
-            text={'Gold'}
+            text={'Currency Name: ' + tooltip.crypto?.currencyName}
             fill="white"
             fontSize={14}
           />
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 30}
-            text={'Type: ' + tooltip.gold?.type}
+            text={'Code: ' + tooltip.crypto?.code}
             fill="white"
             fontSize={14}
           />

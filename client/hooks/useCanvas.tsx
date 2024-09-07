@@ -23,6 +23,12 @@ import {
   useUpdateExpensesMutation
 } from "@/store/api/expensesSlice";
 import { useDeleteAllGoldMutation, useGetGoldsQuery, useUpdateGoldMutation } from "@/store/api/goldSlice";
+import { useDeleteAllCryptosMutation, useGetCryptosQuery, useUpdateCryptoMutation } from "@/store/api/cryptoSlice";
+import {
+  useDeleteAllLiquidCashMutation,
+  useGetLiquidCashsQuery,
+  useUpdateLiquidCashMutation
+} from "@/store/api/luquidCashSlice";
 
 
 export default function useCanvas() {
@@ -35,6 +41,8 @@ export default function useCanvas() {
   const [deleteAllFixedDeposits] = useDeleteAllFixedDepositsMutation();
   const [deleteAllExpenses] = useDeleteAllExpensesMutation();
   const [deleteAllGold] = useDeleteAllGoldMutation();
+  const [deleteAllCryptos] = useDeleteAllCryptosMutation();
+  const [deleteAllLiquidCash] = useDeleteAllLiquidCashMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
@@ -45,6 +53,8 @@ export default function useCanvas() {
   const [updateFixedDeposit] = useUpdateFixedDepositMutation();
   const [updateExpenses] = useUpdateExpensesMutation();
   const [updateGold] = useUpdateGoldMutation();
+  const [updateCrypto] = useUpdateCryptoMutation();
+  const [updateLiquidCash] = useUpdateLiquidCashMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
@@ -55,6 +65,8 @@ export default function useCanvas() {
   const { data: fixedDeposits } = useGetFixedDepositsQuery();
   const { data: expenses } = useGetExpensesQuery();
   const { data: golds } = useGetGoldsQuery();
+  const { data: cryptos } = useGetCryptosQuery();
+  const { data: liquidCashs } = useGetLiquidCashsQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -89,6 +101,12 @@ export default function useCanvas() {
       case 'gold':
         updateGold(defaultParams);
         break;
+      case 'crypto':
+        updateCrypto(defaultParams);
+        break;
+      case 'liquidCash':
+        updateLiquidCash(defaultParams);
+        break;
     }
   }
 
@@ -102,6 +120,8 @@ export default function useCanvas() {
     deleteAllFixedDeposits();
     deleteAllExpenses();
     deleteAllGold();
+    deleteAllCryptos();
+    deleteAllLiquidCash();
   }
 
   return {
@@ -115,6 +135,8 @@ export default function useCanvas() {
     incomes,
     fixedDeposits,
     expenses,
-    golds
+    golds,
+    cryptos,
+    liquidCashs
   }
 }

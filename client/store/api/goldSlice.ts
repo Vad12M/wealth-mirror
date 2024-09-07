@@ -8,7 +8,7 @@ export const GoldSlice = baseApi.injectEndpoints({
       query: () => ({
         url: '/gold',
       }),
-      providesTags: [{ type: LIST_CONTENT_TAG, id: 'expenses' }]
+      providesTags: [{ type: LIST_CONTENT_TAG, id: 'gold' }]
     }),
 
     createGold: builder.mutation<void, IGoldForm>({
@@ -17,7 +17,7 @@ export const GoldSlice = baseApi.injectEndpoints({
         method: 'POST',
         body: JSON.stringify(params)
       }),
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'expenses' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'gold' }]
     }),
 
     updateGold: builder.mutation<void, any>({
@@ -29,7 +29,7 @@ export const GoldSlice = baseApi.injectEndpoints({
           body: JSON.stringify(rest)
         }
       },
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'expenses' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'gold' }]
     }),
 
     deleteGold: builder.mutation<void, string>({
@@ -37,7 +37,7 @@ export const GoldSlice = baseApi.injectEndpoints({
         url: `/gold/delete/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'expenses' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'gold' }]
     }),
 
     deleteAllGold: builder.mutation<void, void>({
@@ -45,7 +45,7 @@ export const GoldSlice = baseApi.injectEndpoints({
         url: '/gold/delete/all',
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'expenses' }]
+      invalidatesTags: [{ type: LIST_CONTENT_TAG, id: 'gold' }]
     }),
   })
 })

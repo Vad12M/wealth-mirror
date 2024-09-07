@@ -3,53 +3,53 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IGold } from "@/interfaces/IGold";
+import { ILiquidCash } from "@/interfaces/ILiquidCash";
 
-export default function GoldElements({
-  golds,
+export default function LiquideCashElements({
+  liquidCashs,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  golds: IGold[];
+  liquidCashs: ILiquidCash[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: IGold, type: string) => void;
+  handleActiveItem: (item: ILiquidCash, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    gold: IGold | undefined;
+    liquidCash: ILiquidCash | undefined;
     x: number;
     y: number;
   }>({
     visible: false,
-    gold: undefined,
+    liquidCash: undefined,
     x: 0,
     y: 0,
   });
 
   const tooltipRef = useRef(null);
-  if (!golds.length) {
+  if (!liquidCashs.length) {
     return null;
   }
 
   return (
     <>
-      {golds.map((gold) => {
+      {liquidCashs.map((liquidCash) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = '/canvas/Gold.svg';
+          image.src = '/canvas/LiquidCash.svg';
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'} key={gold._id}>
+            <Button typeButton={'none'} key={liquidCash._id}>
               <KonvaImage
-                key={gold._id}
+                key={liquidCash._id}
                 image={image}
-                x={gold.position.x}
-                y={gold.position.y}
-                height={70}
-                width={70}
+                x={liquidCash.position.x}
+                y={liquidCash.position.y}
+                height={60}
+                width={60}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
@@ -57,24 +57,24 @@ export default function GoldElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(gold._id, 'gold', x / zoomLevel, y / zoomLevel)
+                  updateItem(liquidCash._id, 'liquidCash', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(gold, 'gold');
+                  handleActiveItem(liquidCash, 'liquidCash');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    gold,
-                    x: gold.position.x + 80,
-                    y: gold.position.y,
+                    liquidCash,
+                    x: liquidCash.position.x + 80,
+                    y: liquidCash.position.y,
                   });
                 }}
                 onMouseLeave={() => {
                   setTooltip({
                     visible: false,
-                    gold: undefined,
+                    liquidCash: undefined,
                     x: 0,
                     y: 0,
                   });
@@ -99,14 +99,14 @@ export default function GoldElements({
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 10}
-            text={'Gold'}
+            text={'Bank Name: ' + tooltip.liquidCash?.bankName}
             fill="white"
             fontSize={14}
           />
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 30}
-            text={'Type: ' + tooltip.gold?.type}
+            text={'Amount: ' + tooltip.liquidCash?.amount}
             fill="white"
             fontSize={14}
           />

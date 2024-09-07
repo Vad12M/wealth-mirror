@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
-import { ICashForm } from "@/interfaces/ICash";
 import OptionLiquidCash from "@/ui/icons/canvas/OptionLiquidCash";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
+import { ILiquidCash, ILiquidCashForm } from "@/interfaces/ILiquidCash";
+import {
+  useCreateLiquidCashMutation,
+  useDeleteLiquidCashMutation,
+  useUpdateLiquidCashMutation
+} from "@/store/api/luquidCashSlice";
+import { parseISO } from "date-fns";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
 
 export default function LiquidCashForm({
   position,
@@ -14,12 +21,17 @@ export default function LiquidCashForm({
     x: number;
     y: number;
   };
-  defaultForm?: any;
+  defaultForm?: ILiquidCash;
   onClose?: () => void;
 }) {
-  const [form, setForm] = useState<ICashForm>({
+  const [deleteLiquidCash, { isLoading: isLoadingDelete }] = useDeleteLiquidCashMutation();
+  const [createLiquidCash, { isLoading: isLoadingCreate }] = useCreateLiquidCashMutation();
+  const [updateLiquidCash, { isLoading: isLoadingUpdate }] = useUpdateLiquidCashMutation();
+
+  const [form, setForm] = useState<ILiquidCashForm>({
     amount: 0,
-    image: '/canvas/Stock-4.svg',
+    bankName: '',
+    lastUpdated: '',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -29,14 +41,25 @@ export default function LiquidCashForm({
   useEffect(() => {
     if (defaultForm) {
       setForm({
+        bankName: defaultForm.bankName,
+        lastUpdated: defaultForm.lastUpdated,
         amount: defaultForm.amount,
-        image: defaultForm.image,
         position: defaultForm.position
       });
     }
   }, [defaultForm]);
 
   const handleClick = () => {
+    if (defaultForm) {
+      updateLiquidCash({
+        id: defaultForm._id,
+        ...form
+      }).unwrap()
+        .finally(() => onClose?.());
+    } else {
+      createLiquidCash(form).unwrap()
+        .finally(() => onClose?.());
+    }
   }
 
   return (
@@ -49,17 +72,31 @@ export default function LiquidCashForm({
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <InputForm
+          label="Bank Name"
+          value={form.bankName}
+          placeholder={'Enter bank name'}
+          onUpdate={(e) => setForm({ ...form, bankName: e.target.value })}
+        />
+        <InputForm
           label="Amount"
           value={!!form.amount ? form.amount.toString() : ''}
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, lastUpdated: startDate }));
+          }}
+          initialSelectDate={form.lastUpdated ? parseISO(form.lastUpdated) : undefined}
+          label={'Last Updated'}
+          placeholder={'Select date'}
+        />
       </div>
       <FormButtonsBlock
-        // isLoading={isLoadingCreate || isLoadingUpdate}
-        // isLoadingDelete={isLoadingDelete}
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
         isEdit={!!defaultForm}
-        // deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
+        deleteClick={() => defaultForm ? deleteLiquidCash(defaultForm._id).finally(() => onClose?.()) : null}
         handleClick={handleClick}
         type={'Liquid Cash'}
       />

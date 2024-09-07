@@ -38,7 +38,7 @@ export default function CarElements({
               width = 100;
               break;
             case 'oldCar':
-              image.src = '/canvas/OldCar.svg';
+              image.src = '/canvas/CarOld.svg';
               height = 105;
               width = 100;
               break;

@@ -1,9 +1,10 @@
 export interface ICrypto {
   _id: string;
-  name: string;
-  amount: number;
+  currencyName: string;
+  code: string;
   quantity: number;
-  image: string;
+  amount: number;
+  purchaseDate: string;
   position: {
     x: number;
     y: number;
@@ -11,12 +12,13 @@ export interface ICrypto {
 }
 
 export interface ICryptoForm {
+  currencyName: string;
+  code: string;
   amount: number;
-  name: string;
   quantity: number;
+  purchaseDate: string;
   position: {
     x: number;
     y: number;
   };
-  image?: string;
 }

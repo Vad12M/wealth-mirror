@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
-import { ICryptoForm } from "@/interfaces/ICrypto";
+import { ICrypto, ICryptoForm } from "@/interfaces/ICrypto";
 import OptionCrypto from "@/ui/icons/canvas/OptionCrypto";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
+import { useCreateCryptoMutation, useDeleteCryptoMutation, useUpdateCryptoMutation } from "@/store/api/cryptoSlice";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 
 export default function CryptoForm({
   position,
@@ -14,14 +17,19 @@ export default function CryptoForm({
     x: number;
     y: number;
   };
-  defaultForm?: any;
+  defaultForm?: ICrypto;
   onClose?: () => void;
 }) {
+  const [deleteCrypto, { isLoading: isLoadingDelete }] = useDeleteCryptoMutation();
+  const [createCrypto, { isLoading: isLoadingCreate }] = useCreateCryptoMutation();
+  const [updateCrypto, { isLoading: isLoadingUpdate }] = useUpdateCryptoMutation();
+
   const [form, setForm] = useState<ICryptoForm>({
-    name: '',
+    currencyName: '',
+    code: '',
+    purchaseDate: '',
     quantity: 0,
     amount: 0,
-    image: '/canvas/Stock-4.svg',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -31,17 +39,27 @@ export default function CryptoForm({
   useEffect(() => {
     if (defaultForm) {
       setForm({
-        name: defaultForm.name,
+        currencyName: defaultForm.currencyName,
+        code: defaultForm.code,
+        purchaseDate: defaultForm.purchaseDate,
         quantity: defaultForm.quantity,
         amount: defaultForm.amount,
-        image: defaultForm.image,
         position: defaultForm.position
       });
     }
   }, [defaultForm]);
 
   const handleClick = () => {
-
+    if (defaultForm) {
+      updateCrypto({
+        id: defaultForm._id,
+        ...form
+      }).unwrap()
+        .finally(() => onClose?.());
+    } else {
+      createCrypto(form).unwrap()
+        .finally(() => onClose?.());
+    }
   }
 
   return (
@@ -54,10 +72,16 @@ export default function CryptoForm({
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <InputForm
-          label="Name"
-          value={form.name}
-          placeholder={'Enter name'}
-          onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+          label="Currency Name"
+          value={form.currencyName}
+          placeholder={'Enter currency name'}
+          onUpdate={(e) => setForm({ ...form, currencyName: e.target.value })}
+        />
+        <InputForm
+          label="Code"
+          value={form.code}
+          placeholder={'Enter code'}
+          onUpdate={(e) => setForm({ ...form, code: e.target.value })}
         />
         <InputForm
           label="Quantity"
@@ -71,12 +95,20 @@ export default function CryptoForm({
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, purchaseDate: startDate }));
+          }}
+          initialSelectDate={form.purchaseDate ? parseISO(form.purchaseDate) : undefined}
+          label={'Date Purchased'}
+          placeholder={'Select date'}
+        />
       </div>
       <FormButtonsBlock
-        // isLoading={isLoadingCreate || isLoadingUpdate}
-        // isLoadingDelete={isLoadingDelete}
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
         isEdit={!!defaultForm}
-        // deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}
+        deleteClick={() => defaultForm ? deleteCrypto(defaultForm._id).finally(() => onClose?.()) : null}
         handleClick={handleClick}
         type={'Crypto'}
       />

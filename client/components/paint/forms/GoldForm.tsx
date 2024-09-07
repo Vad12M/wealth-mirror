@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
-import Stock from "@/ui/icons/canvas/fortune/Stock";
 import Typography from "@/ui/typography/Typography";
 import { IGold, IGoldForm } from "@/interfaces/IGold";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
