@@ -22,6 +22,7 @@ import {
   useGetExpensesQuery,
   useUpdateExpensesMutation
 } from "@/store/api/expensesSlice";
+import { useDeleteAllGoldMutation, useGetGoldsQuery, useUpdateGoldMutation } from "@/store/api/goldSlice";
 
 
 export default function useCanvas() {
@@ -33,6 +34,7 @@ export default function useCanvas() {
   const [deleteAllIncomes] = useDeleteAllIncomesMutation();
   const [deleteAllFixedDeposits] = useDeleteAllFixedDepositsMutation();
   const [deleteAllExpenses] = useDeleteAllExpensesMutation();
+  const [deleteAllGold] = useDeleteAllGoldMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
@@ -42,6 +44,7 @@ export default function useCanvas() {
   const [updateIncome] = useUpdateIncomeMutation();
   const [updateFixedDeposit] = useUpdateFixedDepositMutation();
   const [updateExpenses] = useUpdateExpensesMutation();
+  const [updateGold] = useUpdateGoldMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
@@ -51,6 +54,7 @@ export default function useCanvas() {
   const { data: incomes } = useGetIncomesQuery();
   const { data: fixedDeposits } = useGetFixedDepositsQuery();
   const { data: expenses } = useGetExpensesQuery();
+  const { data: golds } = useGetGoldsQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -82,6 +86,9 @@ export default function useCanvas() {
       case 'expenses':
         updateExpenses(defaultParams);
         break;
+      case 'gold':
+        updateGold(defaultParams);
+        break;
     }
   }
 
@@ -94,6 +101,7 @@ export default function useCanvas() {
     deleteAllIncomes();
     deleteAllFixedDeposits();
     deleteAllExpenses();
+    deleteAllGold();
   }
 
   return {
@@ -106,6 +114,7 @@ export default function useCanvas() {
     mutualFunds,
     incomes,
     fixedDeposits,
-    expenses
+    expenses,
+    golds
   }
 }

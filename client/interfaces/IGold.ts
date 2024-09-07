@@ -1,8 +1,9 @@
 export interface IGold {
   _id: string;
+  type: string;
   quantity: number;
+  purchaseDate: string;
   amount: number;
-  image: string;
   position: {
     x: number;
     y: number;
@@ -10,11 +11,12 @@ export interface IGold {
 }
 
 export interface IGoldForm {
+  type: string;
   quantity: number;
+  purchaseDate: string;
   amount: number;
   position: {
     x: number;
     y: number;
   };
-  image?: string;
 }

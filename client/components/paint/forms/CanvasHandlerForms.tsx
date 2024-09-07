@@ -10,6 +10,7 @@ import FixedDepositForm from "@/components/paint/forms/FixedDepositForm";
 import SavingForm from "@/components/paint/forms/SavingForm";
 import IncomeForm from "@/components/paint/forms/IncomeForm";
 import ExpensesForm from "@/components/paint/forms/ExpensesForm";
+import GoldForm from "@/components/paint/forms/GoldForm";
 
 export default function CanvasHandlerForms({
   type,
@@ -49,5 +50,7 @@ export default function CanvasHandlerForms({
       return <IncomeForm position={position} defaultForm={defaultForm} onClose={onClose}/>
     case 'expense':
       return <ExpensesForm position={position} defaultForm={defaultForm} onClose={onClose}/>
+    case 'gold':
+      return <GoldForm position={position} defaultForm={defaultForm} onClose={onClose}/>
   }
 }

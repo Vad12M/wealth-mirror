@@ -1,12 +1,11 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
-import { createFortuneValidator } from "../validations/fortune.js";
 import { createStock, deleteAllStocks, deleteStock, getStocks, updateStock } from "../controllers/StockController.js";
 import { getExternalStocks } from "../controllers/TickerController.js";
 
 export const stockRouter = express.Router();
 
-stockRouter.post('/stocks/create', checkAuth, createFortuneValidator, createStock);
+stockRouter.post('/stocks/create', checkAuth, createStock);
 stockRouter.put('/stocks/update/:id', checkAuth, updateStock);
 stockRouter.get('/stocks', checkAuth, getStocks);
 stockRouter.delete('/stocks/delete/:id', checkAuth, deleteStock);
