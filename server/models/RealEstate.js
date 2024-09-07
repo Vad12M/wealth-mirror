@@ -4,18 +4,8 @@ const RealEstateSchema = new mongoose.Schema({
   category: { type: String, required: true },
   type: { type: String, required: true },
   location: { type: String, required: true },
-  price: { type: Number, required: true },
+  amount: { type: Number, required: true },
   purchaseDate: { type: Date, required: true },
-  profitAndLoss: {
-    date: {
-      type: Date,
-      required: function () { return this.profitAndLoss && this.profitAndLoss.date != null; }
-    },
-    amount: {
-      type: Number,
-      required: function () { return this.profitAndLoss && this.profitAndLoss.amount != null; }
-    },
-  },
   salePrice: { type: Number, required: false },
   position: {
     x: { type: Number, required: true },

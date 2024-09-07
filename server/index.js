@@ -12,6 +12,10 @@ import { mutualFundRouter } from "./routes/mutualFundRoutes.js";
 import { incomeRouter } from "./routes/incomeRoutes.js";
 import { expensesRouter } from "./routes/expensesRoutes.js";
 import { fixedDepositRouter } from "./routes/fixedDepostRoutes.js";
+import { goldRouter } from "./routes/goldRoutes.js";
+import { liquidCashRouter } from "./routes/luquidCashRoutes.js";
+import { savingRouter } from "./routes/savingRoutes.js";
+import { cryptoRouter } from "./routes/cryptoRoutes.js";
 
 dotenv.config();
 
@@ -39,6 +43,11 @@ app.use(mutualFundRouter);
 app.use(incomeRouter);
 app.use(expensesRouter);
 app.use(fixedDepositRouter);
+app.use(goldRouter);
+app.use(liquidCashRouter);
+app.use(savingRouter);
+app.use(cryptoRouter);
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

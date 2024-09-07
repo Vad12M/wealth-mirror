@@ -3,7 +3,7 @@ export interface ICar {
   name: string;
   brand: string;
   type: string;
-  price: number;
+  amount: number;
   purchaseDate: string;
   variant: string;
   position: {
@@ -14,7 +14,7 @@ export interface ICar {
 
 export interface ICarForm {
   name: string;
-  price: number;
+  amount: number;
   brand: string;
   variant: string;
   purchaseDate: string;
@@ -23,5 +23,4 @@ export interface ICarForm {
     y: number;
   };
   type: string;
-  salePrice?: number;
 }

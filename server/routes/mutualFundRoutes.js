@@ -1,6 +1,5 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
-import { createFortuneValidator } from "../validations/fortune.js";
 import {
   createMutualFund, deleteAllMutualFunds,
   deleteMutualFund,
@@ -10,7 +9,7 @@ import {
 
 export const mutualFundRouter = express.Router();
 
-mutualFundRouter.post('/mutualFunds/create', checkAuth, createFortuneValidator, createMutualFund);
+mutualFundRouter.post('/mutualFunds/create', checkAuth, createMutualFund);
 mutualFundRouter.put('/mutualFunds/update/:id', checkAuth, updateMutualFund);
 mutualFundRouter.get('/mutualFunds', checkAuth, getMutualFunds);
 mutualFundRouter.delete('/mutualFunds/delete/:id', checkAuth, deleteMutualFund);

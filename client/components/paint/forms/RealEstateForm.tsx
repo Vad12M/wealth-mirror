@@ -37,7 +37,7 @@ export default function RealEstateForm({
     category: 'residential',
     type: '',
     location: '',
-    price: 0,
+    amount: 0,
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -56,7 +56,7 @@ export default function RealEstateForm({
         category: defaultForm.category,
         type: defaultForm.type,
         location: defaultForm.location,
-        price: defaultForm.price,
+        amount: defaultForm.amount,
         position: defaultForm.position,
         purchaseDate: defaultForm.purchaseDate
       });
@@ -159,9 +159,9 @@ export default function RealEstateForm({
         />
         <InputForm
           label="Purchased Price"
-          value={!!form.price ? form.price.toString() : ''}
+          value={!!form.amount ? form.amount.toString() : ''}
           placeholder="Enter purchased price"
-          onUpdate={(e) => setForm({ ...form, price: Number(e.target.value) })}
+          onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
         <InputCalendar
           onUpdate={(startDate) => {

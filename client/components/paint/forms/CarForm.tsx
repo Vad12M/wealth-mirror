@@ -35,7 +35,7 @@ export default function Crypto({
   const [updateCar, { isLoading: isLoadingUpdate }] = useUpdateCarMutation();
   const [form, setForm] = useState<ICarForm>({
     name: '',
-    price: 0,
+    amount: 0,
     brand: '',
     variant: '',
     purchaseDate: '',
@@ -63,7 +63,7 @@ export default function Crypto({
     if (defaultForm) {
       setForm({
         name: defaultForm.name,
-        price: defaultForm.price,
+        amount: defaultForm.amount,
         brand: defaultForm.brand,
         variant: defaultForm.variant,
         purchaseDate: defaultForm.purchaseDate,
@@ -169,9 +169,9 @@ export default function Crypto({
         />
         <InputForm
           label="Purchased Price"
-          value={!!form.price ? form.price.toString() : ''}
+          value={!!form.amount ? form.amount.toString() : ''}
           placeholder={'Enter purchased price'}
-          onUpdate={(e) => setForm((prevState) => ({ ...prevState, price: Number(e.target.value) }))}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, amount: Number(e.target.value) }))}
         />
         <InputCalendar
           onUpdate={(startDate) => {

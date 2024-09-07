@@ -3,7 +3,7 @@ export interface IRealEstate {
   category: string;
   type: string;
   location: string;
-  price: number;
+  amount: number;
   salePrice: number;
   position: {
     x: number;
@@ -16,7 +16,7 @@ export interface IRealEstateForm {
   category: string;
   type: string
   location: string;
-  price: number;
+  amount: number;
   position: {
     x: number;
     y: number;

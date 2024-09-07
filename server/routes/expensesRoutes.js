@@ -1,6 +1,5 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
-import { createCarValidator } from "../validations/car.js";
 import {
   createExpenses,
   deleteAllExpensess,
@@ -11,7 +10,7 @@ import {
 
 export const expensesRouter = express.Router();
 
-expensesRouter.post('/expenses/create', checkAuth, createCarValidator, createExpenses);
+expensesRouter.post('/expenses/create', checkAuth, createExpenses);
 expensesRouter.put('/expenses/update/:id', checkAuth, updateExpenses);
 expensesRouter.get('/expenses', checkAuth, getExpenses);
 expensesRouter.delete('/expenses/delete/:id', checkAuth, deleteExpenses);

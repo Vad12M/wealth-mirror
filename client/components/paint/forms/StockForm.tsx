@@ -40,9 +40,7 @@ export default function StockForm({
     code: '',
     quantity: 0,
     amount: 0,
-    amountOfDividends: 0,
     type: 'us-stock',
-    periodOfReceivingDividends: '',
     purchaseDate: '',
     position: {
       x: position?.x || 0,
@@ -58,8 +56,6 @@ export default function StockForm({
         code: defaultForm.code,
         quantity: defaultForm.quantity,
         amount: defaultForm.amount,
-        amountOfDividends: defaultForm.amountOfDividends,
-        periodOfReceivingDividends: defaultForm.periodOfReceivingDividends,
         type: defaultForm.type,
         position: defaultForm.position,
         purchaseDate: defaultForm.purchaseDate,
@@ -185,18 +181,6 @@ export default function StockForm({
           label={'Date of purchase'}
           placeholder={'Select date'}
         />
-        {defaultForm && <InputForm
-          label="Amount of Dividends"
-          value={!!form.amountOfDividends ? form.amountOfDividends.toString() : ''}
-          placeholder={'Enter amount'}
-          onUpdate={(e) => setForm({ ...form, amountOfDividends: Number(e.target.value) })}
-        />}
-        {defaultForm && <InputForm
-          label="Period of Receiving Dividends"
-          value={form.periodOfReceivingDividends}
-          placeholder={'Enter period'}
-          onUpdate={(e) => setForm({ ...form, periodOfReceivingDividends: e.target.value })}
-        />}
       </div>
       <FormButtonsBlock
         isLoading={isLoadingCreate || isLoadingUpdate}

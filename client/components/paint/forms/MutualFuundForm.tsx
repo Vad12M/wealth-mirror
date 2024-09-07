@@ -33,7 +33,7 @@ export default function MutualFundsForm({
     code: '',
     category: '',
     units: 0,
-    purchasePrice: 0,
+    amount: 0,
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -48,7 +48,7 @@ export default function MutualFundsForm({
         code: defaultForm.code,
         position: defaultForm.position,
         purchaseDate: defaultForm.purchaseDate,
-        purchasePrice: defaultForm.purchasePrice,
+        amount: defaultForm.amount,
         category: defaultForm.category,
         units: defaultForm.units
       });
@@ -110,9 +110,9 @@ export default function MutualFundsForm({
         />
         <InputForm
           label="Purchase Price"
-          value={!!form.purchasePrice ? form.purchasePrice.toString() : ''}
+          value={!!form.amount ? form.amount.toString() : ''}
           placeholder={'Enter purchase price'}
-          onUpdate={(e) => setForm((prevState) => ({ ...prevState, purchasePrice: Number(e.target.value) }))}
+          onUpdate={(e) => setForm((prevState) => ({ ...prevState, amount: Number(e.target.value) }))}
         />
         <InputCalendar
           onUpdate={(startDate) => {

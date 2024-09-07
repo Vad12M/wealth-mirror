@@ -4,7 +4,7 @@ export interface IMutualFund {
   code: string;
   category: string;
   units: number;
-  purchasePrice: number;
+  amount: number;
   purchaseDate: string;
   position: {
     x: number;
@@ -17,7 +17,7 @@ export interface IMutualFundForm {
   code: string;
   category: string;
   units: number;
-  purchasePrice: number;
+  amount: number;
   purchaseDate: string;
   position: {
     x: number;

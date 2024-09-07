@@ -10,7 +10,7 @@ import {
 
 export const fixedDepositRouter = express.Router();
 
-fixedDepositRouter.post('/fixedDeposits/create', checkAuth, createCarValidator, createFixedDeposit);
+fixedDepositRouter.post('/fixedDeposits/create', checkAuth, createFixedDeposit);
 fixedDepositRouter.put('/fixedDeposits/update/:id', checkAuth, updateFixedDeposit);
 fixedDepositRouter.get('/fixedDeposits', checkAuth, getFixedDeposits);
 fixedDepositRouter.delete('/fixedDeposits/delete/:id', checkAuth, deleteFixedDeposit);
