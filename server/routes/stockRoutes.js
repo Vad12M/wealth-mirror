@@ -1,7 +1,7 @@
 import express from "express";
 import { checkAuth } from "../utils/checkAuth.js";
 import { createStock, deleteAllStocks, deleteStock, getStocks, updateStock } from "../controllers/StockController.js";
-import { getExternalStocks } from "../controllers/TickerController.js";
+import { getAggregatesForStock, getExternalStockNews, getExternalStocks } from "../controllers/TickerController.js";
 
 export const stockRouter = express.Router();
 
@@ -12,3 +12,5 @@ stockRouter.delete('/stocks/delete/:id', checkAuth, deleteStock);
 stockRouter.delete('/stocks/delete/all', checkAuth, deleteAllStocks);
 
 stockRouter.get('/external/stocks', getExternalStocks);
+stockRouter.get('/external/stocks/news', getExternalStockNews);
+stockRouter.get('/external/stocks/aggregates', getAggregatesForStock);

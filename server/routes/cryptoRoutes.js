@@ -7,6 +7,7 @@ import {
   getCryptos,
   updateCrypto
 } from "../controllers/CryptoController.js";
+import { getExternalCryptos } from "../controllers/TickerController.js";
 
 export const cryptoRouter = express.Router();
 
@@ -15,3 +16,5 @@ cryptoRouter.put('/crypto/update/:id', checkAuth, updateCrypto);
 cryptoRouter.get('/crypto', checkAuth, getCryptos);
 cryptoRouter.delete('/crypto/delete/:id', checkAuth, deleteCrypto);
 cryptoRouter.delete('/crypto/delete/all', checkAuth, deleteAllCryptos);
+
+cryptoRouter.get('/external/crypto', getExternalCryptos);

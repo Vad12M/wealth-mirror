@@ -75,7 +75,7 @@ export default function SavingForm({
         <div className="bg-[#D9FBEE] h-[55px] w-[55px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
           <Saving/>
         </div>
-        <Typography text={'Stock'} type={'labelsVerySmall'} color="text-black"/>
+        <Typography text={'Saving'} type={'labelsVerySmall'} color="text-black"/>
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <Dropdown
@@ -86,7 +86,7 @@ export default function SavingForm({
           ]}
           label={'Type'}
           value={form.type}
-          onChange={(e: any) => setForm({ ...form, type: e.target.value })}
+          onChange={(selectedItem) => setForm((prevState) => ({ ...prevState, type: selectedItem }))}
         />
         <InputForm
           label="Name"

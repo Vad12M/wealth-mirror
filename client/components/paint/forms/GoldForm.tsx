@@ -73,7 +73,7 @@ export default function GoldForm({
         <div className="bg-[#D9FBEE] h-[55px] w-[55px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
           <OptionGold/>
         </div>
-        <Typography text={'Stock'} type={'labelsVerySmall'} color="text-black"/>
+        <Typography text={'Gold'} type={'labelsVerySmall'} color="text-black"/>
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <Dropdown
