@@ -75,6 +75,13 @@ export const apiSlice = baseApi.injectEndpoints({
         url: '/wait-users',
       }),
     }),
+
+    getUsers: builder.query<IUser[], void>({
+      query: () => ({
+        url: '/users',
+      }),
+    }),
+
   })
 })
 
@@ -88,4 +95,5 @@ export const {
   useGetWaitUsersQuery,
   useUpdateMeMutation,
   useChangePasswordMutation,
+  useGetUsersQuery,
 } = apiSlice;

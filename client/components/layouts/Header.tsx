@@ -23,7 +23,7 @@ export default function Header() {
   const { user, isLoggedIn, isAdmin } = useGetUser();
   const [mobileMenu, setMobileMenu] = useState(false);
   const isWhite = [
-    '/about', '/pricing', '/contact', '/services', '/canvas',
+    '/about', '/pricing', '/contact', '/services', '/wealthverse',
     '/payment', '/admin', '/profile', 'termsandconditions',
     '/cancellationandrefund', '/termsandconditions'
   ].includes(asPath);
@@ -36,7 +36,7 @@ export default function Header() {
     { name: 'Contact', link: '/contact' }
   ];
 
-  if (asPath.includes('auth') || asPath.includes('joinwaitlist') || asPath.includes('canvas')) {
+  if (asPath.includes('auth') || asPath.includes('joinwaitlist') || asPath.includes('wealthverse')) {
     return null;
   }
 
@@ -107,7 +107,7 @@ export default function Header() {
             {!isLoggedIn ? <Button
               typeButton={'primary-dark'}
               isGradient={isJoinWaitlist}
-              onClick={() => push(isLoggedIn ? '/canvas' : '/auth/login')}
+              onClick={() => push(isLoggedIn ? '/wealthverse' : '/auth/login')}
             >
               {'Start Free Trial'}
             </Button> : (

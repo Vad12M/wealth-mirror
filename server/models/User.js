@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   address: { type: String },
   role: { type: String, required: true, default: "user" },
   status: { type: String, required: true, default: "inactive" },
-  expiredPayment: { type: Date },
+  expiredPaymentDate: { type: Date },
   passwordHash: { type: String, required: true }
 }, {
   timestamps: true

@@ -36,14 +36,14 @@ export default function LoginPage() {
         .then((res) => {
           setUserToken(res.token);
           loginByToken({ token: res.token })
-          router.push('/canvas')
+          router.push('/wealthverse')
         })
     }
   }
 
   useEffect(() => {
     if (isLoggedIn) {
-      router.push('/canvas')
+      router.push('/wealthverse')
     }
   }, [isLoggedIn]);
 

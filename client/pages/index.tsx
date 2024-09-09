@@ -44,7 +44,7 @@ export default function Home() {
       <div className="md:mt-[100px] mt-[60px] w-full flex justify-center items-center flex-col md:mb-40 mb-20">
         <Typography text={'Ready to join Wealth Mirror?'} type={'heading6'} className="mb-6"/>
         <Button
-          onClick={() => router.push(isLoggedIn ? '/canvas' : '/auth/login')}
+          onClick={() => router.push(isLoggedIn ? '/wealthverse' : '/auth/login')}
           typeButton='white-shadow'
           prefixBtn={() => <FireIcon color={'#E0FFDF'}/>} className={'z-10'}
         >

@@ -7,4 +7,5 @@ export interface IUser {
   phone: string;
   address: string;
   role?: string;
+  expiredPaymentDate?: string;
 }

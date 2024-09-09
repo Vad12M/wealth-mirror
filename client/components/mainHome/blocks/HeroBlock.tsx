@@ -83,7 +83,7 @@ export default function HeroBlock() {
         <Button
           prefixBtn={() => <FireIcon/>}
           typeButton={'secondary'}
-          onClick={() => router.push(isLoggedIn ? '/canvas' : '/auth/login')}
+          onClick={() => router.push(isLoggedIn ? '/wealthverse' : '/auth/login')}
         >
           {'Try Wealth Mirror'}
         </Button>

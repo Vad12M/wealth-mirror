@@ -11,6 +11,8 @@ import DebitCard from "@/ui/icons/canvas/card/DebitCard";
 import MetalCard from "@/ui/icons/canvas/card/MetalCard";
 import 'swiper/swiper-bundle.css';
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 
 export default function CardForm({
   position,
@@ -33,6 +35,8 @@ export default function CardForm({
     name: '',
     amount: 0,
     type: 'debit',
+    bankName: '',
+    expirationDate: '',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
@@ -46,6 +50,8 @@ export default function CardForm({
         amount: defaultForm.amount,
         position: defaultForm.position,
         type: defaultForm.type,
+        bankName: defaultForm.bankName,
+        expirationDate: defaultForm.expirationDate
       });
 
       if (sliderRef.current !== null && (sliderRef.current as any).swiper !== null) {
@@ -129,10 +135,16 @@ export default function CardForm({
       </div>
       <div className="flex flex-col space-y-2 w-full">
         <InputForm
-          label="Name"
+          label="Name on the card"
           value={form.name}
           placeholder={'Enter name'}
           onUpdate={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <InputForm
+          label="Name"
+          value={form.name}
+          placeholder={'Enter name'}
+          onUpdate={(e) => setForm({ ...form, bankName: e.target.value })}
         />
         <InputForm
           label="Amount"
@@ -140,13 +152,21 @@ export default function CardForm({
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, expirationDate: startDate }));
+          }}
+          initialSelectDate={form.expirationDate ? parseISO(form.expirationDate) : undefined}
+          label={'Expiration Date'}
+          placeholder={'Select date'}
+        />
         <div className="flex items-center space-x-4">
           <input
             type="checkbox"
             checked={form.isPrimary}
             onChange={(e) => setForm({ ...form, isPrimary: e.target.checked })}
           />
-          <Typography text={'Is Primary'} type={'body1'}/>
+          <Typography text={'This is my primary card'} type={'body1'}/>
         </div>
       </div>
       <FormButtonsBlock

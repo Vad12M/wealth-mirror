@@ -20,7 +20,7 @@ export default function PaymentPage() {
       </div>
       <Button
         className={'w-[360px] mt-6 flex justify-center h-[46px]'}
-        onClick={() => router.push('/canvas')}
+        onClick={() => router.push('/wealthverse')}
 
       >
         {'Pay'}

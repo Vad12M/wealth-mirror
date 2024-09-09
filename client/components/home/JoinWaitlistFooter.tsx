@@ -34,7 +34,7 @@ export default function JoinWaitlistFooter() {
   ];
 
 
-  if (router.asPath.includes('canvas')) {
+  if (router.asPath.includes('wealthverse')) {
     return null;
   }
 

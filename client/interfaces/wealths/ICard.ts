@@ -1,10 +1,11 @@
 export interface ICard {
   _id: string;
+  type: string;
+  bankName: string;
   name: string;
   amount: number;
-  type: string;
   isPrimary: boolean;
-  expensesPerMonth: number;
+  expirationDate: string;
   position: {
     x: number;
     y: number;
@@ -12,9 +13,11 @@ export interface ICard {
 }
 
 export interface ICardForm {
-  name: string;
   type: string;
+  bankName: string;
+  name: string;
   amount: number;
+  expirationDate: string;
   isPrimary?: boolean;
   position: {
     x: number;
