@@ -3,6 +3,10 @@ import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import Dropdown from "@/ui/dropdown/dropdown";
 import Saving from "@/ui/icons/canvas/fortune/Saving";
+import { useCreateSavingMutation, useDeleteSavingMutation, useUpdateSavingMutation } from "@/store/api/savingSlice";
+import { ISaving, ISavingForm } from "@/interfaces/wealths/ISaving";
+import InputCalendar from "@/ui/inputCalendar/inputCalendar";
+import { parseISO } from "date-fns";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 
 export default function SavingForm({
@@ -14,58 +18,56 @@ export default function SavingForm({
     x: number;
     y: number;
   };
-  defaultForm?: any;
+  defaultForm?: ISaving;
   onClose?: () => void;
 }) {
-  // const [deleteFortune, { isLoading: isLoadingDelete }] = useDeleteFortuneMutation();
-  // const [createFortune, { isLoading: isLoadingCreate }] = useCreateFortuneMutation();
-  // const [updateFortune, { isLoading: isLoadingUpdate }] = useUpdateFortuneMutation();
-  const [form, setForm] = useState<any>({
+  const [deleteSaving, { isLoading: isLoadingDelete }] = useDeleteSavingMutation();
+  const [createSaving, { isLoading: isLoadingCreate }] = useCreateSavingMutation();
+  const [updateSaving, { isLoading: isLoadingUpdate }] = useUpdateSavingMutation();
+  const [form, setForm] = useState<ISavingForm>({
     name: '',
-    code: '',
-    quantity: 0,
+    frequency: 'monthly',
     amount: 0,
-    amountOfDividends: 0,
-    periodOfReceivingDividends: '',
     type: 'nps',
-    image: '/canvas/Stock-4.svg',
+    lastUpdated: '',
     position: {
       x: position?.x || 0,
       y: position?.y || 0
     },
-    purchaseDate: ''
   });
 
   useEffect(() => {
     if (defaultForm) {
       setForm({
+        frequency: defaultForm.frequency,
         name: defaultForm.name,
-        code: defaultForm.code,
-        quantity: defaultForm.quantity,
         amount: defaultForm.amount,
-        amountOfDividends: defaultForm.amountOfDividends,
-        periodOfReceivingDividends: defaultForm.periodOfReceivingDividends,
         type: defaultForm.type,
-        image: defaultForm.image,
         position: defaultForm.position,
-        purchaseDate: defaultForm.purchaseDate
+        lastUpdated: defaultForm.lastUpdated
       });
     }
   }, [defaultForm]);
 
 
   const handleClick = () => {
-    // if (defaultForm) {
-    //   updateFortune({
-    //     id: defaultForm._id,
-    //     ...form
-    //   }).unwrap()
-    //     .finally(() => onClose?.());
-    // } else {
-    //   createFortune(form).unwrap()
-    //     .finally(() => onClose?.());
-    // }
+    if (defaultForm) {
+      updateSaving({
+        id: defaultForm._id,
+        ...form
+      }).unwrap()
+        .finally(() => onClose?.());
+    } else {
+      createSaving(form).unwrap()
+        .finally(() => onClose?.());
+    }
   }
+
+  const frequencies = [
+    { label: 'Monthly', value: 'monthly' },
+    { label: 'Yearly', value: 'yearly' },
+    { label: 'Fixed', value: 'fixed' },
+  ];
 
   return (
     <div className="w-[252px] flex items-center flex-col pr-2">
@@ -92,11 +94,12 @@ export default function SavingForm({
           placeholder={'Enter name'}
           onUpdate={(e) => setForm({ ...form, name: e.target.value })}
         />
-        <InputForm
-          label="Quantity"
-          value={!!form.quantity ? form.quantity.toString() : ''}
-          placeholder={'Enter quantity'}
-          onUpdate={(e) => setForm({ ...form, quantity: Number(e.target.value) })}
+        <Dropdown
+          label={'Frequency'}
+          placeholder={'Select frequency'}
+          options={frequencies}
+          value={form.frequency}
+          onChange={(value) => setForm((prevState) => ({ ...prevState, frequency: value }))}
         />
         <InputForm
           label="Amount"
@@ -104,15 +107,23 @@ export default function SavingForm({
           placeholder={'Enter amount'}
           onUpdate={(e) => setForm({ ...form, amount: Number(e.target.value) })}
         />
+        <InputCalendar
+          onUpdate={(startDate) => {
+            setForm((prevState) => ({ ...prevState, lastUpdated: startDate }));
+          }}
+          initialSelectDate={form.lastUpdated ? parseISO(form.lastUpdated) : undefined}
+          label={'Last Updated'}
+          placeholder={'Select date'}
+        />
       </div>
-      {/*<FormButtonsBlock*/}
-      {/*  isLoading={isLoadingCreate || isLoadingUpdate}*/}
-      {/*  isLoadingDelete={isLoadingDelete}*/}
-      {/*  isEdit={!!defaultForm}*/}
-      {/*  deleteClick={() => defaultForm ? deleteFortune(defaultForm._id).finally(() => onClose?.()) : null}*/}
-      {/*  handleClick={handleClick}*/}
-      {/*  type={'Saving'}*/}
-      {/*/>*/}
+      <FormButtonsBlock
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        isLoadingDelete={isLoadingDelete}
+        isEdit={!!defaultForm}
+        deleteClick={() => defaultForm ? deleteSaving(defaultForm._id).finally(() => onClose?.()) : null}
+        handleClick={handleClick}
+        type={'Saving'}
+      />
     </div>
   )
 }

@@ -29,6 +29,7 @@ import {
   useGetLiquidCashsQuery,
   useUpdateLiquidCashMutation
 } from "@/store/api/luquidCashSlice";
+import { useDeleteAllSavingMutation, useGetSavingsQuery, useUpdateSavingMutation } from "@/store/api/savingSlice";
 
 
 export default function useCanvas() {
@@ -43,6 +44,7 @@ export default function useCanvas() {
   const [deleteAllGold] = useDeleteAllGoldMutation();
   const [deleteAllCryptos] = useDeleteAllCryptosMutation();
   const [deleteAllLiquidCash] = useDeleteAllLiquidCashMutation();
+  const [deleteAllSavings] = useDeleteAllSavingMutation();
 
   const [updateCar] = useUpdateCarMutation();
   const [updateCard] = useUpdateCardMutation();
@@ -55,6 +57,7 @@ export default function useCanvas() {
   const [updateGold] = useUpdateGoldMutation();
   const [updateCrypto] = useUpdateCryptoMutation();
   const [updateLiquidCash] = useUpdateLiquidCashMutation();
+  const [updateSaving] = useUpdateSavingMutation();
 
   const { data: cars } = useGetCarsQuery();
   const { data: cards } = useGetCardsQuery();
@@ -67,6 +70,7 @@ export default function useCanvas() {
   const { data: golds } = useGetGoldsQuery();
   const { data: cryptos } = useGetCryptosQuery();
   const { data: liquidCashs } = useGetLiquidCashsQuery();
+  const { data: savings } = useGetSavingsQuery();
 
   const updateItem = (id: string, type: string, x: number, y: number) => {
     const defaultParams = {
@@ -107,6 +111,9 @@ export default function useCanvas() {
       case 'liquidCash':
         updateLiquidCash(defaultParams);
         break;
+      case 'saving':
+        updateSaving(defaultParams);
+        break;
     }
   }
 
@@ -122,6 +129,7 @@ export default function useCanvas() {
     deleteAllGold();
     deleteAllCryptos();
     deleteAllLiquidCash();
+    deleteAllSavings();
   }
 
   return {
@@ -137,6 +145,7 @@ export default function useCanvas() {
     expenses,
     golds,
     cryptos,
-    liquidCashs
+    liquidCashs,
+    savings
   }
 }

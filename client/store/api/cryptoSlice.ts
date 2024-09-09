@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { ICrypto, ICryptoForm } from "@/interfaces/ICrypto";
+import { ICrypto, ICryptoForm } from "@/interfaces/wealths/ICrypto";
 
 export const cryptoSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

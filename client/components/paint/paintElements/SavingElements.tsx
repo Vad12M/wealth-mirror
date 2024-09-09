@@ -3,53 +3,53 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { ICrypto } from "@/interfaces/wealths/ICrypto";
+import { ISaving } from "@/interfaces/wealths/ISaving";
 
-export default function CryptoElements({
-  cryptos,
+export default function SavingElements({
+  savings,
   isDraggable,
   updateItem,
   handleActiveItem,
   zoomLevel,
 }: {
-  cryptos: ICrypto[];
+  savings: ISaving[];
   isDraggable: boolean;
   updateItem: (id: string, type: string, x: number, y: number) => void;
-  handleActiveItem: (item: ICrypto, type: string) => void;
+  handleActiveItem: (item: ISaving, type: string) => void;
   zoomLevel: number;
 }) {
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
-    crypto: ICrypto | undefined;
+    saving: ISaving | undefined;
     x: number;
     y: number;
   }>({
     visible: false,
-    crypto: undefined,
+    saving: undefined,
     x: 0,
     y: 0,
   });
 
   const tooltipRef = useRef(null);
-  if (!cryptos.length) {
+  if (!savings.length) {
     return null;
   }
 
   return (
     <>
-      {cryptos.map((crypto) => {
+      {savings.map((saving) => {
           const image = new Image(GRID_SIZE * 2, GRID_SIZE * 2);
-          image.src = '/canvas/Crypto.svg';
+          image.src = '/canvas/Saving.svg';
           image.id = uuidv4();
           return (
-            <Button typeButton={'none'} key={crypto._id}>
+            <Button typeButton={'none'} key={saving._id}>
               <KonvaImage
-                key={crypto._id}
+                key={saving._id}
                 image={image}
-                x={crypto.position.x}
-                y={crypto.position.y}
-                height={60}
-                width={40}
+                x={saving.position.x}
+                y={saving.position.y}
+                height={70}
+                width={60}
                 draggable={isDraggable}
                 onDragMove={(e) => e.cancelBubble = true}
                 onDragStart={(e) => e.cancelBubble = true}
@@ -57,24 +57,24 @@ export default function CryptoElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(crypto._id, 'crypto', x / zoomLevel, y / zoomLevel)
+                  updateItem(saving._id, 'saving', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(crypto, 'crypto');
+                  handleActiveItem(saving, 'saving');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
                     visible: true,
-                    crypto,
-                    x: crypto.position.x + 80,
-                    y: crypto.position.y,
+                    saving,
+                    x: saving.position.x + 80,
+                    y: saving.position.y,
                   });
                 }}
                 onMouseLeave={() => {
                   setTooltip({
                     visible: false,
-                    crypto: undefined,
+                    saving: undefined,
                     x: 0,
                     y: 0,
                   });
@@ -99,14 +99,14 @@ export default function CryptoElements({
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 10}
-            text={'Currency Name: ' + tooltip.crypto?.currencyName}
+            text={'Name: ' + tooltip.saving?.name}
             fill="white"
             fontSize={14}
           />
           <Text
             x={tooltip.x + 10}
             y={tooltip.y + 30}
-            text={'Code: ' + tooltip.crypto?.code}
+            text={'Amount: ' + tooltip.saving?.amount}
             fill="white"
             fontSize={14}
           />

@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { IGold, IGoldForm } from "@/interfaces/IGold";
+import { IGold, IGoldForm } from "@/interfaces/wealths/IGold";
 
 export const GoldSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

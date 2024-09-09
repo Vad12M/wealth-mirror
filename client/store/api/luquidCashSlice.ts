@@ -1,6 +1,6 @@
 import { baseApi } from "@/store/api/baseApi";
 import { LIST_CONTENT_TAG } from "@/store/api/apiSlice";
-import { ILiquidCash, ILiquidCashForm } from "@/interfaces/ILiquidCash";
+import { ILiquidCash, ILiquidCashForm } from "@/interfaces/wealths/ILiquidCash";
 
 export const LiquidCashSlice = baseApi.injectEndpoints({
   endpoints: builder => ({

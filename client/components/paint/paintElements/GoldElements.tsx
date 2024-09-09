@@ -3,7 +3,7 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { IGold } from "@/interfaces/IGold";
+import { IGold } from "@/interfaces/wealths/IGold";
 
 export default function GoldElements({
   golds,

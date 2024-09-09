@@ -27,7 +27,7 @@ export default function IncomeForm({
 
   const [form, setForm] = useState<IIncomeForm>({
     category: '',
-    frequency: '',
+    frequency: 'monthly',
     amount: 0,
     dateCredited: '',
     position: {
@@ -72,9 +72,9 @@ export default function IncomeForm({
   ];
 
   const frequencies = [
-    { label: 'Monthly', value: 'Monthly' },
-    { label: 'Yearly', value: 'Yearly' },
-    { label: 'Fixed', value: 'Fixed' },
+    { label: 'Monthly', value: 'monthly' },
+    { label: 'Yearly', value: 'yearly' },
+    { label: 'Fixed', value: 'fixed' },
   ];
 
   return (

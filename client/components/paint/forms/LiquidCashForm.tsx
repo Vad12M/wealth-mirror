@@ -3,7 +3,7 @@ import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
 import OptionLiquidCash from "@/ui/icons/canvas/OptionLiquidCash";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
-import { ILiquidCash, ILiquidCashForm } from "@/interfaces/ILiquidCash";
+import { ILiquidCash, ILiquidCashForm } from "@/interfaces/wealths/ILiquidCash";
 import {
   useCreateLiquidCashMutation,
   useDeleteLiquidCashMutation,

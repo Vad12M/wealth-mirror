@@ -3,7 +3,7 @@ import { Group, Image as KonvaImage, Rect, Text } from "react-konva";
 import { useRef, useState } from "react";
 import { GRID_SIZE } from "@/components/paint/Paint";
 import { Button } from "@/ui/button/Button";
-import { ILiquidCash } from "@/interfaces/ILiquidCash";
+import { ILiquidCash } from "@/interfaces/wealths/ILiquidCash";
 
 export default function LiquideCashElements({
   liquidCashs,

@@ -23,6 +23,7 @@ import ExpensesElements from "@/components/paint/paintElements/ExpensesElements"
 import GoldElements from "@/components/paint/paintElements/GoldElements";
 import CryptoElements from "@/components/paint/paintElements/CryptoElements";
 import LiquideCashElements from "@/components/paint/paintElements/LiquideCashElements";
+import SavingElements from "@/components/paint/paintElements/SavingElements";
 
 interface PaintProps {
 }
@@ -49,7 +50,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
     stocks, incomes,
     mutualFunds, fixedDeposits,
     expenses, golds, cryptos,
-    liquidCashs
+    liquidCashs, savings
   } = usePaint();
 
   const [showOptions, setShowOptions] = useState(false);
@@ -174,6 +175,7 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
           <GoldElements golds={golds || []}{...commonProps}/>
           <CryptoElements cryptos={cryptos || []}{...commonProps}/>
           <LiquideCashElements liquidCashs={liquidCashs || []}{...commonProps}/>
+          <SavingElements savings={savings || []}{...commonProps}/>
 
           <Transformer ref={transformerRef}/>
         </Layer>

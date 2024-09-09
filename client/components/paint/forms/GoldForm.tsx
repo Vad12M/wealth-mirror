@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
-import { IGold, IGoldForm } from "@/interfaces/IGold";
+import { IGold, IGoldForm } from "@/interfaces/wealths/IGold";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import { useCreateGoldMutation, useDeleteGoldMutation, useUpdateGoldMutation } from "@/store/api/goldSlice";
 import Dropdown from "@/ui/dropdown/dropdown";

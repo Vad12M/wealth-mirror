@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InputForm from "@/ui/input/inputForm";
 import Typography from "@/ui/typography/Typography";
-import { ICrypto, ICryptoForm } from "@/interfaces/ICrypto";
+import { ICrypto, ICryptoForm } from "@/interfaces/wealths/ICrypto";
 import OptionCrypto from "@/ui/icons/canvas/OptionCrypto";
 import FormButtonsBlock from "@/components/paint/forms/FormButtonsBlock";
 import { useCreateCryptoMutation, useDeleteCryptoMutation, useUpdateCryptoMutation } from "@/store/api/cryptoSlice";
@@ -68,7 +68,7 @@ export default function CryptoForm({
         <div className="bg-[#D9FBEE] h-[55px] w-[55px] flex items-center justify-center mb-1 p-2 rounded-[8px]">
           <OptionCrypto/>
         </div>
-        <Typography text={'Stock'} type={'labelsVerySmall'} color="text-black"/>
+        <Typography text={'Crypto'} type={'labelsVerySmall'} color="text-black"/>
       </div>
       <div className="flex flex-col space-y-4 w-full">
         <InputForm
