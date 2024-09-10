@@ -31,7 +31,7 @@ export default function Header() {
   const list = [
     { name: 'About Us', link: '/about' },
     { name: 'Services', link: '/services' },
-    { name: 'How it Works', link: '/how-it-works' },
+    { name: 'How it Works', link: '/' },
     { name: 'Pricing', link: '/pricing' },
     { name: 'Contact', link: '/contact' }
   ];
