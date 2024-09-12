@@ -13,8 +13,8 @@ interface IButton extends InputHTMLAttributes<HTMLButtonElement> {
     | 'white-shadow'
     | 'standard'
     | 'standard-white'
-    | 'none'
-  ;
+    | 'outline'
+    | 'none';
   prefixBtn?: () => any;
   isGradient?: boolean;
   rounded?: number;
@@ -59,6 +59,9 @@ export function Button({
       break;
     case 'standard-white':
       typeClassname = styles.standardWhiteBtn;
+      break;
+    case 'outline':
+      typeClassname = styles.outlineBtn;
       break;
   }
 

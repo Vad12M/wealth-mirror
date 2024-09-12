@@ -18,8 +18,6 @@
 .firefly {
   position: absolute;
   bottom: 0;
-  width: 180px;
-  height: 180px;
   animation: fly 10s linear infinite;
   animation-delay: var(--animation-delay);
   opacity: 0;

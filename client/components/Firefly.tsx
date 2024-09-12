@@ -3,10 +3,22 @@ import styles from './join-waitlist-block.module.scss';
 
 export const Firefly = ({
   direction,
+  width,
+  height,
 }: {
   direction: 'left' | 'right';
+  width?: number;
+  height?: number;
 }) => {
-  const [x, setX] = useState(Math.random());
+  function generateRandomX(prevX = 0) {
+    let newX;
+    do {
+      newX = Math.random();
+    } while (Math.abs(newX - prevX) < 0.1);
+    return newX;
+  }
+
+  const [x, setX] = useState(generateRandomX());
   const [delay, setDelay] = useState(Math.random() * 12);
   const images = [
     '/canvas/Car.svg',
@@ -31,7 +43,7 @@ export const Firefly = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setX(Math.random());
+      setX((prevX) => generateRandomX(prevX));
       setDelay(Math.random() * 10);
     }, delay * 1000 + 10000);
     return () => clearInterval(interval);
@@ -41,12 +53,16 @@ export const Firefly = ({
     <div
       className={`${styles.firefly}`}
       style={{
-        left: `${Math.random() * 100}%`,
+        left: `${x * 90}%`,
         '--random-x': x,
         '--animation-delay': `${delay}s`,
       } as React.CSSProperties}
     >
       <img
+        style={{
+          minWidth: width ? `${width}px` : '150px',
+          minHeight: height ? `${height}px` : '150px',
+        }}
         className={`${direction === 'left' ? styles.left : styles.right} opacity-50`}
         src={images[randomIndex]} alt={'icon'}/>
     </div>

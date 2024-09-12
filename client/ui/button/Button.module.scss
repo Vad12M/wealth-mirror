@@ -113,6 +113,21 @@
   color: black;
 }
 
+.outlineBtn {
+  display: flex;
+  padding: 6px 28px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 48px;
+  border: 1px solid #E0FFDF;
+  background: transparent;
+}
+
+.outlineBtn:hover {
+  background: #E0FFDF;
+  color: black;
+  transition: background 0.6s;
+}
 
 
 .loader {

@@ -14,21 +14,23 @@ export default function ProfileChangePassword({
 }) {
 
   return (
-    <div className="flex items-center w-full my-10">
-      <div className="flex flex-col items-start w-1/3">
-        <Typography text={`Old Password`} type='healine4'/>
+    <div className="flex items-center w-full my-10  space-x-6">
+      <div className="flex flex-col items-start w-1/2">
+        <Typography text={`Old Password`} type='body2'/>
         <Input
           value={passwordForm?.oldPassword}
           onUpdate={(e) => setPasswordForm((prevState) => ({ ...prevState, oldPassword: e.target.value }))}
           placeholder="Old Password"
+          className={'w-full'}
         />
       </div>
-      <div className="flex flex-col items-start">
-        <Typography text={`New Password`} type='healine4'/>
+      <div className="flex flex-col items-start w-1/2">
+        <Typography text={`New Password`} type='body2'/>
         <Input
           value={passwordForm?.newPassword}
           onUpdate={(e) => setPasswordForm((prevState) => ({ ...prevState, newPassword: e.target.value }))}
           placeholder="New Password"
+          className={'w-full'}
         />
       </div>
     </div>
