@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRegisterMutation } from "@/store/api/apiSlice";
 import { useRouter } from "next/router";
 import useRegisterValidator from "@/service/validator/useRegisterValidator";
@@ -17,7 +17,6 @@ export default function Register() {
   const [register, { isLoading }] = useRegisterMutation();
   const router = useRouter();
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [error, setError] = useState<string>('');
   const [form, setForm] = useState<IRegister>({
     email: '',
     password: '',
@@ -28,19 +27,10 @@ export default function Register() {
 
   const validator = useRegisterValidator(form);
 
-  useEffect(() => {
-    setError('');
-  }, [form.email, form.password]);
-
   const handleRegister = () => {
     validator.validate()
     if (!validator.isFormInvalid()) {
-      register(form).unwrap()
-        .then(() => router.push('/auth/login'))
-        .catch((e) => {
-          console.log(e)
-          setError('Something went wrong, please try again later')
-        });
+      register(form).unwrap().then(() => router.push('/auth/login'))
     }
   }
 
@@ -87,6 +77,7 @@ export default function Register() {
             }}
             className={'mb-2 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('firstName')}
+            validationMessage={validator.getFieldError('firstName')}
           />
           <Input
             value={form.lastName}
@@ -97,6 +88,7 @@ export default function Register() {
             }}
             className={'mb-2 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('lastName')}
+            validationMessage={validator.getFieldError('lastName')}
           />
           <Input
             value={form.phone}
@@ -107,6 +99,7 @@ export default function Register() {
             }}
             className={'mb-2 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('phone')}
+            validationMessage={validator.getFieldError('phone')}
           />
           <Input
             value={form.email}
@@ -117,6 +110,7 @@ export default function Register() {
             }}
             className={'mb-2 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('email')}
+            validationMessage={validator.getFieldError('email')}
           />
           <Input
             value={form.password}
@@ -127,9 +121,9 @@ export default function Register() {
             }}
             className={'mb-2 md:w-[400px] w-[340px]'}
             invalid={validator.isFieldInvalid('password')}
+            validationMessage={validator.getFieldError('password')}
             type={'password'}
           />
-          {error && <Typography text={error} className={'mb-2'} color={'text-danger'} type={'body'}/>}
         </div>
         <Button
           typeButton={'primary'}

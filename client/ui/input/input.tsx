@@ -14,6 +14,7 @@ export interface InputProps {
   type?: string;
   label?: string;
   typeInput?: string;
+  validationMessage?: string;
 }
 
 export default function Input({
@@ -27,6 +28,7 @@ export default function Input({
   type,
   suffixComponent,
   label,
+  validationMessage,
 }: InputProps) {
 
   const renderSuffix = Boolean(suffixComponent) && (
@@ -55,5 +57,11 @@ export default function Input({
       />
       {renderSuffix}
     </div>
+    {invalid && validationMessage && <Typography
+      text={validationMessage}
+      type={'body2'}
+      color={'text-danger'}
+      className={'pt-2 ml-2'}
+    />}
   </div>
 }
