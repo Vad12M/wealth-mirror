@@ -11,6 +11,7 @@ import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";
 import useGetUser from "@/hooks/useGetUser";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 export default function Home() {
@@ -18,10 +19,24 @@ export default function Home() {
   const { isLoggedIn } = useGetUser();
   const router = useRouter();
   const { data } = useGetMeQuery({}, { skip: !hasAuthToken() });
+  const section = router.query.section;
+
+  useEffect(() => {
+    if (section) {
+      const element = document.getElementById(section as string);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [section]);
+
+
   return (
     <main className="w-full">
       <HeroBlock/>
-      <VideoBlock/>
+      <div id={'how-it-works'}>
+        <VideoBlock/>
+      </div>
       <div>
         <div className="mt-20">
           <FireflyLayout/>
