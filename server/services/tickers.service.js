@@ -23,7 +23,21 @@ export const getStocksAPI = async (limit = 1000, search = '') => {
         market: 'stocks',
       },
     });
-    return response.data;
+    const results = response.data.results;
+
+    const getLogo = async (code) => {
+      const response = await http.get(buildApiUrl(`/v3/reference/tickers/${code}`));
+      return response.data.results.branding.icon_url;
+    }
+
+    return results.map((stock) => {
+      const logo = getLogo(stock.ticker);
+      return {
+        ...stock,
+        logo,
+      }
+    })
+
   } catch (error) {
     console.error('Error fetching stocks:', error);
     throw error;

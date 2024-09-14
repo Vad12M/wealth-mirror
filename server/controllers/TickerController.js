@@ -5,7 +5,7 @@ export const getExternalStocks = async (req, res) => {
 
   try {
     const stocks = await getStocksAPI(limit, search);
-    res.status(200).json(stocks.results);
+    res.status(200).json(stocks);
   } catch (error) {
     res.status(500).json({
       message: error.message
