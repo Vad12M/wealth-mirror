@@ -57,11 +57,11 @@ export default function MutualFundsElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(mutualFund._id, 'mutualFund', x / zoomLevel, y / zoomLevel)
+                  updateItem(mutualFund._id, 'mutualFunds', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(mutualFund, 'mutualFund');
+                  handleActiveItem(mutualFund, 'mutualFunds');
                 }}
                 onMouseEnter={() => {
                   setTooltip({

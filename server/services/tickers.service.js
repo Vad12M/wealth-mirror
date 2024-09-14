@@ -10,7 +10,7 @@ const http = getAxiosInstance({
 });
 
 const buildApiUrl = (path) => {
-  return `${baseUrl}${path}?active=true&apiKey=${process.env.POLYGON_API_KEY}/v3/reference`;
+  return `${baseUrl}${path}?active=true&apiKey=${process.env.POLYGON_API_KEY}`;
 };
 
 

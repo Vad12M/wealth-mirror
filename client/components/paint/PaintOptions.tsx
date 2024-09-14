@@ -32,7 +32,7 @@ export default function PaintOptions({
   type: string;
   onClose: () => void;
 }) {
-  const [newItemType, setNewItemType] = useState<string>('');
+  const [newItemType, setNewItemType] = useState<string>(type);
 
   useEffect(() => {
     if (type) {

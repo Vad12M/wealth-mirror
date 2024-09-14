@@ -57,11 +57,11 @@ export default function ExpensesElements({
                   e.cancelBubble = true;
                   const node = e.target;
                   const { x, y } = node.absolutePosition();
-                  updateItem(expense._id, 'expenses', x / zoomLevel, y / zoomLevel)
+                  updateItem(expense._id, 'expense', x / zoomLevel, y / zoomLevel)
                 }}
                 onClick={(e) => {
                   e.cancelBubble = true;
-                  handleActiveItem(expense, 'expenses');
+                  handleActiveItem(expense, 'expense');
                 }}
                 onMouseEnter={() => {
                   setTooltip({
