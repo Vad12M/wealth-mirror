@@ -14,7 +14,7 @@ const buildApiUrl = (path) => {
 };
 
 
-export const getStocksAPI = async (limit = 1000, search = '') => {
+export const getStocksAPI = async (limit = 1, search = '') => {
   try {
     const response = await http.get(buildApiUrl(`/v3/reference/tickers`), {
       params: {
@@ -25,18 +25,15 @@ export const getStocksAPI = async (limit = 1000, search = '') => {
     });
     const results = response.data.results;
 
-    const getLogo = async (code) => {
-      const response = await http.get(buildApiUrl(`/v3/reference/tickers/${code}`));
-      return response.data.results.branding.icon_url;
-    }
+    // const getLogo = async (code) => {
+    //   const response = await http.get(buildApiUrl(`/v3/reference/tickers/${code}`));
+    //   return response.data.results.branding?.icon_url || null;
+    // };
 
-    return results.map((stock) => {
-      const logo = getLogo(stock.ticker);
-      return {
-        ...stock,
-        logo,
-      }
-    })
+    return await Promise.all(results.map(async (stock) => {
+      // const logo = await getLogo(stock.ticker);
+      return { ...stock, logo: "", };
+    }));
 
   } catch (error) {
     console.error('Error fetching stocks:', error);
