@@ -113,6 +113,7 @@ export default function Header() {
             </Button> : (
               <button onClick={() => {
                 removeUserToken()
+                router.push('/auth/login')
                 window.location.reload()
               }}>
                 <LogoutIcon/>

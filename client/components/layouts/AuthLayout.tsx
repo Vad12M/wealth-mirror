@@ -3,12 +3,9 @@ import Typography from "@/ui/typography/Typography";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import styles from './auth-layout.module.scss';
 import { useRef } from "react";
 import { Button } from "@/ui/button/Button";
 import StarIcon from "@/ui/icons/StarIcon";
-import ArrowLeft from "@/ui/icons/register/ArrowLeft";
-import ArrowRight from "@/ui/icons/register/ArrowRight";
 
 export default function AuthLayout({ children, type }: {
   children: React.ReactNode
@@ -84,7 +81,12 @@ export default function AuthLayout({ children, type }: {
           />
           <img src={'/login/login.svg'} className="absolute bottom-0" alt={'bg'}/>
         </div> :
-        <div className="w-1/2 overflow-hidden bg-[#233725] md:block hidden">
+        <div className="w-1/2 overflow-hidden  md:block hidden"
+             style={{
+               background: 'rgba(242, 255, 185, 0.35)',
+               boxShadow: '1px 8px 70.5px 32px rgba(0, 179, 134, 0.40)'
+             }}
+        >
           <Swiper
             className={`h-screen relative flex-col items-center md:flex hidden`}
             ref={sliderRef}
@@ -94,23 +96,37 @@ export default function AuthLayout({ children, type }: {
             {registerSlides.map(el => (
               <SwiperSlide key={el.title}>
                 <div>
-                  <img src={'/register/group.svg'} className="absolute -top-[8%]" alt={'bg'}/>
-                  <img src={el.image} className="absolute top-[30%] transform -translate-x-1/2 left-1/2" alt={'bg'}/>
+                  <div className="w-full">
+                    <img src="/register/home-1.svg" alt="group" className="floating delay-1 -mt-3 -ml-2"/>
+                    <img src="/register/tree-1.svg" alt="group" className="floating delay-2 absolute top-[10%] left-[50%]"/>
+                    <img src="/register/money.svg" alt="group" className="floating delay-3 absolute right-[24%] top-[18%]"/>
+                    <img src="/register/home-3.svg" alt="group" className="floating delay-5 absolute w-[200px] right-0 top-[30%]"/>
+                    <img src="/register/card-1.svg" alt="group" className="floating delay-6 ml-40 mt-32"/>
+                    <img src="/register/card-2.svg" alt="group" className="floating delay-2 ml-96 -mt-28"/>
+                    <img src="/register/home-2.svg" alt="group" className="floating delay-1 -ml-2 mt-10 w-[200px]"/>
+                    <img src="/register/key-1.svg" alt="group"
+                         className="floating delay-1 absolute right-[35%] -mt-24"/>
+                    <img src="/register/key-2.svg" alt="group"
+                         className="floating delay-2 absolute left-[35%] -mt-32"/>
+                    <img src="/register/saving.svg" alt="group" className="floating delay-4 absolute right-16 -mt-5"/>
+                  </div>
+                  <img src={el.image}
+                       className="absolute top-[40%] transform -translate-x-1/2 left-1/2 w-[700px] h-[400px]"
+                       alt={'bg'}/>
                 </div>
-                <div className="absolute bottom-5 left-[12%] max-w-[600px]">
-                  <div className="flex flex-col">
-                    <Typography text={el.title} type="registerTitle" color="text-white" className="mb-5"/>
-                    <Typography text={el.name} type="registerTitle" color="text-white" className="mb-3"/>
+                <div className="absolute bottom-0  bg-gradient-to-t from-[#000] via-[#053e3b] p-5 pt-20">
+                  <div className="flex flex-col px-10">
+                    <Typography text={el.title} type="registerTitle" color="text-white" className="mb-3 z-50"/>
+                    <Typography text={el.name} type="registerTitle" color="text-white" className="mb-1 z-50"/>
                     <Typography text={el.position} type="registerDesc" color="text-white"/>
                   </div>
-                  <div className="flex items-center space-x-1 absolute right-2 bottom-20 z-10">
+                  <div className="flex items-center space-x-1 absolute right-40 bottom-24 z-50">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <StarIcon key={index}/>
                     ))}
                   </div>
-
                 </div>
-                <img src={'/register/ellipse.svg'} className="h-[70%] w-full absolute bottom-0" alt={'bg'}/>
+                <img src={'/register/ellipse.svg'} className="h-[70%] w-full absolute bottom-0 z-10" alt={'bg'}/>
               </SwiperSlide>
             ))}
           </Swiper>
