@@ -1,39 +1,39 @@
 import Typography from "@/ui/typography/Typography";
-import { Button } from "@/ui/button/Button";
-import FireIcon from "@/ui/icons/FireIcon";
-import PresentIcon from "@/ui/icons/PresentIcon";
+import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 
 export default function PlanBlock() {
+  const isMobile = useGetIsMobile();
 
   const listItem = (index: string, text: string) => {
     return (
-      <div className="flex items-center space-x-2">
-        <Typography text={index} type={'healine6'}/>
-        <Typography text={text} type={'bodyB1'} color={'text-bodyGray'}/>
+      <div className="flex items-center space-x-14">
+        <Typography text={index} type={'heading5'}/>
+        <Typography text={text} type={'heading6'} color={'text-bodyGray'}/>
       </div>
     )
   }
 
   return (
-    <section className="py-20 w-full flex justify-center">
-      <div className="w-[770px] flex flex-col">
-        <Typography text={'Is Standard Plan a good choice for me?'} type={'healine2'} className="mb-8"/>
+    <section className="p-20 w-full flex justify-center">
+      <div className="md:w-[900px] w-[357px] flex flex-col">
+        <Typography text={'Could This Membership Be Your Path to Better Wealth Management?'} type={isMobile ? 'heading3' : 'heading2'} className="mb-8"/>
         <Typography
-          text={'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley .'}
+          text={'Unlock the power to manage and grow your wealth with ease. Here\'s why a membership can transform'}
           type={'bodyB1'}
-          className="mb-5"
+          className="mb-10 md:w-full w-[357px]"
           color={'text-bodyGray'}
         />
-        <div className="flex flex-col space-y-4 mb-6">
-          {listItem('01', 'There are many variations of passages')}
-          {listItem('02', 'Majority have suffered alteration in some form.')}
-          {listItem('03', 'If you are going to use a passage of Lorem Ipsum.')}
-          {listItem('04', ' It uses a dictionary of over 200 Latin words, combined.')}
+        <div className="flex flex-col space-y-4 mb-10 md:w-full w-[357px]">
+          {listItem('01', 'Visualize your entire wealth portfolio in one place—assets, liabilities, and more, all centralized.')}
+          {listItem('02', 'Make smarter, informed decisions with personalized insights, recommendations, and alerts tailored to your financial movements.')}
+          {listItem('03', 'AI-driven suggestions help you spot opportunities, manage risks, and optimize your financial strategy.')}
+          {listItem('04', 'Track value changes, get real-time updates, and always stay ahead with our intelligent recommendations.')}
         </div>
         <Typography
-          text={'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'}
+          text={'Take control of your financial future with a membership that empowers you to make better decisions and achieve greater results!'}
           type={'bodyB1'}
           color={'text-bodyGray'}
+          className={'md:w-full w-[357px]'}
         />
       </div>
     </section>

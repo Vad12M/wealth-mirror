@@ -20,7 +20,7 @@ export default function BlockLayout({
     <section className="py-10 md:py-[100px] flex flex-col justify-center items-center">
       <Typography
         text={title}
-        type={isMobile ? 'heading3' : 'heading1'}
+        type={isMobile ? 'heading3' : 'txt1'}
         className={description ? 'mb-2' : 'mb-12'}
         primaryElements={primaryElements}
       />
