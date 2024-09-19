@@ -81,12 +81,14 @@ export default function AuthLayout({ children, type }: {
           />
           <img src={'/login/login.svg'} className="absolute bottom-0" alt={'bg'}/>
         </div> :
-        <div className="w-1/2 overflow-hidden  md:block hidden"
+        <div className="w-1/2 overflow-hidden md:block hidden relative border-l border-primary"
              style={{
                background: 'rgba(242, 255, 185, 0.35)',
                boxShadow: '1px 8px 70.5px 32px rgba(0, 179, 134, 0.40)'
              }}
         >
+          <img src="/register/ellipseBig.svg" alt="bg"
+               className="absolute transform -translate-x-1/2 left-1/2 bottom-10"/>
           <Swiper
             className={`h-screen relative flex-col items-center md:flex hidden`}
             ref={sliderRef}
@@ -102,13 +104,21 @@ export default function AuthLayout({ children, type }: {
               <SwiperSlide key={el.title}>
                 <div>
                   <div className="w-full">
-                    <img src="/register/home-1.svg" alt="group" className="floating delay-1 -mt-3 -ml-2"/>
-                    <img src="/register/tree-1.svg" alt="group" className="floating delay-2 absolute top-[10%] left-[50%]"/>
-                    <img src="/register/money.svg" alt="group" className="floating delay-3 absolute right-[24%] top-[18%]"/>
-                    <img src="/register/home-3.svg" alt="group" className="floating delay-5 absolute w-[200px] right-0 top-[30%]"/>
+                    <div className='w-[200px] -rotate-[30deg] -mt-10 -ml-2'>
+                      <img src="/register/home-1.svg" alt="group" className="floating delay-1 "/>
+                    </div>
+                    <img src="/register/tree-1.svg" alt="group"
+                         className="floating delay-2 absolute top-[10%] left-[50%]"/>
+                    <img src="/register/money.svg" alt="group"
+                         className="floating delay-3 absolute right-[24%] top-[18%]"/>
+                    <div className='w-[200px] rotate-[70deg] absolute -right-4 top-[25%]'>
+                      <img src="/register/home-3.svg" alt="group" className="floating delay-5 w-[200px]"/>
+                    </div>
                     <img src="/register/card-1.svg" alt="group" className="floating delay-6 ml-40 mt-32"/>
                     <img src="/register/card-2.svg" alt="group" className="floating delay-2 ml-96 -mt-28"/>
-                    <img src="/register/home-2.svg" alt="group" className="floating delay-1 -ml-2 mt-10 w-[200px]"/>
+                    <div className='w-[200px] -rotate-[30deg] -ml-4 mt-10'>
+                      <img src="/register/home-2.svg" alt="group" className="floating delay-1 w-[200px]"/>
+                    </div>
                     <img src="/register/key-1.svg" alt="group"
                          className="floating delay-1 absolute right-[35%] -mt-24"/>
                     <img src="/register/key-2.svg" alt="group"
@@ -119,7 +129,11 @@ export default function AuthLayout({ children, type }: {
                        className="absolute top-[40%] transform -translate-x-1/2 left-1/2 w-[700px] h-[400px]"
                        alt={'bg'}/>
                 </div>
-                <div className="absolute bottom-0  bg-gradient-to-t from-[#000] via-[#053e3b] p-5 pt-20">
+                <div className="absolute bottom-0  p-5 pt-20"
+                     style={{
+                       background: 'linear-gradient(0deg, #0C0C0C 20.02%, rgba(0, 0, 0, 0.00) 100%)'
+                     }}
+                >
                   <div className="flex flex-col px-10">
                     <Typography text={el.title} type="registerTitle" color="text-white" className="mb-3 z-50"/>
                     <Typography text={el.name} type="registerTitle" color="text-white" className="mb-1 z-50"/>
@@ -131,7 +145,6 @@ export default function AuthLayout({ children, type }: {
                     ))}
                   </div>
                 </div>
-                <img src={'/register/ellipse.svg'} className="h-[70%] w-full absolute bottom-0 z-10" alt={'bg'}/>
               </SwiperSlide>
             ))}
           </Swiper>
