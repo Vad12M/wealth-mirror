@@ -95,7 +95,7 @@ export default function AuthLayout({ children, type }: {
             loop={true}
             slidesPerView={'auto'}
             autoplay={{
-              delay: 3000,
+              delay: 5000,
               disableOnInteraction: false,
             }}
             modules={[Autoplay]}
