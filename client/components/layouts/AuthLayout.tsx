@@ -92,6 +92,10 @@ export default function AuthLayout({ children, type }: {
             ref={sliderRef}
             loop={true}
             slidesPerView={'auto'}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
           >
             {registerSlides.map(el => (
               <SwiperSlide key={el.title}>
