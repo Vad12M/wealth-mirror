@@ -108,26 +108,28 @@ export default function AuthLayout({ children, type }: {
                       <img src="/register/home-1.svg" alt="group" className="floating delay-1 "/>
                     </div>
                     <img src="/register/tree-1.svg" alt="group"
-                         className="floating delay-2 absolute top-[10%] left-[50%]"/>
+                         className="floating delay-2 absolute top-[5%] left-[50%]"/>
                     <img src="/register/money.svg" alt="group"
-                         className="floating delay-3 absolute right-[24%] top-[18%]"/>
+                         className="floating delay-3 absolute right-[24%] top-[10%]"/>
                     <div className='w-[200px] rotate-[70deg] absolute -right-4 top-[25%]'>
                       <img src="/register/home-3.svg" alt="group" className="floating delay-5 w-[200px]"/>
                     </div>
-                    <img src="/register/card-1.svg" alt="group" className="floating delay-6 ml-40 mt-32"/>
-                    <img src="/register/card-2.svg" alt="group" className="floating delay-2 ml-96 -mt-28"/>
-                    <div className='w-[200px] -rotate-[30deg] -ml-4 mt-10'>
+                    <img src="/register/card-1.svg" alt="group" className="floating delay-6 ml-40 mt-20"/>
+                    <img src="/register/card-2.svg" alt="group" className="floating delay-2 ml-80 -mt-24"/>
+                    <div className='w-[200px] -rotate-[30deg] -ml-4 -mt-10'>
                       <img src="/register/home-2.svg" alt="group" className="floating delay-1 w-[200px]"/>
                     </div>
                     <img src="/register/key-1.svg" alt="group"
-                         className="floating delay-1 absolute right-[35%] -mt-24"/>
+                         className="floating delay-1 absolute right-[35%] -mt-20"/>
                     <img src="/register/key-2.svg" alt="group"
-                         className="floating delay-2 absolute left-[35%] -mt-32"/>
+                         className="floating delay-2 absolute left-[35%] -mt-20"/>
                     <img src="/register/saving.svg" alt="group" className="floating delay-4 absolute right-16 -mt-5"/>
                   </div>
-                  <img src={el.image}
-                       className="absolute top-[40%] transform -translate-x-1/2 left-1/2 w-[700px] h-[400px]"
-                       alt={'bg'}/>
+                  <img
+                    src={el.image}
+                    className="absolute top-[35%] transform -translate-x-1/2 left-1/2 w-[600px] h-[400px]"
+                    alt={'bg'}
+                  />
                 </div>
                 <div className="absolute bottom-0  p-5 pt-20"
                      style={{
