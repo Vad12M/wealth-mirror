@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRef } from "react";
 import { Button } from "@/ui/button/Button";
 import StarIcon from "@/ui/icons/StarIcon";
+import { Autoplay } from "swiper/modules";
 
 export default function AuthLayout({ children, type }: {
   children: React.ReactNode
@@ -44,7 +45,6 @@ export default function AuthLayout({ children, type }: {
       (sliderRef.current as any).swiper.slideNext();
     }
   };
-
   return (
     <div className="flex w-full z-10">
       <div className="w-full md:w-1/2">
@@ -96,6 +96,7 @@ export default function AuthLayout({ children, type }: {
               delay: 3000,
               disableOnInteraction: false,
             }}
+            modules={[Autoplay]}
           >
             {registerSlides.map(el => (
               <SwiperSlide key={el.title}>
