@@ -14,8 +14,8 @@ export default function PlanBlock() {
   }
 
   return (
-    <section className="p-20 w-full flex justify-center">
-      <div className="md:w-[900px] w-[357px] flex flex-col">
+    <section className="md:p-20 p-10 w-full flex justify-center">
+      <div className="md:w-[900px] w-full flex flex-col">
         <Typography text={'Could This Membership Be Your Path to Better Wealth Management?'} type={isMobile ? 'heading3' : 'heading2'} className="mb-8"/>
         <Typography
           text={'Unlock the power to manage and grow your wealth with ease. Here\'s why a membership can transform'}

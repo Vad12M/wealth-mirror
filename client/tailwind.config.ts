@@ -27,6 +27,7 @@ const config: Config = {
         naturalBlack: '#000',
         gray: '#4B5754',
         grayLight: '#BEBEBE',
+        grayLight2: '#F8F8F8CC',
 
         darkGray1: '#343839',
         darkGray2: '#232627',
@@ -36,6 +37,7 @@ const config: Config = {
         placeholder: '#797979',
 
         bodyGray: '#9E9E9E',
+
 
         mediumColor: "#969696",
         neutralGray: '#404040',
