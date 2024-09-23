@@ -1,10 +1,10 @@
-import JoinWaitlistBlock from "@/components/home/JoinWaitlistBlock";
-import FAQBlock from "@/components/mainHome/blocks/FAQBlock";
+import JoinWaitlistBlock from "@/components/join-waitlist/JoinWaitlistBlock";
+import FAQBlock from "@/components/home/blocks/FAQBlock";
 import { useState } from "react";
 import { FireflyLayout } from "@/components/FireflyLayout";
-import PriceBlock from "@/components/mainHome/blocks/PriceBlock";
-import JoinWaitlistPopup from "@/components/home/JoinWaitlistPopup";
-import HowIsItWorkBlock from "@/components/mainHome/blocks/HowIsItWorkBlock";
+import PriceBlock from "@/components/home/blocks/PriceBlock";
+import JoinWaitlistPopup from "@/components/join-waitlist/JoinWaitlistPopup";
+import HowIsItWorkBlock from "@/components/home/blocks/HowIsItWorkBlock";
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";

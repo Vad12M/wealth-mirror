@@ -2,7 +2,7 @@ import Typography from "@/ui/typography/Typography";
 import React from "react";
 import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 import { FireflyLayout } from "@/components/FireflyLayout";
-import OurValues from "@/components/aboutBlocks/OurValues";
+import OurValues from "@/components/about-blocks/OurValues";
 
 export default function About() {
   const isMobile = useGetIsMobile();

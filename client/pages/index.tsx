@@ -1,11 +1,11 @@
-import VideoBlock from "@/components/mainHome/blocks/VideoBlock";
-import PriceBlock from "@/components/mainHome/blocks/PriceBlock";
-import HeroBlock from "@/components/mainHome/blocks/HeroBlock";
-import FAQBlock from "@/components/mainHome/blocks/FAQBlock";
+import VideoBlock from "@/components/home/blocks/VideoBlock";
+import PriceBlock from "@/components/home/blocks/PriceBlock";
+import HeroBlock from "@/components/home/blocks/HeroBlock";
+import FAQBlock from "@/components/home/blocks/FAQBlock";
 import { useGetMeQuery } from "@/store/api/apiSlice";
 import useAuthHandler from "@/service/useAuthHandler";
 import { FireflyLayout } from "@/components/FireflyLayout";
-import HowIsItWorkBlock from "@/components/mainHome/blocks/HowIsItWorkBlock";
+import HowIsItWorkBlock from "@/components/home/blocks/HowIsItWorkBlock";
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import FireIcon from "@/ui/icons/FireIcon";

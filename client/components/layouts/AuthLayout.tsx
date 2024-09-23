@@ -1,4 +1,4 @@
-import JoinWaitlistFooter from "@/components/home/JoinWaitlistFooter";
+import JoinWaitlistFooter from "@/components/join-waitlist/JoinWaitlistFooter";
 import Typography from "@/ui/typography/Typography";
 import 'swiper/css';
 import 'swiper/css/navigation';

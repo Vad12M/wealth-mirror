@@ -1,0 +1,82 @@
+.collapsibleContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    min-height: 0;
+  }
+  50% {
+    min-height: 150px; /* Adjust based on your content size */
+  }
+  60% {
+    min-height: 110px;
+  }
+  70% {
+    min-height: 140px;
+  }
+  80% {
+    min-height: 110px;
+  }
+  100% {
+    min-height: 130px; /* Adjust based on your content size */
+  }
+}
+
+@keyframes bounceInMobile {
+  0% {
+    min-height: 0;
+  }
+  50% {
+    min-height: 400px; /* Adjust based on your content size */
+  }
+  60% {
+    min-height: 200px;
+  }
+  70% {
+    min-height: 350px;
+  }
+  80% {
+    min-height: 250px;
+  }
+  100% {
+    min-height: 380px; /* Adjust based on your content size */
+  }
+}
+
+.opening {
+  animation: bounceIn 1.2s ease-out forwards;
+}
+
+.closing {
+  animation: collapseAnimation 2s ease-out forwards;
+}
+
+@media (max-width: 768px) {
+  .opening {
+    animation: bounceInMobile 1.8s ease-out forwards;
+  }
+
+  .closing {
+    animation: collapseAnimationMobile 1.2s ease-out forwards;
+  }
+}
+@keyframes collapseAnimation {
+  0% {
+    min-height: 100px; /* Adjust based on your content size */
+  }
+  100% {
+    min-height: 0;
+  }
+}
+
+@keyframes collapseAnimationMobile {
+  0% {
+    min-height: 400px; /* Adjust based on your content size */
+  }
+  100% {
+    min-height: 0;
+  }
+}

@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import store from "@/store";
 import dynamic from "next/dynamic";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import JoinWaitlistFooter from "@/components/home/JoinWaitlistFooter";
+import JoinWaitlistFooter from "@/components/join-waitlist/JoinWaitlistFooter";
 
 const CustomCursor = dynamic(() => import('@/components/custom-cursor/CustomCursor'), { ssr: false });
 const Header = dynamic(() => import('@/components/layouts/Header'), { ssr: false });
