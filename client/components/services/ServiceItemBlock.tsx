@@ -20,7 +20,6 @@ export default function ServiceItemBlock({
   additionalVideo?: string;
 }) {
   const isLeft = direction === 'left';
-
   return (
     <div className="py-10 px-8 rounded-[34px] flex flex-col fixed-container space-y-8"
          style={{
