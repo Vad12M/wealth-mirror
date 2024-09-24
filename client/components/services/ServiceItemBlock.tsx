@@ -1,4 +1,5 @@
 import Typography from "@/ui/typography/Typography";
+import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 
 export default function ServiceItemBlock({
   direction = 'right',
@@ -19,9 +20,10 @@ export default function ServiceItemBlock({
   stylesSmallVideo?: string;
   additionalVideo?: string;
 }) {
+  const isMobile = useGetIsMobile();
   const isLeft = direction === 'left';
   return (
-    <div className="py-10 px-8 rounded-[34px] flex flex-col fixed-container space-y-8"
+    <div className="py-10 px-8 rounded-[34px] flex flex-col items-center fixed-container space-y-8"
          style={{
            border: '0.5px solid #2ADC03',
            background: 'rgba(255, 255, 255, 0.03)',
@@ -29,17 +31,21 @@ export default function ServiceItemBlock({
            backdropFilter: 'blur(41.04999923706055px)'
          }}
     >
-      <div className={`flex items-start ${isLeft ? 'flex-row-reverse' : 'flex-row '}`}>
-        <Typography text={description} type={'heading6'} className={`mt-2 ${!isLeft ? 'mr-8' : ''}`}/>
+      <div className={`flex md:flex-row flex-col-reverse items-start ${isLeft ? 'flex-row-reverse' : 'flex-row '}`}>
+        <Typography
+          text={description}
+          type={isMobile ? 'body1' : 'heading6'}
+          className={`mt-2 ${!isLeft && !isMobile ? 'mr-8' : ''}`}
+        />
         <Typography
           text={title}
-          type={'heading1'}
+          type={isMobile ? 'heading2' : 'heading1'}
           primaryElements={primaryElements}
-          className={`min-w-[340px] ${isLeft ? 'mr-8' : ''}`}
+          className={`md:min-w-[340px] min-w-[300px] ${isLeft && !isMobile ? 'mr-8' : ''} md:mb-0 mb-4`}
         />
       </div>
-      <div className={`flex items-center ${isLeft ? 'flex-row-reverse' : 'flex-row'} h-[296px]`}>
-        <div className={`rounded-[14px] flex items-center justify-center ${!isLeft ? 'mr-8' : ''} overflow-hidden h-[276px]`}>
+      <div className={`flex items-center ${isLeft ? 'md:flex-row-reverse flex-col' : 'md:flex-row flex-col'} md:h-[296px] h-auto`}>
+        <div className={`rounded-[14px] flex items-center justify-center ${!isLeft && !isMobile ? 'mr-8' : ''} overflow-hidden md:h-[276px] md:w-auto h-[200px] w-[300px]`}>
           <video
             className={`rounded-[14px]`}
             src={bigVideo}
@@ -49,8 +55,8 @@ export default function ServiceItemBlock({
             muted
           />
         </div>
-        <div className={`bg-white rounded-[14px] p-3 flex flex-col space-y-3 w-[430px] ${isLeft ? 'mr-8' : ''}`}>
-          <div className="w-[292px] h-[202px] rounded-[14px] overflow-hidden flex items-center justify-center">
+        <div className={`bg-white rounded-[14px] p-3 flex flex-col space-y-3 md:w-[430px] w-[300px] ${isLeft && !isMobile ? 'mr-8' : ''}`}>
+          <div className="md:w-[292px] w-[276px] h-[202px] rounded-[14px] overflow-hidden flex items-center justify-center">
             <video
               className={`rounded-[14px] min-w-[1292px] min-h-[902px] ${stylesSmallVideo}`}
               src={smallVideo}
@@ -73,9 +79,9 @@ export default function ServiceItemBlock({
         </div>
       </div>
       {additionalVideo &&
-        <div className="rounded-[14px] flex items-center justify-center h-[262px] overflow-hidden">
+        <div className="rounded-[14px] flex items-center justify-center md:h-[262px] h-[170px] overflow-hidden">
         <video
-          className={`rounded-[14px] min-w-[1492px] min-h-[902px]`}
+          className={`rounded-[14px] md:min-w-[1492px] md:min-h-[902px]`}
           src={additionalVideo}
           autoPlay={true}
           controls={false}

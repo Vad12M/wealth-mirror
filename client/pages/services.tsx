@@ -7,7 +7,7 @@ export default function Services() {
   const isMobile = useGetIsMobile();
 
   return (
-    <section className="py-[100px] md:py-[280px] flex flex-col justify-center items-center">
+    <section className="py-[160px] md:py-[280px] flex flex-col justify-center items-center">
       <Typography
         text={'Our Services'}
         type={isMobile ? 'heading2' : 'txt1'}
@@ -17,10 +17,10 @@ export default function Services() {
       <Typography
         text={'Explore the tools and services designed to help you manage, grow, and optimize your wealth. Everything you need, all in one place.'}
         type={'heading6'}
-        className={`md:px-20 px-0 text-center max-w-[970px] mb-[180px]`}
+        className={`md:px-20 px-0 text-center md:max-w-[970px] max-w-[350px] md:mb-[180px] mb-8`}
         color={'text-grayLight'}
       />
-      <div className="flex flex-col space-y-20">
+      <div className="flex flex-col md:space-y-20 space-y-8">
         <ServiceItemBlock
           title={'Track your Stocks'}
           description={'Wealth Mirror\'s "Track Your Stocks" service is a powerful feature designed to help users manage and monitor their stock investments efficiently. The Stocks can be from Indian, US or EU markets. This service integrates various functionalities that allow users to centralize their stock data, visualize performance, analyze trends, and take informed actions.'}
