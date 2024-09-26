@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 import Typography from "@/ui/typography/Typography";
 import ServiceItemBlock from "@/components/services/ServiceItemBlock";
+import { Button } from "@/ui/button/Button";
+import FireIcon from "@/ui/icons/FireIcon";
+import { useRouter } from "next/router";
+import useGetUser from "@/hooks/useGetUser";
 
 export default function Services() {
   const isMobile = useGetIsMobile();
+  const router = useRouter();
+  const { isLoggedIn } = useGetUser();
 
   return (
-    <section className="py-[160px] md:py-[280px] flex flex-col justify-center items-center">
+    <section className="pb-32 pt-[160px] md:pt-[280px] flex flex-col justify-center items-center">
       <Typography
         text={'Our Services'}
         type={isMobile ? 'heading2' : 'txt1'}
@@ -121,6 +127,16 @@ export default function Services() {
           smallVideo={'/services/CARD/CARD_ANIMATION.mp4'}
           stylesSmallVideo={"mt-5"}
         />
+      </div>
+      <div className="md:mt-[200px] mt-[60px] w-full flex justify-center items-center flex-col">
+        <Typography text={'Ready to join Wealth Mirror?'} type={'heading6'} className="mb-6"/>
+        <Button
+          onClick={() => router.push(isLoggedIn ? '/wealthverse' : '/auth/login')}
+          typeButton='white-shadow'
+          prefixBtn={() => <FireIcon color={'#E0FFDF'}/>} className={'z-10'}
+        >
+          {'Try Wealth Mirror'}
+        </Button>
       </div>
     </section>
   )
