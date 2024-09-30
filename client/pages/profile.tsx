@@ -9,13 +9,13 @@ import ProfileChangePassword, { IPasswordForm } from "@/components/profile/Profi
 import styles from "@/components/join-waitlist-block.module.scss";
 import { Firefly } from "@/components/Firefly";
 import { useGetIsMobile } from "@/hooks/useGetIsMobile";
+import useGetUser from "@/hooks/useGetUser";
 
 export default function ProfilePage() {
   const isMobile = useGetIsMobile();
   const [updateMe] = useUpdateMeMutation();
   const [updatePassword] = useChangePasswordMutation();
-  const authHandler = useAuthHandler();
-  const isLoggedIn = authHandler.hasAuthToken();
+  const { isLoggedIn, isAdmin } = useGetUser();
   const { data: user } = useGetMeQuery({}, { skip: !isLoggedIn });
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState<IUser>({
@@ -109,16 +109,16 @@ export default function ProfilePage() {
           >
             <div className="flex flex-col items-start w-full md:mb-8 mb-5">
               <Typography text={`Account Status`} type={isMobile ? 'body1' : 'body2'} className="mb-1"/>
-              <Typography text={'Free'} type={isMobile ? 'subHeading4' : 'heading3'}/>
+              <Typography text={isAdmin ? 'Premium' : 'Free'} type={isMobile ? 'subHeading4' : 'heading3'}/>
             </div>
             <div className="flex md:flex-row flex-col items-center w-full">
               <div className="flex flex-col items-start md:w-1/2 w-full md:mb-0 mb-5">
                 <Typography text={`Subscription Type`} type={isMobile ? 'body1' : 'body2'} className="mb-1"/>
-                <Typography text={'Monthly'} type={isMobile ? 'subHeading4' : 'heading3'}/>
+                <Typography text={isAdmin ? 'Yearly' : 'N/A'} type={isMobile ? 'subHeading4' : 'heading3'}/>
               </div>
               <div className="flex flex-col items-start md:w-1/2 w-full">
                 <Typography text={`Subscription Validity`} type={isMobile ? 'body1' : 'body2'} className="mb-1"/>
-                <Typography text={'25 June, 2025'} type={isMobile ? 'subHeading4' : 'heading3'}/>
+                <Typography text={isAdmin ? '25 June, 2030' : 'N/A'} type={isMobile ? 'subHeading4' : 'heading3'}/>
               </div>
             </div>
           </div>

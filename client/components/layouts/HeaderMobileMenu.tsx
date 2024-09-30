@@ -4,17 +4,19 @@ import useGetUser from "@/hooks/useGetUser";
 import MainLogoMobile from "@/ui/icons/logos/MainLogoMobile";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import { Button } from "@/ui/button/Button";
+import { removeUserToken } from "@/service/useAuthHandler";
+import WealthserveIcon from "@/ui/icons/WealthserveIcon";
 
 export default function HeaderMobileMenu({
   setMobileMenu,
   mobileMenu
-}:{
+}: {
   setMobileMenu: (value: boolean) => void;
   mobileMenu: boolean;
 }) {
   const { asPath } = useRouter();
   const router = useRouter();
-  const { user, isLoggedIn } = useGetUser();
+  const { user, isLoggedIn, isAdmin } = useGetUser();
 
   const list = [
     { name: 'About Us', link: '/about' },
@@ -40,22 +42,57 @@ export default function HeaderMobileMenu({
           </svg>
           <Typography text={'Back'} type={'body2'} color={'text-black'}/>
         </button>
-        <div className='pt-[40%] px-4 mb-12'>
+        <div className="flex items-center justify-center pt-[10%] mb-3">
+          <div className="relative rounded-full flex items-center justify-center">
+            {!isAdmin
+              ?
+              <div
+                className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#00B386] to-[#004D3A]"/>
+              :
+              <div
+                className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#FED200] to-[#79660A]"/>}
+
+            <div className="relative rounded-full p-1 flex items-center justify-center min-w-[100px] min-h-[100px]">
+              <img src={'/TextUser.svg'} alt={'user'} className="w-[100px]"/>
+            </div>
+          </div>
+        </div>
+        <Typography
+          text={`${user?.firstName || ''} ${user?.lastName || ''}`}
+          type={'heading3'}
+          className="text-center mb-[50px]"
+          color={'text-naturalBlack'}/>
+        <div className='px-4'>
           {list.map((item, index) => (
             <Anchor href={item.link} key={index} className="block py-4" onClick={() => setMobileMenu(!mobileMenu)}>
               <Typography text={item.name} type={'heading4NotBold'} color={'text-naturalBlack'}/>
             </Anchor>
           ))}
         </div>
-
+        <svg xmlns="http://www.w3.org/2000/svg" width="328" height="2" viewBox="0 0 328 2" fill="none" className="my-[30px]">
+          <path d="M1 1H327" stroke="#A0C29F" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
         {!isLoggedIn ? (
           <Button typeButton={'standard'} onClick={() => router.push('/auth/login')}>
             {'Login'}
           </Button>
         ) : (
-          <Button typeButton={'standard'} onClick={() => router.push('/profile')}>
-            {`${user?.firstName || ''} ${user?.lastName || ''}`}
-          </Button>
+         <div>
+           <Button typeButton={'none'} className="mb-[30px]" onClick={() => {
+             router.push('/profile')
+            setMobileMenu(!mobileMenu)
+           }}>
+             <Typography text={'Profile Settings'} type={'body1'} color={'text-naturalBlack'}/>
+           </Button>
+           <Button typeButton={'none'} onClick={() => {
+             removeUserToken()
+             router.push('/auth/login')
+             window.location.reload()
+             setMobileMenu(!mobileMenu)
+           }}>
+             <Typography text={'Logout'} type={'body1'} color="text-danger"/>
+           </Button>
+         </div>
         )}
 
         {!isLoggedIn && <div>
@@ -64,11 +101,22 @@ export default function HeaderMobileMenu({
           </Button>
         </div>}
 
-        <div
-          className="flex items-center justify-center space-x-3 absolute bottom-20 left-[50%] transform translate-x-[-50%]">
-          <MainLogoMobile/>
-          <Typography text={'Wealth Mirror'} type={'navBar'} color={asPath === '/' ? 'text-black' : 'text-white'}/>
-        </div>
+       <div className="flex items-center justify-center mt-10">
+         <Button
+           typeButton={'none'}
+           onClick={() => router.push(isLoggedIn ? '/wealthverse' : '/auth/login')}
+           className={`rounded-[60px] bg-[#1E1E1E] py-2 px-6`}
+         >
+           <div className="flex items-center space-x-2">
+             <WealthserveIcon/>
+             <Typography
+               type={'heading6SM'}
+               text={'Wealthverse'}
+               color={'text-primaryLight2'}
+             />
+           </div>
+         </Button>
+       </div>
       </div>
     </div>
   )
