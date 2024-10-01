@@ -17,7 +17,7 @@ export default function PaintHeader({
   exportClick: () => void
 }) {
   const [isOpenedProfilePopup, setIsOpenedProfilePopup] = useState(false);
-  const { isAdmin } = useGetUser();
+  const { isAdmin } = useGetUser(); // todo: paid user
 
   const refButton = useRef(null);
   const refProfilePopup = useRef(null);
@@ -80,13 +80,13 @@ export default function PaintHeader({
             {isOpenedProfilePopup &&
               <ProfileHeaderPopup refContainer={refProfilePopup} onClose={() => setIsOpenedProfilePopup(false)}/>}
           </div>
-          <Button
+          {!isAdmin && <Button
             typeButton="none"
             className="bg-primary text-white px-5 py-2 rounded-[38px] font-bold"
             onClick={exportClick}
           >
             {'Save canvas'}
-          </Button>
+          </Button>}
         </div>
       </div>
     </div>

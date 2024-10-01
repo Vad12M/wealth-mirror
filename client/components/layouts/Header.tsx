@@ -14,6 +14,7 @@ import HeaderMobileMenu from "@/components/layouts/HeaderMobileMenu";
 import WealthserveIcon from "@/ui/icons/WealthserveIcon";
 import ProfileHeaderPopup from "@/components/profile/ProfileHeaderPopup";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
+import { ChartNoAxesCombined } from "lucide-react";
 
 export default function Header() {
   const isMobile = useGetIsMobile();
@@ -120,20 +121,35 @@ export default function Header() {
               </div>
             )}
 
-            <Button
-              typeButton={'none'}
-              onClick={() => push(isLoggedIn ? '/wealthverse' : '/auth/login')}
-              className={`rounded-[60px] ${isWhite ? 'bg-white' : ' bg-[#1E1E1E]'} py-2 px-6`}
-            >
-              <div className="flex items-center space-x-2">
-                <WealthserveIcon/>
-                <Typography
-                  type={'heading6SM'}
-                  text={'Wealthverse'}
-                  color={isWhite ? 'text-border1' : 'text-primaryLight2'}
-                />
-              </div>
-            </Button>
+
+            {isLoggedIn
+              ? <Button
+                typeButton={'none'}
+                onClick={() => push('/wealthverse')}
+                className={`rounded-[60px] ${isWhite ? 'bg-white' : ' bg-[#1E1E1E]'} py-2 px-6`}
+              >
+                <div className="flex items-center space-x-2">
+                  <WealthserveIcon/>
+                  <Typography
+                    type={'heading6SM'}
+                    text={'Wealthverse'}
+                    color={isWhite ? 'text-border1' : 'text-primaryLight2'}
+                  />
+                </div>
+              </Button>
+              : (
+                <Button
+                  typeButton={'primary-dark'}
+                  isGradient={isJoinWaitlist}
+                  onClick={() => push('/auth/login')}
+                >
+                  {'Start Free Trial'}
+                </Button>
+              )}
+            {isAdmin &&
+              <Button typeButton={'primary-dark'} isGradient={isJoinWaitlist} onClick={() => push('/admin')}>
+                <ChartNoAxesCombined/>
+              </Button>}
           </div>
 
           <button className="flex flex-col items-end space-y-1 md:hidden" onClick={() => setMobileMenu(!mobileMenu)}>

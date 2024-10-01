@@ -10,8 +10,10 @@ import styles from "@/components/join-waitlist-block.module.scss";
 import { Firefly } from "@/components/Firefly";
 import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 import useGetUser from "@/hooks/useGetUser";
+import { useRouter } from "next/router";
 
 export default function ProfilePage() {
+  const router = useRouter();
   const isMobile = useGetIsMobile();
   const [updateMe] = useUpdateMeMutation();
   const [updatePassword] = useChangePasswordMutation();
@@ -97,7 +99,8 @@ export default function ProfilePage() {
                 </Button>}
             </div>
           </div>
-          <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "354" : "720"} height="2" viewBox="0 0 720 2" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "354" : "720"} height="2" viewBox="0 0 720 2"
+               fill="none">
             <path d="M1 1H719" stroke="white" strokeOpacity="0.2" strokeLinecap="round"/>
           </svg>
           <Typography type={'heading6SM'} text={'Membership details'} className="mb-4 mt-6" color="text-grayLight2"/>
@@ -131,9 +134,14 @@ export default function ProfilePage() {
       </div>
 
       <div className="w-full flex justify-center mt-[100px]">
-        <Button typeButton={'outline'} onClick={() => {
-        }} className="w-[180px]">
-          {'Refer a friend'}
+        <Button
+          typeButton={'outline'}
+          onClick={() => {
+            router.push('/payment')
+          }}
+          className="w-[280px]"
+        >
+          {'Get Wealth Mirror Premium'}
         </Button>
       </div>
     </section>
