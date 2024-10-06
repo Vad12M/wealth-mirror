@@ -18,6 +18,17 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    googleLogin: builder.mutation<{ token: string }, {
+      googleId: string,
+      email: string,
+    }>({
+      query: (params) => ({
+        url: '/auth/google',
+        method: 'POST',
+        body: JSON.stringify(params)
+      }),
+    }),
+
     register: builder.mutation<void, IRegister>({
       query: (params) => ({
         url: '/auth/register',
@@ -87,6 +98,7 @@ export const apiSlice = baseApi.injectEndpoints({
 
 export const {
   useLoginMutation,
+  useGoogleLoginMutation,
   useRegisterMutation,
   useGetMeQuery,
   useAddWaitUserMutation,

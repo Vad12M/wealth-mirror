@@ -67,6 +67,35 @@ export const login = async (req, res) => {
   }
 }
 
+export const googleLogin = async (req, res) => {
+  const { googleId, email, name } = req.body;
+
+  try {
+    let user = await UserModel.findOne({ $or: [{ googleId }, { email }] });
+
+    if (!user) {
+      user = new UserModel({
+        googleId,
+        email,
+        name,
+      });
+      await user.save();
+    }
+
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.SECRET,
+      { expiresIn: '30d' }
+    );
+
+    // Відправка токена на фронтенд
+    res.status(200).json({ token });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
 export const getMe = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);

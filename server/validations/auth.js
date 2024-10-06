@@ -24,6 +24,11 @@ export const loginValidator = [
   }).withMessage('Password must be between 3 and 32 characters'),
 ];
 
+export const googleLoginValidator = [
+  body('email', 'Email is required').isEmail().withMessage('Wrong email'),
+  body('googleId', 'Google ID is required').isString().withMessage('Wrong Google ID'),
+];
+
 export const updateMeValidator = [
   body('email', 'Email is required').isEmail().withMessage('Invalid email format'),
   body('firstName', 'First name is required').isString().isLength({

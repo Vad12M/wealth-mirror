@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, required: true, default: "user" },
   status: { type: String, required: true, default: "inactive" },
   expiredPaymentDate: { type: Date },
-  passwordHash: { type: String, required: true }
+  passwordHash: { type: String, required: true },
+  googleId: { type: String },
 }, {
   timestamps: true
 });

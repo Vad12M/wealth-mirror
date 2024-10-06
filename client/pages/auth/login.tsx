@@ -5,19 +5,21 @@ import { Button } from "@/ui/button/Button";
 import useLoginValidator from "@/service/validator/useLoginValidator";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useLoginMutation } from "@/store/api/apiSlice";
+import { useGoogleLoginMutation, useLoginMutation } from "@/store/api/apiSlice";
 import { ILogin } from "@/interfaces/IAuth";
-import { loginByToken } from "@/store/actions/global.actions";
-import { setUserToken } from "@/service/useAuthHandler";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import PrimaryLogo from "@/ui/icons/logos/PrimaryLogo";
 import { useGetIsMobile } from "@/hooks/useGetIsMobile";
 import HeaderMobileMenu from "@/components/layouts/HeaderMobileMenu";
 import useGetUser from "@/hooks/useGetUser";
+import GoogleIcon from "@/ui/icons/GoogleIcon";
+import { useGoogleLogin } from "@react-oauth/google";
+import { loginByToken } from "@/store/actions/global.actions";
 
 export default function LoginPage() {
   const isMobile = useGetIsMobile();
   const [login, { isLoading }] = useLoginMutation();
+  const [googleLogin] = useGoogleLoginMutation();
   const router = useRouter();
   const { isLoggedIn } = useGetUser();
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -34,7 +36,6 @@ export default function LoginPage() {
     if (!validator.isFormInvalid()) {
       login(form).unwrap()
         .then((res) => {
-          setUserToken(res.token);
           loginByToken({ token: res.token })
           router.push('/wealthverse')
         })
@@ -46,6 +47,33 @@ export default function LoginPage() {
       router.push('/wealthverse')
     }
   }, [isLoggedIn]);
+
+  const handleLoginGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${tokenResponse.access_token}`,
+          },
+        });
+
+        const data = await res.json();
+        if (data) {
+          googleLogin({ googleId: data.sub, email: data.email }).unwrap()
+            .then((res) => {
+              loginByToken({ token: res.token })
+              router.push('/wealthverse')
+            })
+        }
+      } catch (error) {
+        console.error('Google login error:', error);
+      }
+    },
+    onError: (error) => console.error('Google login error:', error),
+  });
+
 
   return (
     <AuthLayout type={'login'}>
@@ -117,6 +145,17 @@ export default function LoginPage() {
           disabled={isLoading}
         >
           {'Log in'}
+        </Button>
+        <Button
+          typeButton={'none'}
+          rounded={6}
+          className="md:w-[400px] w-[340px] mt-6 flex justify-center h-[46px] z-50 border border-white rounded-[2px] opacity-80"
+          onClick={() => handleLoginGoogle()}
+        >
+          <div className="flex items-center space-x-2">
+            <GoogleIcon/>
+            <Typography text={'Log in with Google'} className={'text-white'} type={'button'} color={'text-white'}/>
+          </div>
         </Button>
         <div className="flex items-center space-x-1 z-50">
           <Typography text={'Don’t have an account?'} className={'mt-6'} type="link2" color={"text-grayBody2"}/>
