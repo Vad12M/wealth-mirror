@@ -23,7 +23,7 @@ export const apiSlice = baseApi.injectEndpoints({
       email: string,
     }>({
       query: (params) => ({
-        url: '/auth/google',
+        url: '/auth/googleLogin',
         method: 'POST',
         body: JSON.stringify(params)
       }),

@@ -15,6 +15,7 @@ import useGetUser from "@/hooks/useGetUser";
 import GoogleIcon from "@/ui/icons/GoogleIcon";
 import { useGoogleLogin } from "@react-oauth/google";
 import { loginByToken } from "@/store/actions/global.actions";
+import { setUserToken } from "@/service/useAuthHandler";
 
 export default function LoginPage() {
   const isMobile = useGetIsMobile();
@@ -36,6 +37,7 @@ export default function LoginPage() {
     if (!validator.isFormInvalid()) {
       login(form).unwrap()
         .then((res) => {
+          setUserToken(res.token);
           loginByToken({ token: res.token })
           router.push('/wealthverse')
         })
@@ -63,6 +65,7 @@ export default function LoginPage() {
         if (data) {
           googleLogin({ googleId: data.sub, email: data.email }).unwrap()
             .then((res) => {
+              setUserToken(res.token);
               loginByToken({ token: res.token })
               router.push('/wealthverse')
             })
@@ -73,7 +76,6 @@ export default function LoginPage() {
     },
     onError: (error) => console.error('Google login error:', error),
   });
-
 
   return (
     <AuthLayout type={'login'}>
