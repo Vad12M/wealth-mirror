@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: any) {
     <div id={"global-root"}>
       <div id={"app-root"} className={"flex flex-col min-h-screen"}>
         <Provider store={store}>
-          <GoogleOAuthProvider clientId="739084853909-e7h6dj40tc985kbeqopuf7qeeuhpicgu.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId={'789657400021-8c0cq6pqbis2h2fc2d9f2e11i7sielau.apps.googleusercontent.com'}>
             <ErrorBoundary><Header/></ErrorBoundary>
             <ErrorBoundary>
               <div className={"flex justify-center"}>
