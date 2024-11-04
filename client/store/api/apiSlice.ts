@@ -18,6 +18,13 @@ export const apiSlice = baseApi.injectEndpoints({
       }),
     }),
 
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'POST',
+      }),
+    }),
+
     googleLogin: builder.mutation<{ token: string }, {
       googleId: string,
       email: string,
@@ -108,4 +115,5 @@ export const {
   useUpdateMeMutation,
   useChangePasswordMutation,
   useGetUsersQuery,
+  useLogoutMutation,
 } = apiSlice;
