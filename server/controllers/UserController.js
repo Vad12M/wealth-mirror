@@ -180,7 +180,17 @@ export const getUsers = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    removeAllWealth(req, res);
+    const user = await UserModel.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
+
+    if (user.status === 'inactive') {
+      await removeAllWealth(req, res);
+    }
+
     res.status(200).json({
       message: 'Logged out',
     });
