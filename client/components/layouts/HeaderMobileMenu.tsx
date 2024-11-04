@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
 import Typography from "@/ui/typography/Typography";
 import useGetUser from "@/hooks/useGetUser";
-import MainLogoMobile from "@/ui/icons/logos/MainLogoMobile";
 import { Anchor } from "@/components/custom-cursor/CustomCursorHighlight";
 import { Button } from "@/ui/button/Button";
-import { removeUserToken } from "@/service/useAuthHandler";
 import WealthserveIcon from "@/ui/icons/WealthserveIcon";
+import useAuth from "@/hooks/useAuth";
 
 export default function HeaderMobileMenu({
   setMobileMenu,
@@ -14,7 +13,7 @@ export default function HeaderMobileMenu({
   setMobileMenu: (value: boolean) => void;
   mobileMenu: boolean;
 }) {
-  const { asPath } = useRouter();
+  const { logout } = useAuth();
   const router = useRouter();
   const { user, isLoggedIn, isAdmin } = useGetUser();
 
@@ -85,9 +84,7 @@ export default function HeaderMobileMenu({
              <Typography text={'Profile Settings'} type={'body1'} color={'text-naturalBlack'}/>
            </Button>
            <Button typeButton={'none'} onClick={() => {
-             removeUserToken()
-             router.push('/auth/login')
-             window.location.reload()
+             logout()
              setMobileMenu(!mobileMenu)
            }}>
              <Typography text={'Logout'} type={'body1'} color="text-danger"/>

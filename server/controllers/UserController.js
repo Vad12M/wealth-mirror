@@ -1,6 +1,7 @@
 import UserModel from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { removeAllWealth } from "../services/wealth.js";
 
 export const register = async (req, res) => {
   try {
@@ -170,6 +171,21 @@ export const getUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (err) {
     console.error('Error in getUsers:', err);
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+
+export const logout = async (req, res) => {
+  try {
+    removeAllWealth(req, res);
+    res.status(200).json({
+      message: 'Logged out',
+    });
+  } catch (err) {
+    console.error('Error in logout:', err);
     res.status(500).json({
       message: err.message,
     });

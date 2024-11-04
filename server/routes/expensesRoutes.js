@@ -6,7 +6,7 @@ import {
   deleteExpenses,
   getExpenses,
   updateExpenses
-} from "../controllers/expensesController.js";
+} from "../controllers/ExpensesController.js";
 
 export const expensesRouter = express.Router();
 

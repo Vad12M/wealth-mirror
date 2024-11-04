@@ -1,8 +1,8 @@
 import Typography from "@/ui/typography/Typography";
 import { Button } from "@/ui/button/Button";
 import { useRouter } from "next/router";
-import { removeUserToken } from "@/service/useAuthHandler";
 import useGetUser from "@/hooks/useGetUser";
+import useAuth from "@/hooks/useAuth";
 
 export default function ProfileHeaderPopup({
   onClose,
@@ -13,6 +13,7 @@ export default function ProfileHeaderPopup({
 }) {
   const router = useRouter();
   const { user } = useGetUser();
+  const { logout } = useAuth();
 
   return (
     <div
@@ -39,9 +40,7 @@ export default function ProfileHeaderPopup({
           <Typography text={'Profile Settings'} type={'body1'} className="opacity-80"/>
         </Button>
         <Button typeButton={'none'} onClick={() => {
-          removeUserToken()
-          router.push('/auth/login')
-          window.location.reload()
+          logout()
           onClose()
         }}>
           <Typography text={'Logout'} type={'body1'} color="text-danger"/>

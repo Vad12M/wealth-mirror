@@ -17,7 +17,7 @@ export default function ProfilePage() {
   const isMobile = useGetIsMobile();
   const [updateMe] = useUpdateMeMutation();
   const [updatePassword] = useChangePasswordMutation();
-  const { isLoggedIn, isAdmin } = useGetUser();
+  const { isLoggedIn, isPaid } = useGetUser();
   const { data: user } = useGetMeQuery({}, { skip: !isLoggedIn });
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState<IUser>({
@@ -112,16 +112,16 @@ export default function ProfilePage() {
           >
             <div className="flex flex-col items-start w-full md:mb-8 mb-5">
               <Typography text={`Account Status`} type={isMobile ? 'body1' : 'body2'} className="mb-1"/>
-              <Typography text={isAdmin ? 'Premium' : 'Free'} type={isMobile ? 'subHeading4' : 'heading3'}/>
+              <Typography text={isPaid ? 'Premium' : 'Free'} type={isMobile ? 'subHeading4' : 'heading3'}/>
             </div>
             <div className="flex md:flex-row flex-col items-center w-full">
               <div className="flex flex-col items-start md:w-1/2 w-full md:mb-0 mb-5">
                 <Typography text={`Subscription Type`} type={isMobile ? 'body1' : 'body2'} className="mb-1"/>
-                <Typography text={isAdmin ? 'Yearly' : 'N/A'} type={isMobile ? 'subHeading4' : 'heading3'}/>
+                <Typography text={isPaid ? 'Yearly' : 'N/A'} type={isMobile ? 'subHeading4' : 'heading3'}/>
               </div>
               <div className="flex flex-col items-start md:w-1/2 w-full">
                 <Typography text={`Subscription Validity`} type={isMobile ? 'body1' : 'body2'} className="mb-1"/>
-                <Typography text={isAdmin ? '25 June, 2030' : 'N/A'} type={isMobile ? 'subHeading4' : 'heading3'}/>
+                <Typography text={isPaid ? '25 June, 2030' : 'N/A'} type={isMobile ? 'subHeading4' : 'heading3'}/>
               </div>
             </div>
           </div>
