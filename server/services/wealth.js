@@ -25,5 +25,4 @@ export const removeAllWealth = async (req, res) => {
   await RealEstateModel.deleteMany({ user: req.userId });
   await SavingModel.deleteMany({ user: req.userId });
   await StockModel.deleteMany({ user: req.userId });
-
 }

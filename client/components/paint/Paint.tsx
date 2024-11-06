@@ -193,7 +193,21 @@ export const Paint: React.FC<PaintProps> = React.memo(function Paint({}) {
         />
       )}
       <Box className={`absolute top-0 left-0`} width={`${sizeWidth - 100}px`}>
-        <PaintHeader exportClick={onExportClick}/>
+        <PaintHeader
+          exportClick={onExportClick}
+          cards={cards || []}
+          realEstates={realEstates || []}
+          stocks={stocks || []}
+          incomes={incomes || []}
+          mutualFunds={mutualFunds || []}
+          fixedDeposits={fixedDeposits || []}
+          expenses={expenses || []}
+          golds={golds || []}
+          cryptos={cryptos || []}
+          liquidCashs={liquidCashs || []}
+          savings={savings || []}
+          cars={cars || []}
+        />
       </Box>
       <Box className={`absolute left-10 transform -translate-x-1/2 -translate-y-1/2`} style={{ top: '50%' }}>
         <PaintLeftMenu exportClick={onExportClick} addClick={() => {

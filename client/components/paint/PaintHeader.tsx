@@ -10,21 +10,100 @@ import Stats from "@/ui/icons/canvas/header/Stats";
 import ProfileHeaderPopup from "@/components/profile/ProfileHeaderPopup";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import useGetUser from "@/hooks/useGetUser";
+import { ICard } from "@/interfaces/wealths/ICard";
+import { IRealEstate } from "@/interfaces/wealths/IRealEstate";
+import { IStock } from "@/interfaces/wealths/IStock";
+import { IIncome } from "@/interfaces/wealths/IIncome";
+import { IMutualFund } from "@/interfaces/wealths/IMutualFund";
+import { IExpenses } from "@/interfaces/wealths/IExpenses";
+import { IFixedDeposit } from "@/interfaces/wealths/IFixedDeposit";
+import { IGold } from "@/interfaces/wealths/IGold";
+import { ICrypto } from "@/interfaces/wealths/ICrypto";
+import { ILiquidCash } from "@/interfaces/wealths/ILiquidCash";
+import { ISaving } from "@/interfaces/wealths/ISaving";
+import Coin from "@/ui/icons/canvas/header/Coin";
+import Gold from "@/ui/icons/canvas/header/Gold";
+import Card from "@/ui/icons/canvas/header/Card";
+import Saving from "@/ui/icons/canvas/header/Saving";
+import FixedDeposit from "@/ui/icons/canvas/header/FixedDeposit";
+import Income from "@/ui/icons/canvas/header/Income";
+import Expenses from "@/ui/icons/canvas/header/Expenses";
+import Car from "@/ui/icons/canvas/header/Car";
+import { ICar } from "@/interfaces/wealths/ICar";
+import MutualFunds from "@/ui/icons/canvas/header/MutualFunds";
+import ChevroneDownIcon from "@/ui/icons/ChevroneDownIcon";
 
 export default function PaintHeader({
-  exportClick
+  exportClick,
+  cards,
+  realEstates,
+  stocks,
+  incomes,
+  mutualFunds,
+  fixedDeposits,
+  expenses,
+  golds,
+  cryptos,
+  liquidCashs,
+  savings,
+  cars
 }: {
   exportClick: () => void
+  cards: ICard[];
+  cars: ICar[];
+  realEstates: IRealEstate[];
+  stocks: IStock[];
+  incomes: IIncome[];
+  mutualFunds: IMutualFund[];
+  fixedDeposits: IFixedDeposit[];
+  expenses: IExpenses[];
+  golds: IGold[];
+  cryptos: ICrypto[];
+  liquidCashs: ILiquidCash []
+  savings: ISaving[];
 }) {
   const [isOpenedProfilePopup, setIsOpenedProfilePopup] = useState(false);
-  const { isAdmin } = useGetUser(); // todo: paid user
+  const [showAdditionalOptions, setShowAdditionalOptions] = useState(false);
+  const { isPaid } = useGetUser();
 
   const refButton = useRef(null);
   const refProfilePopup = useRef(null);
 
-  useOnClickOutside([refButton, refProfilePopup], () => {
-    setIsOpenedProfilePopup(false);
-  })
+  useOnClickOutside([refButton, refProfilePopup], () => setIsOpenedProfilePopup(false));
+
+  const getTotalForType = (array: any[]) => {
+    return array.reduce((acc, item) => {
+      return acc + item.amount;
+    }, 0);
+  }
+
+  const getOverTotal = () => {
+    return getTotalForType(cards)
+      + getTotalForType(liquidCashs)
+      + getTotalForType(realEstates)
+      + getTotalForType(stocks)
+      + getTotalForType(cryptos)
+      + getTotalForType(golds)
+      + getTotalForType(cards)
+      + getTotalForType(savings)
+      + getTotalForType(fixedDeposits)
+      + getTotalForType(incomes)
+      + getTotalForType(expenses)
+      + getTotalForType(cars)
+      + getTotalForType(mutualFunds);
+  }
+
+  const showItemWithMoney = (icon: React.ReactNode, total: number, currencySymbol: string, currency?: string, className?: string) => (
+    <div className={`flex items-center space-x-2 ${className}`}>
+      {icon}
+      <Typography
+        text={`${currencySymbol} ${total} ${currency || ''}`}
+        type={'labelsMedium'}
+        className="whitespace-nowrap"
+      />
+    </div>
+  )
+
   return (
     <div
       className="px-4 py-4 rounded-[52px] mx-10 w-full mt-5"
@@ -40,22 +119,34 @@ export default function PaintHeader({
             <Typography text={'Wealth Mirror'} type={'canvasTitle'} color={'text-white'}/>
           </Anchor>
           <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2">
-              <Stats/>
-              <Typography text={'₹ 2.8 Cr'} type={'labelsMedium'}/>
+            {showItemWithMoney(<Stats/>, getOverTotal(), '$')}
+            {showItemWithMoney(<Money/>, getTotalForType(liquidCashs), '$')}
+            {showItemWithMoney(<House/>, getTotalForType(realEstates), '$')}
+            {showItemWithMoney(<Stock/>, getTotalForType(stocks), '$')}
+            {showItemWithMoney(<Coin/>, getTotalForType(cryptos), '$')}
+            {showItemWithMoney(<Gold/>, getTotalForType(golds), '$')}
+            {showItemWithMoney(<Card/>, getTotalForType(cards), '$')}
+            {showItemWithMoney(<Saving/>, getTotalForType(savings), '$')}
+            {showItemWithMoney(<FixedDeposit/>, getTotalForType(fixedDeposits), '$')}
+            <div className="relative">
+              <Button
+                typeButton={'none'}
+                onMouseEnter={() => setShowAdditionalOptions(true)}
+                onMouseLeave={() => setShowAdditionalOptions(false)}
+                className="bg-white px-3 py-3.5 rounded-full bg-opacity-30 hover:bg-opacity-50 cursor-pointer"
+              >
+                <ChevroneDownIcon color={'white'}/>
+              </Button>
+              {showAdditionalOptions &&
+                <div
+                  className="absolute bg-naturalBlack p-6 bg-opacity-80 rounded-2xl right-0 top-16 flex items-start space-y-2 flex-col">
+                  {showItemWithMoney(<Income/>, getTotalForType(incomes), '$', undefined, 'ml-2')}
+                  {showItemWithMoney(<Expenses/>, getTotalForType(expenses), '$')}
+                  {showItemWithMoney(<Car/>, getTotalForType(cars), '$')}
+                  {showItemWithMoney(<MutualFunds/>, getTotalForType(mutualFunds), '$')}
+                </div>}
             </div>
-            <div className="flex items-center space-x-2">
-              <Money/>
-              <Typography text={'₹ 1.5 Cr'} type={'labelsMedium'}/>
-            </div>
-            <div className="flex items-center space-x-2">
-              <House/>
-              <Typography text={'₹ 1.3 Cr'} type={'labelsMedium'}/>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Stock/>
-              <Typography text={'₹ 1.8 Cr'} type={'labelsMedium'}/>
-            </div>
+
           </div>
         </div>
         <div className="flex space-x-6 relative">
@@ -65,13 +156,9 @@ export default function PaintHeader({
               onClick={() => setIsOpenedProfilePopup(!isOpenedProfilePopup)}
               className="relative rounded-full flex items-center justify-center"
             >
-              {!isAdmin
-                ?
-                <div
-                  className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#00B386] to-[#004D3A]"/>
-                :
-                <div
-                  className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#FED200] to-[#79660A]"/>}
+              {!isPaid
+                ? <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#00B386] to-[#004D3A]"/>
+                : <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-r from-[#FED200] to-[#79660A]"/>}
 
               <div className="relative rounded-full p-1 flex items-center justify-center">
                 <img src={'/TextUser.svg'} alt={'user'} className="w-[36px]"/>
@@ -80,7 +167,7 @@ export default function PaintHeader({
             {isOpenedProfilePopup &&
               <ProfileHeaderPopup refContainer={refProfilePopup} onClose={() => setIsOpenedProfilePopup(false)}/>}
           </div>
-          {!isAdmin && <Button
+          {!isPaid && <Button
             typeButton="none"
             className="bg-primary text-white px-5 py-2 rounded-[38px] font-bold"
             onClick={exportClick}

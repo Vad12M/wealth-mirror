@@ -74,6 +74,8 @@ export function Button({
         borderRadius: rounded ? `${rounded}px` : '48px',
         background: isGradient ? 'linear-gradient(90deg, #3EDC79 0%, #1E6BEB 100%' : '',
       }}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
     >
       {prefixBtn?.()}
       <div>
