@@ -104,6 +104,58 @@ export default function PaintHeader({
     </div>
   )
 
+
+  const wealthCount = [
+    {
+      data: showItemWithMoney(<Money/>, getTotalForType(liquidCashs), '$'),
+      total: getTotalForType(liquidCashs)
+    },
+    {
+      data: showItemWithMoney(<House/>, getTotalForType(realEstates), '$'),
+      total: getTotalForType(realEstates)
+    },
+    {
+      data: showItemWithMoney(<Stock/>, getTotalForType(stocks), '$'),
+      total: getTotalForType(stocks)
+    },
+    {
+      data: showItemWithMoney(<Coin/>, getTotalForType(cryptos), '$'),
+      total: getTotalForType(cryptos)
+    },
+    {
+      data: showItemWithMoney(<Gold/>, getTotalForType(golds), '$'),
+      total: getTotalForType(golds)
+    },
+    {
+      data: showItemWithMoney(<Card/>, getTotalForType(cards), '$'),
+      total: getTotalForType(cards)
+    },
+    {
+      data: showItemWithMoney(<Saving/>, getTotalForType(savings), '$'),
+      total: getTotalForType(savings)
+    },
+    {
+      data: showItemWithMoney(<FixedDeposit/>, getTotalForType(fixedDeposits), '$'),
+      total: getTotalForType(fixedDeposits)
+    },
+    {
+      data: showItemWithMoney(<Income/>, getTotalForType(incomes), '$'),
+      total: getTotalForType(incomes)
+    },
+    {
+      data: showItemWithMoney(<Expenses/>, getTotalForType(expenses), '$'),
+      total: getTotalForType(expenses)
+    },
+    {
+      data: showItemWithMoney(<Car/>, getTotalForType(cars), '$'),
+      total: getTotalForType(cars)
+    },
+    {
+      data: showItemWithMoney(<MutualFunds/>, getTotalForType(mutualFunds), '$'),
+      total: getTotalForType(mutualFunds)
+    }
+  ].filter(item => item.total > 0);
+
   return (
     <div
       className="px-4 py-4 rounded-[52px] mx-10 w-full mt-5"
@@ -120,14 +172,9 @@ export default function PaintHeader({
           </Anchor>
           <div className="flex items-center space-x-6">
             {showItemWithMoney(<Stats/>, getOverTotal(), '$')}
-            {showItemWithMoney(<Money/>, getTotalForType(liquidCashs), '$')}
-            {showItemWithMoney(<House/>, getTotalForType(realEstates), '$')}
-            {showItemWithMoney(<Stock/>, getTotalForType(stocks), '$')}
-            {showItemWithMoney(<Coin/>, getTotalForType(cryptos), '$')}
-            {showItemWithMoney(<Gold/>, getTotalForType(golds), '$')}
-            {showItemWithMoney(<Card/>, getTotalForType(cards), '$')}
-            {showItemWithMoney(<Saving/>, getTotalForType(savings), '$')}
-            {showItemWithMoney(<FixedDeposit/>, getTotalForType(fixedDeposits), '$')}
+            {wealthCount
+              .slice(0, 8)
+              .map((item) => item.data)}
             <div className="relative">
               <Button
                 typeButton={'none'}
@@ -137,13 +184,12 @@ export default function PaintHeader({
               >
                 <ChevroneDownIcon color={'white'}/>
               </Button>
-              {showAdditionalOptions &&
+              {showAdditionalOptions && wealthCount.length > 8 &&
                 <div
                   className="absolute bg-naturalBlack p-6 bg-opacity-80 rounded-2xl right-0 top-16 flex items-start space-y-2 flex-col">
-                  {showItemWithMoney(<Income/>, getTotalForType(incomes), '$', undefined, 'ml-2')}
-                  {showItemWithMoney(<Expenses/>, getTotalForType(expenses), '$')}
-                  {showItemWithMoney(<Car/>, getTotalForType(cars), '$')}
-                  {showItemWithMoney(<MutualFunds/>, getTotalForType(mutualFunds), '$')}
+                  {wealthCount
+                    .slice(8)
+                    .map((item, index) => item.data)}
                 </div>}
             </div>
 
